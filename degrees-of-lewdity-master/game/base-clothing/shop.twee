@@ -1,0 +1,213 @@
+:: Forest Shop [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+<<if $tryOn.autoReset isnot false>><<tryOnReset>><</if>>
+<<specialClothesUpdate>>
+<<if $forest_shop_intro isnot 1>>
+	<<set $forest_shop_intro to 1>>
+	<<npc Gwylan>><<person1>>
+	You enter the strange building. The interior is dark and crowded by tall shelves, holding all manner of items. The quiet is broken by a scraping, then a thud. A <<if $pronoun is "m">>boy<<else>>girl<</if>> holding a stepladder appears at the end of the closest aisle.
+	<br><br>
+	"A customer!" <<he>> says, dropping the ladder and walking over. <<He>> wipes <<his>> hands on <<his>> apron. "Welcome to my shop."
+	<br><br>
+	<<He>> looks about your age, with mousy hair and a hint of freckles. "I'm older than I look," <<he>> says, as if reading your mind. "I'm Gwylan," <<he>> reaches forward, lifts your hand from beside your waist, and shakes it in both <<his>> own. "Pleased to meet you. I sell-," <<he>> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks here. Things you won't find in normal shops. Even I don't know what I have in stock!" <<He>> sounds proud.
+	<br><br>
+	"I hope you find something you like," <<he>> says, picking the ladder back up. "But don't worry if you don't. My grand<<if $pronoun is "m">>father<<else>>mother<</if>> would say the objects here hide from people they don't want to be bought by." <<He>> laughs. "I could believe it."
+	<br><br>
+	<<link [[Next|Forest Shop]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	You are in the forest shop. The interior is dark and crowded by tall shelves, holding all manner of items. Most are useless knick-knacks, but some interest you.
+	<br><br>
+	You hear Gwylan shuffling somewhere in the gloom.
+	<br><br>
+
+	[[Look behind the dark screen|Forest Shop Outfit]]
+	<br>
+	[[Look in the antique wardrobe|Forest Shop Upper]]
+	<br>
+	[[Look on the strange ironing board|Forest Shop Lower]]
+	<br>
+	[[Look in the dusky drawer|Forest Shop Under Lower]]
+	<br>
+	[[Look on the spindly hat stand|Forest Shop Head]]
+	<br>
+	[[Look on the gnarled wall|Forest Shop Face]]
+	<br>
+	[[Look in the glowing box|Forest Shop Neck]]
+	<br>
+	[[Look in the worn stocking|Forest Shop Legs]]
+	<br>
+	[[Look beneath the decaying rack|Forest Shop Feet]]
+	<br>
+
+	<br>
+	<<if $tryOn.value gt 0 and $tryOn.value lt $money>>
+		<<link[[Buy clothes and send to wardrobe|$passage]]>><<buyTryOnClothes "wardrobe">><</link>>
+		<br>
+	<<elseif $tryOn.value is 0>>
+		<<link [[Leave|Forest]]>><<endnpc>><<unset $clothes_choice>><<set $tryOn.autoReset to true>><<set $eventskip to 1>><<unset $tempDisable>><</link>>
+	<</if>>
+<</if>>
+
+:: Forest Shop Outfit [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "upper">>
+	<<else>>
+		<<shopbuy "upper" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "upper" "reset">>
+<</if>>
+<<clothingShop "upper" "outfits">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Upper [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "upper">>
+	<<else>>
+		<<shopbuy "upper" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "upper" "reset">>
+<</if>>
+<<clothingShop "upper" "non-outfits">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Lower [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "lower">>
+	<<else>>
+		<<shopbuy "lower" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "lower" "reset">>
+<</if>>
+<<clothingShop "lower">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Under Lower [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "under_lower">>
+	<<else>>
+		<<shopbuy "under_lower" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "under_lower" "reset">>
+<</if>>
+<<clothingShop "under_lower">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Head [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "head">>
+	<<else>>
+		<<shopbuy "head" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "head" "reset">>
+<</if>>
+<<clothingShop "head">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Face [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "face">>
+	<<else>>
+		<<shopbuy "face" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "face" "reset">>
+<</if>>
+<<clothingShop "face">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Neck [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "neck">>
+	<<else>>
+		<<shopbuy "neck" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "neck" "reset">>
+<</if>>
+<<clothingShop "neck">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Legs [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "legs">>
+	<<else>>
+		<<shopbuy "legs" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "legs" "reset">>
+<</if>>
+<<clothingShop "legs">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>
+
+:: Forest Shop Feet [nobr]
+
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+
+<<if $clothes_choice and $clothes_choice_previous>>
+	<<if $clothes_choice is $clothes_choice_previous>>
+		<<shopbuy "feet">>
+	<<else>>
+		<<shopbuy "feet" "reset">>
+	<</if>>
+<<else>>
+	<<shopbuy "feet" "reset">>
+<</if>>
+<<clothingShop "feet">>
+<br>
+
+<<link [[Back to shop|Forest Shop]]>><<unset $clothes_choice>><</link>>

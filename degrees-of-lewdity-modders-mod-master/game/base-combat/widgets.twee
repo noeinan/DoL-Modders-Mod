@@ -1,0 +1,129 @@
+:: Widgets Combat [widget]
+
+<<widget "takeVirginity">><<nobr>>
+<<if $args[1]>>
+	<<if $args[1] is "vaginal" or $args[1] is "penile">>
+		<<switch $args[0]>>
+			<<case "Robin">><<earnFeat "Robin the Lover">>
+			<<case "Kylar">><<earnFeat "Kylar the Obsessed">>
+			<<case "Eden">><<earnFeat "Eden the Lonely">>
+			<<case "Whitney">><<earnFeat "Whitney the Tsundere">>
+			<<case "Avery">><<earnFeat "Avery the Moneybags">>
+			<<case "Leighton">><<earnFeat "Leighton the Shady">>
+			<<case "Alex">><<earnFeat "Alex the Robust">>
+		<</switch>>
+	<</if>>
+	<<if $player.virginity[$args[1]] is true>>
+		<<if $args[0] isnot undefined and $args[0] isnot 0>>
+			<<set $player.virginity[$args[1]] to $args[0]>>
+		<<else>>
+			<<set $player.virginity[$args[1]] to false>>
+		<</if>>
+	<</if>>
+
+	<<if $player.virginity.temple is true and ($args[1] is "vaginal" or $args[1] is "penile")>>
+		<<set $player.virginity.temple to false>>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "setupMidOrgasm">><<nobr>>
+<<if $setupMidOrgasm isnot undefined and $enemyarousal gte $enemyarousalmax>>
+	<<set _midOrgasm to false>>
+	<<for _n to 0; _n lt $NPCList.length;_n++>>
+		<<if $NPCList[_n].maxOrgasms gt 1>>
+			<<set $NPCList[_n].orgasms++>>
+		<</if>>
+		<<if $NPCList[_n].orgasms lt $NPCList[_n].maxOrgasms>>
+			<<set _midOrgasm to true>>
+		<</if>>
+	<</for>>
+	<<if _midOrgasm is true>>
+		<<set $enemyarousal to $enemyarousalmax / 2>>
+		<<set $finish to 0>>
+		<<set $ejaculatingMid to true>>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "combatTrainAdvance">><<nobr>>
+<<if $combatTrain.length gt 0>>
+	<<set $combatTrain.length-->>
+	<<if $combatTrain.beastTypes.length gt 0>>
+		<<run $combatTrain.beastTypes.deleteAt(0)>>
+	<</if>>
+	<<if $combatTrain.numberPerTrain.length gt 0>>
+		<<run $combatTrain.numberPerTrain.deleteAt(0)>>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+/*Args 0 - Combat Train Length*/
+/*Args 1 - Combat Train Beast Types, accepts a string or array, array may be smaller then length to loop*/
+/*Args 2 - Combat Train Combatants in train section, accepts a string or array,
+	should be left undefined till combat is setup for multiple beasts*/
+<<widget "beastTrainGenerate">><<nobr>>
+<<if $args[0] and $args[1]>>
+	<<set $combatTrain to {
+		length: $args[0],
+		generateInit: 1,
+		beastTypes: [],
+		numberPerTrain: [],
+	}>>
+	<<if Array.isArray($args[1])>>
+		<<set $combatTrain.beastTypes to clone($args[1])>>
+		<<if $combatTrain.beastTypes.length lt $combatTrain.length>>
+			<<set _loopLength to clone($combatTrain.length - $combatTrain.beastTypes.length)>>
+			<<set _start to 0>>
+			<<set _end to clone($combatTrain.beastTypes.length)>>
+			<<for _i to 0; _i lt _loopLength; _i++>>
+				<<run $combatTrain.beastTypes.push($combatTrain.beastTypes[_start])>>
+				<<if _start + 1 lt _end>>
+					<<set _start++>>
+				<<else>>
+					<<set _start to 0>>
+				<</if>>
+			<</for>>
+		<</if>>
+	<<else>>
+		<<for _i to 0; _i lt $combatTrain.length; _i++>>
+			<<run $combatTrain.beastTypes.push(clone($args[1]))>>
+		<</for>>
+	<</if>>
+	<<if $args[2] is undefined>>
+		<<for _i to 0; _i lt $combatTrain.length; _i++>>
+			<<run $combatTrain.numberPerTrain.push(1)>>
+		<</for>>
+	<<elseif Array.isArray($args[2])>>
+		<<set $combatTrain.numberPerTrain to clone($args[2])>>
+	<<else>>
+		<<for _i to 0; _i lt $combatTrain.length; _i++>>
+			<<run $combatTrain.numberPerTrain.push(clone($args[2]))>>
+		<</for>>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "leg_position">><<nobr>>
+<<if $machine>>
+	<<if $machine.tattoo>>
+		<<if $machine.tattoo.use is "left_thigh" or $machine.tattoo.use is "right_thigh">>
+			<<set _leg_position to "up">>
+		<<else>>
+			<<leg_position_basic>>
+		<</if>>
+	<<else>>
+		<<leg_position_basic>>
+	<</if>>
+<<else>>
+	<<leg_position_basic>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "leg_position_basic">><<nobr>>
+<<if $anususe is "penis" or $vaginause is "penis" or $anususe is 1 or $vaginause is 1>>
+	<<set _leg_position to "up">>
+<<else>>
+	<<set _leg_position to "down">>
+<</if>>
+<</nobr>><</widget>>

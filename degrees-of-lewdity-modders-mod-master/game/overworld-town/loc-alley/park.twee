@@ -1,0 +1,180 @@
+:: Park [nobr]
+
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">>
+You are in the park.
+<<if $daystate is "dawn">>
+	There are a few people out walking or jogging. Some have dogs with them.
+<<elseif $daystate is "day">>
+	<<if $weather is "rain">>
+		A few people are out, walking around the puddles dotting the paths.
+	<<else>>
+		Many people are out, walking their dogs or jogging. You hear children in the playground.
+	<</if>>
+<<elseif $daystate is "dusk">>
+	There are many people around. Teenagers hang out in the playground.
+<<elseif $daystate is "night">>
+	<<if $famepark gte 60>>
+		<span class="pink">Creepy figures lurk in the shadows.</span> <i>News of your lewd running has spread. Don't run while exposed for several days if you want it to cool off.</i>
+	<<elseif $famepark gte 20>>
+		<span class="pink">You think you're being watched.</span> <i>News of your lewd running has spread. Don't run while exposed for a few days if you want it to cool off.</i>
+	<<else>>
+		There is no one around.
+	<</if>>
+<</if>>
+<<if $science gte 300 and !$plants_known.includes("tulip")>>
+	Tulips grow in great patches near the riverbank.
+<</if>>
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionismpark>>
+	<<if $daystate isnot "night">>
+		You can hear the commotion of the High Street, there's no way you'll be able to cross like this. However, there's a depot from which crates are being carried across the road, maybe you could hide in one of them.
+		<br><br>
+	<</if>>
+<</if>>
+<<if $arousal gte 10000>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte 10000>>
+	<<passoutpark>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($halloween_kylar is 1 or $NPCName[$NPCNameList.indexOf("Kylar")].love gte 60) and $halloween_kylar_proposed isnot 1 and $daystate is "night" and $NPCName[$NPCNameList.indexOf("Kylar")].init is 1 and ($halloween is 1 and $monthday is 31 or $month is "november" and $monthday is 1 and $hour lte 6)>>
+		<<npc Kylar>><<person1>>
+		<span class="blue">You feel like you're being watched.</span> You glance around, and see a figure creep from the shadows,
+		<<if $pronoun is "m">>
+			wearing a gothic suit, and heavy makeup.
+		<<else>>
+			wearing a gothic dress, and heavy makeup. <<if $NPCList[0].breastsize gte 1>>A tight corset pushes up <<his>> <<print $NPCList[0].breastsdesc>>.<</if>>
+		<</if>>
+		It takes a moment to recognise <<him>>. It's Kylar.
+		<br><br>
+		<<set $halloween_kylar_proposed to 1>>
+
+		<<if $exposed gte 1>>
+			<<covered>> "Happy Halloween-" <<He>> begins, but stops when <<he>> notices your exposure. The dark had concealed you at first. <<His>> eyes flick over you, unsure where to look.
+			<br><br>
+
+			You hear a drunken shout from the nearby street. Kylar snaps out of <<his>> stupor, and throws an anxious look in the direction of the noise. "W-we need to get you covered," <<he>> says. "There are perverts out." <<He>> runs into the dark.
+			<br><br>
+
+			Less than a minute later <<he>> returns, carrying rolls of toilet paper. "On another night," <<he>> says. "This wouldn't do. But you could dress as a mummy and not look too out of place."
+			<br><br>
+
+
+
+
+			<<link [[Tell Kylar to look away|Kylar Halloween Look]]>><<npcincr Kylar dom -1>><</link>>
+			<br>
+			<<if $exhibitionism gte 35>>
+				<<link [[Let Kylar watch you dress|Kylar Halloween Watch]]>><<npcincr Kylar lust 5>><<npcincr Kylar love 1>><</link>><<exhibitionist2>><<gglust>><<glove>>
+				<br>
+			<</if>>
+
+		<<else>>
+			"Happy Halloween," <<he>> says. <<He>> seems excited. "There's something I want to show you. This way."
+			<br><br>
+			<<link [[Go with Kylar (1:00)|Kylar Halloween]]>><<npcincr Kylar love 1>><<pass 10>><</link>><<glove>>
+			<br>
+			<<link [[Refuse|Kylar Halloween Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
+			<br>
+		<</if>>
+	<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $map.top is true>>
+			<<map "park">>
+			<br>
+		<</if>>
+		Places of interest
+		<br>
+		<<if $scienceproject is "ongoing" and $sciencelichenknown is 1 and $sciencelichenpark is 0 and $exposed lte 0>>
+			<<link [[Examine lichen for science project|Park Lichen]]>><</link>>
+			<br>
+		<</if>>
+		<<if $science gte 300 and !$plants_known.includes("tulip")>>
+		<<link [[Search for seeds (0:30)|Park Tulip]]>><<set $plants_known.push("tulip")>><<pass 30>><<tending 6>><</link>><<gtending>>
+		<br>
+		<</if>>
+		<<if $exposed lte 0 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and $weather isnot "rain" and $daystate is "day">>
+			<<if $schoolday isnot 1 or $hour lte 8 or $hour gte 15>>
+				Kylar sits on a bench, sketching something.
+				<br>
+				<<link [[Approach|Kylar Park]]>><</link>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<link [[Men's toilets|Men's Toilets]]>><</link>>
+		<br>
+		<<link [[Women's toilets|Women's Toilets]]>><</link>>
+		<br>
+		<<if $worn.feet.type.includes("heels")>>
+			<<link [[Exercise in heels (0:30)|Park Exercise Heels]]>><<pass 30>><<tiredness 3>><<stress -1>><<athletics 2>><<slimeEventEnd>><</link>><<ggtiredness>><<gathletics>><<lstress>>
+		<<else>>
+			<<if $daystate is "night">>
+				<<if $exposed gte 2 and $exhibitionism gte 35>>
+					<<link [[Go for a run (0:30)|Park Run Exposed]]>><<pass 30>><<set $phase to 0>><<tiredness 3>><<stress -3>><<athletics 3>><<slimeEventEnd>><</link>><<exhibitionist3>><<gtiredness>><<gathletics>><<lstress>>
+					<br>
+				<<elseif $exposed is 1>>
+					<<link [[Go for a run (0:30)|Park Run Exposed]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><<stress -3>><<athletics 3>><<slimeEventEnd>><</link>><<exhibitionist1>><<gtiredness>><<gathletics>><<lstress>>
+					<br>
+				<<elseif $exposed is 0>>
+					<<link [[Go for a run (0:30)|Park Run]]>><<pass 30>><<tiredness 3>><<stress -3>><<athletics 3>><<slimeEventEnd>><</link>><<gtiredness>><<gathletics>><<lstress>>
+					<br>
+				<</if>>
+			<<elseif $exposed is 0>>
+				<<link [[Go for a run (0:30)|Park Run]]>><<pass 30>><<tiredness 3>><<stress -3>><<athletics 3>><<slimeEventEnd>><</link>><<gtiredness>><<gathletics>><<lstress>>
+				<br>
+			<</if>>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and $daystate isnot "night">>
+			<<link [[Hide in a Crate (0:10)|Crate Ex]]>><<pass 10>><</link>>
+			<br>
+			<<if $exposed gte 2 and $exhibitionism gte 75>>
+				<<link [[Cross flyover to the industrial district (0:05)|Flyover Ex Naked]]>><</link>><<if $ex_flyover is undefined>><<exhibitionist5>><</if>>
+				<br>
+			<<elseif $exposed is 1 and $exhibitionism gte 35>>
+				<<link [[Cross flyover to the industrial district (0:05)|Flyover Ex Undies]]>><</link>><<if $ex_flyober is undefined>><<exhibitionist3>><</if>>
+				<br>
+			<</if>>
+		<<else>>
+			<<add_link "Travel<br>">><<hideDisplay>>
+			<<high>>
+			<<starfish>>
+			<<oxford>>
+			<<nightingale>>
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>Alternate routes<br>">>
+		<<if $exposed gte 1 and $daystate isnot "night">><<hideDisplay>>
+		<<else>>
+			<<commercial>>
+			<<industrial>>
+		<</if>>
+		<<stormdrain>>
+		<<if $historytrait gte 1 and $parktunnelintro gte 1>>
+			<<add_link "<<link [[Secret tunnel to school (0:05)|School Rear Playground]]>><<pass 5>><</link>>">>
+			<br>
+		<</if>>
+		<<displayLinks>>
+		<<if $map.top isnot true>>
+			<br>
+			<<map "park">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>
+
+:: Park Tulip [nobr]
+<<effects>>
+
+You walk through the tulips, searching for any that are seeding and careful not to tread on the blossoms.
+<br><br>
+
+<span class="gold">You can now grow tulips.</span>
+<br><br>
+
+<<link [[Next|Park]]>><</link>>
+<br>

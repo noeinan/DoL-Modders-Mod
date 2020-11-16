@@ -1,0 +1,1159 @@
+:: Widgets Actions Generation [widget]
+
+/*Please read dev comments before making changes*/
+/*Be careful with changing names around, they are intentional as can get re-used when the user uses the controls, leading to errors if incorrect*/
+
+/*Sends the required variables to the chosen display type*/
+<<widget "generateCombatAction">><<nobr>>
+<<switch $combatControls>>
+	<<case "radio">>
+		<<generateCombatActionRadio $args[0] $args[1] $args[3]>>
+	<<case "lists" "limitedLists">>
+		<<generateCombatActionList $args[0] $args[1] $args[2]>>
+<</switch>>
+<</nobr>><</widget>>
+
+/*Generated each set of actions in the form of a set of radio buttons*/
+<<widget "generateCombatActionRadio">><<nobr>>
+<br>
+<<for _labelC, _valueC range $args[0]>>
+	<label>
+		<<print '<<radiobutton "$'+$args[1]+'" "'+_valueC+'" ' + (_valueC is $args[2] ? "checked" : "") + '>>'>>
+		<span @class="combatListColor('', _valueC, '')"><<print _labelC>></span>
+		<<print '<<'+$args[1]+'Difficulty "'+_valueC+'">>'>> |
+	</label>
+<</for>>
+<br><br>
+<</nobr>><</widget>>
+
+/*Generated each set of actions in the form of a list*/
+<<widget "generateCombatActionList">><<nobr>>
+<<if $args[0]>>
+	<<set _options to $args[0]>>
+	<<set _name to $args[1]>>
+	<<capture _var _options _name>>
+		<span @id="_name + 'Select'" @class="$args[2] + 'List flavorText'">
+			<<listbox `"$"+_name` autoselect>>
+				<<optionsfrom _options>>
+			<</listbox>>
+		</span>
+		/*Changes the colour of the list border when the option is changed*/
+		<<combatButtonAdjustments _name "">>
+	<</capture>>
+<</if>>
+<</nobr>><</widget>>
+
+/*Generates the required divs and calls each type of action*/
+<<widget "generateActionsMan">><<nobr>>
+<br>
+<<if $oldControls is true>>
+	__New Controls__
+	<br>
+<</if>>
+<<if $defaultsType is undefined>>
+	<<getCombatDefaultsType>>
+<</if>>
+<div id="replaceAction">
+	<<replaceActionLink>>
+</div>
+
+<div id="listContainer">
+	<div id="leftaction" @class="$combatControls + 'Control'">
+		<<leftActionInit>>
+	</div>
+
+	<div id="rightaction" @class="$combatControls + 'Control'">
+		<<rightActionInit>>
+	</div>
+
+	<div id="feetaction" @class="$combatControls + 'Control'">
+		<<feetactionInit>>
+	</div>
+
+	<div id="mouthaction" @class="$combatControls + 'Control'">
+		<<mouthactionInit>>
+	</div>
+
+	<<if $penisexist is 1>>
+		<div id="penisaction" @class="$combatControls + 'Control'">
+			<<penisactionInit>>
+		</div>
+	<</if>>
+
+	<<if $vaginaexist is 1>>
+		<div id="vaginaaction" @class="$combatControls + 'Control'">
+			<<vaginaactionInit>>
+		</div>
+	<</if>>
+
+	<div id="anusaction" @class="$combatControls + 'Control'">
+		<<anusactionInit>>
+	</div>
+
+	<<if $chestuse isnot 0>>
+		<div id="chestaction" @class="$combatControls + 'Control'">
+			<<chestactionInit>>
+		</div>
+	<</if>>
+
+	<<if $thighuse isnot 0>>
+		<div id="thighaction" @class="$combatControls + 'Control'">
+			<<thighactionInit>>
+		</div>
+	<</if>>
+</div>
+<br>
+<<if $oldControls is true>>
+	__Old Controls__
+	<br>
+<</if>>
+<</nobr>><</widget>>
+
+/*Generates the required values for defaults to be setup based on the situation*/
+<<widget "getCombatDefaultsType">><<nobr>>
+<<switch $enemytype>>
+	<<case "man">>
+		<<if $NPCNameList.includes($NPCList[0].fullDescription)>>
+			<<if $actionDefaults[$NPCList[0].fullDescription] isnot undefined>>
+				<<set $defaultsType to $NPCList[0].fullDescription>>
+			<<else>>
+				<<set $defaultsType to "Acquaintances">>
+			<</if>>
+		<<else>>
+			<<set $defaultsType to "Strangers">>
+		<</if>>
+	<<case "beast">><<set $defaultsType to "Animals">>
+	<<default>><<set $defaultsType to "Everyone">>
+<</switch>>
+
+<<if $consensual is 1>>
+	<<set $defaultsCombatType = "consensual">>
+<<else>>
+	<<set $defaultsCombatType = "rape">>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "getCombatDefaultsTypeClear">><<nobr>>
+<<unset $defaultsType>>
+<<unset $defaultsCombatType>>
+<<unset $replaceAction>>
+<</nobr>><</widget>>
+
+<<widget "replaceActionLink">><<nobr>>
+<<if $replaceAction isnot "Alternative">>
+	<a onclick="wikifier('replaceAction','Alternative')">Switch to Alternative Actions</a>
+	|
+<</if>>
+<<if $replaceAction isnot "Submissive">>
+	<a onclick="wikifier('replaceAction','Submissive')">Switch to Submissive Actions</a>
+	|
+<</if>>
+<<if $replaceAction isnot "Defiant">>
+	<a onclick="wikifier('replaceAction','Defiant')">Switch to Defiant Actions</a>
+	|
+<</if>>
+<<if $replaceAction isnot undefined>>
+	<a onclick="wikifier('replaceAction','Normal')">Switch to Normal Actions</a>
+	|
+<</if>>
+<br>
+<</nobr>><</widget>>
+
+<<widget "replaceAction">><<nobr>>
+<<switch $args[0]>>
+	<<case "Alternative">>
+		<<if $actionDefaults.Alternative is undefined>>
+			<<setupDefaults>>
+		<</if>>
+		<<set $defaultsType to "Alternative">>
+		<<set $replaceAction to "Alternative">>
+	<<case "Submissive">>
+		<<if $actionDefaults.Submissive is undefined>>
+			<<setupDefaults>>
+		<</if>>
+		<<set $defaultsType to "Submissive">>
+		<<set $replaceAction to "Submissive">>
+	<<case "Defiant">>
+		<<if $actionDefaults.Defiant is undefined>>
+			<<setupDefaults>>
+		<</if>>
+		<<set $defaultsType to "Defiant">>
+		<<set $replaceAction to "Defiant">>
+	<<case "Normal">>
+		<<getCombatDefaultsType>>
+		<<unset $replaceAction>>
+<</switch>>
+
+<<replace #replaceAction>><<replaceActionLink _replace>><</replace>>
+<<replace #leftaction>><<leftActionInit true>><</replace>>
+<<replace #rightaction>><<rightActionInit true>><</replace>>
+<<replace #feetaction>><<feetactionInit true>><</replace>>
+<<replace #mouthaction>><<mouthactionInit true>><</replace>>
+<<if $penisexist is 1>>
+	<<replace #penisaction>><<penisactionInit true>><</replace>>
+<</if>>
+<<if $vaginaexist is 1>>
+	<<replace #vaginaaction>><<vaginaactionInit true>><</replace>>
+<</if>>
+<<replace #anusaction>><<anusactionInit true>><</replace>>
+<<if $chestuse isnot 0>>
+	<<replace #chestaction>><<chestactionInit true>><</replace>>
+<</if>>
+<<if $thighuse isnot 0>>
+	<<replace #thighaction>><<thighactionInit true>><</replace>>
+<</if>>
+<</nobr>><</widget>>
+
+/*Each set of actions are based on the same set of rules*/
+/*Setup by getting the situation that the player is in. i.e Their left hand is hold onto a penis*/
+
+/*This is then followed up in getting the options that are available to the player, this would be from <<leftActions>>*/
+/*in the case for the left hand. An object will be provide that contain moves in the form of {"actionName":"actionValue"}*/
+/*actionName will be shown to the player, actionValue will be used to do the action*/
+
+/*After the list of actions is setup, as long as there is more than one provide it will continue on to setting up the defaults*/
+/*This will use the object setup in "base-system\attitudes.twee"*/
+
+/*To provide extra imformation to the player, widgets such as `<<leftactionDifficulty>> can be used to display extra*/
+/*information to the player such as "<<handdifficulty>>"" or "<<skulduggerydifficulty>><<combatcrime>>"*/
+/*This will use the previous "actionValue"*/
+
+/*Move colors will be provided through "combatListColor" found in "03-JavaScript\ingame.js"*/
+/*These again use the "actionValue"*/
+
+<<widget "leftActionInit">><<nobr>>
+	<<switch $leftarm>>
+		<<case 0>>
+			<<set _leftOptions to "free">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your left hand is free.</span>
+		<<case "penis">>
+			<<set _leftOptions to "penis">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your left hand is holding <<his>> penis.</span>
+		<<case "grappled">>
+			<<set _leftOptions to "grappled">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your left arm is being held down.</span>
+		<<case "bound">>
+			<<set _leftOptions to "bothBound">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your arms are helplessly bound.</span>
+		<<case "othervagina">>
+			<<set _leftOptions to "pussy">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your left hand is stroking <<his>> pussy.</span>
+		<<case "vagina">>
+			<<set _leftOptions to "coverVagina">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your left hand is protecting your <<pussystop>></span>
+		<<case "coverpenis">>
+			<<set _leftOptions to "coverPenis">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your left hand is protecting your <<penisstop>></span>
+		<<case "anus">>
+			<<set _leftOptions to "coverAss">>
+			<span @class="($lastOptions.left isnot _leftOptions or _leftGold is true ?'gold':'')">Your left hand is protecting your <<bottomstop>></span>
+	<</switch>>
+	<<if $lastOptions.left isnot _leftOptions>>
+		<<set _leftGold to true>>
+	<</if>>
+
+	<<leftActions>>
+	<<if Object.keys(_leftaction).length gt 0>>
+		<<if Object.values(_leftaction).includes($leftactiondefault) is false or $args[0] is true>>
+			<<set _defaultsCombatAction to "leftaction">>
+			<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+			<<set _pass to false>>
+			<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
+				<<if Object.values(_leftaction).includes(_actionsSet[_set])>>
+					<<set $leftactiondefault to clone(_actionsSet[_set])>>
+					<<set _pass to true>>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if _pass is false>>
+				<<set $leftactiondefault to Object.values(_leftaction)[0]>>
+			<</if>>
+		<</if>>
+
+		<<set $leftaction to $leftactiondefault>>
+		<<set _textColor to combatListColor('leftaction', (Object.values(_leftaction).includes($leftaction) ? $leftaction : Object.values(_leftaction)[0]), "")>>
+		<<generateCombatAction _leftaction "leftaction" _textColor $leftaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="leftactionDifficulty">
+				<<leftactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.left to clone(_leftOptions)>>
+<</nobr>><</widget>>
+
+<<widget "leftactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $leftaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "leftwork" "leftclit">><<handdifficulty>>
+	<<case "leftplay" "leftgrab">><<handdifficulty>> <<combatpromiscuous3>>
+	<<case "steal">><<skulduggerydifficulty>><<combatcrime>>
+	<<case "spray">>Remaining: $spray / $spraymax
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "leftActions">><<nobr>>
+/*Generate Actions*/
+<<set _leftaction to {}>>
+<<switch _leftOptions>>
+	<<case "free">>
+		<<set _leftaction["Rest"] to "rest">>
+		<<leftdefault>>
+		<<leftgrabnew>>
+		<<leftplaynew>>
+		<<leftclothesnew>>
+		<<leftspraynew>>
+		<<leftstealnew>>
+		<<leftpenwhacknew>>
+		<<leftFixAndCoverActions>>
+	<<case "penis">>
+		<<set _leftaction["Work their shaft"] to "leftwork">>
+		<<set _leftaction["Stop"] to "leftstoppenis">>
+	<<case "grappled">>
+		<<set _leftaction["Rest"] to "rest">>
+		<<set _leftaction["Struggle"] to "leftstruggle">>
+	<<case "bothBound">>
+	<<case "pussy">>
+		<<set _leftaction["Rub their clit"] to "leftclit">>
+		<<set _leftaction["Stop"] to "leftothervaginastop">>
+	<<case "coverVagina">>
+		<<set _leftaction["Keep covering"] to "leftcovervagina">>
+		<<set _leftaction["Stop"] to "leftstopvagina">>
+	<<case "coverPenis">>
+		<<set _leftaction["Keep covering"] to "leftcoverpenis">>
+		<<set _leftaction["Stop"] to "leftstopcoverpenis">>
+	<<case "coverAss">>
+		<<set _leftaction["Keep covering"] to "leftcoveranus">>
+		<<set _leftaction["Stop"] to "leftstopanus">>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "rightActionInit">><<nobr>>
+	<<switch $rightarm>>
+		<<case 0>>
+			<<set _rightOptions to "free">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your right hand is free.</span>
+		<<case "penis">>
+			<<set _rightOptions to "penis">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your right hand is holding <<his>> penis.</span>
+		<<case "grappled">>
+			<<set _rightOptions to "grappled">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your right arm is being held down.</span>
+		<<case "bound">>
+			<<set _rightOptions to "bothBound">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your arms are helplessly bound.</span>
+		<<case "othervagina">>
+			<<set _rightOptions to "pussy">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your right hand is stroking <<his>> pussy.</span>
+		<<case "vagina">>
+			<<set _rightOptions to "coverVagina">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your right hand is protecting your <<pussystop>></span>
+		<<case "coverpenis">>
+			<<set _rightOptions to "coverPenis">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your right hand is protecting your <<penisstop>></span>
+		<<case "anus">>
+			<<set _rightOptions to "coverAss">>
+			<span @class="($lastOptions.right isnot _rightOptions or _rightGold is true ?'gold':'')">Your right hand is protecting your <<bottomstop>></span>
+	<</switch>>
+	<<if $lastOptions.right isnot _rightOptions>>
+		<<set _rightGold to true>>
+	<</if>>
+
+	<<rightActions>>
+	<<if Object.keys(_rightaction).length gt 0>>
+		<<if Object.values(_rightaction).includes($rightactiondefault) is false or $args[0] is true>>
+			<<set _defaultsCombatAction to "rightaction">>
+			<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+			<<set _pass to false>>
+			<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
+				<<if Object.values(_rightaction).includes(_actionsSet[_set])>>
+					<<set $rightactiondefault to clone(_actionsSet[_set])>>
+					<<set _pass to true>>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if _pass is false>>
+				<<set $rightactiondefault to Object.values(_rightaction)[0]>>
+			<</if>>
+		<</if>>
+
+		<<set $rightaction to $rightactiondefault>>
+		<<set _textColor to combatListColor('rightaction', (Object.values(_rightaction).includes($rightaction) ? $rightaction : Object.values(_rightaction)[0]), "")>>
+		<<generateCombatAction _rightaction "rightaction" _textColor $rightaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="rightactionDifficulty">
+				<<rightactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.right to clone(_rightOptions)>>
+<</nobr>><</widget>>
+
+<<widget "rightactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $rightaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "rightwork" "rightclit">><<handdifficulty>>
+	<<case "rightplay" "rightgrab">><<handdifficulty>> <<combatpromiscuous3>>
+	<<case "steal">><<skulduggerydifficulty>><<combatcrime>>
+	<<case "spray">>Remaining: $spray / $spraymax
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "rightActions">><<nobr>>
+/*Generate Actions*/
+<<set _rightaction to {}>>
+<<switch _rightOptions>>
+	<<case "free">>
+		<<set _rightaction["Rest"] to "rest">>
+		<<rightdefault>>
+		<<rightgrabnew>>
+		<<rightplaynew>>
+		<<rightclothesnew>>
+		<<rightspraynew>>
+		<<rightstealnew>>
+		<<rightpenwhacknew>>
+		<<rightFixAndCoverActions>>
+	<<case "penis">>
+		<<set _rightaction["Work their shaft"] to "rightwork">>
+		<<set _rightaction["Stop"] to "rightstoppenis">>
+	<<case "grappled">>
+		<<set _rightaction["Rest"] to "rest">>
+		<<set _rightaction["Struggle"] to "rightstruggle">>
+	<<case "bothBound">>
+	<<case "pussy">>
+		<<set _rightaction["Rub their clit"] to "rightclit">>
+		<<set _rightaction["Stop"] to "rightothervaginastop">>
+	<<case "coverVagina">>
+		<<set _rightaction["Keep covering"] to "rightcovervagina">>
+		<<set _rightaction["Stop"] to "rightstopvagina">>
+	<<case "coverPenis">>
+		<<set _rightaction["Keep covering"] to "rightcoverpenis">>
+		<<set _rightaction["Stop"] to "rightstopcoverpenis">>
+	<<case "coverAss">>
+		<<set _rightaction["Keep covering"] to "rightcoveranus">>
+		<<set _rightaction["Stop"] to "rightstopanus">>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "feetactionInit">><<nobr>>
+	<<switch $feetuse>>
+		<<case 0>>
+			<<set _feetOptions to "free">>
+			<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">Your feet are free.</span>
+		<<case "penis">>
+			<<set _feetOptions to "penis">>
+			<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">Your feet are holding <<his>> penis.</span>
+		<<case "othervagina">>
+			<<set _feetOptions to "othervagina">>
+			<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">Your feet are holding back <<his>> pussy.</span>
+		<<case "bound">>
+			<<set _feetOptions to "bound">>
+			<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">Your legs are bound.</span>
+		<<default>>
+			<<set _feetOptions to "unusable">>
+			<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">Your feet are free but unusable in this position.</span>
+	<</switch>>
+	<<if $lastOptions.feet isnot _feetOptions>>
+		<<set _feetGold to true>>
+	<</if>>
+
+	<<feetActions>>
+	<<if Object.keys(_feetaction).length gt 0>>
+		<<if Object.values(_feetaction).includes($feetactiondefault) is false or $args[0] is true>>
+			<<set _defaultsCombatAction to "feetaction">>
+			<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+			<<set _pass to false>>
+			<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
+				<<if Object.values(_feetaction).includes(_actionsSet[_set])>>
+					<<set $feetactiondefault to clone(_actionsSet[_set])>>
+					<<set _pass to true>>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if _pass is false>>
+				<<set $feetactiondefault to Object.values(_feetaction)[0]>>
+			<</if>>
+		<</if>>
+
+		<<set $feetaction to $feetactiondefault>>
+		<<set _textColor to combatListColor('feetaction', (Object.values(_feetaction).includes($feetaction) ? $feetaction : Object.values(_feetaction)[0]), "")>>
+		<<generateCombatAction _feetaction "feetaction" _textColor $feetaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="feetactionDifficulty">
+				<<feetactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.feet to clone(_feetOptions)>>
+<</nobr>><</widget>>
+
+<<widget "feetactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $feetaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "grab" "vaginagrab">><<feetdifficulty>><<combatpromiscuous3>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "feetActions">><<nobr>>
+/*Generate Actions*/
+<<set _feetaction to {}>>
+<<set _feetaction["Rest"] to "rest">>
+<<switch _feetOptions>>
+	<<case "free">>
+		<<feetgrabnew>>
+		<<feetKick>>
+	<<case "penis">>
+		<<feetGrabRub>>
+	<<case "othervagina">>
+		<<feetOthervagina>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "mouthactionInit">><<nobr>>
+	<<switch $mouthuse>>
+		<<case 0>>
+			<<set _mouthOptions to "free">>
+			<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')">Your mouth is free.</span>
+		<<case "othervagina">>
+			<<set _mouthOptions to "othervagina">>
+			<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')"><<His>> pussy presses against your lips.</span>
+		<<case "kiss">>
+			<<set _mouthOptions to "kiss">>
+			<<switch $mouthstate>>
+				<<case "kissentrance">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')">Your mouth is pressed by another's.</span>
+				<<case "kissimminent" "kiss">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')">Your mouth is engulfed by another's.</span>
+			<</switch>>
+		<<case "gagged">>
+			<<set _mouthOptions to "gagged">>
+			<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')">Your mouth is helplessly gagged.</span>
+		<<default>>
+			<<switch $mouthstate>>
+				<<case "entrance">>
+					<<set _mouthOptions to "penisEntrance">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')"><<His>> penis hovers in front of your mouth.</span>
+				<<case "imminent">>
+					<<set _mouthOptions to "penisImminent">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')"><<His>> penis presses against your lips.</span>
+				<<case "penetrated">>
+					<<set _mouthOptions to "penisPenetrated">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')"><<His>> penis penetrates your mouth.</span>
+				<<case "gagged">>
+					<<set _mouthOptions to "gagged">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')">Your mouth is helplessly gagged.</span>
+				<<case "breasts">>
+					<<set _mouthOptions to "breasts">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')"><<breastFlavorText>></span>
+				<<case "nipple">>
+					<<set _mouthOptions to "nipple">>
+					<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')"><<nippleFlavorText>></span>
+				<<default>>
+					<<if $mouthuse is "righthand" or $mouthuse is "lefthand">>
+						<<set _mouthOptions to $mouthuse>>
+						<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')">Your mouth is blocked by a hand, muffling any noise you make.</span>
+					<<else>>
+						<<set _mouthOptions to "blocked">>
+						<span @class="($lastOptions.mouth isnot _mouthOptions or _mouthGold is true ?'gold':'')">Your mouth is blocked, muffling any noise you make.</span>
+					<</if>>
+			<</switch>>
+	<</switch>>
+	<<if $lastOptions.mouth isnot _mouthOptions>>
+		<<set _mouthGold to true>>
+	<</if>>
+
+	<<mouthActions>>
+	<<if Object.keys(_mouthaction).length gt 0>>
+		<<if Object.values(_mouthaction).includes($mouthactiondefault) is false or $args[0] is true>>
+			<<set _defaultsCombatAction to "mouthaction">>
+			<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+			<<set _pass to false>>
+			<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
+				<<if Object.values(_mouthaction).includes(_actionsSet[_set])>>
+					<<set $mouthactiondefault to clone(_actionsSet[_set])>>
+					<<set _pass to true>>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if _pass is false>>
+				<<set $mouthactiondefault to Object.values(_mouthaction)[0]>>
+			<</if>>
+		<</if>>
+
+		<<set $mouthaction to $mouthactiondefault>>
+		<<set _textColor to combatListColor('mouthaction', (Object.values(_mouthaction).includes($mouthaction) ? $mouthaction : Object.values(_mouthaction)[0]), "")>>
+		<<generateCombatAction _mouthaction "mouthaction" _textColor $mouthaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="mouthactionDifficulty">
+				<<mouthactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.mouth to clone(_mouthOptions)>>
+<</nobr>><</widget>>
+
+<<widget "mouthactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $mouthaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "mouth" "othervagina">><<oraldifficulty>> <<combatpromiscuous4>>
+	<<case "movetochest">><<oraldifficulty>> <<combatpromiscuous3>>
+	<<case "swallow">><<oralvirginitywarning>> <<combatpromiscuous5>>
+	<<case "grasp">><<chestdifficulty>> <<combatpromiscuous3>>
+	<<case "pullaway" "pullawaykiss">><<oraldifficulty>>
+	<<case "finish">><<if !$gloryhole and $gamemode isnot "soft">><<seductiondifficulty>><</if>>
+	<<case "novaginal">><<if !$gloryhole and $gamemode isnot "soft">><<seductiondifficulty>><</if>>
+	<<case "nopenile">><<if !$gloryhole and $gamemode isnot "soft">><<seductiondifficulty>><</if>>
+	<<case "noanal">><<if !$gloryhole and $gamemode isnot "soft">><<seductiondifficulty>><</if>>
+	<<case "mock">>
+		<<listbox "$mockaction">>
+			<<option "ethics" "ethics" `$mockaction is "ethics" ? "selected" : ""`>>
+			<<option "looks" "looks" `$mockaction is "looks" ? "selected" : ""`>>
+			<<option "strength" "weak" `$mockaction is "weak" ? "selected" : ""`>>
+			<<option "skill" "skill" `$mockaction is "skill" ? "selected" : ""`>>
+			<<option "penis" "penis" `$mockaction is "penis" ? "selected" : ""`>>
+			<<option "pussy" "vagina" `$mockaction is "vagina" ? "selected" : ""`>>
+		<</listbox>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "mouthActions">><<nobr>>
+/*Generate Actions*/
+<<set _mouthaction to {}>>
+<<set _mouthaction["Rest"] to "rest">>
+<<switch _mouthOptions>>
+	<<case "free">>
+		<<if $head isnot "grappled" and $head isnot "bound">>
+			<<if $chestuse is "penis">>
+				<<set _mouthaction["Kiss"] to "peniskiss">>
+			<<else>>
+				<<set _mouthaction["Kiss"] to "kiss">>
+			<</if>>
+		<</if>>
+		<<oralnew>>
+		<<speaknew>>
+		<<combatApologise>>
+	<<case "othervagina">>
+		<<combatOthervagina>>
+	<<case "kiss">>
+		<<set _mouthaction["Kiss"] to "kissback">>
+		<<set _mouthaction["Pull away"] to "pullawaykiss">>
+		<<if $mouthstate isnot "kiss" and $mouthstate isnot "kissimminent">>
+			<<speaknew>>
+		<</if>>
+	<<case "gagged">>
+	<<case "penisEntrance">>
+		<<combatPenisEntrance>>
+	<<case "penisImminent">>
+		<<combatPenisImminent>>
+	<<case "penisPenetrated">>
+		<<combatPenisPenetrated>>
+	<<case "breasts">>
+		<<combatBreast>>
+	<<case "nipple">>
+		<<combatNipple>>
+	<<case "lefthand">>
+		<<set _mouthaction["Bite"] to "handbite">>
+	<<case "righthand">>
+		<<set _mouthaction["Bite"] to "handbite">>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "penisactionInit">><<nobr>>
+	<<switch $penisstate>>
+		<<case 0>>
+			<<set _penisOptions to "free">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')">Your <<penis>> is free.</span>
+		<<case "othermouthentrance">>
+			<<set _penisOptions to "mouthEntrance">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')">You feel breath on your <<penisstop>></span>
+		<<case "othermouthimminent">>
+			<<set _penisOptions to "mouthImminent">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> lips press against the tip of your <<penisstop>></span>
+		<<case "othermouth">>
+			<<set _penisOptions to "mouthPenetration">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> mouth envelopes your <<penisstop>></span>
+		<<case "entrance">>
+			<<set _penisOptions to "pussyEntrance">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> pussy hovers near your <<penisstop>></span>
+		<<case "imminent">>
+			<<set _penisOptions to "pussyImminent">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> pussy presses against your <<penisstop>></span>
+		<<case "penetrated">>
+			<<set _penisOptions to "pussyPenetration">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> vagina envelopes your <<penisstop>></span>
+		<<case "otheranusentrance">>
+			<<set _penisOptions to "anusEntrance">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> ass hovers near your <<penisstop>></span>
+		<<case "otheranusimminent">>
+			<<set _penisOptions to "anusImminent">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> ass presses against your <<penisstop>></span>
+		<<case "otheranus">>
+			<<set _penisOptions to "anusPenetration">>
+			<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')"><<His>> ass envelopes your <<penisstop>></span>
+		<<default>>
+			<<switch $penisuse>>
+				<<case "clit">>
+					<<set _penisOptions to "penisAgainstClit">>
+					<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')">You press your <<penis>> against <<his>> <<if $enemytype is "beast">><<beasttype>> pussy<<else>>clit<</if>>.</span>
+				<<case "otheranusrub">>
+					<<set _penisOptions to "penisAgainstAss">>
+					<span @class="($lastOptions.penis isnot _penisOptions or _penisGold is true ?'gold':'')">You hold your <<penis>> between <<his>> ass cheeks.</span>
+			<</switch>>
+	<</switch>>
+	<<if $lastOptions.penis isnot _penisOptions>>
+		<<set _penisGold to true>>
+	<</if>>
+
+	<<penisActions>>
+	<<if Object.keys(_penisaction).length gt 0>>
+		<<if Object.values(_penisaction).includes($penisactiondefault) is false or $args[0] is true>>
+			<<set _defaultsCombatAction to "penisaction">>
+			<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+			<<set _pass to false>>
+			<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
+				<<if Object.values(_penisaction).includes(_actionsSet[_set])>>
+					<<set $penisactiondefault to clone(_actionsSet[_set])>>
+					<<set _pass to true>>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if _pass is false>>
+				<<set $penisactiondefault to Object.values(_penisaction)[0]>>
+			<</if>>
+		<</if>>
+
+		<<set $penisaction to $penisactiondefault>>
+		<<set _textColor to combatListColor('penisaction', (Object.values(_penisaction).includes($penisaction) ? $penisaction : Object.values(_penisaction)[0]), "")>>
+		<<generateCombatAction _penisaction "penisaction" _textColor $penisaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="penisactionDifficulty">
+				<<penisactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.penis to clone(_penisOptions)>>
+<</nobr>><</widget>>
+
+<<widget "penisactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $penisaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "penistovagina" "penistoanus">><<peniledifficulty>> <<combatpromiscuous5>>
+	<<case "penisvaginafuck" "penisanusfuck">><<combatpromiscuous5>> <<penilevirginitywarning>>
+	<<case "thighbay">><<thighdifficulty>> <<combatpromiscuous1>>
+	<<case "bay">><<peniledifficulty>> <<combatpromiscuous4>>
+	<<case "otheranusbay">><<peniledifficulty>> <<combatpromiscuous4>>
+	<<case "clitrub" "otheranusrub">><<peniledifficulty>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "penisActions">><<nobr>>
+/*Generate Actions*/
+<<set _penisaction to {}>>
+<<switch _penisOptions>>
+	<<case "free">>
+		<<set _penisaction["Rest"] to "rest">>
+		<<actionspenistovaginanew>>
+		<<actionspenistoanusnew>>
+	<<case "mouthEntrance">>
+		<<set _penisaction["Rest"] to "rest">>
+		<<actionspenisMouthEntrance>>
+	<<case "mouthImminent">>
+		<<set _penisaction["Rest"] to "rest">>
+		<<actionspenisMouthImminent>>
+	<<case "mouthPenetration">>
+		<<actionspenisMouthPenetration>>
+	<<case "pussyEntrance">>
+		<<set _penisaction["Rest"] to "rest">>
+		<<actionspenisPussyEntrance>>
+	<<case "pussyImminent">>
+		<<set _penisaction["Rest"] to "rest">>
+		<<actionspenisPussyImminent>>
+	<<case "pussyPenetration">>
+		<<actionspenisPussyPenetration>>
+	<<case "anusEntrance">>
+		<<set _penisaction["Rest"] to "rest">>
+		<<actionspenisAnusEntrance>>
+	<<case "anusImminent">>
+		<<set _penisaction["Rest"] to "rest">>
+		<<actionspenisAnusImminent>>
+	<<case "anusPenetration">>
+		<<actionspenisAnusPenetration>>
+	<<case "penisAgainstClit">>
+		<<actionspenisAgainstClit>>
+	<<case "penisAgainstAss">>
+		<<actionspenisAgainstAss>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "vaginaactionInit">><<nobr>>
+	<<switch $vaginastate>>
+		<<case 0>>
+			<<set _vaginaOptions to "free">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions ?'gold':'')">Your <<pussy>> is free.</span>
+		<<case "othermouthentrance">>
+			<<set _vaginaOptions to "mouthEntranch">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions or _vaginaGold is true ?'gold':'')">You feel breath on your <<pussystop>></span>
+		<<case "othermouthimminent">>
+			<<set _vaginaOptions to "mouthImminent">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions or _vaginaGold is true ?'gold':'')"><<His>> lips press against your labia.</span>
+		<<case "othermouth">>
+			<<set _vaginaOptions to "mouthPenetrated">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions or _vaginaGold is true ?'gold':'')"><<His>> tongue penetrates your <<pussystop>></span>
+		<<case "othervagina">>
+			<<set _vaginaOptions to "vaginaImminent">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions or _vaginaGold is true ?'gold':'')"><<His>> pussy is pressed against your <<pussystop>></span>
+		<<case "entrance">>
+			<<set _vaginaOptions to "penisEntrance">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions or _vaginaGold is true ?'gold':'')"><<His>> penis hovers near your <<pussystop>></span>
+		<<case "imminent">>
+			<<set _vaginaOptions to "penisImminent">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions or _vaginaGold is true ?'gold':'')"><<His>> penis presses against your <<pussystop>></span>
+		<<case "penetrated">>
+			<<set _vaginaOptions to "penisPenetrated">>
+			<span @class="($lastOptions.vagina isnot _vaginaOptions or _vaginaGold is true ?'gold':'')"><<His>> penis penetrates your <<pussystop>></span>
+	<</switch>>
+	<<if $lastOptions.vagina isnot _vaginaOptions>>
+		<<set _vaginaGold to true>>
+	<</if>>
+
+	<<vaginaActions>>
+	<<if Object.keys(_vaginaaction).length gt 0>>
+		<<if Object.values(_vaginaaction).includes($vaginaactiondefault) is false or $args[0] is true>>
+			<<set _defaultsCombatAction to "vaginaaction">>
+			<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+			<<set _pass to false>>
+			<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
+				<<if Object.values(_vaginaaction).includes(_actionsSet[_set])>>
+					<<set $vaginaactiondefault to clone(_actionsSet[_set])>>
+					<<set _pass to true>>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if _pass is false>>
+				<<set $vaginaactiondefault to Object.values(_vaginaaction)[0]>>
+			<</if>>
+		<</if>>
+
+		<<set $vaginaaction to $vaginaactiondefault>>
+		<<set _textColor to combatListColor('vaginaaction', (Object.values(_vaginaaction).includes($vaginaaction) ? $vaginaaction : Object.values(_vaginaaction)[0]), "")>>
+		<<generateCombatAction _vaginaaction "vaginaaction" _textColor $vaginaaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="vaginaactionDifficulty">
+				<<vaginaactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.vagina to clone(_vaginaOptions)>>
+<</nobr>><</widget>>
+
+<<widget "vaginaactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $vaginaaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "vaginatopenis" "vaginatopenis">><<vaginaldifficulty>> <<combatpromiscuous5>>
+	<<case "vaginatovagina" "vaginatovagina">><<vaginaldifficulty>> <<combatpromiscuous5>>
+	<<case "vaginapenisfuck">><<combatpromiscuous5>> <<vaginalvirginitywarning>>
+	<<case "thighbay">><<thighdifficulty>> <<combatpromiscuous1>>
+	<<case "penisthighs">><<thighdifficulty>> <<combatpromiscuous4>>
+	<<case "penisanus">><<analdifficulty>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "vaginaActions">><<nobr>>
+/*Generate Actions*/
+<<set _vaginaaction to {}>>
+<<switch _vaginaOptions>>
+	<<case "free">>
+		<<set _vaginaaction["Rest"] to "rest">>
+		<<actionsvaginatopenisnew>>
+		<<actionsvaginatovaginanew>>
+	<<case "mouthEntranch">>
+		<<set _vaginaaction["Rest"] to "rest">>
+		<<actionsvaginaMouthEntrance>>
+	<<case "mouthImminent">>
+		<<set _vaginaaction["Rest"] to "rest">>
+		<<actionsvaginaMouthImminent>>
+	<<case "vaginaImminent">>
+		<<set _vaginaaction["Rest"] to "rest">>
+		<<actionsvaginaVaginaImminent>>
+	<<case "mouthPenetrated">>
+		<<actionsvaginaMouthPenetrated>>
+	<<case "penisEntrance">>
+		<<set _vaginaaction["Rest"] to "rest">>
+		<<actionsvaginaPenisEntrance>>
+	<<case "penisImminent">>
+		<<set _vaginaaction["Rest"] to "rest">>
+		<<actionsvaginaPenisImminent>>
+	<<case "penisPenetrated">>
+		<<actionsvaginaPenisPenetrated>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "anusactionInit">><<nobr>>
+	<<switch $anusstate>>
+		<<case 0>>
+			<<set _anusOptions to "free">>
+			<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')">Your <<bottom>> is free.</span>
+		<<case "othermouthentrance">>
+			<<set _anusOptions to "mouthEntrance">>
+			<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')">You feel breath on your <<bottomstop>></span>
+		<<case "othermouthimminent">>
+			<<set _anusOptions to "mouthImminent">>
+			<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')"><<His>> lips press against your anus.</span>
+		<<case "othermouth">>
+			<<set _anusOptions to "mouthPenetration">>
+			<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')"><<His>> tongue penetrates your <<bottomstop>></span>
+		<<case "entrance">>
+			<<set _anusOptions to "penisEntrance">>
+			<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')"><<His>> penis hovers near your <<bottomstop>></span>
+		<<case "imminent">>
+			<<set _anusOptions to "penisImminent">>
+			<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')"><<His>> penis presses against your anus.</span>
+		<<case "penetrated">>
+			<<set _anusOptions to "penisPenetration">>
+			<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')"><<His>> penis penetrates your anus.</span>
+		<<default>>
+			<<switch $bottomuse>>
+				<<case "mouth">>
+					<<set _anusOptions to "faceAgainstAnus">>
+					<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')">You press your <<bottom>> against <<his>> face.</span>
+				<<case "penis">>
+					<<set _anusOptions to "penisAgainstAnus">>
+					<span @class="($lastOptions.anus isnot _anusOptions or _anusGold is true ?'gold':'')">You hold <<his>> penis between your buttocks.</span>
+			<</switch>>
+	<</switch>>
+	<<if $lastOptions.anus isnot _anusOptions>>
+		<<set _anusGold to true>>
+	<</if>>
+
+	<<anusActions>>
+	<<if Object.keys(_anusaction).length gt 0>>
+		<<if Object.values(_anusaction).includes($anusactiondefault) is false or $args[0] is true>>
+			<<set _defaultsCombatAction to "anusaction">>
+			<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+			<<set _pass to false>>
+			<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
+				<<if Object.values(_anusaction).includes(_actionsSet[_set])>>
+					<<set $anusactiondefault to clone(_actionsSet[_set])>>
+					<<set _pass to true>>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if _pass is false>>
+				<<set $anusactiondefault to Object.values(_anusaction)[0]>>
+			<</if>>
+		<</if>>
+
+		<<set $anusaction to $anusactiondefault>>
+		<<set _textColor to combatListColor('anusaction', (Object.values(_anusaction).includes($anusaction) ? $anusaction : Object.values(_anusaction)[0]), "")>>
+		<<generateCombatAction _anusaction "anusaction" _textColor $anusaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="anusactionDifficulty">
+				<<anusactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.anus to clone(_anusOptions)>>
+<</nobr>><</widget>>
+
+<<widget "anusactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $anusaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "bottombay">><<bottomdifficulty>> <<combatpromiscuous1>>
+	<<case "penischeeks">><<analdifficulty>> <<combatpromiscuous4>>
+	<<case "anustopenis">><<analdifficulty>> <<combatpromiscuous5>>
+	<<case "anuspenisfuck">><<combatpromiscuous5>> <<analvirginitywarning>>
+	<<case "otherAnusRub" "otherMouthAnusRub">> <<analdifficulty>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "anusActions">><<nobr>>
+/*Generate Actions*/
+<<set _anusaction to {}>>
+<<switch _anusOptions>>
+	<<case "free">>
+		<<set _anusaction["Rest"] to "rest">>
+		<<actionsanustopenisnew>>
+	<<case "mouthEntrance">>
+		<<set _anusaction["Rest"] to "rest">>
+		<<actionsanusMouthEntrance>>
+	<<case "mouthImminent">>
+		<<set _anusaction["Rest"] to "rest">>
+		<<actionsanusMouthImminent>>
+	<<case "mouthPenetration">>
+		<<actionsanusMouthPenetration>>
+	<<case "penisEntrance">>
+		<<set _anusaction["Rest"] to "rest">>
+		<<actionsanuspenisfucknew>>
+		<<actionsanusPenisEntrance>>
+	<<case "penisImminent">>
+		<<set _anusaction["Rest"] to "rest">>
+		<<actionsanuspenisfucknew>>
+		<<actionsanusPenisImminent>>
+	<<case "penisPenetration">>
+		<<actionsanusPenisPenetration>>
+	<<case "faceAgainstAnus">>
+		<<actionsanusFaceAgainstAnus>>
+	<<case "penisAgainstAnus">>
+		<<actionsanusPenisAgainstAnus>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "chestactionInit">><<nobr>>
+	<<switch $chestuse>>
+		<<case "penis">>
+			<<set _chestOptions to "penis">>
+			<span @class="($lastOptions.chest isnot _chestOptions ?'gold':'')"><<His>> penis rests <<print ($breastsize is 0 ?"against":"between")>> your <<breastsstop>></span>
+	<</switch>>
+
+	<<chestActions>>
+	<<if Object.keys(_chestaction).length gt 0>>
+		<<if $chestactiondefault is 0>>
+			<<set $chestactiondefault to Object.values(_chestaction)[0]>>
+		<</if>>
+
+		<<set $chestaction to $chestactiondefault>>
+		<<set _textColor to combatListColor('chestaction', (Object.values(_chestaction).includes($chestaction) ? $chestaction : Object.values(_chestaction)[0]), "")>>
+		<<generateCombatAction _chestaction "chestaction" _textColor $chestaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="chestactionDifficulty">
+				<<chestactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.chest to clone(_chestOptions)>>
+<</nobr>><</widget>>
+
+<<widget "chestactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $chestaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "rub">><<chestdifficulty>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "chestActions">><<nobr>>
+/*Generate Actions*/
+<<set _chestaction to {}>>
+/*<<set _chestaction["Rest"] to "rest">>*/
+<<switch _chestOptions>>
+	<<case "penis">>
+		<<set _chestaction["Rub"] to "rub">>
+		<<set _chestaction["Stop"] to "stop">>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "thighactionInit">><<nobr>>
+	<<switch $thighuse>>
+		<<case "mouth">>
+			<<set _thighOptions to "mouth">>
+			<span @class="($lastOptions.thigh isnot _thighOptions ?'gold':'')">You press your thigh against <<his>> mouth.</span>
+		<<case "penis">>
+			<<set _thighOptions to "penis">>
+			<span @class="($lastOptions.thigh isnot _thighOptions ?'gold':'')">You hold <<his>> penis between your thighs.</span>
+	<</switch>>
+
+	<<thighactions>>
+	<<if Object.keys(_thighaction).length gt 0>>
+		<<if $thighactiondefault is 0>>
+			<<set $thighactiondefault to Object.values(_thighaction)[0]>>
+		<</if>>
+		<<set $thighaction to $thighactiondefault>>
+		<<set _textColor to combatListColor('thighaction', (Object.values(_thighaction).includes($thighaction) ? $thighaction : Object.values(_thighaction)[0]), "")>>
+		<<generateCombatAction _thighaction "thighaction" _textColor $thighaction>>
+
+		/*Checks/Difficulty*/
+		<<if $combatControls.includes("ists")>>
+			<div id="thighactionDifficulty">
+				<<thighactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.thigh to clone(_thighOptions)>>
+<</nobr>><</widget>>
+
+<<widget "thighactionDifficulty">><<nobr>>
+<<if $args[0] is undefined>>
+	<<set _diffAction to $thighaction>>
+<<else>>
+	<<set _diffAction to $args[0]>>
+<</if>>
+<<switch _diffAction>>
+	<<case "rub" "othermouthrub">><<thighdifficulty>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "thighactions">><<nobr>>
+/*Generate Actions*/
+<<set _thighaction to {}>>
+/*<<set _thighaction["Rest"] to "rest">>*/
+<<switch _thighOptions>>
+	<<case "mouth">>
+		<<set _thighaction["Rub"] to "othermouthrub">>
+		<<set _thighaction["Stop"] to "othermouthstop">>
+	<<case "penis">>
+		<<set _thighaction["Rub"] to "rub">>
+		<<set _thighaction["Stop"] to "stop">>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "resetLastOptions">><<nobr>>
+<<set $lastOptions to {
+	"left":"",
+	"right":"",
+	"feet":"",
+	"mouth":"",
+	"penis":"",
+	"vagina":"",
+	"anus":"",
+	"chest":"",
+	"thigh":"",
+	"cheek":"",
+}>>
+<</nobr>><</widget>>

@@ -1,0 +1,710 @@
+:: Widgets Difficulty [widget]
+<<widget "chestdifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $chestskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $chestskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $chestskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $chestskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $chestskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $chestskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "seductiondifficulty">><<nobr>>
+<<if $combat is 1>>
+	<<if (990 - ($enemytrust * 10) - $seductionskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+		<span class="green">(Very Easy)</span>
+	<<elseif (800 - ($enemytrust * 10) - $seductionskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+		<span class="teal">(Easy)</span>
+	<<elseif (600 - ($enemytrust * 10) - $seductionskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+		<span class="lblue">(Medium)</span>
+	<<elseif (400 - ($enemytrust * 10) - $seductionskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+		<span class="blue">(Challenging)</span>
+	<<elseif (200 - ($enemytrust * 10) - $seductionskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+		<span class="purple">(Hard)</span>
+	<<elseif (1 - ($enemytrust * 10) - $seductionskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+		<span class="pink">(Very Hard)</span>
+	<<else>>
+		<span class="red">(Impossible)</span>
+	<</if>>
+<<else>>
+	<<if 990 - $seductionskill - ($attractiveness / 10) lte -100>>
+		<span class="green">(Very Easy)</span>
+	<<elseif 800 - $seductionskill - ($attractiveness / 10) lte -100>>
+		<span class="teal">(Easy)</span>
+	<<elseif 600 - $seductionskill - ($attractiveness / 10) lte -100>>
+		<span class="lblue">(Medium)</span>
+	<<elseif 400 - $seductionskill - ($attractiveness / 10) lte -100>>
+		<span class="blue">(Challenging)</span>
+	<<elseif 200 - $seductionskill - ($attractiveness / 10) lte -100>>
+		<span class="purple">(Hard)</span>
+	<<elseif 1 - $seductionskill - ($attractiveness / 10) lte -100>>
+		<span class="pink">(Very Hard)</span>
+	<<else>>
+		<span class="red">(Impossible)</span>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "oraldifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $oralskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $oralskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $oralskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $oralskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $oralskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $oralskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "vaginaldifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $vaginalskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $vaginalskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $vaginalskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $vaginalskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $vaginalskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $vaginalskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "analdifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $analskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $analskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $analskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $analskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $analskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $analskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "handdifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $handskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $handskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $handskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $handskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $handskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $handskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "feetdifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $feetskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $feetskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $feetskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $feetskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $feetskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $feetskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "bottomdifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $bottomskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $bottomskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $bottomskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $bottomskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $bottomskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $bottomskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "thighdifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $thighskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="green">(Very Easy)</span>
+
+<<elseif (800 - ($enemytrust * 10) - $thighskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="teal">(Easy)</span>
+
+<<elseif (600 - ($enemytrust * 10) - $thighskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="lblue">(Medium)</span>
+
+<<elseif (400 - ($enemytrust * 10) - $thighskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="blue">(Challenging)</span>
+
+<<elseif (200 - ($enemytrust * 10) - $thighskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="purple">(Hard)</span>
+
+<<elseif (1 - ($enemytrust * 10) - $thighskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+<span class="pink">(Very Hard)</span>
+
+<<else>>
+<span class="red">(Impossible)</span>
+
+<</if>>
+<</nobr>><</widget>>
+<<widget "peniledifficulty">><<nobr>>
+<<if (990 - ($enemytrust * 10) - $penileskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+	<span class="green">(Very Easy)</span>
+<<elseif (800 - ($enemytrust * 10) - $penileskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+	<span class="teal">(Easy)</span>
+<<elseif (600 - ($enemytrust * 10) - $penileskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+	<span class="lblue">(Medium)</span>
+<<elseif (400 - ($enemytrust * 10) - $penileskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+	<span class="blue">(Challenging)</span>
+<<elseif (200 - ($enemytrust * 10) - $penileskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+	<span class="purple">(Hard)</span>
+<<elseif (1 - ($enemytrust * 10) - $penileskill + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
+	<span class="pink">(Very Hard)</span>
+<<else>>
+	<span class="red">(Impossible)</span>
+<</if>>
+<</nobr>><</widget>>
+<<widget "skulduggerycheck">><<nobr>>
+<<set $skulduggeryroll to random(1, 1000)>>
+<<if $skulduggery gte $skulduggerydifficulty>>
+	<<set $skulduggerysuccess to 1>>
+	<span class="green">You succeed in your skulduggery.</span>
+<<elseif $skulduggery + 100 gte $skulduggerydifficulty>>
+	<<if $skulduggeryroll gte 100>>
+		<<set $skulduggerysuccess to 1>>
+		<span class="green">You succeed in your skulduggery.</span>
+	<<else>>
+		<<set $skulduggerysuccess to 0>>
+		<span class="red">You fail in your skulduggery.</span>
+	<</if>>
+<<elseif $skulduggery + 200 gte $skulduggerydifficulty>>
+	<<if $skulduggeryroll gte 300>>
+		<<set $skulduggerysuccess to 1>>
+		<span class="green">You succeed in your skulduggery.</span>
+	<<else>>
+		<<set $skulduggerysuccess to 0>>
+		<span class="red">You fail in your skulduggery.</span>
+	<</if>>
+<<elseif $skulduggery + 300 gte $skulduggerydifficulty>>
+	<<if $skulduggeryroll gte 500>>
+		<<set $skulduggerysuccess to 1>>
+		<span class="green">You succeed in your skulduggery.</span>
+	<<else>>
+		<<set $skulduggerysuccess to 0>>
+		<span class="red">You fail in your skulduggery.</span>
+	<</if>>
+<<elseif $skulduggery + 400 gte $skulduggerydifficulty>>
+	<<if $skulduggeryroll gte 700>>
+		<<set $skulduggerysuccess to 1>>
+		<span class="green">You succeed in your skulduggery.</span>
+	<<else>>
+		<<set $skulduggerysuccess to 0>>
+		<span class="red">You fail in your skulduggery.</span>
+	<</if>>
+<<elseif $skulduggery + 500 gte $skulduggerydifficulty>>
+	<<if $skulduggeryroll gte 900>>
+		<<set $skulduggerysuccess to 1>>
+		<span class="green">You succeed in your skulduggery.</span>
+	<<else>>
+		<<set $skulduggerysuccess to 0>>
+		<span class="red">You fail in your skulduggery.</span>
+	<</if>>
+<<else>>
+	<<set $skulduggerysuccess to 0>>
+	<span class="red">You fail in your skulduggery.</span>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "skulduggerydifficulty">><<nobr>>
+ | <span class="orange">Skulduggery:</span>
+	<<if $skulduggery gte $skulduggerydifficulty>>
+		<span class="green">Very Easy</span>
+	<<elseif $skulduggery + 100 gte $skulduggerydifficulty>>
+		<span class="teal">Easy</span>
+	<<elseif $skulduggery + 200 gte $skulduggerydifficulty>>
+		<span class="lblue">Medium</span>
+	<<elseif $skulduggery + 300 gte $skulduggerydifficulty>>
+		<span class="blue">Challenging</span>
+	<<elseif $skulduggery + 400 gte $skulduggerydifficulty>>
+		<span class="purple">Hard</span>
+	<<elseif $skulduggery + 500 gte $skulduggerydifficulty>>
+		<span class="pink">Very Hard</span>
+	<<else>>
+		<span class="red">Impossible</span>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "skulduggeryrequired">><<nobr>>
+<<if $lock lte 0>>
+<span class="red">None</span>
+<<elseif $lock gte 1 and $lock lt 100>>
+<span class="pink">F</span>
+<<elseif $lock gte 100 and $lock lt 200>>
+<span class="pink">F+</span>
+<<elseif $lock gte 200 and $lock lt 300>>
+<span class="purple">D</span>
+<<elseif $lock gte 300 and $lock lt 400>>
+<span class="purple">D+</span>
+<<elseif $lock gte 400 and $lock lt 500>>
+<span class="blue">C</span>
+<<elseif $lock gte 500 and $lock lt 600>>
+<span class="blue">C+</span>
+<<elseif $lock gte 600 and $lock lt 700>>
+<span class="lblue">B</span>
+<<elseif $lock gte 700 and $lock lt 800>>
+<span class="lblue">B+</span>
+<<elseif $lock gte 800 and $lock lt 900>>
+<span class="teal">A</span>
+<<elseif $lock gte 900 and $lock lt 1000>>
+<span class="teal">A+</span>
+<<elseif $lock gte 1000>>
+<span class="green">S</span>
+<</if>>
+<</nobr>><</widget>>
+<<widget "seductioncheck">><<nobr>>
+Attractiveness rating:
+<<if $attractiveness gte 5000>>
+	<span class="green">S</span>
+<<elseif $attractiveness gte 4000>>
+	<span class="teal">A</span>
+<<elseif $attractiveness gte 3000>>
+	<span class="lblue">B</span>
+<<elseif $attractiveness gte 2000>>
+	<span class="blue">C</span>
+<<elseif $attractiveness gte 1000>>
+	<span class="purple">D</span>
+<<else>>
+	<span class="pink">F</span>
+<</if>>
+<br>
+Seduction Skill:
+<<if $seductionskill lte 0>>
+	<span class="red">None</span>
+<<elseif $seductionskill gte 1 and $seductionskill lt 200>>
+	<span class="pink">F</span>
+<<elseif $seductionskill gte 200 and $seductionskill lt 400>>
+	<span class="purple">D</span>
+<<elseif $seductionskill gte 400 and $seductionskill lt 600>>
+	<span class="blue">C</span>
+<<elseif $seductionskill gte 600 and $seductionskill lt 800>>
+	<span class="lblue">B</span>
+<<elseif $seductionskill gte 800 and $seductionskill lt 1000>>
+	<span class="teal">A</span>
+<<elseif $seductionskill gte 1000>>
+	<span class="green">S</span>
+<</if>>
+<br>
+Overall rating:
+<<if $attractiveness + ($seductionskill * 5) gte 10000>>
+	<span class="green">S</span>
+	<<set $seductionrating to 6>>
+<<elseif $attractiveness + ($seductionskill * 5) gte 8000>>
+	<span class="teal">A</span>
+	<<set $seductionrating to 5>>
+<<elseif $attractiveness + ($seductionskill * 5) gte 6000>>
+	<span class="lblue">B</span>
+	<<set $seductionrating to 4>>
+<<elseif $attractiveness + ($seductionskill * 5) gte 4000>>
+	<span class="blue">C</span>
+	<<set $seductionrating to 3>>
+<<elseif $attractiveness + ($seductionskill * 5) gte 2000>>
+	<span class="purple">D</span>
+	<<set $seductionrating to 2>>
+<<else>>
+	<span class="pink">F</span>
+	<<set $seductionrating to 1>>
+<</if>>
+<br>
+Required rating:
+<<if $seductiondifficulty gte 10000>>
+	<span class="green">S</span>
+	<<set $seductionrequired to 6>>
+<<elseif $seductiondifficulty gte 8000>>
+	<span class="teal">A</span>
+	<<set $seductionrequired to 5>>
+<<elseif $seductiondifficulty gte 6000>>
+	<span class="lblue">B</span>
+	<<set $seductionrequired to 4>>
+<<elseif $seductiondifficulty gte 4000>>
+	<span class="blue">C</span>
+	<<set $seductionrequired to 3>>
+<<elseif $seductiondifficulty gte 2000>>
+	<span class="purple">D</span>
+	<<set $seductionrequired to 2>>
+<<else>>
+	<span class="pink">F</span>
+	<<set $seductionrequired to 1>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "physiquedifficulty">><<nobr>>
+<<if $args[0]>>
+	<<set _physiquedifficultymin to $args[0]>>
+<<else>>
+	<<set _physiquedifficultymin to 1>>
+<</if>>
+<<if $args[1]>>
+	<<set _physiquedifficultymax to $args[1]>>
+<<else>>
+	<<set _physiquedifficultymax to $physiquemax>>
+<</if>>
+ | <span class="orange">Physique</span>:
+<<set _difficulty to Math.round(Math.clamp($physique - _physiquedifficultymin, 0, _physiquedifficultymax) / (_physiquedifficultymax - _physiquedifficultymin) * 100)>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "dancedifficulty">><<nobr>>
+<<if $args[0]>>
+	<<set _dancedifficultymin to $args[0]>>
+<<else>>
+	<<set _dancedifficultymin to 1>>
+<</if>>
+<<if $args[1]>>
+	<<set _dancedifficultymax to $args[1]>>
+<<else>>
+	<<set _dancedifficultymax to 1000>>
+<</if>>
+ | <span class="orange">Dance</span>:
+<<set _difficulty to Math.round(Math.clamp($danceskill - _dancedifficultymin, 0, _dancedifficultymax) / (_dancedifficultymax - _dancedifficultymin) * 100)>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "swimmingdifficulty">><<nobr>>
+<<if $args[0]>>
+	<<set _swimmingdifficultymin to $args[0]>>
+<<else>>
+	<<set _swimmingdifficultymin to 1>>
+<</if>>
+<<if $args[1]>>
+	<<set _swimmingdifficultymax to $args[1]>>
+<<else>>
+	<<set _swimmingdifficultymax to 1000>>
+<</if>>
+ | <span class="orange">Swimming</span>:
+<<set _difficulty to Math.round(Math.clamp($swimmingskill - _swimmingdifficultymin, 0, _swimmingdifficultymax) / (_swimmingdifficultymax - _swimmingdifficultymin) * 100)>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "athleticsdifficulty">><<nobr>>
+<<if $args[0]>>
+	<<set _athleticsdifficultymin to $args[0]>>
+<<else>>
+	<<set _athleticsdifficultymin to 1>>
+<</if>>
+<<if $args[1]>>
+	<<set _athleticsdifficultymax to $args[1]>>
+<<else>>
+	<<set _athleticsdifficultymax to 1000>>
+<</if>>
+ | <span class="orange">Athletics</span>:
+<<set _difficulty to Math.round(Math.clamp($athletics - _athleticsdifficultymin, 0, _athleticsdifficultymax) / (_athleticsdifficultymax - _athleticsdifficultymin) * 100)>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "willpowerdifficulty">><<nobr>>
+<<if $args[0]>>
+	<<set _willpowerdifficultymin to $args[0]>>
+<<else>>
+	<<set _willpowerdifficultymin to 1>>
+<</if>>
+<<if $args[1]>>
+	<<set _willpowerdifficultymax to $args[1]>>
+<<else>>
+	<<set _willpowerdifficultymax to $willpowermax>>
+<</if>>
+ | <span class="orange">Willpower</span>:
+<<set _difficulty to Math.round(Math.clamp($willpower - _willpowerdifficultymin, 0, _willpowerdifficultymax) / (_willpowerdifficultymax - _willpowerdifficultymin) * 100)>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "tendingdifficulty">><<nobr>>
+<<if $args[0]>>
+	<<set _tendingdifficultymin to $args[0]>>
+<<else>>
+	<<set _tendingdifficultymin to 1>>
+<</if>>
+<<if $args[1]>>
+	<<set _tendingdifficultymax to $args[1]>>
+<<else>>
+	<<set _tendingdifficultymax to 1000>>
+<</if>>
+ | <span class="orange">Tending</span>:
+<<set _difficulty to Math.round(Math.clamp($tending - _tendingdifficultymin, 0, _tendingdifficultymax) / (_tendingdifficultymax - _tendingdifficultymin) * 100)>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "difficulty">><<nobr>>
+<<if $args[0]>>
+ | Success Chance:
+	<<if $args[0] gte 100>>
+		<span class="green"><<print $args[0]>>%</span>
+	<<elseif $args[0] gte 80>>
+		<span class="teal"><<print $args[0]>>%</span>
+	<<elseif $args[0] gte 60>>
+		<span class="lblue"><<print $args[0]>>%</span>
+	<<elseif $args[0] gte 40>>
+		<span class="blue"><<print $args[0]>>%</span>
+	<<elseif $args[0] gte 20>>
+		<span class="purple"><<print $args[0]>>%</span>
+	<<elseif $args[0] gte 1>>
+		<span class="pink"><<print $args[0]>>%</span>
+	<<else>>
+		<span class="red"><<print $args[0]>>%</span>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "englishdifficulty">><<nobr>>
+<<if $args[0]>>
+	<<set _englishdifficultymin to $args[0]>>
+<<else>>
+	<<set _englishdifficultymin to 1>>
+<</if>>
+<<if $args[1]>>
+	<<set _englishdifficultymax to $args[1]>>
+<<else>>
+	<<set _englishdifficultymax to 1000>>
+<</if>>
+ | <span class="orange">English</span>:
+<<set _difficulty to Math.round(Math.clamp($english - _englishdifficultymin, 0, _englishdifficultymax) / (_englishdifficultymax - _englishdifficultymin) * 100)>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>
+
+
+
+
+<<widget "skill_difficulty">><<nobr>>
+/*args[0]: skill to be checked.
+args[1]: skill name to display.
+args[2]: skill required to have a chance.
+args[3]: skill required for 100% success rate.*/
+<<if $args[2]>>
+	<<set _skilldifficultymin to $args[2]>>
+<<else>>
+	<<set _skilldifficultymin to 1>>
+<</if>>
+<<if $args[3]>>
+	<<set _skilldifficultymax to $args[3]>>
+<<else>>
+	<<set _skilldifficultymax to 1000>>
+<</if>>
+ | <span class="orange"><<print $args[1]>></span>:
+<<print '<<set _difficulty to Math.round(Math.clamp($' + $args[0] + ' - _skilldifficultymin, 0, _skilldifficultymax) / (_skilldifficultymax - _skilldifficultymin) * 100)>>'>>
+<<if _difficulty gt 100>>
+	<<set _difficulty to 100>>
+<</if>>
+<<if _difficulty gte 100>>
+	<span class="green">Simple <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 80>>
+	<span class="teal">Easy <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 60>>
+	<span class="lblue">Reasonable <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 40>>
+	<span class="blue">Challenging <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 20>>
+	<span class="purple">Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<elseif _difficulty gte 1>>
+	<span class="pink">Very Hard <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<<else>>
+	<span class="red">Impossible <<if $checkstyle is "percentage">><<print _difficulty>>%<</if>></span>
+<</if>>
+<</nobr>><</widget>>

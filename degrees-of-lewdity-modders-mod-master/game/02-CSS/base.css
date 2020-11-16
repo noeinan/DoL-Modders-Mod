@@ -1,0 +1,2502 @@
+mouse.tooltip {font-weight: normal;}
+
+mouse.tooltip span {
+	z-index:210;
+	display:none;
+	padding:14px 10px;
+	margin-top:50px; margin-left:-40px;
+	min-width: 50px;
+	max-width: 450px !important;
+	line-height:20px;
+	border-radius:2px;
+	box-shadow: 0px 0px 8px 4px #000;
+}
+
+mouse.tooltip:hover span {
+	display:inline;
+	position:absolute;
+	border:2px solid #000000;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: none;
+	font-size:1.0em;
+	background:#C4C4C4 repeat-x 0 0;
+}
+
+#next {
+	position: fixed;
+	bottom: -1px;
+	border: 1px solid #aaa;
+	background-color: #222;
+	z-index: 200;
+}
+
+#next a {
+	color: gold;
+	padding: 10px 20px 30px 20px;
+	display: block;
+}
+
+#saveDataInput {
+	min-width: inherit;
+	width: 95%
+}
+
+.passage {
+	-o-transition:.2s ease-in;
+	transition:.2s ease-in;
+}
+
+.closeButton, .macro-button {
+	width: 100%;
+	font-size: 110%;
+	max-width: 240px;
+	background-color: #222;
+	border: 1px solid #444;
+}
+
+.fixedClose {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	background-color: #222;
+	width: auto;
+	height: auto;
+	margin: 0;
+	z-index: 1;
+	padding: 0;
+	border-bottom: 1px solid #fff;
+}
+
+.macro-button:hover {
+	background-color: #333;
+	border: 1px solid #fff;
+}
+
+.customOverlay {
+	display: block;
+	position:fixed;
+	top: 20px;
+	bottom: 20px;
+	left: 20px;
+	right:20px;
+	height: auto;
+	width: auto;
+	border: 2px #fff solid;
+	background-color: #222;
+	text-align: left;
+	padding: 0 5px 3px;
+	overflow-y: scroll;
+	z-index: 1000;
+	max-width: 1000px;
+}
+
+@media only screen and (min-width: 870px) {
+	.customOverlay {
+		left: 300px;
+	}
+}
+
+.debugOverlay {
+	display: block;
+	position: fixed;
+	top: 20px;
+	bottom: 20px;
+	right: 20px;
+	height: auto;
+	width: auto;
+	max-width: 700px;
+	z-index: 1001;
+	padding: 3px;
+	border: 2px #fff solid;
+	background-color: #333;
+	overflow-y: scroll;
+}
+
+.overlayMenu ul {
+	text-align: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.overlayMenu ul li {
+	float: left;
+	height: 35px;
+	margin-right: 1px;
+}
+
+.debugOverlay ul li input {
+	width: 80px;
+	margin: 0;
+}
+
+.overlayItem {
+	border-top: 2px #fff solid;
+	clear: both;
+}
+
+#statsHelp {
+	overflow-y: scroll;
+	height: auto;
+	max-height: 200px;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.close {
+	background-color: darkred;
+}
+
+#gameVersionDisplay {
+	position: fixed;
+	right: 3px;
+	top: 1px;
+	font-size: 0.6em;
+	color: #777;
+	z-index: 1000;
+	background-color: #111;
+}
+
+.feat {
+	/*display: none;*/
+	position: fixed;
+	right: 10px;
+	top: 20px;
+	height: 81px;
+	width: 80%;
+	max-width: 400px;
+	z-index: 1000;
+	background-color: gold;
+	padding: 2px;
+}
+
+.featList {
+	height: 87px;
+	width: 80%;
+	max-width: 400px;
+	background-color: gold;
+	padding: 2px;
+	float: left;
+}
+
+.featImage {
+	display: inline-block;
+	height: 100%;
+	width: 79px;
+	background-color: #333;
+}
+
+.dot {
+	height: 74px;
+	width: 74px;
+	background-color: #999;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 3px;
+	position: absolute;
+}
+
+.featCoin {
+	position: absolute;
+	margin-top: 3px;
+	margin-left: 3px;
+}
+
+.featText {
+	display: inline-block;
+	height: 100%;
+	width: calc(100% - 84px);
+	background-color: #333;
+	float: right;
+}
+
+.featText .title {
+	font-weight: bold;
+	margin: 5px;
+}
+
+.featText .text {
+	margin: 5px;
+}
+
+.closeFeat {
+	position: fixed;
+	right: 10px;
+	top: 20px;
+	height: 75px;
+	width: 80%;
+	max-width: 400px;
+	z-index: 1001;
+}
+
+#mobileStats {
+	position: fixed;
+	left: 0px;
+	top: 50px;
+	z-index: 299;
+	padding: 0;
+	width: 2em;
+}
+
+#mobileStats .stat {
+	border: 1px solid #444;
+	text-align: center;
+	font-weight: 500;
+	font-size: 1.2em;
+	line-height: 1;
+	padding: .3em 0;
+	margin-top: 2px;
+}
+
+#mobileStats .time {
+	font-size: 1.2em;
+	height: 75px;
+	padding: 0 .3em;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	/*writing-mode: vertical-lr;
+	text-orientation: upright;
+	padding: 0 .3em;*/
+}
+
+#mobileStats .time .ampm {
+	font-size: 0.5em;
+}
+
+#savesListContainer {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #999;
+	max-width: 800px;
+}
+
+#savesListContainer .savesListRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	border: 1px solid #999;
+	padding: 4px;
+}
+
+#savesListContainer .savesListRow .saveGroup {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	flex-grow: 1;
+	flex-shrink: 1;
+	/* Set min-width to allow parent correctly to resize this element's children */
+	min-width: 0;
+}
+
+#savesListContainer .savesListRow .saveGroup > div {
+	display: flex;
+	justify-content: center;
+	margin: 0 10px;
+	flex-shrink: 0;
+	flex-grow: 0;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveId {
+	min-width: 10px;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveButton {
+	min-width: 110px;
+	display: flex;
+	justify-content: center;
+	margin: 0 10px;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveName {
+	width: 60px;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveButton input {
+	margin: 3px 0;
+}
+
+#savesListContainer .savesListRow .saveGroup > .saveDetails {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0px;
+	min-width: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: stretch;
+}
+
+#savesListContainer .savesListRow .saveGroup > .saveDetails span {
+	max-height: 80px;
+	overflow-y: hidden;
+}
+
+#savesListContainer .savesListRow .saveGroup .deleteButton {
+	display: flex;
+	justify-content: right;
+	margin: 0;
+}
+
+.datestamp {
+	font-size: 13px;
+}
+
+.listMargin {
+	display: inline-block;
+	margin: 1px 0;
+}
+
+.right {
+	float: right;
+}
+
+.saveMenuButton {
+	background-color: #4372FF !important;
+}
+
+.saveMenuButton:hover {
+	background-color: #4372FF !important;
+}
+
+.saveMenuConfirm {
+	margin-top: 20px;
+	margin-left: 150px;
+}
+
+.saveBorder {
+	border: 1px solid #ccc;
+	max-width: 700px;
+	padding: 5px 2px 30px;
+	margin: 10px 2px 10px;
+}
+
+#menu {
+	display: none;
+}
+
+.settingsToggle {
+	display: inline-block;
+	float: left;
+	width: 45%;
+	min-width: 275px;
+	padding: 3px;
+	margin: 5px;
+	border: 1px solid #666;
+}
+
+#divbowl {
+		position: relative;
+		display: inline-block;
+		height: 50px;
+		width: 50px;
+
+}
+
+#divmap {
+	position: relative;
+	display: inline-block;
+	height: 256px;
+	width: 256px;
+}
+
+#map {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 10;
+}
+
+#maparrow {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 20;
+}
+
+#ui-bar-toggle {
+	z-index: 500;
+}
+
+#ui-bar {
+	z-index: 300;
+}
+
+.stowed{
+	z-index: 298 !important;
+}
+
+.solidBorderContainer	{
+	border: 1px solid #333;
+	padding: 5px;
+}
+
+.debugLines-audience {
+	border: dotted red 1px;
+}
+
+.debugLines-combat {
+	border: dotted yellow 1px;
+}
+
+.debugLines-effectsman {
+	border: dotted green 1px;
+}
+
+.debugLines-stateman {
+	border: dotted cyan 1px;
+}
+
+.debugLines-actionsman {
+	border: dotted pink 1px;
+}
+
+.debugLines-beast {
+	border: dotted blue 1px;
+}
+
+.debugLines-tentacles {
+	border: dotted yellow 1px;
+}
+
+.debugLines-actionstentacles {
+	border: dotted pink 1px;
+}
+
+.debugLines-effectstentacleadv {
+	border: dotted green 1px;
+}
+
+.debugLines-swarm {
+	border: dotted green 1px;
+}
+
+.debugLines-swarmactions {
+	border: dotted pink 1px;
+}
+
+.reducedLineHeight .passage {
+	line-height: 1.5;
+}
+
+body.has-images header#title {
+	display: none;
+}
+body.has-images #story-caption #storyCaptionDiv {
+	/* 256 px: images
+	2.5 em: ui-bar-body margin-top */
+	margin-top: calc(256px - 2.5em);
+}
+
+body.has-images #story-caption .storyCaptionDivExtended {
+	margin-top: calc(281px - 2.5em) !important;
+}
+
+.nostyle {
+	list-style: none;
+}
+
+.shopCustomColors {
+	float:left;
+	width: 48%;
+	min-width: 375px;
+	border: solid 2px #555;
+	padding:4px;
+	height: 300px;
+}
+
+.shopImg {
+	height: 128px;
+	width: 128px;
+	overflow: hidden;
+	background-color: #222;
+}
+
+.shopImg > * {
+	position: absolute;
+	height: 128px;
+	overflow: hidden;
+}
+
+.hideImageOverflow {
+	overflow: hidden;
+	height: 128px;
+	width: 128px;
+	position: relative;
+}
+
+/*Wardrobe UI*/
+.wardrobeItem {
+
+	display: inline-block;
+	padding: 2px;
+	float: left;
+	border: solid 1px #aaa;
+	height: 30px;
+	width: 48%;
+	min-width: 400px;
+	margin: 0px 3px 3px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#wardrobeItemDetails {
+	display: inline-block;
+	padding: 2px;
+	float: left;
+	border: solid 1px #aaa;
+	height: 100%;
+	width: 90%;
+	min-width: 400px;
+	margin: 0px 30px 9px 30px;
+	/*white-space: nowrap;*/
+	overflow: hidden;
+}
+
+#wardrobeLinks .selected {
+	color: #FFD700;
+	text-decoration: underline;
+}
+
+.clothingBox {
+	display: inline-block;
+	float: left;
+	border: solid 2px #fff;
+	height: 250px;
+	width: 270px;
+	padding: 4px;
+	margin: 2px;
+}
+
+.clothingBox div{
+	position: relative;
+	bottom: 0px;
+	height: 190px;
+	overflow-y: scroll;
+}
+
+.clothingBox div ul{
+	margin-left: 0px;
+}
+
+#customColor div {
+	height: 30px;
+	width: 200px;
+	background-color: red;
+}
+
+.red {
+	color: #EC3535;
+}
+
+.pink {
+	color: #E40081;
+}
+
+.purple {
+	color: #AA4BC8;
+}
+
+.blue {
+	color: #4372FF;
+}
+
+.lblue {
+	color: #559BC0;
+}
+
+.teal {
+	color: #08C1C1;
+}
+
+.green {
+	color: #38B20A;
+}
+
+.brown {
+	color: #4C2217;
+}
+
+.brat {
+	color: #B75D41;
+}
+
+.meek {
+	color: #C44B8B;
+}
+
+.def {
+	color: #D20000;
+}
+
+.hide a {
+	color: #eee;
+	text-decoration: none;
+}
+
+.hide a:hover {
+	color: #eee;
+	text-decoration: none;
+}
+
+.sub {
+	color: #AA4BC8;
+}
+
+.gold, .gold button {
+	color: #FFD700;
+}
+
+.yellow {
+	color: #FFD700;
+}
+
+.orange {
+	color: #f28500
+}
+
+.tangerine {
+	color: #f28500
+}
+
+.black {
+	color: #929292
+}
+
+.brown {
+	color: #aa7243
+}
+
+.lightbrown {
+	color: #C5793A
+}
+
+.platinum {
+	color: #FEF593
+}
+
+.strawberry {
+	color: #F08C51
+}
+
+.lewd {
+	color: #E04880
+}
+
+.grey {
+	color: #B7B7B7
+}
+
+.tan {
+	color: #D2B48C;
+}
+
+.sand {
+	color: #FDF5E6;
+}
+
+.olive {
+	color: #8E8E38;
+}
+
+.wine {
+	color: #8B3626;
+}
+
+.general {
+	opacity: 0.99;
+}
+
+.wetstage2 {
+	opacity: 0.90;
+		filter: brightness(0.95);
+
+}
+
+.wetstage3 {
+	opacity: 0.75;
+		filter: brightness(0.90);
+
+}
+
+#stats {
+	height: 20px;
+	width: 256px;
+	overflow: hidden;
+	border-top: #fff 2px solid;
+	border-bottom: #fff 2px solid;
+	position: fixed;
+	top: 232px;
+	left: 0px;
+	background-color: #222;
+}
+
+#stats > * {
+	position: absolute;
+	top: 232px;
+	left: 0px;
+}
+
+.statsExtended {
+	height: 45px !important;
+}
+
+.icon_ui {
+	position: static !important;
+	height: 14px;
+	width: 14px;
+}
+
+#statbar {
+	position: relative;
+	left: 0px;
+	top: 9px;
+	z-index: 0;
+}
+
+#img {
+	height: 256px;
+	width: 256px;
+	overflow: hidden;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: #222;
+}
+
+#img > * {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.imgLighten {
+	background-color: #444 !important;
+}
+
+#ui-bar-toggle {
+	background-color: #222;
+}
+
+.icon_ui {
+	position: static !important;
+	height: 14px;
+	width: 14px;
+}
+.layer-bg {
+	z-index: 0;
+}
+
+#relative {
+	position: relative;
+	width: 0px;
+	height: 0px;
+	z-index: 10;
+}
+
+#icon {
+	position: static;
+	vertical-align:middle;
+}
+
+#accIcon {
+	position: absolute;
+	right: 4px;
+}
+
+#spanIcon {
+	position: absolute;
+}
+
+#daystate {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	z-index: 10;
+}
+
+#weather {
+	position: fixed;
+	left: 0px;
+	top: 64px;
+	z-index: 10;
+}
+
+#location {
+	position: fixed;
+	left: 0px;
+	top: 128px;
+	z-index: 10;
+}
+
+#spray1 {
+	position: fixed;
+	left: 0px;
+	top: 192px;
+	z-index: 10;
+}
+
+#spray2 {
+	position: fixed;
+	left: 16px;
+	top: 192px;
+	z-index: 10;
+}
+
+#spray3 {
+	position: fixed;
+	left: 32px;
+	top: 192px;
+	z-index: 10;
+}
+
+#spray4 {
+	position: fixed;
+	left: 48px;
+	top: 192px;
+	z-index: 10;
+}
+
+#spray5 {
+	position: fixed;
+	left: 64px;
+	top: 192px;
+	z-index: 10;
+}
+
+#divandroidxray {
+	position: relative;
+	display: inline-block;
+	height: 256px;
+	width: 256px;
+}
+
+#xrayvaginal, #divsex #xrayvaginal {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 3;
+}
+
+#xrayvaginalcum, #divsex #xrayvaginalcum {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 4;
+}
+
+#xraypenile, #divsex #xraypenile {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
+}
+
+#xrayanal, #divsex #xrayanal {
+	position: absolute;
+	left: 512px;
+	top: 0px;
+	z-index: 1;
+}
+
+#xrayandroidanal, #divsex #xrayandroidanal {
+	position: relative;
+	left: 0px;
+	top: -8px;
+	z-index: 1;
+	height: 128px;
+}
+
+/*
+Combat display styles
+*/
+#listContainer	{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-bottom: 40px;
+}
+
+.radioControl	{
+	display: block;
+	width: 100%;
+}
+
+.radioControl .extraMargin	{
+	margin-bottom: 20px;
+}
+
+.listsControl, .limitedListsControl	{
+	display: flex;
+	flex-direction: column;
+	padding: 2px;
+	border: solid 1px #555;
+	margin: 5px;
+}
+
+.limitedListsControl	{
+	min-width: 46%;
+}
+
+@media only screen and (max-width: 500px) {
+	.limitedListsControl, .listsControl {
+		min-width: 99%;
+	}
+	.limitedListsControl .flavorText select, .listsControl .flavorText select {
+		max-width: 500px;
+	}
+}
+
+.whiteList select,.whiteList select:hover,.whiteList select:focus{
+	border:#fff 2px solid;
+	width: 99%;
+	max-width: 300px;
+}
+
+.bratList select,.bratList select:hover,.bratList select:focus{
+	border:#B75D41 2px solid;
+	width: 99%;
+	max-width: 300px;
+}
+
+.meekList select,.meekList select:hover,.meekList select:focus{
+	border:#C44B8B 2px solid;
+	width: 99%;
+	max-width: 300px;
+}
+
+.defList select,.defList select:hover,.defList select:focus{
+	border:#D20000 2px solid;
+	width: 99%;
+	max-width: 300px;
+}
+
+.subList select,.subList select:hover,.subList select:focus{
+	border:#AA4BC8 2px solid;
+	width: 99%;
+	max-width: 300px;
+}
+
+.reducedWidth select,.reducedWidth select:hover,.reducedWidth select:focus {
+	max-width: 175px;
+}
+
+/*
+removed unused:
+#arm #underacc #legs #feet #bottom #top #sleeve #outer #outersleeve #neckacc
+*/
+
+.layer-over_head-back {
+	z-index: 0;
+}
+.layer-head-back {
+	z-index: 1;
+}
+.layer-basehead {
+	z-index: 5;
+}
+.layer-backhair {
+	z-index: 10;
+}
+.layer-back-lower {
+	z-index: 15;
+}
+.layer-base {
+	z-index: 20;
+}
+.layer-tanBody {
+	z-index: 22;
+}
+.layer-hirsute {
+	z-index: 25;
+}
+.layer-eyes {
+	z-index: 30;
+}
+.layer-sclera {
+	z-index: 35;
+}
+.layer-mouth {
+	z-index: 40;
+}
+.layer-breasts {
+	z-index: 35;
+}
+.layer-tanbreasts {
+	z-index: 30;
+}
+.layer-blush {
+	z-index: 50;
+}
+.layer-skin {
+	z-index: 52;
+}
+.layer-tears {
+	z-index: 55;
+}
+.layer-hair {
+	z-index: 60;
+}
+.layer-brow {
+	z-index: 62;
+}
+.layer-penis-chastity {
+	z-index: 63;
+}
+.layer-lashes {
+	z-index: 64;
+}
+.layer-legs {
+	z-index: 64;
+}
+.layer-genitals {
+	z-index: 64;
+}
+.layer-pbhair {
+	z-index: 65;
+}
+.layer-underParasite {
+	z-index: 65;
+}
+.layer-under_lower {
+	z-index: 67;
+}
+.layer-under_lower-top {
+	z-index: 68;
+}
+.layer-under_upper {
+	z-index: 70;
+}
+.layer-under_upper-top {
+	z-index: 72;
+}
+.layer-under_lower-high {
+	z-index: 75;
+}
+.layer-under_lower_top-high {
+	z-index: 77;
+}
+.layer-under {
+	z-index: 75;
+}
+.layer-feet {
+	z-index: 85;
+}
+.layer-lower {
+	z-index: 90;
+}
+.layer-lower_top {
+	z-index: 92;
+}
+.layer-upper {
+	z-index: 95;
+}
+.layer-upper_top {
+	z-index: 97;
+}
+
+.layer-collar {
+	z-index: 103;
+}
+
+.layer-rightarm {
+	z-index: 105;
+}
+.layer-leftarm {
+	z-index: 105;
+}
+.layer-armSkin {
+	z-index: 106;
+}
+.layer-armTan {
+	z-index: 107;
+}
+.layer-leftarmunderclothes {
+	z-index: 107;
+}
+.layer-rightarmunderclothes {
+	z-index: 107;
+}
+.layer-rightarmclothes {
+	z-index: 110;
+}
+.layer-leftarmclothes {
+	z-index: 110;
+}
+.layer-lower-high {
+	z-index: 115;
+}
+.layer-lower-top-high {
+	z-index: 117;
+}
+
+.layer-hairforwards {
+	z-index: 132;
+}
+.layer-fronthair {
+	z-index: 133;
+}
+.layer-brow {
+	z-index: 138;
+}
+.layer-neck {
+	z-index: 140;
+}
+.layer-face {
+	z-index: 145;
+}
+.layer-head {
+	z-index: 150;
+}
+.layer-over_head {
+	z-index: 152;
+}
+.layer-penis {
+	z-index: 160;
+}
+
+.layer-parasite {
+	z-index: 160;
+}
+
+.layer-tailPenisCover {
+	z-index: 165;
+}
+
+.layer-over_lower {
+	z-index: 170;
+}
+.layer-over_upper {
+	z-index: 171;
+}
+.layer-leftarmoverclothes {
+	z-index: 174;
+}
+.layer-rightarmoverclothes {
+	z-index: 174;
+}
+
+#divsex {
+		position: relative;
+		display: inline-block;
+		height: 256px;
+		width: 768px;
+
+}
+#divsex > *, #divandroidsex > * {
+	position: absolute;
+	left: 256px;
+	top: 0px;
+}
+
+#divandroidsex {
+		position: relative;
+		display: inline-block;
+		height: 256px;
+		width: 256px;
+		left: -256px;
+}
+
+#closepenis, #divsex #closepenis {
+		position: absolute;
+		left: 321px;
+		top: -30px;
+	z-index: 250;
+}
+
+#closeanus, #divsex #closeanus {
+		position: absolute;
+		left: 451px;
+		top: -30px;
+	z-index: 250;
+}
+
+#closevagina, #divsex #closevagina {
+		position: absolute;
+		left: 386px;
+		top: -30px;
+	z-index: 250;
+}
+
+.layer-behind {
+	z-index: -100;
+}
+
+.layer-voreback {
+	z-index: -20;
+}
+.layer-sexbaseback {
+	z-index: 1;
+}
+.layer-sexpenis {
+	z-index: 5;
+}
+.layer-beastback {
+	z-index: 8;
+}
+.layer-sexbase {
+	z-index: 10;
+}
+.layer-sexlegsback {
+	z-index: 11;
+}
+.layer-sexlegsbackacc {
+	z-index: 12;
+}
+.layer-sexbaseoverlay {
+	z-index: 12;
+}
+.layer-sexeyes {
+	z-index: 20;
+}
+.layer-sexsclera {
+	z-index: 30;
+}
+.layer-sexmouth {
+	z-index: 40;
+}
+.layer-sexblush {
+	z-index: 50;
+}
+.layer-sexskin {
+	z-index: 55;
+}
+.layer-sextears {
+	z-index: 60;
+}
+.layer-beastfront {
+	z-index: 65;
+}
+.layer-sexbrow {
+	z-index: 80;
+}
+.layer-sexlashes {
+	z-index: 90;
+}
+.layer-sexbasefront {
+	z-index: 100;
+}
+.layer-doggyhirsute {
+	z-index: 101;
+}
+.layer-sexshoes {
+	z-index: 102;
+}
+.layer-sexlegs {
+	z-index: 103;
+}
+.layer-sexlegsacc {
+	z-index: 104;
+}
+.layer-sexunder {
+	z-index: 105;
+}
+.layer-sexbetweenlegs {
+	z-index: 99;
+}
+.layer-sexrightleg {
+	z-index: 100;
+}
+.layer-sexrightlegskin {
+	z-index: 101;
+}
+.layer-sexlower {
+	z-index: 106;
+}
+.layer-sexupper {
+	z-index: 107;
+}
+.layer-sexaboveclothes {
+	z-index: 108;
+}
+.layer-sexarmsskin {
+	z-index: 108;
+}
+.layer-sexsleeve {
+	z-index: 110;
+}
+
+.layer-beastforeground {
+	z-index: 120;
+}
+
+.layer-apparatus {
+	z-index: 130;
+}
+.layer-midapparatus {
+	z-index: 131;
+}
+.layer-frontapparatus {
+	z-index: 132;
+}
+
+.layer-sexhair {
+	z-index: 140;
+}
+
+.layer-sexarmsbound {
+	z-index: 150;
+}
+.layer-sexarmsboundskin {
+	z-index: 151;
+}
+
+.layer-foreground {
+	z-index: 200;
+}
+.layer-frontforeground {
+	z-index: 220;
+}
+
+/*! <<numberpool>> macro set for SugarCube v2 */
+div[id|="numberbox-body"] {
+	display: inline-block;
+}
+div[id|="numberbox-body"] input {
+	min-width: 3em;
+	width: 3em;
+	text-align: center;
+}
+div[id|="numberbox-body"] button {
+	font-family: "tme-fa-icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: normal;
+	speak: none;
+	padding: 0.4em 0.6em;
+}
+div[id|="numberbox-body"] button[id|="numberbox-minus"] {
+	margin-right: 0.4em;
+}
+div[id|="numberbox-body"] button[id|="numberbox-plus"] {
+	margin-left: 0.4em;
+}
+
+div[id|="numberslider-body"] {
+	display: inline-block;
+	width: 100%;
+}
+div[id|="numberslider-body"] span {
+	display: inline-block;
+	/*font-size: 1.25em;*/
+	margin-left: 0.25em;
+	min-width: 3em;
+	text-align: center;
+	vertical-align: middle;
+}
+div[id|="numberslider-body"] input {
+	-webkit-appearance: none;
+	cursor: pointer;
+	height: 1.25em;
+	width: 95%;
+	max-width: 20em;
+	vertical-align: middle;
+}
+div[id|="numberslider-body"] input:focus {
+	outline: none;
+}
+div[id|="numberslider-body"] input::-webkit-slider-runnable-track {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+	cursor: pointer;
+	height: 10px;
+	width: 100%;
+}
+div[id|="numberslider-body"] input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background: #ddd;
+	border: 3px solid #aaa;
+	border-radius: 0;
+	cursor: pointer;
+	height: 18px;
+	margin-top: -5px;
+	width: 33px;
+}
+div[id|="numberslider-body"] input:focus::-webkit-slider-runnable-track {
+	background: #222;
+}
+div[id|="numberslider-body"] input::-moz-range-track {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+	cursor: pointer;
+	height: 10px;
+	width: 100%;
+}
+div[id|="numberslider-body"] input::-moz-range-thumb {
+	background: #ddd;
+	border: 3px solid #aaa;
+	border-radius: 0;
+	cursor: pointer;
+	height: 18px;
+	width: 33px;
+}
+div[id|="numberslider-body"] input::-ms-track {
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+	cursor: pointer;
+	height: 10px;
+	width: 99%; /* fallback for MS browsers without support for calc() */
+	width: calc(100% - 1px);
+}
+div[id|="numberslider-body"] input::-ms-fill-lower {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+}
+div[id|="numberslider-body"] input::-ms-fill-upper {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+}
+div[id|="numberslider-body"] input::-ms-thumb {
+	background: #ddd;
+	border: 3px solid #aaa;
+	border-radius: 0;
+	cursor: pointer;
+	height: 16px;
+	width: 33px;
+}
+
+label {
+	cursor: pointer;
+}
+
+.meter {
+	position: relative;
+	height: 0.3em;
+	width: 100%;
+	background-color: gray;
+	text-align: center;
+	z-index: -10;
+}
+
+.rightMeterText {
+	width: 38%;
+	float: left;
+	text-align: right;
+	padding-right: 2px;
+}
+
+.rightMeter {
+	position: relative;
+	height: 0.4em;
+	width: 60%;
+	background-color: gray;
+	text-align: center;
+	z-index: -10;
+	float: right;
+	margin-top: 0.6em;
+}
+
+.redbar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #EC3535;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .redbar {
+	height: 0.4em;
+}
+
+.pinkbar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #E40081;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .pinkbar {
+	height: 0.4em;
+}
+
+.purplebar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #AA4BC8;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .purplebar {
+	height: 0.4em;
+}
+
+.bluebar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #4372FF;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .bluebar {
+	height: 0.4em;
+}
+
+.lbluebar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #559BC0;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .lbluebar {
+	height: 0.4em;
+}
+
+.tealbar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #08C1C1;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .tealbar {
+	height: 0.4em;
+}
+
+.greenbar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #38B20A;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .greenbar {
+	height: 0.4em;
+}
+
+.goldbar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0.3em;
+	background-color: #FFD700;
+	z-index: 0;
+	max-width: 100%;
+}
+
+.rightMeter .goldbar {
+	height: 0.4em;
+}
+
+/*
+ * Hair/Eye/Clothing colour filters
+ * Expected document structure:
+ * - some outer element has .hair-$haircolour (or .eye-/.lower-/.upper-/.under-) class
+ * - inner image element has .colour-hair (or -eye/-lower/-upper/-under) class
+ */
+/* Hair: base is red */
+.hair-black .colour-hair {
+	-webkit-filter: hue-rotate(0deg) saturate(15%) brightness(50%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(15%) brightness(50%) contrast(100%);
+}
+.hair-platinumblond .colour-hair {
+	-webkit-filter: hue-rotate(57deg) saturate(60%) brightness(170%) contrast(80%) sepia(0);
+	filter: hue-rotate(57deg) saturate(60%) brightness(170%) contrast(80%) sepia(0);
+}
+.hair-blond .colour-hair {
+	-webkit-filter: hue-rotate(60deg) saturate(80%) brightness(135%) contrast(90%);
+	filter: hue-rotate(60deg) saturate(80%) brightness(135%) contrast(90%);
+}
+.hair-blue .colour-hair {
+	-webkit-filter: hue-rotate(200deg) saturate(200%) brightness(58%) contrast(150%);
+	filter: hue-rotate(200deg) saturate(200%) brightness(58%) contrast(150%);
+}
+.hair-brown .colour-hair {
+	-webkit-filter: hue-rotate(40deg) saturate(60%) brightness(71%) contrast(100%);
+	filter: hue-rotate(40deg) saturate(60%) brightness(71%) contrast(100%);
+}
+.hair-lightbrown .colour-hair {
+	-webkit-filter: hue-rotate(40deg) saturate(70%) brightness(100%) contrast(110%);
+	filter: hue-rotate(40deg) saturate(70%) brightness(100%) contrast(110%);
+}
+.hair-darkbrown .colour-hair {
+	-webkit-filter: hue-rotate(30deg) saturate(70%) brightness(50%) contrast(110%);
+	filter: hue-rotate(30deg) saturate(70%) brightness(50%) contrast(110%);
+}
+.hair-strawberryblond .colour-hair {
+	-webkit-filter: hue-rotate(30deg) saturate(80%) brightness(150%) contrast(90%);
+	filter: hue-rotate(30deg) saturate(80%) brightness(150%) contrast(90%) sepia(1%);
+}
+.hair-ginger .colour-hair {
+	-webkit-filter: hue-rotate(30deg) saturate(150%) brightness(110%) contrast(90%);
+	filter: hue-rotate(30deg) saturate(150%) brightness(110%) contrast(90%);
+}
+.hair-green .colour-hair {
+	-webkit-filter: hue-rotate(125) saturate(100%) brightness(80%) contrast(100%);
+	filter: hue-rotate(125deg) saturate(100%) brightness(80%) contrast(100%);
+}
+.hair-teal .colour-hair {
+	-webkit-filter: hue-rotate(155deg) saturate(100%) brightness(88%) contrast(100%);
+	filter: hue-rotate(155deg) saturate(100%) brightness(88%) contrast(100%);
+}
+.hair-pink .colour-hair {
+	-webkit-filter: hue-rotate(-20deg) saturate(70%) brightness(100%) contrast(100%);
+	filter: hue-rotate(-20deg) saturate(70%) brightness(100%) contrast(100%);
+}
+.hair-hotpink .colour-hair {
+	-webkit-filter: hue-rotate(320deg) saturate(100%) brightness(120%) contrast(100%);
+	filter: hue-rotate(320deg) saturate(100%) brightness(120%) contrast(100%);
+}
+.hair-softpink .colour-hair {
+	-webkit-filter: hue-rotate(-20deg) saturate(30%) brightness(150%) contrast(100%);
+	filter: hue-rotate(20deg) saturate(30%) brightness(150%) contrast(100%);
+}
+.hair-purple .colour-hair {
+	-webkit-filter: hue-rotate(-70deg) saturate(110%) brightness(50%) contrast(200%);
+	filter: hue-rotate(-70deg) saturate(110%) brightness(50%) contrast(200%);
+}
+.hair-red .colour-hair {
+	-webkit-filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+}
+.hair-crimson .colour-hair {
+	-webkit-filter: hue-rotate(0deg) saturate(155%) brightness(65%) contrast(135%);
+	filter: hue-rotate(0deg) saturate(155%) brightness(65%) contrast(135%);
+}
+.hair-white .colour-hair {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(160%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(160%) contrast(100%);
+}
+.hair-snowwhite .colour-hair {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(190%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(190%) contrast(100%);
+}
+.hair-deepblue .colour-hair {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(190%) contrast(100%);
+	filter: hue-rotate(240deg) saturate(100%) brightness(40%) contrast(120%);
+}
+
+/* Eye: base is hazel */
+.eye-dark-blue .colour-eye {
+	-webkit-filter: hue-rotate(170deg) brightness(90%) saturate(100%) contrast(140%);
+	filter: hue-rotate(170deg) brightness(90%) saturate(100%) contrast(140%);
+}
+.eye-light-blue .colour-eye {
+	-webkit-filter: hue-rotate(160deg) brightness(180%) saturate(120%) contrast(100%);
+	filter: hue-rotate(160deg) brightness(180%) saturate(120%) contrast(100%);
+}
+.eye-purple .colour-eye {
+	-webkit-filter: hue-rotate(-120deg) brightness(80%) saturate(200%) contrast(190%);
+	filter: hue-rotate(-120deg) brightness(80%) saturate(200%) contrast(190%);
+}
+.eye-hazel .colour-eye {
+	-webkit-filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+}
+.eye-amber .colour-eye {
+	-webkit-filter: hue-rotate(0deg) brightness(170%) saturate(100%) contrast(100%);
+	filter: hue-rotate(0deg) brightness(170%) saturate(100%) contrast(100%);
+}
+.eye-green .colour-eye {
+	-webkit-filter: hue-rotate(30deg) brightness(140%) saturate(100%) contrast(100%);
+	filter: hue-rotate(30deg) brightness(140%) saturate(100%) contrast(100%);
+}
+.eye-lightgreen .colour-eye {
+	-webkit-filter: hue-rotate(30deg) brightness(170%) saturate(160%) contrast(100%);
+	filter: hue-rotate(30deg) brightness(170%) saturate(160%) contrast(100%);
+}
+.eye-red .colour-eye {
+	-webkit-filter: hue-rotate(335deg) saturate(200%) brightness(100%) contrast(140%);
+	filter: hue-rotate(335deg) saturate(200%) brightness(100%) contrast(140%);
+}
+.eye-pink .colour-eye {
+	-webkit-filter: hue-rotate(-105deg) brightness(150%) saturate(120%) contrast(120%);
+	filter: hue-rotate(-105deg) brightness(150%) saturate(120%) contrast(120%);
+}
+.eye-grey .colour-eye {
+	-webkit-filter: hue-rotate(0deg) brightness(140%) saturate(0%) contrast(100%);
+	filter: hue-rotate(0deg) brightness(140%) saturate(0%) contrast(100%);
+}
+
+/* Clothing specific classes */
+/* Clothing opacity classes need to be applied to a div with the images inside */
+.clothes-div img {
+	position: absolute;
+}
+
+.clothes-damp {
+	-webkit-filter: opacity(0.9);
+	filter: opacity(0.9);
+}
+
+.clothes-wet {
+	-webkit-filter: opacity(0.7);
+	filter: opacity(0.7);
+}
+
+.clothes-drenshed {
+	-webkit-filter: opacity(0.5);
+	filter: opacity(0.5);
+}
+
+/* Clothing: base is red */
+.clothes-blue {
+	-webkit-filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
+}
+
+.clothes-white {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(440%) contrast(140%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(440%) contrast(140%);
+}
+
+.clothes-red {
+	-webkit-filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+}
+
+.clothes-green {
+	-webkit-filter: hue-rotate(120deg) saturate(100%) brightness(150%) contrast(100%);
+	filter: hue-rotate(120deg) saturate(100%) brightness(150%) contrast(100%);
+}
+
+.clothes-black {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(110%) contrast(110%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(110%) contrast(110%);
+}
+
+.clothes-pink {
+	-webkit-filter: hue-rotate(-30deg) saturate(50%) contrast(100%) brightness(160%);
+	filter: hue-rotate(-30deg) saturate(50%) contrast(100%) brightness(160%);
+}
+
+.clothes-purple {
+	-webkit-filter: hue-rotate(-80deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(-80deg) saturate(100%) brightness(100%) contrast(100%);
+}
+
+.clothes-tangerine {
+	-webkit-filter: hue-rotate(60deg) saturate(150%) brightness(200%) contrast(100%);
+	filter: hue-rotate(60deg) saturate(150%) brightness(200%) contrast(100%);
+}
+
+.clothes-teal {
+	-webkit-filter: hue-rotate(-180deg) saturate(75%) brightness(200%) contrast(100%);
+	filter: hue-rotate(-180deg) saturate(75%) brightness(200%) contrast(100%);
+}
+
+.clothes-yellow {
+	-webkit-filter: hue-rotate(65deg) saturate(100%) brightness(290%) contrast(300%) sepia(0.55);
+	filter: hue-rotate(65deg) saturate(100%) brightness(290%) contrast(300%) sepia(0.55);
+}
+
+.clothes-brown {
+	-webkit-filter: hue-rotate(55deg) saturate(100%) brightness(90%) contrast(100%);
+	filter: hue-rotate(55deg) saturate(100%) brightness(90%) contrast(100%);
+}
+
+.clothes-tan {
+	-webkit-filter: hue-rotate(60.3deg) saturate(17.5%) brightness(270%);
+	filter: hue-rotate(60.3deg) saturate(17.5%) brightness(270%);
+}
+.clothes-grey {
+	-webkit-filter: hue-rotate(58.8deg) saturate(5%) brightness(270%);
+	filter: hue-rotate(58.8deg) saturate(5%) brightness(270%);
+}
+.clothes-sand {
+	-webkit-filter: hue-rotate(70deg) saturate(2.7%) brightness(340%);
+	filter: hue-rotate(70deg) saturate(2.7%) brightness(340%);
+}
+.clothes-off-white {
+	-webkit-filter: hue-rotate(70deg) saturate(1.3%) brightness(360%);
+	filter: hue-rotate(70deg) saturate(1.3%) brightness(360%);
+}
+.clothes-navy {
+	-webkit-filter: hue-rotate(250deg) saturate(7%) brightness(77%);
+	filter: hue-rotate(250deg) saturate(7%) brightness(77%);
+}
+.clothes-olive {
+	-webkit-filter: hue-rotate(67deg) saturate(24.5%) brightness(137%);
+	filter: hue-rotate(67deg) saturate(24.5%) brightness(137%);
+}
+.clothes-wine {
+	-webkit-filter: hue-rotate(351deg) saturate(28%) brightness(90%);
+	filter: hue-rotate(351deg) saturate(28%) brightness(90%);
+}
+
+/* Old Clothing classes, need to be removed once all use of them is replaced, this includes the wetness classes */
+.upper-blue .colour-upper, .lower-blue .colour-lower, .under_lower-blue .colour-under_lower, .under_upper-blue .colour-under_upper, .head-blue .colour-head, .face-blue .colour-face, .neck-blue .colour-neck, .legs-blue .colour-legs, .feet-blue .colour-feet, .upper_acc-blue .colour-upper_acc, .lower_acc-blue .colour-lower_acc, .under_lower_acc-blue .colour-under_lower_acc, .under_upper_acc-blue .colour-under_upper_acc, .head_acc-blue .colour-head_acc, .face_acc-blue .colour-face_acc, .neck_acc-blue .colour-neck_acc, .legs_acc-blue .colour-legs_acc, .feet_acc-blue .colour-feet_acc , .icon-blue{
+	-webkit-filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
+}
+.upper-white .colour-upper, .lower-white .colour-lower, .under_lower-white .colour-under_lower, .under_upper-white .colour-under_upper, .head-white .colour-head, .face-white .colour-face, .neck-white .colour-neck, .legs-white .colour-legs, .feet-white .colour-feet, .upper_acc-white .colour-upper_acc, .lower_acc-white .colour-lower_acc, .under_lower_acc-white .colour-under_lower_acc, .under_upper_acc-white .colour-under_upper_acc, .head_acc-white .colour-head_acc, .face_acc-white .colour-face_acc, .neck_acc-white .colour-neck_acc, .legs_acc-white .colour-legs_acc, .feet_acc-white .colour-feet_acc, .icon-white{
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(440%) contrast(140%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(440%) contrast(140%);
+}
+.upper-red .colour-upper, .lower-red .colour-lower, .under_lower-red .colour-under_lower, .under_upper-red .colour-under_upper, .head-red .colour-head, .face-red .colour-face, .neck-red .colour-neck, .legs-red .colour-legs, .feet-red .colour-feet, .upper_acc-red .colour-upper_acc, .lower_acc-red .colour-lower_acc, .under_lower_acc-red .colour-under_lower_acc, .under_upper_acc-red .colour-under_upper_acc, .head_acc-red .colour-head_acc, .face_acc-red .colour-face_acc, .neck_acc-red .colour-neck_acc, .legs_acc-red .colour-legs_acc, .feet_acc-red .colour-feet_acc, .icon-red{
+	-webkit-filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+}
+.upper-green .colour-upper, .lower-green .colour-lower, .under_lower-green .colour-under_lower, .under_upper-green .colour-under_upper, .head-green .colour-head, .face-green .colour-face, .neck-green .colour-neck, .legs-green .colour-legs, .feet-green .colour-feet, .upper_acc-green .colour-upper_acc, .lower_acc-green .colour-lower_acc, .under_lower_acc-green .colour-under_lower_acc, .under_upper_acc-green .colour-under_upper_acc, .head_acc-green .colour-head_acc, .face_acc-green .colour-face_acc, .neck_acc-green .colour-neck_acc, .legs_acc-green .colour-legs_acc, .feet_acc-green .colour-feet_acc, .icon-green{
+	-webkit-filter: hue-rotate(120deg) saturate(100%) brightness(150%) contrast(100%);
+	filter: hue-rotate(120deg) saturate(100%) brightness(150%) contrast(100%);
+}
+.upper-black .colour-upper, .lower-black .colour-lower, .under_lower-black .colour-under_lower, .under_upper-black .colour-under_upper, .head-black .colour-head, .face-black .colour-face, .neck-black .colour-neck, .legs-black .colour-legs, .feet-black .colour-feet, .upper_acc-black .colour-upper_acc, .lower_acc-black .colour-lower_acc, .under_lower_acc-black .colour-under_lower_acc, .under_upper_acc-black .colour-under_upper_acc, .head_acc-black .colour-head_acc, .face_acc-black .colour-face_acc, .neck_acc-black .colour-neck_acc, .legs_acc-black .colour-legs_acc, .feet_acc-black .colour-feet_acc, .icon-black{
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(110%) contrast(110%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(110%) contrast(110%);
+}
+.upper-pink .colour-upper, .lower-pink .colour-lower, .under_lower-pink .colour-under_lower, .under_upper-pink .colour-under_upper, .head-pink .colour-head, .face-pink .colour-face, .neck-pink .colour-neck, .legs-pink .colour-legs, .feet-pink .colour-feet, .upper_acc-pink .colour-upper_acc, .lower_acc-pink .colour-lower_acc, .under_lower_acc-pink .colour-under_lower_acc, .under_upper_acc-pink .colour-under_upper_acc, .head_acc-pink .colour-head_acc, .face_acc-pink .colour-face_acc, .neck_acc-pink .colour-neck_acc, .legs_acc-pink .colour-legs_acc, .feet_acc-pink .colour-feet_acc, .icon-pink{
+	-webkit-filter: hue-rotate(-30deg) saturate(50%) contrast(100%) brightness(160%);
+	filter: hue-rotate(-30deg) saturate(50%) contrast(100%) brightness(160%);
+}
+.upper-purple .colour-upper, .lower-purple .colour-lower, .under_lower-purple .colour-under_lower, .under_upper-purple .colour-under_upper, .head-purple .colour-head, .face-purple .colour-face, .neck-purple .colour-neck, .legs-purple .colour-legs, .feet-purple .colour-feet, .upper_acc-purple .colour-upper_acc, .lower_acc-purple .colour-lower_acc, .under_lower_acc-purple .colour-under_lower_acc, .under_upper_acc-purple .colour-under_upper_acc, .head_acc-purple .colour-head_acc, .face_acc-purple .colour-face_acc, .neck_acc-purple .colour-neck_acc, .legs_acc-purple .colour-legs_acc, .feet_acc-purple .colour-feet_acc, .icon-purple {
+	-webkit-filter: hue-rotate(-80deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(-80deg) saturate(100%) brightness(100%) contrast(100%);
+}
+.upper-tangerine .colour-upper, .lower-tangerine .colour-lower, .under_lower-tangerine .colour-under_lower, .under_upper-tangerine .colour-under_upper, .head-tangerine .colour-head, .face-tangerine .colour-face, .neck-tangerine .colour-neck, .legs-tangerine .colour-legs, .feet-tangerine .colour-feet, .upper_acc-tangerine .colour-upper_acc, .lower_acc-tangerine .colour-lower_acc, .under_lower_acc-tangerine .colour-under_lower_acc, .under_upper_acc-tangerine .colour-under_upper_acc, .head_acc-tangerine .colour-head_acc, .face_acc-tangerine .colour-face_acc, .neck_acc-tangerine .colour-neck_acc, .legs_acc-tangerine .colour-legs_acc, .feet_acc-tangerine .colour-feet_acc, .icon-tangerine {
+	-webkit-filter: hue-rotate(60deg) saturate(150%) brightness(200%) contrast(100%);
+	filter: hue-rotate(60deg) saturate(150%) brightness(200%) contrast(100%);
+}
+.upper-teal .colour-upper, .lower-teal .colour-lower, .under_lower-teal .colour-under_lower, .under_upper-teal .colour-under_upper, .head-teal .colour-head, .face-teal .colour-face, .neck-teal .colour-neck, .legs-teal .colour-legs, .feet-teal .colour-feet, .upper_acc-teal .colour-upper_acc, .lower_acc-teal .colour-lower_acc, .under_lower_acc-teal .colour-under_lower_acc, .under_upper_acc-teal .colour-under_upper_acc, .head_acc-teal .colour-head_acc, .face_acc-teal .colour-face_acc, .neck_acc-teal .colour-neck_acc, .legs_acc-teal .colour-legs_acc, .feet_acc-teal .colour-feet_acc, .icon-teal {
+	-webkit-filter: hue-rotate(-180deg) saturate(75%) brightness(200%) contrast(100%);
+	filter: hue-rotate(-180deg) saturate(75%) brightness(200%) contrast(100%);
+}
+.upper-yellow .colour-upper, .lower-yellow .colour-lower, .under_lower-yellow .colour-under_lower, .under_upper-yellow .colour-under_upper, .head-yellow .colour-head, .face-yellow .colour-face, .neck-yellow .colour-neck, .legs-yellow .colour-legs, .feet-yellow .colour-feet, .upper_acc-yellow .colour-upper_acc, .lower_acc-yellow .colour-lower_acc, .under_lower_acc-yellow .colour-under_lower_acc, .under_upper_acc-yellow .colour-under_upper_acc, .head_acc-yellow .colour-head_acc, .face_acc-yellow .colour-face_acc, .neck_acc-yellow .colour-neck_acc, .legs_acc-yellow .colour-legs_acc, .feet_acc-yellow .colour-feet_acc, .icon-yellow {
+	-webkit-filter: hue-rotate(65deg) saturate(100%) brightness(290%) contrast(300%) sepia(0.55);
+	filter: hue-rotate(65deg) saturate(100%) brightness(290%) contrast(300%) sepia(0.55);
+}
+.upper-brown .colour-upper, .lower-brown .colour-lower, .under_lower-brown .colour-under_lower, .under_upper-brown .colour-under_upper, .head-brown .colour-head, .face-brown .colour-face, .neck-brown .colour-neck, .legs-brown .colour-legs, .feet-brown .colour-feet, .upper_acc-brown .colour-upper_acc, .lower_acc-brown .colour-lower_acc, .under_lower_acc-brown .colour-under_lower_acc, .under_upper_acc-brown .colour-under_upper_acc, .head_acc-brown .colour-head_acc, .face_acc-brown .colour-face_acc, .neck_acc-brown .colour-neck_acc, .legs_acc-brown .colour-legs_acc, .feet_acc-brown .colour-feet_acc, .icon-brown {
+	-webkit-filter: hue-rotate(55deg) saturate(100%) brightness(90%) contrast(100%);
+	filter: hue-rotate(55deg) saturate(100%) brightness(90%) contrast(100%);
+}
+
+/*
+*	ATTENTION: The following colours are not their actually recognised HSB value, as browsers are special little cunts that don't conform to standards
+*	Instead, I had to create these colours laboriously by hand, and they are as close as I could seemingly get to the real deal
+*	I have no idea how to actually replicate any of these colours properly without resorting to a pact with Satan
+*	Fuck browsers
+*/
+
+.upper-tan .colour-upper, .lower-tan .colour-lower, .under_lower-tan .colour-under_lower, .under_upper-tan .colour-under_upper, .head-tan .colour-head, .face-tan .colour-face, .neck-tan .colour-neck, .legs-tan .colour-legs, .feet-tan .colour-feet, .upper_acc-tan .colour-upper_acc, .lower_acc-tan .colour-lower_acc, .under_lower_acc-tan .colour-under_lower_acc, .under_upper_acc-tan .colour-under_upper_acc, .head_acc-tan .colour-head_acc, .face_acc-tan .colour-face_acc, .neck_acc-tan .colour-neck_acc, .legs_acc-tan .colour-legs_acc, .feet_acc-tan .colour-feet_acc, .icon-tan {
+	-webkit-filter: hue-rotate(60.3deg) saturate(17.5%) brightness(270%);
+	filter: hue-rotate(60.3deg) saturate(17.5%) brightness(270%);
+}
+.upper-grey .colour-upper, .lower-grey .colour-lower, .under_lower-grey .colour-under_lower, .under_upper-grey .colour-under_upper, .head-grey .colour-head, .face-grey .colour-face, .neck-grey .colour-neck, .legs-grey .colour-legs, .feet-grey .colour-feet, .upper_acc-grey .colour-upper_acc, .lower_acc-grey .colour-lower_acc, .under_lower_acc-grey .colour-under_lower_acc, .under_upper_acc-grey .colour-under_upper_acc, .head_acc-grey .colour-head_acc, .face_acc-grey .colour-face_acc, .neck_acc-grey .colour-neck_acc, .legs_acc-grey .colour-legs_acc, .feet_acc-grey .colour-feet_acc, .icon-grey {
+	-webkit-filter: hue-rotate(58.8deg) saturate(5%) brightness(270%);
+	filter: hue-rotate(58.8deg) saturate(5%) brightness(270%);
+}
+.upper-sand .colour-upper, .lower-sand .colour-lower, .under_lower-sand .colour-under_lower, .under_upper-sand .colour-under_upper, .head-sand .colour-head, .face-sand .colour-face, .neck-sand .colour-neck, .legs-sand .colour-legs, .feet-sand .colour-feet, .upper_acc-sand .colour-upper_acc, .lower_acc-sand .colour-lower_acc, .under_lower_acc-sand .colour-under_lower_acc, .under_upper_acc-sand .colour-under_upper_acc, .head_acc-sand .colour-head_acc, .face_acc-sand .colour-face_acc, .neck_acc-sand .colour-neck_acc, .legs_acc-sand .colour-legs_acc, .feet_acc-sand .colour-feet_acc, .icon-sand {
+	-webkit-filter: hue-rotate(70deg) saturate(2.7%) brightness(340%);
+	filter: hue-rotate(70deg) saturate(2.7%) brightness(340%);
+}
+.upper-off-white .colour-upper, .lower-off-white .colour-lower, .under_lower-off-white .colour-under_lower, .under_upper-off-white .colour-under_upper, .head-off-white .colour-head, .face-off-white .colour-face, .neck-off-white .colour-neck, .legs-off-white .colour-legs, .feet-off-white .colour-feet, .upper_acc-off-white .colour-upper_acc, .lower_acc-off-white .colour-lower_acc, .under_lower_acc-off-white .colour-under_lower_acc, .under_upper_acc-off-white .colour-under_upper_acc, .head_acc-off-white .colour-head_acc, .face_acc-off-white .colour-face_acc, .neck_acc-off-white .colour-neck_acc, .legs_acc-off-white .colour-legs_acc, .feet_acc-off-white .colour-feet_acc, .icon-off-white {
+	-webkit-filter: hue-rotate(70deg) saturate(1.3%) brightness(360%);
+	filter: hue-rotate(70deg) saturate(1.3%) brightness(360%);
+}
+.upper-navy .colour-upper, .lower-navy .colour-lower, .under_lower-navy .colour-under_lower, .under_upper-navy .colour-under_upper, .head-navy .colour-head, .face-navy .colour-face, .neck-navy .colour-neck, .legs-navy .colour-legs, .feet-navy .colour-feet, .upper_acc-navy .colour-upper_acc, .lower_acc-navy .colour-lower_acc, .under_lower_acc-navy .colour-under_lower_acc, .under_upper_acc-navy .colour-under_upper_acc, .head_acc-navy .colour-head_acc, .face_acc-navy .colour-face_acc, .neck_acc-navy .colour-neck_acc, .legs_acc-navy .colour-legs_acc, .feet_acc-navy .colour-feet_acc, .icon-navy {
+	-webkit-filter: hue-rotate(250deg) saturate(7%) brightness(77%);
+	filter: hue-rotate(250deg) saturate(7%) brightness(77%);
+}
+.upper-olive .colour-upper, .lower-olive .colour-lower, .under_lower-olive .colour-under_lower, .under_upper-olive .colour-under_upper, .head-olive .colour-head, .face-olive .colour-face, .neck-olive .colour-neck, .legs-olive .colour-legs, .feet-olive .colour-feet, .upper_acc-olive .colour-upper_acc, .lower_acc-olive .colour-lower_acc, .under_lower_acc-olive .colour-under_lower_acc, .under_upper_acc-olive .colour-under_upper_acc, .head_acc-olive .colour-head_acc, .face_acc-olive .colour-face_acc, .neck_acc-olive .colour-neck_acc, .legs_acc-olive .colour-legs_acc, .feet_acc-olive .colour-feet_acc, .icon-olive {
+	-webkit-filter: hue-rotate(67deg) saturate(24.5%) brightness(137%);
+	filter: hue-rotate(67deg) saturate(24.5%) brightness(137%);
+}
+.upper-wine .colour-upper, .lower-wine .colour-lower, .under_lower-wine .colour-under_lower, .under_upper-wine .colour-under_upper, .head-wine .colour-head, .face-wine .colour-face, .neck-wine .colour-neck, .legs-wine .colour-legs, .feet-wine .colour-feet, .upper_acc-wine .colour-upper_acc, .lower_acc-wine .colour-lower_acc, .under_lower_acc-wine .colour-under_lower_acc, .under_upper_acc-wine .colour-under_upper_acc, .head_acc-wine .colour-head_acc, .face_acc-wine .colour-face_acc, .neck_acc-wine .colour-neck_acc, .legs_acc-wine .colour-legs_acc, .feet_acc-wine .colour-feet_acc, .icon-wine {
+	-webkit-filter: hue-rotate(351deg) saturate(28%) brightness(90%);
+	filter: hue-rotate(351deg) saturate(28%) brightness(90%);
+}
+
+/* wet clothes */
+.upper-wetblue .colour-upper, .lower-wetblue .colour-lower, .under_lower-wetblue .colour-under_lower, .under_upper-wetblue .colour-under_upper {
+	-webkit-filter: hue-rotate(-120deg) saturate(0.5) brightness(90%) contrast(100%) opacity(0.5);
+	filter: hue-rotate(-120deg) saturate(0.5) brightness(90%) contrast(100%) opacity(0.5);
+}
+.upper-wetwhite .colour-upper, .lower-wetwhite .colour-lower, .under_lower-wetwhite .colour-under_lower, .under_upper-wetwhite .colour-under_upper {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(430%) contrast(140%) opacity(0.5);
+	filter: hue-rotate(0deg) saturate(0%) brightness(430%) contrast(140%) opacity(0.5);
+}
+.upper-wetred .colour-upper, .lower-wetred .colour-lower, .under_lower-wetred .colour-under_lower, .under_upper-wetred .colour-under_upper {
+	-webkit-filter: hue-rotate(0deg) saturate(0.5) brightness(90%) contrast(100%) opacity(0.5);
+	filter: hue-rotate(0deg) saturate(0.5) brightness(90%) contrast(100%) opacity(0.5);
+}
+.upper-wetgreen .colour-upper, .lower-wetgreen .colour-lower, .under_lower-wetgreen .colour-under_lower, .under_upper-wetgreen .colour-under_upper {
+	-webkit-filter: hue-rotate(120deg) saturate(0.5) brightness(140%) contrast(100%) opacity(0.5);
+	filter: hue-rotate(120deg) saturate(0.5) brightness(140%) contrast(100%) opacity(0.5);
+}
+.upper-wetblack .colour-upper, .lower-wetblack .colour-lower, .under_lower-wetblack .colour-under_lower, .under_upper-wetblack .colour-under_upper {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(90%) contrast(110%) opacity(0.5);
+	filter: hue-rotate(0deg) saturate(0%) brightness(90%) contrast(110%) opacity(0.5);
+}
+.upper-wetpink .colour-upper, .lower-wetpink .colour-lower, .under_lower-wetpink .colour-under_lower, .under_upper-wetpink .colour-under_upper {
+	-webkit-filter: hue-rotate(-30deg) saturate(25%) contrast(100%) brightness(150%) opacity(0.5);
+	filter: hue-rotate(-30deg) saturate(25%) contrast(100%) brightness(150%) opacity(0.5);
+}
+.upper-wetpurple .colour-upper, .lower-wetpurple .colour-lower, .under_lower-wetpurple .colour-under_lower, .under_upper-wetpurple .colour-under_upper {
+	-webkit-filter: hue-rotate(-90deg) saturate(0.5) brightness(90%) contrast(100%) opacity(0.5);
+	filter: hue-rotate(-90deg) saturate(0.5) brightness(90%) contrast(100%) opacity(0.5);
+}
+.upper-wettangerine .colour-upper, .lower-wettangerine .colour-lower, .under_lower-wettangerine .colour-under_lower, .under_upper-wettangerine .colour-under_upper {
+	-webkit-filter: hue-rotate(60deg) saturate(0.75) brightness(190%) contrast(100%) opacity(0.5);
+	filter: hue-rotate(60deg) saturate(0.75) brightness(190%) contrast(100%) opacity(0.5);
+}
+.upper-wetteal .colour-upper, .lower-wetteal .colour-lower, .under_lower-wetteal .colour-under_lower, .under_upper-wetteal .colour-under_upper {
+	-webkit-filter: hue-rotate(-180deg) saturate(50%) brightness(150%) contrast(100%) opacity(0.5);
+	filter: hue-rotate(-180deg) saturate(50%) brightness(150%) contrast(100%) opacity(0.5);
+}
+.upper-wetyellow .colour-upper, .lower-wetyellow .colour-lower, .under_lower-wetyellow .colour-under_lower, .under_upper-wetyellow .colour-under_upper {
+	-webkit-filter: hue-rotate(65deg) saturate(0.5) brightness(280%) contrast(300%) sepia(0.55) opacity(0.5);
+	filter: hue-rotate(65deg) saturate(0.5) brightness(280%) contrast(300%) sepia(0.55) opacity(0.5);
+}
+.upper-wetbrown .colour-upper, .lower-wetbrown .colour-lower, .under_lower-wetbrown .colour-under_lower, .under_upper-wetbrown .colour-under_upper {
+	-webkit-filter: hue-rotate(60deg) saturate(150%) brightness(200%) contrast(100%) opacity(0.5);
+	filter: hue-rotate(60deg) saturate(150%) brightness(200%) contrast(100%) opacity(0.5);
+}
+.upper-wet .colour-upper, .lower-wet .colour-lower, .under_lower-wet .colour-under_lower, .under_upper-wet .colour-under_upper {
+	-webkit-filter: opacity(0.5);
+	filter: opacity(0.5);
+}
+.upper-wettan .colour-upper, .lower-wettan .colour-lower, .under_lower-wettan .colour-under_lower, .under_upper-wettan .colour-under_upper, .head-wettan .colour-head, .face-wettan .colour-face, .neck-wettan .colour-neck, .legs-wettan .colour-legs, .feet-wettan .colour-feet, .upper_acc-wettan .colour-upper_acc, .lower_acc-wettan .colour-lower_acc, .under_lower_acc-wettan .colour-under_lower_acc, .under_upper_acc-wettan .colour-under_upper_acc, .head_acc-wettan .colour-head_acc, .face_acc-wettan .colour-face_acc, .neck_acc-wettan .colour-neck_acc, .legs_acc-wettan .colour-legs_acc, .feet_acc-wettan .colour-feet_acc, .icon-wettan {
+	-webkit-filter: hue-rotate(60.3deg) saturate(17.5%) brightness(270%) opacity(0.5);
+	filter: hue-rotate(60.3deg) saturate(17.5%) brightness(270%) opacity(0.5);
+}
+.upper-wetgrey .colour-upper, .lower-wetgrey .colour-lower, .under_lower-wetgrey .colour-under_lower, .under_upper-wetgrey .colour-under_upper, .head-wetgrey .colour-head, .face-wetgrey .colour-face, .neck-wetgrey .colour-neck, .legs-wetgrey .colour-legs, .feet-wetgrey .colour-feet, .upper_acc-wetgrey .colour-upper_acc, .lower_acc-wetgrey .colour-lower_acc, .under_lower_acc-wetgrey .colour-under_lower_acc, .under_upper_acc-wetgrey .colour-under_upper_acc, .head_acc-wetgrey .colour-head_acc, .face_acc-wetgrey .colour-face_acc, .neck_acc-wetgrey .colour-neck_acc, .legs_acc-wetgrey .colour-legs_acc, .feet_acc-wetgrey .colour-feet_acc, .icon-wetgrey {
+	-webkit-filter: hue-rotate(58.8deg) saturate(5%) brightness(270%) opacity(0.5);
+	filter: hue-rotate(58.8deg) saturate(5%) brightness(270%) opacity(0.5);
+}
+.upper-wetsand .colour-upper, .lower-wetsand .colour-lower, .under_lower-wetsand .colour-under_lower, .under_upper-wetsand .colour-under_upper, .head-wetsand .colour-head, .face-wetsand .colour-face, .neck-wetsand .colour-neck, .legs-wetsand .colour-legs, .feet-wetsand .colour-feet, .upper_acc-wetsand .colour-upper_acc, .lower_acc-wetsand .colour-lower_acc, .under_lower_acc-wetsand .colour-under_lower_acc, .under_upper_acc-wetsand .colour-under_upper_acc, .head_acc-wetsand .colour-head_acc, .face_acc-wetsand .colour-face_acc, .neck_acc-wetsand .colour-neck_acc, .legs_acc-wetsand .colour-legs_acc, .feet_acc-wetsand .colour-feet_acc, .icon-wetsand {
+	-webkit-filter: hue-rotate(70deg) saturate(2.7%) brightness(340%) opacity(0.5);
+	filter: hue-rotate(70deg) saturate(2.7%) brightness(340%) opacity(0.5);
+}
+.upper-wetoff-white .colour-upper, .lower-wetoff-white .colour-lower, .under_lower-wetoff-white .colour-under_lower, .under_upper-wetoff-white .colour-under_upper, .head-wetoff-white .colour-head, .face-wetoff-white .colour-face, .neck-wetoff-white .colour-neck, .legs-wetoff-white .colour-legs, .feet-wetoff-white .colour-feet, .upper_acc-wetoff-white .colour-upper_acc, .lower_acc-wetoff-white .colour-lower_acc, .under_lower_acc-wetoff-white .colour-under_lower_acc, .under_upper_acc-wetoff-white .colour-under_upper_acc, .head_acc-wetoff-white .colour-head_acc, .face_acc-wetoff-white .colour-face_acc, .neck_acc-wetoff-white .colour-neck_acc, .legs_acc-wetoff-white .colour-legs_acc, .feet_acc-wetoff-white .colour-feet_acc, .icon-wetoff-white {
+	-webkit-filter: hue-rotate(70deg) saturate(1.3%) brightness(360%) opacity(0.5);
+	filter: hue-rotate(70deg) saturate(1.3%) brightness(360%) opacity(0.5);
+}
+.upper-wetnavy .colour-upper, .lower-wetnavy .colour-lower, .under_lower-wetnavy .colour-under_lower, .under_upper-wetnavy .colour-under_upper, .head-wetnavy .colour-head, .face-wetnavy .colour-face, .neck-wetnavy .colour-neck, .legs-wetnavy .colour-legs, .feet-wetnavy .colour-feet, .upper_acc-wetnavy .colour-upper_acc, .lower_acc-wetnavy .colour-lower_acc, .under_lower_acc-wetnavy .colour-under_lower_acc, .under_upper_acc-wetnavy .colour-under_upper_acc, .head_acc-wetnavy .colour-head_acc, .face_acc-wetnavy .colour-face_acc, .neck_acc-wetnavy .colour-neck_acc, .legs_acc-wetnavy .colour-legs_acc, .feet_acc-wetnavy .colour-feet_acc, .icon-wetnavy {
+	-webkit-filter: hue-rotate(250deg) saturate(7%) brightness(77%) opacity(0.5);
+	filter: hue-rotate(250deg) saturate(7%) brightness(77%) opacity(0.5);
+}
+.upper-wetolive .colour-upper, .lower-wetolive .colour-lower, .under_lower-wetolive .colour-under_lower, .under_upper-wetolive .colour-under_upper, .head-wetolive .colour-head, .face-wetolive .colour-face, .neck-wetolive .colour-neck, .legs-wetolive .colour-legs, .feet-wetolive .colour-feet, .upper_acc-wetolive .colour-upper_acc, .lower_acc-wetolive .colour-lower_acc, .under_lower_acc-wetolive .colour-under_lower_acc, .under_upper_acc-wetolive .colour-under_upper_acc, .head_acc-wetolive .colour-head_acc, .face_acc-wetolive .colour-face_acc, .neck_acc-wetolive .colour-neck_acc, .legs_acc-wetolive .colour-legs_acc, .feet_acc-wetolive .colour-feet_acc, .icon-wetolive {
+	-webkit-filter: hue-rotate(67deg) saturate(24.5%) brightness(137%) opacity(0.5);
+	filter: hue-rotate(67deg) saturate(24.5%) brightness(137%) opacity(0.5);
+}
+.upper-wetwine .colour-upper, .lower-wetwine .colour-lower, .under_lower-wetwine .colour-under_lower, .under_upper-wetwine .colour-under_upper, .head-wetwine .colour-head, .face-wetwine .colour-face, .neck-wetwine .colour-neck, .legs-wetwine .colour-legs, .feet-wetwine .colour-feet, .upper_acc-wetwine .colour-upper_acc, .lower_acc-wetwine .colour-lower_acc, .under_lower_acc-wetwine .colour-under_lower_acc, .under_upper_acc-wetwine .colour-under_upper_acc, .head_acc-wetwine .colour-head_acc, .face_acc-wetwine .colour-face_acc, .neck_acc-wetwine .colour-neck_acc, .legs_acc-wetwine .colour-legs_acc, .feet_acc-wetwine .colour-feet_acc, .icon-wetwine {
+	-webkit-filter: hue-rotate(351deg) saturate(28%) brightness(90%) opacity(0.5);
+	filter: hue-rotate(351deg) saturate(28%) brightness(90%) opacity(0.5);
+}
+
+/*
+ * Animation-related classes. Work-in-progress
+ * Expected document structure:
+ * <div class="i256" -- should have the image size-related class
+ *					(or have fixed size & overflow: hidden any other way)
+ *	<img class="anim-2s anim-2f" -- should have
+ *		1) duration-related class like "anim-2s" (2 seconds)
+ *		2) frame count-related class like "anim-2f" (2 frames)
+ *		OR
+ *	<img class="anim-doggy-4f-vfast"
+ *		-- should have frame count & speed class
+ *			like "anim-doggy-4f-vfast" (4 frames, very fast)
+ */
+.i256 {
+	width: 256px;
+	height: 256px;
+	overflow: hidden;
+}
+.i128 {
+	width: 128px;
+	height: 128px;
+	overflow: hidden;
+}
+.i64 {
+	width: 64px;
+	height: 64px;
+	overflow: hidden;
+}
+.i256 > *, .i128 > *, .i64 > * {
+	position: absolute;
+}
+.anim-1s, .anim-2s {
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+
+/* joint duration & frame-count classes */
+
+/* generic idle animation, -slow(default)/-mid/-fast */
+.anim-idle-1f, .anim-idle-1f-slow { }
+.anim-idle-2f, .anim-idle-2f-slow {
+	-webkit-animation-duration: 2s; /* 1s x 2 */
+	-webkit-animation-timing-function: steps(2);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 2s; /* 1s x 2 */
+	animation-timing-function: steps(2);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-idle-3f, .anim-idle-3f-slow {
+	-webkit-animation-duration: 3s; /* 1s x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 3s; /* 1s x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-idle-4f-mid {
+	-webkit-animation-duration: 1320ms; /* 330ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1320ms; /* 330ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-idle-4f-fast {
+	-webkit-animation-duration: 320ms; /* 80ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 320ms; /* 80ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+
+/* sex animations, main slot */
+
+.anim-doggy-3f-vfast {
+	-webkit-animation-duration: 240ms; /* 80ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 240ms; /* 80ms x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-3f-fast {
+	-webkit-animation-duration: 330ms; /* 110ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 330ms; /* 110ms x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-3f-mid {
+	-webkit-animation-duration: 510ms; /* 170ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 510ms; /* 170ms x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-3f-slow {
+	-webkit-animation-duration: 990ms; /* 330ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1320ms; /* 330ms x 3 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-4f-vfast {
+	-webkit-animation-duration: 320ms; /* 80ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 320ms; /* 80ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-4f-fast {
+	-webkit-animation-duration: 440ms; /* 110ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 440ms; /* 110ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-4f-mid {
+	-webkit-animation-duration: 680ms; /* 170ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 680ms; /* 170ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-4f-slow {
+	-webkit-animation-duration: 1320ms; /* 330ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1320ms; /* 330ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-5f-vfast {
+	-webkit-animation-duration: 400ms; /* 80ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 400ms; /* 80ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-5f-fast {
+	-webkit-animation-duration: 550ms; /* 110ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 550ms; /* 110ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-5f-mid {
+	-webkit-animation-duration: 850ms; /* 170ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 850ms; /* 170ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-5f-slow {
+	-webkit-animation-duration: 1650ms; /* 330ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1650ms; /* 330ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-6f-vfast {
+	-webkit-animation-duration: 480ms; /* 80ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 480ms; /* 80ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-6f-fast {
+	-webkit-animation-duration: 660ms; /* 110ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 660ms; /* 110ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-6f-mid {
+	-webkit-animation-duration: 1020ms; /* 170ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1020ms; /* 170ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-doggy-6f-slow {
+	-webkit-animation-duration: 1980ms; /* 330ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1980ms; /* 330ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+
+/* sex animations, close-up slots */
+.anim-close-3f-vfast {
+	-webkit-animation-duration: 240ms; /* 80ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 240ms; /* 80ms x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-3f-fast {
+	-webkit-animation-duration: 330ms; /* 110ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 330ms; /* 110ms x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-3f-mid {
+	-webkit-animation-duration: 510ms; /* 170ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 510ms; /* 170ms x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-3f-slow {
+	-webkit-animation-duration: 990ms; /* 330ms x 3 */
+	-webkit-animation-timing-function: steps(3);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 990ms; /* 330ms x 3 */
+	animation-timing-function: steps(3);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-4f-vfast {
+	-webkit-animation-duration: 320ms; /* 80ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 320ms; /* 80ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-4f-fast {
+	-webkit-animation-duration: 440ms; /* 110ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 440ms; /* 110ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-4f-mid {
+	-webkit-animation-duration: 680ms; /* 170ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 680ms; /* 170ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-4f-slow {
+	-webkit-animation-duration: 1320ms; /* 330ms x 4 */
+	-webkit-animation-timing-function: steps(4);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1320ms; /* 330ms x 4 */
+	animation-timing-function: steps(4);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+/*Currently unused*/
+.anim-close-5f-vfast {
+	-webkit-animation-duration: 400ms; /* 80ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 400ms; /* 80ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-5f-fast {
+	-webkit-animation-duration: 550ms; /* 110ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 550ms; /* 110ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-5f-mid {
+	-webkit-animation-duration: 850ms; /* 170ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 850ms; /* 170ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-5f-slow {
+	-webkit-animation-duration: 1650ms; /* 330ms x 5 */
+	-webkit-animation-timing-function: steps(5);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1650ms; /* 330ms x 5 */
+	animation-timing-function: steps(5);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-6f-vfast {
+	-webkit-animation-duration: 480ms; /* 80ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 480ms; /* 80ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-6f-fast {
+	-webkit-animation-duration: 660ms; /* 110ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 660ms; /* 110ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-6f-mid {
+	-webkit-animation-duration: 1020ms; /* 170ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1020ms; /* 170ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-close-6f-slow {
+	-webkit-animation-duration: 1980ms; /* 330ms x 6 */
+	-webkit-animation-timing-function: steps(6);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1980ms; /* 330ms x 6 */
+	animation-timing-function: steps(6);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+
+.anim-xray-8f-vfast {
+	-webkit-animation-duration: 320ms; /* 40ms x 8 */
+	-webkit-animation-timing-function: steps(8);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 320ms; /* 40ms x 8 */
+	animation-timing-function: steps(8);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-xray-8f-fast {
+	-webkit-animation-duration: 480ms; /* 60ms x 8 */
+	-webkit-animation-timing-function: steps(8);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 480ms; /* 60ms x 8 */
+	animation-timing-function: steps(8);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-xray-8f-mid {
+	-webkit-animation-duration: 640ms; /* 80ms x 8 */
+	-webkit-animation-timing-function: steps(8);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 640ms; /* 80ms x 8 */
+	animation-timing-function: steps(8);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+.anim-xray-8f-slow {
+	-webkit-animation-duration: 1320ms; /* 170ms x 8 */
+	-webkit-animation-timing-function: steps(8);
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: anim-default;
+	animation-duration: 1320ms; /* 170ms x 8 */
+	animation-timing-function: steps(8);
+	animation-iteration-count: infinite;
+	animation-name: anim-default;
+}
+
+.height64NoMargin{
+	height: 128px !important;
+}
+
+.height64{
+	margin-top: 64px;
+	height: 128px;
+}
+
+.height128{
+	margin-top: 128px;
+	height: 128px;
+}
+
+/* duration related-classes.
+	When adding, don't forget to add it to rule above with animation-iteration-count */
+.anim-1s {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+}
+.anim-2s {
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
+}
+
+/* frame-count related classes */
+.anim-2f {
+	-webkit-animation-timing-function: steps(2);
+	animation-timing-function: steps(2);
+}
+.anim-4f {
+	-webkit-animation-timing-function: steps(4);
+	animation-timing-function: steps(4);
+}
+
+@keyframes anim-default {
+	0% {
+	-webkit-transform: translateX(0);
+	transform: translateX(0);
+	}
+	100% {
+		-webkit-transform: translateX(-100%);
+		transform: translateX(-100%);
+	}
+}

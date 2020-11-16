@@ -1,0 +1,552 @@
+:: Widgets Museum [widget]
+<<widget "museumdonate">><<nobr>>
+
+<<museumAntiqueStatus "antiquebox" "talk">>
+<<museumAntiqueStatus "antiquesilverring" "talk">>
+<<museumAntiqueStatus "antiquegoldnecklace" "talk">>
+<<museumAntiqueStatus "antiqueivorynecklace" "talk">>
+<<museumAntiqueStatus "antiquecrystal" "talk">>
+<<museumAntiqueStatus "antiquehorn" "talk">>
+<<museumAntiqueStatus "antiquewatch" "talk">>
+<<museumAntiqueStatus "antiquedildo" "talk">>
+<<museumAntiqueStatus "antiquecandlestick" "talk">>
+<<museumAntiqueStatus "antiqueforestarrow" "talk">>
+<<museumAntiqueStatus "antiqueforestdagger" "talk">>
+<<museumAntiqueStatus "antiqueforestgem" "talk">>
+<<museumAntiqueStatus "antiquesilverbrooch" "talk">>
+<<museumAntiqueStatus "antiquetrashcup" "talk">>
+<<museumAntiqueStatus "antiquetrashburner" "talk">>
+<<museumAntiqueStatus "antiquebrassstatuette" "talk">>
+<<museumAntiqueStatus "antiquegoldchastitybelt" "talk">>
+<<museumAntiqueStatus "antiquecoppercompass" "talk">>
+<<museumAntiqueStatus "antiquegrenade" "talk">>
+<<museumAntiqueStatus "antiquestonetalisman" "talk">>
+<<museumAntiqueStatus "antiquesilvermask" "talk">>
+
+<</nobr>><</widget>>
+
+<<widget "museumtalk">><<nobr>>
+<<if $museumAntiques.antiques.antiquebox is "talk">>
+	<<link [[Ask about box|Museum Box]]>><<museumAntiqueStatus "antiquebox" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquesilverring is "talk">>
+	<<link [[Ask about silver ring|Museum Silver Ring]]>><<museumAntiqueStatus "antiquesilverring" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquegoldnecklace is "talk">>
+	<<link [[Ask about gold necklace|Museum Gold Necklace]]>><<museumAntiqueStatus "antiquegoldnecklace" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquegoldchastitybelt is "talk">>
+	<<link [[Ask about gold chastity belt|Museum Gold Chastity Belt]]>><<museumAntiqueStatus "antiquegoldchastitybelt" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiqueivorynecklace is "talk">>
+	<<link [[Ask about ivory necklace|Museum Ivory Necklace]]>><<museumAntiqueStatus "antiqueivorynecklace" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquecrystal is "talk">>
+	<<link [[Ask about crystal|Museum Crystal]]>><<museumAntiqueStatus "antiquecrystal" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquehorn is "talk">>
+	<<link [[Ask about horn|Museum Horn]]>><<museumAntiqueStatus "antiquehorn" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquewatch is "talk">>
+	<<link [[Ask about watch|Museum Watch]]>><<museumAntiqueStatus "antiquewatch" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquedildo is "talk">>
+	<<link [[Ask about strange object|Museum Dildo]]>><<museumAntiqueStatus "antiquedildo" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquecandlestick is "talk">>
+	<<link [[Ask about candlestick|Museum Candlestick]]>><<museumAntiqueStatus "antiquecandlestick" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiqueforestarrow is "talk">>
+	<<link [[Ask about arrowhead|Museum Arrow]]>><<museumAntiqueStatus "antiqueforestarrow" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiqueforestdagger is "talk">>
+	<<link [[Ask about dagger|Museum Dagger]]>><<museumAntiqueStatus "antiqueforestdagger" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiqueforestgem is "talk">>
+	<<link [[Ask about gem|Museum Gem]]>><<museumAntiqueStatus "antiqueforestgem" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquesilverbrooch is "talk">>
+	<<link [[Ask about silver brooch|Museum Silver Brooch]]>><<museumAntiqueStatus "antiquesilverbrooch" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquetrashcup is "talk">>
+	<<link [[Ask about the cup|Museum Cup]]>><<museumAntiqueStatus "antiquetrashcup" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquetrashburner is "talk">>
+	<<link [[Ask about the incense burner|Museum Burner]]>><<museumAntiqueStatus "antiquetrashburner" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquebrassstatuette is "talk">>
+	<<link [[Ask about the brass statuette|Museum Brass Statuette]]>><<museumAntiqueStatus "antiquebrassstatuette" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquecoppercompass is "talk">>
+<<link [[Ask about the copper compass|Museum Copper Compass]]>><<museumAntiqueStatus "antiquecoppercompass" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquegrenade is "talk">>
+<<link [[Ask about the grenade|Museum Grenade]]>><<museumAntiqueStatus "antiquegrenade" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquestonetalisman is "talk">>
+<<link [[Ask about the stone talisman|Museum Stone Talisman]]>><<museumAntiqueStatus "antiquestonetalisman" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+<br>
+<</if>>
+<<if $museumAntiques.antiques.antiquesilvermask is "talk">>
+<<link [[Ask about the silver mask|Museum Silver Mask]]>><<museumAntiqueStatus "antiquesilvermask" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+<br>
+<</if>>
+
+<</nobr>><</widget>>
+
+:: Museum Lock [nobr]
+<<set $outside to 1>><<set $location to "museum">><<effects>>
+
+The museum is closed. A sign on the door reads.
+<br><br>
+"Open weekends
+<br>
+<<if $timestyle is "ampm">>9:00 am - 6:00 pm<<else>>9:00 - 18:00<</if>>"
+<br><br>
+
+<<link [[Leave|Oxford Street]]>><</link>>
+<br>
+
+:: Museum [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if $museumintro isnot 1>>
+	<<set $museumintro to 1>><<set $phase to 0>>
+
+	<<npc Winter>><<person1>>You enter the dim museum. Small windows peek down from just beneath the high ceiling, doing little to break the gloom. The other rooms are no better.
+	<br><br>
+
+	Winter stands polishing a brass pot. <<He>> regards you with a level stare. "Don't touch anything," <<he>> says. "I doubt you've washed your hands."
+	<br><br>
+
+	<<link [[Respond indignantly|Museum Intro]]>><<set $submissive -= 1>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[Respond obediently|Museum Intro]]>><<set $submissive += 1>><<set $phase to 1>><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+	<<link [[Respond flirtatiously|Museum Intro]]>><<set $phase to 2>><<npcincr Winter love -1>><</link>><<promiscuous1>><<llove>>
+	<br>
+
+<<elseif $museumhorseintro is undefined and $museumAntiques.museumCount gte 10>>
+	<<set $museumhorseintro to 0>>
+	<<npc Winter>><<person1>>You enter the dim museum. Winter stares at a brass pot sitting alone on a display. "I can't find a place for it," <<he>> sighs. <<He>> notices you. "I was hoping you'd visit. I have a favour to ask, seeing as you've been such a help already." <<He>> walks to the corner of the room, where something large hides beneath a dirty sheet. <<He>> tugs it off, revealing a wooden horse.
+	<br><br>
+
+	"It's genuine," <<he>> says with satisfaction. "And in good condition."
+	<br><br>
+
+	<<if $awareness gte 200>>
+		"It's a torture device," you say.
+		<br><br>
+
+		"I'm impressed." <<he>> responds. "That's exactly what it is. They would sit the victim on top, and weigh them down to put pressure on their crotch. They'd often be whipped at the same time."
+	<<else>>
+		"What is it for?" you ask.
+		<br><br>
+
+		"Torture," <<he>> responds. "Modern examples exist for... other uses. They would sit the victim on top, and weigh them down to put pressure on their crotch. They'd often be whipped at the same time."
+	<</if>>
+	<br><br>
+	<<He>> rests a hand on the horse. "I want to stage a demonstration, to get people interested in history." <<He>> regards you. "I don't want you to feel pushed into it, but I'd like your help. Give it some thought."
+	<br><br>
+
+	<<link [[Next|Museum]]>><<endevent>><</link>>
+	<br>
+<<elseif $museumduckintro is undefined and $museumAntiques.museumCount gte 20>>
+	<<set $museumduckintro to 0>>
+	<<npc Winter>><<generate2>><<person2>>You enter the dim museum. A <<person>> brushes past you.
+	<br><br>
+	<<person1>>
+	"Just who I wanted to see," Winter says, looking up from a dark brown wooden chair. "I've been speaking with an interesting <<person2>><<if $pronoun is "m">>gentleman<<else>>lady<</if>>. You might have passed <<him>> on the way in."<<person1>>
+	<br><br>
+
+	<<person1>>Winter places a finger on the chair beside <<him>>. "I've received a donation. Something rather special."
+	<br><br>
+
+	<<if $awareness gte 300>>
+		You look closer. The chair has a hook at the back, as if it were meant to be tied to something. "It's a ducking stool," you say. "They'd use it to suffocate people underwater."
+		<br><br>
+
+		"I'm very impressed," <<he>> responds. "That's it precisely. They'd tie the chair to a... crane of sorts. Then dunk the victim in a river. It could be fatal, depending."
+	<<else>>
+		"What is it for?" you ask.
+		<br><br>
+
+		"Punishment," <<he>> responds. "It's called a ducking stool. See this hook at the back? They'd tie it to a crane with a victim strapped to the seat. Then suffocate said victim in water. It could be fatal."
+	<</if>>
+	<br><br>
+	"I want to demonstrate it in public," <<he>> continues. "I've found someone who can provide the rest of the apparatus, and there's a river nearby. I don't presume anything, but I would like your help. Give it some thought."
+	<br><br>
+
+	<<link [[Next|Museum]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	You are inside the museum. Items of historic value cover the walls and perch on pedestals.
+	<<if $museuminterest gte 100>>
+		Visitors crowd the building, examining the antiques with interest. Winter looks overworked, but content.
+	<<elseif $museuminterest gte 60>>
+		The building is full of visitors, here to examine the antiques.
+	<<elseif $museuminterest gte 20>>
+		Several other visitors examine the displays.
+	<<else>>
+		The building is empty of visitors, save yourself.
+	<</if>>
+	<br><br>
+
+	<<if $museumhorseintro is 0>>
+		<<link [[Agree to wood horse demonstration|Museum Horse Agree]]>><<set $museumhorseintro to 1>><</link>>
+		<br>
+	<<elseif $museumhorseintro is 1 and $museumhorse isnot 1>>
+		<<link [[Demonstrate wooden horse (1:00)|Museum Horse]]>><<pass 60>><<set $museumhorse to 1>><</link>><<gpain>><<exhibitionist1>>
+		<br>
+	<</if>>
+	<<if $museumduckintro is 0>>
+		<<link [[Agree to ducking stool demonstration|Museum Duck Agree]]>><<set $museumduckintro to 1>><</link>>
+		<br>
+	<<elseif $museumduckintro is 1 and $museumduck isnot 1>>
+		<<link [[Demonstrate ducking stool (1:00)|Museum Duck]]>><<pass 60>><<set $museumduck to 1>><</link>><<exhibitionist1>>
+		<br>
+	<</if>>
+	<<museumtalk>>
+	<<if $museumAntiques.antiques.antiqueforestgem is "museum" and $museumgreengemtouch isnot 1>>
+		<<link [[Touch green gem|Museum Green Gem Touch]]>><<stress -3>><<set $museumgreengemtouch to 1>><</link>><<lstress>>
+		<br>
+	<</if>>
+	<<if $antiquemoney gt 0>>
+		<<link [[Sell antiques|Museum Sell]]>><<if $museumAntiques.antiques.antiquesilvermask is "found">><<set $phase to 1>><</if>><<museumdonate>><</link>>
+		<br>
+	<</if>>
+	<<link [["Look around the Museum"|Museum Look around]]>><</link>>
+	<br><br>
+
+	<<link [[Leave|Oxford Street]]>><</link>>
+	<br>
+
+<</if>>
+
+
+
+:: Museum Intro [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if $phase is 0>>
+	<<if $submissive gte 1150>>
+	"I-I thought you'd be happy I was showing interest," you say.
+	<<elseif $submissive lte 850>>
+	You put your hands on your hips. "Is that how you always greet people?" you ask. "I though you'd be happy I was showing interest."
+	<<else>>
+	"I expected you to be happy I was showing interest," you say.
+	<</if>>
+	<br><br>
+A vein twitches on <<his>> forehead as <<he>> stares at you. "You shouldn't speak to your elders that way," <<he>> says. "But that was rude of me."
+
+<<elseif $phase is 1>>
+	<<if $submissive gte 1150>>
+	You nod, and keep your hands firm at your sides.
+	<<elseif $submissive lte 850>>
+	You clench your fists and look away. "Sure," you say. "Why would I want to touch these dumb things anyway?"
+	<<else>>
+	"I will," you say, keeping your hands firm at your sides.
+	<</if>>
+	<br><br>
+"Good," <<he>> says. "Forgive my caution, but some of these are very old."
+
+<<else>>
+	<<if $submissive gte 1150>>
+	"I am very dirty," you purr. "Would you help wash me?"
+	<<elseif $submissive lte 850>>
+	"That's okay," you purr. "You're the only antique I want to touch."
+	<<else>>
+	"The only thing I want to touch is you," you purr.
+	<</if>>
+<<promiscuity1>>
+
+"What insolence," <<he>> sneers. "I suppose I should expect no better. Don't think I won't ban you from the premises."
+
+<</if>>
+<br><br>
+
+<<He>> places the pot back on its pedestal. "It's a sorry collection for an area so rich in history. The mayor's office agrees, and has set aside funds to reward anyone who provides local antiques."
+<br><br>
+
+<<He>> starts polishing an ornate breastplate. "If you find anything, I'll appraise it. I won't hold my breath."
+<br><br>
+<<endevent>>
+<<link [[Next|Museum]]>><</link>>
+<br>
+
+:: Museum Sell [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>
+<<if $phase is 1>><<set $phase to 0>>
+Winter dons a pair of gloves and appraises the goods. "Aha," <<he>> says. "The mask. I'm glad you've decided to put it under my care." <<He>> places £<<print $antiquemoney>> on the table.
+<<glove>><<npcincr Winter love 1>>
+<br><br>
+
+<<He>> takes the goods into a back room.
+<br><br>
+
+<<elseif $antiquemoney gte 1000>>
+
+Winter dons a pair of gloves and appraises the goods. <<His>> scepticism fades as <<he>> works. "Where did you get this?" <<he>> asks. <<He>> doesn't wait for an answer, but places £<<print $antiquemoney>> on the table.
+<<glove>><<npcincr Winter love 1>>
+<br><br>
+
+<<He>> takes the goods into a back room.
+<br><br>
+<<elseif $antiquemoney gte 200>>
+
+Winter dons a pair of gloves and appraises the goods. "Thank you," <<he>> says. "Your contribution is noted." <<he>> places £<<print $antiquemoney>> on the table.
+<br><br>
+
+<<He>> takes the goods into a back room.
+<br><br>
+
+<<else>>
+Winter dons a pair of gloves and appraises the goods. Without a word, <<he>> places £<<print $antiquemoney>> on the table.
+<br><br>
+
+<<He>> takes the goods into a back room.
+<br><br>
+
+<</if>>
+<<endevent>>
+
+<<set $money += ($antiquemoney * 100)>><<set $antiquemoneyhistory += $antiquemoney>><<set $antiquemoney to 0>>
+
+<<link [[Next|Museum]]>><</link>>
+<br>
+
+:: Museum Box [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>Winter picks up the small box you brought. "It's a jewellery case," <<he>> says. "They would have made thousands of these. Very few have survived. That the lock still works is a miracle."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Silver Ring [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>Winter holds the silver ring up to the light and examines it. "Common jewellery," <<he>> says. "And of enduring metal. There's a lot of these around. This one was worn by someone who lived here. There's value there, I think. Thanks for bringing it."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Gold Necklace [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>Winter turns the gold necklace in <<his>> palm. "This is magnificent," <<he>> says. "Worn by someone of note I imagine. Where did you find it?"
+<br><br>
+
+<<link [[Tell|Museum Tell]]>><<set $winterlakeknown to 1>><</link>>
+<br>
+<<link [[Keep secret|Museum Secret]]>><</link>>
+<br>
+
+:: Museum Gold Chastity Belt [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>
+<<if $worn.genitals.origin is "Underwater Temple">>
+	<<strip>>
+	You tell Winter about a gold chastity belt that you found and decided to wear. "How intriguing, can you strip for me?" <<he>> says.
+	<br><br>
+	You strip and allow <<him>> to examine it.
+<<else>>
+	Winter holds the gold chastity belt.
+<</if>>
+
+"This is ancient," <<he>> says. "There are religious inscriptions. This would have been worn by a priestess for a particular ritual or ceremony."
+<<if $worn.genitals.origin is "Underwater Temple">>
+	<br>
+	"Let me take a couple of close up photos" <<he>> continues as he takes out <<his>> small camera. "I'm sure I can get a replication setup, try not to get it locked on you next time."
+<</if>>
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><<clotheson>><</link>>
+
+:: Museum Tell [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+"The lake," <<he>> says. "Buried on the shore I suppose. Interesting. I've heard there's evidence of old structures there. Maybe I'll take a look."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Secret [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<He>> frowns and nods. "That's your right," <<he>> says. "Maybe I'll puzzle it out on my own."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Ivory Necklace [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"The ivory necklace?" Winter says. "I have to send it away. Terrible shame, but I was told to inform the mayor's office should I acquire anything fitting that description. They've sent someone to pick it up." <<He>> shakes <<his>> head. "Best not interfere with those types."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Crystal [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"I must admit," Winter says. "I have no idea what it is. There's a carving. Looks like writing, but I don't recognise it." <<He>> frowns. "A corporation is looking to buy the thing. They must know something I don't."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Horn [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>Winter runs <<his>> finger over the mouthpiece, and recoils as if hurt. <<His>> face shows no sign of pain. "A hunting trophy from abroad," <<he>> says. "They had it made into an instrument. Not what I would have done."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Candlestick [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"Candlesticks are common enough," Winter says. "This one was made for a particular noble house that resided here." <<He>> shakes <<his>> head. "A pity what became of them."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Watch [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"This is something special," Winter says. "A century and a half, yet still ticking away. Was made during the town's glory days."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Dildo [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>Winter blushes. "That's," <<he>> says. "That's a... medical aid. A very old fashioned one. It's not terribly interesting." <<He>> wants to change the subject.
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Arrow [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"You can't take twenty steps in the forest without finding an old arrowhead," Winter says. "Not that I'm ungrateful. Most people wouldn't spot them."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Dagger [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"A nice find," Winter says. "These would have been common in the distant past, but few have survived. I'm surprised you found it without any digging."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Gem [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>Winter holds the gem up to the light. "Pretty," <<he>> says. "Similar to the ones they mine nearby." <<He>> frowns. "Except a different hue."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Green Gem Touch [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+You touch the green gem. A calmness falls over you.
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Silver Brooch [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"Sterling silver," Winter says. "The design was popular several decades ago. I imagine it was hidden away in a loft somewhere."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Cup [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"This style was popular among the middle-classes some hundred years ago," Winter says. <<He>> curls <<his>> nose. "I wouldn't drink from it now. I think it's had quite an adventure."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Burner [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"They still use these," Winter says. "At the temple. Got them in trouble with the greater church in the past."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Brass Statuette [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"This wasn't made locally," Winter says, examing the statuette through a magnifying glass. "Possibly brought by foreign conquerers over a thousand years ago."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+
+:: Museum Copper Compass [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"Remarkable," Winter says, turning the compass and observing the spin. "You found it out at sea? We're fortunate it survived so intact."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+<br>
+
+:: Museum Grenade [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"This one might be younger than me," Winter laughs. You assume <<hes>> joking. "I'm not surprised you found it in the countryside. I hear of some impressive collections."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+<br>
+
+:: Museum Stone Talisman [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"I wasn't sure about this one," Winter says. "Had to phone an old colleague, but it's genuine. Ancient, and engraved with symbols of the old religion."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+<br>
+
+:: Museum Silver Mask [nobr]
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>"It was serendipitous," Winter says. "That you found this where you did. Or sinister. We don't know much about its origins, but it was used by the old religion. The myths are colourful."
+<br><br>
+
+<<link [[Next|Museum]]>><<endevent>><</link>>
+<br>
+
+

@@ -1,0 +1,2665 @@
+:: Widgets Kylar [widget]
+<<widget "kylargag">><<nobr>>
+<<set $mouthuse to "gagged">>
+<<facewear 4>>
+<<if $pronoun is "m">><<He>> pulls a knife from <<his>> pocket.<<else>><<He>> pulls a knife from beneath <<his>> skirt.<</if>> <<His>> smile doesn't falter. "You're just grouchy because we've been apart too long. Here." <<He>> cuts a piece from a roll of tape at <<his>> side, and sticks it over your mouth.
+<br><br>
+
+"There," <<he>> says. "Are you feeling better?" You can only mumble. <<He>> scrambles over to the table, and pulls a laptop out from beneath it. You can't see the screen, but a moment later a voice emerges. Your voice.
+<br><br>
+
+"I am better," it says. Each word has a different tone, recorded in different places and stitched together.
+<br><br>
+
+Kylar beams at you. "I knew it," <<he>> says.
+<br><br>
+
+<<He>> clicks again. "I love you," says your voice.
+<br><br>
+
+Kylar clutches <<his>> cheeks. "I know. You tell me every day."
+<br><br>
+
+<</nobr>><</widget>>
+
+<<widget "kylarangry">><<nobr>>
+	<<if $submissive gte 1150>>
+	"You're being horrible," you say. "Let me go."
+	<<elseif $submissive lte 850>>
+	"You creep," you say. "Let me go this instant."
+	<<else>>
+	"You're awful," you say. "Let me go."
+	<</if>>
+	<br><br>
+<</nobr>><</widget>>
+
+<<widget "kylaroptions">><<nobr>>
+
+<<kylaroptionstext>>
+
+<<if $bus is "park" and $daystate isnot "day">>
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+	<<He>> looks at <<his>> watch. "I need to go," <<he>> says. "They're waiting for me." <<He>> keeps looking over <<his>> shoulder as <<he>> walks.
+	<br><br>
+	<<else>>
+	<<He>> looks at <<his>> watch, mumbles something, then walks away.
+	<br><br>
+	<</if>>
+<<kylaroptionsleave>>
+<<elseif $location is "school" and $hour isnot 12>>
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+	<<He>> looks at <<his>> watch. "I need to go," <<he>> says. "I'll be late for my lesson." <<He>> keeps looking over <<his>> shoulder as <<he>> walks.
+	<br><br>
+	<<else>>
+	<<He>> looks at <<his>> watch, mumbles something, then walks away.
+	<br><br>
+	<</if>>
+<<kylaroptionsleave>>
+<<elseif $bus is "starfish" and $daystate isnot "day">>
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+	<<He>> looks at <<his>> watch. "I need to go," <<he>> says. "They're waiting for me." <<He>> keeps looking over <<his>> shoulder as <<he>> walks.
+	<br><br>
+	<<else>>
+	<<He>> looks at <<his>> watch, mumbles something, then walks away.
+	<br><br>
+	<</if>>
+<<kylaroptionsleave>>
+<<else>>
+
+<<link [[Chat (0:15)|Kylar Chat]]>><<pass 15>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><<stress -2>><</link>><<lstress>><<glove>><<lsuspicion>>
+<br>
+<<link [[Tease (0:15)|Kylar Tease]]>><<pass 15>><<npcincr Kylar love 1>><<npcincr Kylar lust 1>><<stress -2>><</link>><<promiscuous1>><<lstress>><<glove>><<glust>>
+<br>
+<<if $bus is "starfish">>
+<<link [[Play a game (0:15)|Kylar Game]]>><<pass 15>><<stress -2>><<npcincr Kylar love 1>><</link>><<glove>><<lstress>>
+<br>
+<</if>>
+<<if $loft_known is 1 and $loft_kylar isnot 1 and $NPCName[$NPCNameList.indexOf("Kylar")].love gte 90 and $loft_option_block isnot 1>>
+<<link [[Tell Kylar about the orphanage loft|Kylar Loft]]>><</link>>
+<br>
+<</if>>
+
+	<<if random(1, 100) gte 61 and $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50 and $kylarstop isnot 1>>
+	<<link [[Leave|Kylar Stop]]>><<set $kylarstop to 1>><</link>>
+	<br>
+	<<else>>
+	<<kylaroptionsleave>>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "kylaroptionsleave">><<nobr>>
+
+<<if $kylarstop isnot 1>>
+	<<if $bus is "park">>
+	<<link [[Leave|Park]]>><<endevent>><</link>>
+	<br>
+	<<elseif $bus is "schoollibrary">>
+	<<link [[Leave|School Library]]>><<endevent>><</link>>
+	<br>
+	<<elseif $bus is "starfish">>
+	<<link [[Leave|Arcade]]>><<endevent>><</link>>
+	<<else>>
+	<<link [[Leave|School Rear Playground]]>><<endevent>><</link>>
+	<br>
+	<</if>>
+<</if>>
+<<set $kylarstop to 0>>
+<</nobr>><</widget>>
+
+<<widget "kylaroptionstext">><<nobr>>
+<<set $rng to random(1, 100)>>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+	<<if $kylarchatintro isnot 1>>
+	<<set $kylarchatintro to 1>>
+	<<He>> clenches <<his>> fists and lifts <<his>> head, looking you straight in the eye. "H-hey," <<he>> says.
+		<<if $kylarhomeinterrupted is 1>>
+		"I-I'm sorry about the thing in your bedroom."
+			<<if $kylarignored isnot 1>>
+			<<He>> gulps. "I just wanted to thank you for helping me." <<He>> looks away.
+			<<else>>
+			<<He>> gulps. "I just wanted to t-tell you you're very <<if $player.gender_appearance is "m">>handsome<<else>>pretty<</if>>" <<He>> looks away.
+			<</if>>
+		<<else>>
+			<<if $kylarignored isnot 1>>
+			"Thank you for helping me." <<He>> looks away.
+			<<else>>
+			"You're very <<if $player.gender_appearance is "m">>handsome<<else>>pretty<</if>>" <<He>> looks away.
+			<</if>>
+		<</if>>
+	<br><br>
+
+	<<elseif $famesex gte 100 and $rng gte 91 and $kylarfameconfront isnot 1 and $kylarfamestage is undefined>>
+	<<set $kylarfameconfront to 1>><<set $kylarfamestage to 0>>
+	"I-I found a strange picture of you," <<he>> says. "Someone doctored it to make it look like you were doing lewd things." <<He>> laughs. "Some people have no shame."
+	<<npcincr Kylar rage 3>><<gksuspicion>>
+	<br><br>
+	<<elseif $famesex gte 300 and $rng gte 91 and $kylarfameconfront isnot 1 and $kylarfamestage is 0>>
+	<<set $kylarfameconfront to 1>><<set $kylarfamestage to 1>>
+	"I-I found another strange picture of you," <<he>> laughs. "Doctored to make it look like you were doing lewd things." <<He>> laughs again. "You must be popular with perverts."
+	<<npcincr Kylar rage 10>><<ggksuspicion>>
+	<br><br>
+	<<elseif $famesex gte 500 and $rng gte 91 and $kylarfameconfront isnot 1 and $kylarfamestage is 1>>
+	<<set $kylarfameconfront to 1>>
+	"Y-you'll never guess what I found," <<he>> laughs. "More doctored pictures of you doing perverted things." <<His>> laughter reaches a hysterical pitch. "S-Someone spent a lot of time on them. There are so many."<<gggksuspicion>><<npcincr Kylar rage 30>>
+	<br><br>
+	<<elseif $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 50>>
+	"You came to see me," <<he>> says. "Of course you did. Why wouldn't you." <<He>> laughs.
+	<br><br>
+	<<else>>
+	<<He>> smiles at you.
+	<br><br>
+	<</if>>
+<<else>>
+<<He>> blushes and looks away.
+<br><br>
+<</if>>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 90 and $spray lt $spraymax and $kylarspray isnot 1>><<set $kylarspray to 1>>
+"I made you something," <<he>> says as <<he>> rummages in <<his>> bag. <<He>> hands you a charge for your pepper spray. "I made it myself. It'll keep sluts and perverts away." <<He>> beams.
+<<spray 1>><<gspray>>
+<br><br>
+<</if>>
+
+<</nobr>><</widget>>
+
+:: Kylar Intro Intervene [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You walk up to the <<person2>><<personstop>> Both <<he>> and the <<person1>>bullied <<if $pronoun is "m">>boy<<else>>girl<</if>> stop and look at you. <<person2>>"What you want?" the <<person>> says.
+<br><br>
+
+<<if $submissive gte 1150>>
+You avert your eyes. "L-let <<person1>><<him>> go," you say. "Don't be mean."
+<<elseif $submissive lte 850>>
+"Let <<person1>><<him>> go," you demand. "Or it'll be you up against that locker."
+<<else>>
+"Stop it," you say. "Bullying is wrong."
+<</if>>
+<br><br>
+The <<person2>><<person>> regards you for a moment, then laughs. Some of the audience join in. <<He>> releases the <<person1>>bullied <<if $pronoun is "m">>boy<<else>>girl<</if>>'s collar. "Sure thing," <<person2>><<he>> manages through wheezes. "I don't want any trouble." <<His>> laughter redoubles. <<He>> staggers away.
+<br><br>
+
+The <<person1>>bullied <<if $pronoun is "m">>boy<<else>>girl<</if>> picks up <<his>> bag and starts gathering the contents. "Th-thank you," <<he>> stutters. "I-I'm," <<he>> looks at you, but blushes and looks away. "I'm Kylar." You thought <<he>> was younger than you, but <<he>> seems the same age. <<Hes>> just small. <<He>> turns and runs.
+<br><br>
+<<endevent>>
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Intro Help [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You pick up the bullied <<person1>><<if $pronoun is "m">>boy<<else>>girl<</if>>'s bag and gather <<his>> books and pens. The <<person2>><<person>> soon finishes <<his>> game, and drops <<his>> victim to the ground. <<He>> and the audience lose interest.
+<br><br>
+
+You're the only one still paying <<person1>><<him>> attention when you walk up to the bullied <<if $pronoun is "m">>boy<<else>>girl<</if>> and hold out <<his>> things. <<He>> steps back as if threatened.
+<br><br>
+
+<<if $submissive gte 1150>>
+"I know what it's like," you say. "But it's okay. Things will be better."
+<<elseif $submissive lte 850>>
+"Don't let <<person2>><<him>> get to you," you say. "<<Hes>> not worth it."
+<<else>>
+"I hope you're okay," you say.
+<</if>>
+<br><br>
+
+<<person1>>"Th-thank you," <<he>> stutters. "I-I'm," <<he>> looks at you, but blushes and looks away. "I'm Kylar." You thought <<he>> was younger than you, but <<he>> seems the same age. <<Hes>> just small. <<He>> turns and runs.
+<br><br>
+<<endevent>>
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Intro Ignore [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You continue on, not wanting to get involved. No one gives you a second glance.
+<br><br>
+
+<<endevent>>
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Basement [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+<<npc Kylar>><<person1>><<set $leftarm to "bound">><<set $rightarm to "bound">>
+<<set $stress -= 2000>><<clothesontowel>><<set $pain += 1>>
+You awaken sat on a chair. You can't move. Your legs are chained and your arms are bound behind you. You're in a spacious basement. A tiny window lets in a little light.
+<br><br>
+
+You hear a door open above. A person walks down a staircase, carrying something large and hidden by a white sheet. They place it on a table, then step around it into view. It's Kylar. <<His>> hair is even messier than usual, but <<hes>> smiling. <<His>> eyes are crazed and terrible. "You're awake," <<he>> gasps. <<He>> drops to <<his>> knees in front of you. <<He>> places <<his>> hands on your thighs. They're shaking.
+<br><br>
+
+"You're so <<if $player.gender_appearance is "m">>handsome<<else>>beautiful<</if>>." <<He>> laughs. "I've done everything. Don't worry."
+<br><br>
+
+<<link [[Plead|Kylar Basement 2]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Get angry|Kylar Basement 2]]>><<set $phase to 2>><</link>>
+<br>
+<<link [[Remain silent|Kylar Basement 2]]>><<set $phase to 0>><</link>>
+<br>
+
+:: Kylar Basement 2 [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+
+<<if $phase is 0>>
+
+<<elseif $phase is 1>>
+
+	<<if $submissive gte 1150>>
+	"D-don't hurt me," you say.
+	<<elseif $submissive lte 850>>
+	"I demand you let me go," you say. "This instant."
+	<<else>>
+	"Please let me go," you say. "I won't tell anyone."
+	<</if>>
+<br><br>
+
+	<<if $rng gte 51>>
+	"It's okay," <<he>> says. "I'm nervous too."
+	<br><br>
+	<<else>>
+	<<kylargag>>
+	<</if>>
+
+<<elseif $phase is 2>>
+
+<<kylarangry>>
+<<kylargag>>
+
+<</if>>
+
+<<He>> stands and hauls the sheet off the large object. It's a great white cake. A wedding cake. <<He>> beams. "It's the big day." <<He>> drops to <<his>> knees again. "The vicar will be here soon." <<He>> touches the chains binding you. "D-do you think, it would be okay if we got a head start? On the honeymoon?"
+<br><br>
+
+<<if $mouthuse isnot "gagged">>
+<<link [[Plead|Kylar Basement 3]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Get angry|Kylar Basement 3]]>><<set $phase to 2>><</link>>
+<br>
+<</if>>
+
+<<link [[Remain silent|Kylar Basement 3]]>><<set $phase to 0>><</link>>
+<br>
+
+:: Kylar Basement 3 [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+
+<<if $phase is 0>>
+
+<<elseif $phase is 1>>
+
+	<<if $submissive gte 1150>>
+	"P-please don't," you say.
+	<<elseif $submissive lte 850>>
+	"Don't you dare," you say.
+	<<else>>
+	"Don't," you say. "It's not like you."
+	<</if>>
+<br><br>
+
+	<<if $rng gte 51>>
+	<<else>>
+	<<kylargag>>
+	<</if>>
+
+<<elseif $phase is 2>>
+
+<<kylarangry>>
+<<kylargag>>
+
+<</if>>
+
+<<if $mouthuse is "gagged">>
+<<He>> clicks something on the laptop. "I will ride you all night," your voice says.
+<br><br>
+<</if>>
+
+"You're so rough," <<He>> laughs. "I'm powerless. Do what you want to me."
+
+<<if $NPCList[0].penis isnot "none">>
+<<He>> pushes your thighs up and sits on the edge of the chair, pushing against your groin.
+<<else>>
+<<He>> climbs on top of you.
+<</if>>
+"S-so assertive," <<he>> says. <<He>> wraps <<his>> arms around your neck and leans in to kiss your neck. "All mine," <<he>> whispers.
+<br><br>
+
+<<link [[Next|Kylar Basement Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Kylar Basement Rape [nobr]
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<set $enemyarousalmax *= 2>><<set $kylarraped += 1>>
+	<<if $worn.under_lower.type.includes("naked")>><<set $NPCList[0].lefthand to "none">><<else>><<set $NPCList[0].lefthand to "underclothes">><</if>>
+	<<if $worn.lower.type.includes("naked")>><<set $NPCList[0].righthand to "none">><<else>><<set $NPCList[0].righthand to "lowerclothes">><</if>>
+	<<if $NPCList[0].penis isnot "none" and $vaginaexist is 1>>
+		<<set $NPCList[0].penis to "vaginaentrance">><<set $vaginause to "penis">><<set $vaginastate to "entrance">><<set $NPCList[0].location.genitals to "genitals">>
+	<</if>>
+	<<if $NPCList[0].vagina isnot "none" and $penisexist is 1>>
+		<<set $NPCList[0].vagina to "penisentrance">><<set $penisuse to "othervagina">><<set $penisstate to "entrance">><<set $NPCList[0].location.genitals to "genitals">>
+	<</if>>
+<</if>>
+<<set $enemyarousal += 15>>
+<<He>> kisses, licks and bites you while rubbing <<his>> whole body against yours.
+<br><br>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[Next|Kylar Basement Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next|Kylar Basement Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Kylar Basement Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Kylar Basement Rape Finish [nobr]
+
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+<<ejaculation>><<npcincr Kylar lust -20>>
+
+<<He>> moans into your ear, then falls limp. <<He>> hangs from you for a few moments. <<He>> rubs <<his>> nose against yours and stares into your eyes. "We're going to do this every day," <<he>> says. "Forever."
+
+<<if $mouthuse isnot "gagged">><<He>> kisses your mouth.<<else>><<He>> kisses your forehead.<</if>>
+<br><br>
+
+<<else>>
+
+You knock <<him>> away from you. "Y-you're v-very kinky," <<he>> stammers. "N-not so rough next time."
+<br><br>
+
+<</if>>
+
+<<npc Kylar>><<person1>>
+<<He>> walks across the basement without bothering to fix <<his>> clothing. <<He>> hefts a fire axe from the wall. "When you're my <<if $player.gender_appearance is "m">>husband<<else>>wife<</if>>," <<he>> says. "I'll protect you. I'll find everyone who ever looked at you and crack them open." <<He>> laughs. "Then it will be just us."
+<br><br>
+
+<<if $mouthuse isnot "gagged">>
+<<link [[Plead|Kylar Basement 4]]>><<set $phase to 1>><</link>>
+<br>
+<<link [[Get angry|Kylar Basement 4]]>><<set $phase to 2>><</link>>
+<br>
+<</if>>
+
+<<link [[Remain silent|Kylar Basement 4]]>><<set $phase to 0>><</link>>
+<br>
+
+:: Kylar Basement 4 [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+
+<<if $phase is 0>>
+
+<<elseif $phase is 1>>
+
+	<<if $submissive gte 1150>>
+	"P-please no," you say. "Don't hurt anyone!"
+	<<elseif $submissive lte 850>>
+	"You aren't brave enough," you say. "Stop it and let me go."
+	<<else>>
+	"Don't hurt anyone" you say. "You'll regret it."
+	<</if>>
+<br><br>
+
+	<<if $rng gte 51>>
+	"But if I don't," Kylar says. "I'd have to keep you chained up all the time."
+	<br><br>
+	<<else>>
+	<<kylargag>>
+	<</if>>
+
+<<elseif $phase is 2>>
+
+<<kylarangry>>
+<<kylargag>>
+
+<</if>>
+<<generate2>><<person2>>
+A door opens above. "<<Hes>> here," Kylar says, not dropping the axe. A <<person>> wearing a vicar's robe staggers down the stairs. <<He>> takes a swig of an unmarked bottle and surveys the room.
+<br><br>
+
+<<He>> takes another swig, and shrugs. "Alright," <<he>> says. "Make this quick."
+<br><br>
+
+Kylar stands at your side as the vicar reads the marriage rites.
+<br><br>
+
+<<if $mouthuse isnot "gagged">>
+<<link [[Protest|Kylar Basement Protest]]>><</link>>
+<br>
+<</if>>
+<<link [[Remain Silent|Kylar Basement Silent]]>><</link>>
+<br>
+
+:: Kylar Basement Protest [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+
+"This is wrong," you say to the vicar. "How can you ignore my predicament?"
+<br><br>
+
+Kylar glares at you. "D-don't cause a fuss dear," <<person1>><<he>> says.
+<br><br>
+
+The vicar shrugs. "You'd be surprised what people are into," <<person2>><<he>> says. "Still, if you aren't into it I can't perform the rites." <<He>> hiccups. "Keeping the money."
+<br><br>
+
+<<He>> turns to leave, until Kylar thuds the axe into the staircase beside <<himstop>> "Finish the ceremony," The vicar sighs and nods.
+<br><br>
+
+<<link [[Next|Kylar Basement Police]]>><</link>>
+<br>
+
+:: Kylar Basement Silent [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+
+The vicar turns to you. "Do you take Kylar as your <<person1>><<if $pronoun is "m">>husband<<else>>wife<</if>>?"
+<br><br>
+
+<<if $mouthuse is "gagged">>
+Kylar crouches and clicks something on the laptop. "I do," says your voice.
+<br><br>
+
+The Vicar turns to Kylar, "Do you-"
+<br><br>
+
+"I do, yes." <<He>> says. "Can I kiss <<phim>> now?"
+<br><br>
+
+The vicar nods. Kylar closes <<his>> eyes and licks <<his>> upper lip. <<He>> leans close.
+<br><br>
+<<else>>
+Kylar pokes you with the axe. Quite hard.
+<br><br>
+
+<</if>>
+
+<<link [[Next|Kylar Basement Police]]>><</link>>
+<br>
+
+:: Kylar Basement Police [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+
+There's a thud from up above. Then a crash. Several uniformed police march down the stairs "There <<person1>><<he>> is," a <<generate3>><<person3>><<person>> announces. "The cake thief."
+<br><br>
+
+Kylar backs away, clutching the axe. "Put the toy down, <<person1>><<if $pronoun is "m">>boy<<else>>girl<</if>>." the <<person3>><<person>> warns. "You're in deep enough shit. I recognise you. You're the one we took in for breaking into chemical plants. There's been similar crimes lately." <<He>> chuckles. "We'll find plenty of dirt once we get leave to snoop around your home."
+<br><br>
+
+Kylar drops the axe and weeps.
+<br><br>
+
+<<link [[Remain silent|Kylar Basement Police Silent]]>><<set $mouthuse to 0>><<unbind>><</link>>
+<br>
+<<link [[Save Kylar|Kylar Basement Police Heroics]]>><<set $mouthuse to 0>><<unbind>><<crimeup 2000>><</link>><<crime>>
+<br>
+
+:: Kylar Basement Police Silent[nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<npcset Kylar state "prison">>
+<<if $worn.face.type.includes("gag")>>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+<</if>>
+They arrest Kylar. They untie you too, after you make a bit of noise. They decide against taking you in as "evidence."
+<<clothesontowel>>
+<br><br>
+<<if $schoolday is 1 and $schoolstate isnot "early" and $schoolstate isnot "late">>
+You climb the stairs and emerge into the school hallways. Students are being lined up outside and a register taken. They march Kylar through to reach the waiting car, giving the students one last chance to jeer at <<person1>><<himstop>>
+<br><br>
+<<else>>
+You climb the stairs and emerge into the school hallways. They march Kylar across the playground and into a waiting car.
+<br><br>
+<</if>>
+<<He>> waves at you as they drive away.
+<br><br>
+
+<<endcombat>>
+
+<<link [[Next|Oxford Street]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Kylar Basement Police Heroics [nobr]
+<<set $outside to 0>><<set $location to "school">><<effects>>
+
+<<if $worn.face.type.includes("gag")>>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	You mumble through the gag and rock the chair. The <<person3>><<person>> notices you at last. <<He>> rips the gag off your mouth and cuts through your bonds.
+	<br><br>
+<</if>>
+"I did it," you say. "I stole the cake."
+<br><br>
+
+The <<person3>><<person>> doesn't look convinced. "Fine," <<he>> sighs. "You two, take <<phim>> in." <<He>> turns to Kylar. "You'd best keep your nose clean."
+<br><br>
+
+Kylar watches as you are led away. <<person1>><<He>> weeps harder.
+<<lllksuspicion>><<npcincr Kylar rage -50>>
+<br><br>
+<<endcombat>>
+<<link [[Next (0:30)|Kylar Basement Car]]>><<pass 30>><<clothesontowel>><</link>>
+<br>
+
+:: Kylar Basement Car[nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<generate1>><<generate2>>A <<person1>><<person>> and <<person2>><<person>> lead you up the stairs. You emerge in a school hallway.
+
+<<if $schoolday is 1 and $schoolstate isnot "early" and $schoolstate isnot "late">>
+Students are being lined up outside and a register taken. The police march you through, giving the other students lots to gossip about no doubt, until you're through the gates and out of sight.
+<br><br>
+<<else>>
+<</if>>
+
+<<link [[Next|Hospital Arrest Journey]]>><</link>>
+<br>
+
+:: Kylar Bedroom 1 [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+Your bedroom door is ajar. You peek through the gap. Nothing seems to be amiss, until you look in your wardrobe.
+
+<<for _i to 0; _i lt $wardrobe.under_lower.length; _i++>>
+	<<if $wardrobe.under_lower[_i].one_piece isnot 1>>
+	<<set _temp to _i>>
+	<</if>>
+<</for>>
+
+<<if _temp>>
+Your $wardrobe.under_lower[_temp].name <<if $wardrobe.under_lower[_temp].plural is 1>>are<<else>>is<</if>> missing. You search the floor, but turn up nothing.
+<<set $wardrobe.under_lower.deleteAt(_temp)>><<gstress>><<stress 3>>
+<<else>>
+The clothes are hung in a haphazard manner. Someone took them off and put them back in a hurry.
+<<gstress>><<stress 3>>
+<</if>>
+<br><br>
+
+<<link [[Bedroom|Bedroom]]>><</link>>
+<br>
+
+:: Kylar Bedroom 2 [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<npc Kylar>><<person1>>
+Your bedroom door is ajar. You peek through the gap. Kylar stands beside the window. <<He>> holds your bedding in <<his>> arms. <<Hes>> pressing <<his>> face into it, eyes shut in contentment.
+<br><br>
+
+<<link [[Get angry|Kylar Bedroom Angry]]>><<npcincr Kylar love -10>><</link>><<lllove>>
+<br>
+<<link [[Tease|Kylar Bedroom Tease]]>><<npcincr Kylar love 5>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<glust>>
+<br>
+<<link [[Sneak away (0:05)|Kylar Bedroom Sneak]]>><<pass 5>><</link>>
+<br>
+
+:: Kylar Bedroom Angry [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set $kylarhomeinterrupted to 1>>
+<<if $submissive gte 1150>>
+"Pervert," you declare. <<He>> jumps in fright and throws the bedding away. "You've been playing with my clothes."
+<<elseif $submissive lte 850>>
+"Creep," you declare. <<He>> jumps in fright and throws the bedding away. "You've been playing with my clothes."
+<<else>>
+"Creep," you declare. <<He>> jumps in fright and throws the bedding away. "You've been playing with my clothes."
+<</if>>
+<br><br>
+
+Kylar tears up as you speak. "I-It's not what it looks like," <<he>> tries to protest. "I-I just, Oh." <<He>> hangs <<his>> head and leaves the room.
+<br><br>
+
+<<endevent>>
+<<link [[Bedroom|Bedroom]]>><</link>>
+<br>
+
+:: Kylar Bedroom Tease [nobr]
+
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set $kylarhomeinterrupted to 1>>
+<<covered>>
+<<if $submissive gte 1150>>
+	"You could have asked," you say. <<He>> jumps in fright and throws the bedding away. You walk up to <<himstop>> "You must really like me."
+<<elseif $submissive lte 850>>
+	<<if $exposed gte 1>>
+		"Rude," you declare. <<He>> jumps in fright and throws the bedding away. You walk up to <<himstop>> "You should ask first. So I have a chance to get dressed."
+	<<else>>
+		"Rude," you declare. <<He>> jumps in fright and throws the bedding away. You walk up to <<himstop>> "You should ask first. What if I'd walked in naked?"
+	<</if>>
+<<else>>
+	You laugh. <<He>> jumps in fright and throws the bedding away. You walk up to <<himstop>> "You've been playing with my clothes. Maybe you'd like to try them on?"
+<</if>>
+<<promiscuity1>>
+"I-It's not," <<he>> manages as <<his>> face turns a bright shade of red.
+<br><br>
+You push <<him>> onto the bed and sit on <<his>> lap. "I need to get comfy," you say. You wiggle your <<bottom>> against <<his>> crotch. It's too much for <<himstop>> <<He>> pushes you off and runs from the room.
+<br><br>
+<<endevent>>
+<<link [[Bedroom|Bedroom]]>><</link>>
+<br>
+
+:: Kylar Bedroom Sneak [nobr]
+
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+You sneak from your bedroom and hide around a corner in the hall. You wait. <<He>> doesn't come out. You sneak back to your room and peek through the gap in the door. Kylar isn't there, and the window is wide open.
+<br><br>
+<<endevent>>
+<<link [[Bedroom|Bedroom]]>><</link>>
+<br>
+
+:: Kylar Stop [nobr]
+<<set $outside to 0>><<effects>>
+
+You turn to leave. Kylar grasps your wrist. "Wh-where are you going?" <<he>> says. "Stay with me."<<gksuspicion>><<npcincr Kylar rage 1>>
+<br><br>
+
+<<kylaroptions>>
+<<link [[Shake off|Kylar Shake]]>><<npcincr Kylar rage 5>><</link>><<ggksuspicion>>
+<br>
+
+:: Kylar Shake [nobr]
+<<set $outside to 0>><<effects>>
+
+You shake off Kylar's grip and leave. <<He>> watches you with <<his>> fists clenched against <<his>> thighs.
+<br><br>
+
+<<kylaroptionsleave>>
+
+:: Kylar Tease [nobr]
+<<set $outside to 0>><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+	<<if $rng gte 81>>
+	You pat Kylar's head. <<His>> eyes close in bliss.
+	<<elseif $rng gte 61>>
+	You pull your $worn.lower.name taut against your <<genitalsstop>> "I may need a smaller size," you say. Kylar stands in front of you to shield you from view.
+	<<set $genderknown.pushUnique("Kylar")>>
+	<<elseif $rng gte 41>>
+	You whisper something naughty into Kylar's ear. "D-don't" <<he>> says, smiling. "Someone might hear you."
+	<<elseif $rng gte 21>>
+	You lick Kylar's cheek. <<He>> licks you back.
+	<<else>>
+	You ask to see Kylar's underwear. "Or maybe," you say. "You don't have any on?"
+		<<if $pronoun is "m">>
+		<<He>> pulls down the hem of <<his>> shorts to reveal white briefs.
+		<<else>>
+		<<He>> lifts the side of <<his>> skirt to reveal panties with white and pink stripes.
+		<</if>>
+		<br><br>
+		"D-don't tell anyone," <<he>> says. "That's for you only."
+
+	<</if>>
+<<else>>
+	<<if $rng gte 81>>
+	You pat Kylar's head. <<He>> recoils from each touch as if struck. When you stop, <<he>> whispers, "M-more."
+	<<elseif $rng gte 61>>
+	You pull your $worn.lower.name taut against your <<genitalsstop>> "I may need a smaller size," you say. Kylar's face turns red.
+	<<elseif $rng gte 41>>
+	You whisper something naughty into Kylar's ear. <<He>> looks away and blushes.
+	<<elseif $rng gte 21>>
+	You lick Kylar's cheek. <<He>> tenses, but rests <<his>> hand on the spot you touched.
+	<<else>>
+	You ask Kylar what sort of underwear <<he>> has on. "Or maybe," you say. "You don't have any?" <<He>> trembles.
+	<</if>>
+<</if>>
+<<promiscuity1>>
+
+<<if ($location is "park" or $bus is "starfish") and $NPCName[$NPCNameList.indexOf("Kylar")].love gte 80 and $NPCName[$NPCNameList.indexOf("Kylar")].lust gte 80 and $kylar_invite isnot 1>>
+	<<set $kylar_invite to 1>>
+	Kylar stares at you, eyes full of intensity. It melts away at once. "D-do you," <<he>> manages before averting <<his>> eyes. "Do you want to go somewhere private, where we can do th-things?"
+	<br><br>
+
+	<<link [[Invite Kylar to the orphanage (0:15)|Kylar Invite]]>><<pass 15>><</link>><<promiscuous1>>
+	<br>
+	<<link [[Decline|Kylar Invite Decline]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><</link>><<llove>><<gksuspicion>>
+	<br>
+<<else>>
+	<<kylaroptions>>
+<</if>>
+
+:: Kylar Invite [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+You lean close, and whisper your invite into Kylar's ear. <<He>> shivers.<<promiscuity1>>
+<br><br>
+
+Kylar hugs your arm on the walk over, as if afraid you'll run.
+
+<<if $rng gte 81>>
+	No one bothers you until you arrive at the orphanage itself. "What's that thing doing here?" a <<generatey2>><<person>> asks as you enter the main hall. Anger flashes across Kylar's face, but <<person1>><<he>> doesn't say anything.
+	<br><br>
+
+	<<link [[Defend Kylar|Kylar Orphanage Defend]]>><<status -10>><<npcincr Kylar love 1>><</link>><<lcool>><<glove>>
+	<br>
+	<<link [[Berate Kylar|Kylar Orphanage Berate]]>><<npcincr Kylar love -3>><</link>><<lllove>>
+	<br>
+<<else>>
+	No one bothers you. You arrive at the orphanage, and lead Kylar to your room.
+	<br><br>
+
+	<<link [[Next|Kylar Orphanage]]>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Invite Decline [nobr]
+<<effects>>
+
+<<if $submissive gte 1150>>
+	"S-sorry," you say, afraid of hurting <<his>> feelings. "I'm not in the mood."
+<<elseif $submissive lte 850>>
+	"Not today," you say. "You shouldn't be so scared to ask."
+<<else>>
+	"I'm having a good time here," you say.
+<</if>>
+Kylar nods, but doesn't say anything in response.
+<br><br>
+
+<<kylaroptions>>
+
+:: Kylar Orphanage Defend [nobr]
+<<effects>>
+
+<<person1>>
+<<if $submissive gte 1150>>
+	"<<Hes>> with me," you say. "You should be nicer to people."
+<<elseif $submissive lte 850>>
+	"<<Hes>> with me," you say. "Now get out of our way."
+<<else>>
+	"<<Hes>> with me," you say.
+<</if>>
+<br><br>
+
+"Fine," the <<person2>><<person>> sneers. "But I'm blaming you if someone poisons the food."
+<br><br>
+
+You walk past the <<person2>><<person>> and continue to your room. Kylar follows close behind, as if afraid of being obstructed again.
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+
+<<link [[Next|Kylar Orphanage]]>><</link>>
+<br>
+
+:: Kylar Orphanage Berate [nobr]
+<<effects>>
+
+<<person1>>
+<<if $submissive gte 1150>>
+	"Go away," you say to Kylar. "If you touch me I'll scream."
+<<elseif $submissive lte 850>>
+	"Get out, creep," you say to Kylar. "Before I beat your ass."
+<<else>>
+	"Don't come in here without invite," you say to Kylar. "Please leave."
+<</if>>
+<br><br>
+Kylar shrinks away from you, looking betrayed.
+<br><br>
+"You heard <<phim>>," the <<person2>><<person>> says. "I don't want to see you here again." <<He>> leaves through one of the corridors.
+<br><br>
+<<person1>>
+Kylar turns to leave as well, but you grab <<his>> arm. "I didn't meant it," you say. "Just try not to be seen again." <<He>> nods, but still looks hurt. You lead <<him>> to your room.
+<br><br>
+<<endevent>>
+<<npc Kylar>><<person1>>
+<<link [[Next|Kylar Orphanage]]>><</link>>
+<br>
+
+:: Kylar Orphanage [nobr]
+<<effects>>
+
+You sit on your bed, and pat the sheet beside you. Kylar scans the room as <<he>> sits. <<He>> seems less nervous now you're alone, but you can feel <<his>> pulse racing when you take <<his>> hand.
+<br><br>
+
+<<He>> turns to face you, and bumps <<his>> forehead against yours as <<he>> leans forward for a kiss.
+<br><br>
+
+<<link [[Kiss|Kylar Orphanage Kiss]]>><<npcincr Kylar love 1>><</link>><<glove>>
+<br>
+<<link [[Turn Away|Kylar Orphanage Turn]]>><<npcincr Kylar love -3>><</link>><<lllove>>
+<br>
+
+:: Kylar Orphanage Turn [nobr]
+<<effects>>
+
+You turn away from <<him>>. "S-sorry," <<he>> says. Overcome by nerves, <<he>> jumps to <<his>> feet. Before you can stop <<him>>, <<he>> rushes to the door, throws it open, and escapes into the corridor.
+<br><br>
+
+<<link [[Next|Bedroom]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Orphanage Kiss [nobr]
+<<effects>>
+
+You lean forward, and your lips meet. <<He>> pushes <<his>> tongue into your mouth as <<his>> arms rest on your shoulders, pushing you down to the bed.
+<br><br>
+
+<<link [[Next|Kylar Orphanage Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Kylar Orphanage Sex [nobr]
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 100>><<promiscuity5>>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $finish is 1>>
+	<span id="next"><<link [[Next|Kylar Orphanage Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[Next|Kylar Orphanage Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next|Kylar Orphanage Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Kylar Orphanage Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Kylar Orphanage Sex Finish [nobr]
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<npcincr Kylar lust -20>>
+	<<He>> lies on top of you for a few moments, eyes closed in contentment. It's ended by the sound of voices from the corridor outside, making <<him>> tense once more.
+	<br><br>
+
+	<<tearful>> you sit upright, your arms around <<him>>.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Kylar>><<person1>>
+
+	<<if $weather is "rain">>
+		<<link [[Walk to the arcade together (0:15)|Kylar Arcade Walk]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<<link [[Walk to the park together (0:15)|Kylar Park Walk]]>><<pass 15>><</link>>
+		<br>
+	<</if>>
+
+	<<link [[Bid Kylar goodbye|Kylar Orphanage Leave]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	Kylar tumbles from the bed. <<He>> climbs to <<his>> feet, <<his>> face a mix of anger and longing. <<His>> nerves get the better of <<him>>, and <<he>> bolts from the room.<<lllove>><<npcincr Kylar love -3>>
+	<br><br>
+	<<tearful>> you sit upright on the bed.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Bedroom]]>><</link>>
+	<br>
+<<else>>
+	"D-did I do something wrong?" Kylar asks as <<he>> pulls away from you. <<His>> nerves get the better of <<him>>, and <<he>> bolts from the room.
+	<br><br>
+	<<tearful>> you sit upright on the bed.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Bedroom]]>><</link>>
+	<br>
+<</if>>
+
+:: Kylar Orphanage Leave [nobr]
+<<effects>>
+
+Kylar stops under the door frame on <<his>> way out. <<He>> shoots you a longing look, then leaves without a sound.
+<br><br>
+
+<<link [[Next|Bedroom]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Park Walk [nobr]
+<<set $location to "park">><<set $outside to 1>><<effects>>
+
+You accompany Kylar to the park. <<He>> grasps your hand once outside the orphanage, and loudly refers to you as <<his>> <<girlfriend>> as others pass by.
+<br><br>
+
+<<kylaroptions>>
+
+:: Kylar Arcade Walk [nobr]
+<<set $location to "arcade">><<set $bus to "starfish">><<effects>>
+
+You accompany Kylar to the arcade. <<He>> grasps your hand once outside the orphanage, and loudly refers to you as <<his>> <<girlfriend>> as others pass by.
+<br><br>
+
+<<kylaroptions>>
+
+:: Kylar Chat [nobr]
+<<set $outside to 0>><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+	<<bodywriting_exposure_check>>
+	<<if _bodywriting_exposed gte 1 and $kylar_bodywriting isnot 1>>
+		<<set $kylar_bodywriting to 1>>
+		You chat with Kylar. <<He>> stares at the <<tattoo _bodypart>> on your <<bodypart _bodypart>>, but doesn't mention it.
+		<<gksuspicion>><<glust>><<npcincr Kylar lust 1>><<npcincr Kylar rage 1>>
+	<<elseif $rng gte 81>>
+	You chat with Kylar. "No one's been giving you trouble, I hope," <<he>> says.
+	<<elseif $rng gte 61>>
+	You chat with Kylar. "I've been thinking up names for our children," <<he>> says.
+	<<gstress>><<stress 1>>
+	<<elseif $rng gte 41>>
+	You chat with Kylar. <<He>> finds lots of excuses to touch you.
+	<<elseif $rng gte 21>>
+	You chat with Kylar. <<He>> rubs <<his>> head against your shoulder.
+	<<else>>
+	You chat with Kylar. "You're wonderful," <<he>> says.
+	<</if>>
+<<else>>
+	<<if $rng gte 81>>
+	You try to encourage <<him>> to talk, but <<hes>> content to listen.
+	<<elseif $rng gte 61>>
+	You ask if <<hes>> having a nice day. <<He>> doesn't respond.
+	<<elseif $rng gte 41>>
+	You make small talk. <<He>> nods along and makes unintelligible noises.
+	<<elseif $rng gte 21>>
+	You compliment <<his>> hair. <<He>> pats <<his>> own head and smiles at the ground.
+	<<else>>
+	You tell some jokes. <<He>> mumbles laughter, but doesn't look at you.
+	<</if>>
+<</if>>
+<br><br>
+<<kylaroptions>>
+
+:: Kylar Game [nobr]
+<<set $outside to 0>><<effects>>
+
+<<if $kylar_play isnot 1>>
+	<<if $submissive gte 1150>>
+	"L-let's play a game," you say. "It'll be fun!"
+	<<elseif $submissive lte 850>>
+	"Bet I could do better," you say. "I'll join in."
+	<<else>>
+	"It has a multiplayer mode," you say. "Can I play?"
+	<</if>>
+<<else>>
+You ask if <<he>> would like to play again.
+<</if>>
+<<set $kylar_play to 1>>
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+Kylar nods. "I'll pay," <<he>> says.
+<<else>>
+Kylar looks away, but nods. "I-I'll pay," <<he>> mumbles.
+<</if>>
+<<if $rng gte 81>>
+<<He>> disappears beneath a pinball machine, and emerges with a bunch of coins.
+<<elseif $rng gte 61>>
+<<He>> presses <<his>> ear against a fruit machine, and moves down its case. <<He>> finds the right spot, and gives it a swift kick. You hear the jingle of coins flood out, which <<he>> promptly gathers.
+<<elseif $rng gte 41>>
+<<He>> approaches a tourist sat at one of the fruit machines, <<if random(1, 2) is 1>>lifts his wallet,<<else>>lifts her purse,<</if>> takes out some coins, and puts it back without being noticed.
+<<elseif $rng gte 21>>
+<<He>> searches each machine for missed coins, until <<he>> scrounges enough for a game.
+<<else>>
+<<He>> smacks the front of a coin pusher, and a handful of coins tumble down.
+<</if>>
+<br><br>
+
+<<set $rng to random(1, 100)>>
+<<if $rng gte 67>>
+You play a cooperative first person shooter. You kill lots of <<print either("zombies", "pirates", "aliens", "soldiers", "criminals", "mutants")>>.
+<<set $phase to 0>>
+<<elseif $rng gte 31>>
+You play a cooperative <<if random(1, 2) is 1>>shmup<<else>>beat 'em up<</if>>.
+<<set $phase to 0>>
+<<else>>
+You play the versus mode in a fighting game.
+<<set $phase to 1>>
+<</if>>
+
+<<set $rng to random(1, 100)>>
+<<if $rng gte 81>>
+<<generatey2>><<generatey3>>"Ew, it's Kylar," says a <<person2>><<person>> behind you. <<He>> points at the arcade cabinet. "Remind me to never touch that one." <<His>> friend, a <<person3>><<personcomma>> laughs.
+<br><br>
+Kylar pretends not to hear them, but <<person1>><<his>> performance in the game drops.
+<br><br>
+
+<<link [[Ignore them too|Kylar Arcade Ignore]]>><</link>>
+<br>
+<<link [[Get angry|Kylar Arcade Angry]]>><<status -10>><<npcincr Kylar love 3>><</link>><<lcool>><<gglove>>
+<br>
+<<elseif $rng gte 61>>
+	<<if $phase is 0>>
+	It's close, but you manage to edge out a victory. Kylar is sweating by the end.
+	<br><br>
+	<<kylaroptions>>
+	<<else>>
+	Both Kylar and you are unfamiliar with the game, and you manage to button mash to victory.
+	<<ltrauma>><<trauma -2>>
+	<br><br>
+	<<kylaroptions>>
+	<</if>>
+<<elseif $rng gte 41>>
+	<<if $phase is 0>>
+	The game proves difficult, but Kylar is willing to pay for additional lives.
+	<br><br>
+	<<kylaroptions>>
+	<<else>>
+	You end up messing around more than actually trying to fight each other.
+	<br><br>
+	<<kylaroptions>>
+	<</if>>
+<<elseif $rng gte 21>>
+	<<if $phase is 0>>
+		You put up a good fight, but the game gets the best of you.
+		<br><br>
+		<<kylaroptions>>
+	<<else>>
+		Both Kylar and you are unfamiliar with the game, but <<he>> manages to button mash to victory.
+		<br><br>
+		<<kylaroptions>>
+	<</if>>
+<<else>>
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+		<<if $phase is 0>>
+			<<Hes>> really good. You can't keep up, but <<he>> manages to carry you.
+			<br><br>
+			<<kylaroptions>>
+		<<else>>
+			<<Hes>> really good, and soon has you on the ropes.
+			<br><br>
+			<<link [[Just have fun|Kylar Fun]]>><<npcincr Kylar love 1>><</link>><<glove>>
+			<br>
+			<<link [[Distract Kylar|Kylar Distract]]>><<npcincr Kylar lust 1>><</link>><<glust>><<promiscuous1>>
+			<br>
+		<</if>>
+	<<else>>
+		None of the skill you witnessed earlier is present. <<His>> hands are shaking too much.
+		<br><br>
+		<<link [[Encourage|Kylar Encourage]]>><<npcincr Kylar love 1>><</link>><<glove>>
+		<br>
+		<<link [[Tease|Kylar Arcade Tease]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Kylar Arcade Angry [nobr]
+<<effects>>
+
+You turn and face the pair.
+
+<<if $submissive gte 1150>>
+"Leave <<person1>><<him>> alone," you say.
+<<elseif $submissive lte 850>>
+"Fuck off losers," you say.
+<<else>>
+"Go away," you say. "Be a nuisance somewhere else."
+<</if>>
+The pair laugh.
+<br><br>
+"Or what?" the <<person2>><<person>> says. "You gonna fight for your <<person1>><<if $pronoun is "m">>boyfriend<<else>>girlfriend<</if>>?"
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+"You better listen to <<phimcomma>>" Kylar says from behind. "My <<if $player.gender_appearance is "m">>boyfriend<<else>>girlfriend<</if>> is really strong."
+<br><br>
+The pair laugh harder, but don't try anything physical. They continue to mock Kylar until someone from the arcade staff shoos them out.
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+<<kylaroptions>>
+<<else>>
+The pair laugh harder, and continue to mock Kylar until someone from the arcade staff shoos them out.
+<br><br>
+"Th-thank you," Kylar manages once they're gone. <<He>> doesn't make eye contact.
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+<<kylaroptions>>
+<</if>>
+
+:: Kylar Arcade Ignore [nobr]
+<<effects>>
+You ignore the pair. They say a few more disparaging things about Kylar, but they don't hang around long.
+<br><br>
+<<if $phase is 0>>
+You lose the game. Kylar doesn't say anything.
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+<<kylaroptions>>
+
+<<else>>
+You win the game, but there's no sense of achievement. Kylar doesn't say anything.
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+<<kylaroptions>>
+
+<</if>>
+
+:: Kylar Encourage [nobr]
+<<effects>>
+
+<<if $submissive gte 1150>>
+"It's okay," you say. "You don't need to be nervous."
+<<elseif $submissive lte 850>>
+"You better not be going easy on me," you say. "I'd be insulted."
+<<else>>
+"You can do it," you say. "I've seen you play."
+<</if>>
+<br><br>
+
+Kylar's shaking eases a little, but you still win with ease.
+<br><br>
+<<kylaroptions>>
+
+:: Kylar Arcade Tease [nobr]
+<<effects>>
+
+<<if $submissive gte 1150>>
+"It's okay," you say. "Keep practising and one day you'll be good."
+<<elseif $submissive lte 850>>
+"I thought you'd be better than this," you say. "Shame."
+<<else>>
+"Maybe I should go easy on you," you say.
+<</if>>
+<br><br>
+
+Kylar doesn't say anything, and you win with ease.
+<br><br>
+<<kylaroptions>>
+
+:: Kylar Fun [nobr]
+<<effects>>
+
+You don't win, but have fun anyway. Kylar doesn't gloat.
+<br><br>
+
+<<kylaroptions>>
+
+:: Kylar Distract [nobr]
+<<effects>>
+
+You wrap an arm around Kylar's waist. <<His>> body freezes, then melts against you. <<He>> loses <<his>> sense of coordination, and can only offer a token defence as you turn things around and win the game.
+<<promiscuity1>>
+<br><br>
+"Sorry," you say, and plant a kiss on <<his>> cheek. <<He>> doesn't care that <<he>> lost.
+<br><br>
+
+<<kylaroptions>>
+
+:: Kylar Bully [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $submissive gte 1150>>
+"You're scaring me," you say to Kylar. "Stop it."
+<<elseif $submissive lte 850>>
+"You fucking creep," you say. You tear down the portrait.
+<<else>>
+"You're creepy," you say. "Stop it."
+<</if>>
+
+The crowd cheers. Kylar struggles free and runs through the other students, one hand held to <<his>> eyes.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Defend [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $submissive gte 1150>>
+"Bullying is wrong," you announce. "Leave <<him>> alone."
+<<elseif $submissive lte 850>>
+"Leave <<him>> alone you fucks," you say. "How about I go nosing through your lockers?"
+<<else>>
+"Stop it," you say. "Let <<him>> go."
+<</if>>
+<br><br>
+
+<<person2>>The <<person>> sneers at you. "I guess you creeps are meant for each other," <<he>> says. <<He>> releases <<his>> grip on Kylar's arms and swaggers away.
+<br><br>
+
+<<person1>>Kylar shuts <<his>> locker. "Th-thank you," <<he>> manages before running away.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Walk [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You turn and walk away. No doubt the audience were hoping you'd cause a bigger fuss.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Greet [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You walk towards Kylar's hiding place. <<He>> peeks out, to find you stood right there. <<He>> freezes on the spot, stares over your shoulder and pretends <<he>> was looking at something else.
+<br><br>
+
+<<if $submissive gte 1150>>
+"Hey," you say. "Are you okay?"
+<<elseif $submissive lte 850>>
+"I saw you watching me," you say. "What do you want?"
+<<else>>
+"I saw you watching," you say. "Don't be frightened."
+<</if>>
+
+<<He>> turns and runs.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar True [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<person1>>
+<<if $submissive gte 1150>>
+"Kylar is my <<if $pronoun is "m">>boyfriend<<else>>girlfriend<</if>>," you say.
+<<elseif $submissive lte 850>>
+"That's right," you say. "You have a problem with it"?
+<<else>>
+"<<Hes>> telling the truth," you say.
+<</if>>
+<br><br>
+
+<<person2>>The <<person>> and <<his>> friends whisper amongst themselves as they turn away. One shoots you a look of disgust.
+<br><br>
+
+<<person1>>Kylar hugs you. <<He>> trembles against you for a moment, then strolls down the corridor.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Lie [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You shake your head and step away from Kylar. <<He>> laughs. "<<pShe>> is t-teasing me," <<he>> says. "We are going to marry one day." The <<person2>><<person>> and <<his>> friends burst into laughter. <<person1>>Kylar hangs <<his>> head and walks away.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Walk 2 [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You turn and walk away. "What's w-wrong," Kylar says, running in front of you. "Did I upset you?" You walk faster.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Refuse [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You shake your head.
+<<if $submissive gte 1150>>
+"I'm sorry," you say. "But I don't have time."
+<<elseif $submissive lte 850>>
+"No time," you say.
+<<else>>
+"Not right now," you say.
+<</if>>
+<br><br>
+
+<<He>> releases your arm. "Okay," <<he>> says. "I'm sure y-you're busy." <<He>> watches you walk away.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Kylar Cupboard [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You let Kylar pull you into the cupboard. The door shuts, plunging you into darkness.
+<<promiscuity1>>
+
+<<He>> jumps on you, pushing you against the wall. <<He>> covers you with clumsy kisses, trying to find your mouth in the dark.
+<br><br>
+
+<<link [[Kiss back|Kylar Cupboard Kiss]]>><<npcincr Kylar lust 1>><</link>><<glust>>
+<br>
+<<if $promiscuity gte 15>>
+<<link [[Use your knee|Kylar Cupboard Knee]]>><<npcincr Kylar lust 5>><</link>><<promiscuous2>><<gglust>>
+<br>
+<</if>>
+
+:: Kylar Cupboard Kiss [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You take <<his>> head in your hands and guide <<his>> kiss. <<He>> falls limp in your arms. You pull back. Your eyes have adjusted, and you can see <<him>> a little. <<His>> eyes glint. You lean forward, breathe on <<his>> neck and feel <<him>> shiver.
+<br><br>
+
+<<if $rng gte 85>>
+The door swings open. <<generatey2>><<generatey3>>A <<person2>><<person>> and <<person3>><<person>> stand there, giggling at each other. They barge part way in before noticing you. Seems they had the same idea.
+<br><br>
+
+"Is that Kylar?" the <<person2>><<person>> says. <<He>> looks at you. "I didn't realise this school had two freaks." The <<person3>><<person>> laughs as they slam the door.
+<<lcool>><<status -10>>
+<br><br>
+
+<<person1>>There's silence for a moment. "S-sorry," Kylar mumbles in the dark. <<He>> pushes the door open. <<Hes>> staring at <<his>> feet. "I need to go."
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+<<else>>
+
+<<He>> wears a secretive smile on <<his>> glowing face when you leave the cupboard. "I have to go," <<he>> says. "Th-thank you." <<He>> kisses your cheek before leaving.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+<</if>>
+
+:: Kylar Cupboard Knee [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You raise a knee into <<his>> crotch. <<He>> yelps in surprise as you lean forward and push <<him>> against the wall. You grind against <<his>> crotch in a circular motion. Your eyes have adjusted a bit, and you can make <<him>> out a little. <<His>> eyes are shut and <<his>> mouth open.
+<br><br>
+
+<<His>> breath quickens. You switch to a vertical movement, grinding your knee up and down <<his>> groin. Your hands remain on <<his>> shoulders, and you feel <<him>> tremble.
+<<promiscuity2>>
+
+<<if $rng gte 85>>
+The door swings open. <<generatey2>><<generatey3>>A <<person2>><<person>> and <<person3>><<person>> stand there, giggling at each other. They barge part way in before noticing you. Seems they had the same idea.
+<br><br>
+
+"Is that Kylar?" the <<person2>><<person>> says. <<He>> looks at you. "I didn't realise this school had two freaks." The <<person3>><<person>> laughs as they slam the door.
+<<lcool>><<status -10>>
+<br><br>
+
+<<person1>>There's silence for a moment. "S-sorry," Kylar mumbles in the dark. <<He>> pushes the door open. <<Hes>> staring at <<his>> feet. "I need to go."
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+<<else>>
+
+<<He>> wears a secretive smile on <<his>> glowing face when you leave the cupboard. "I have to go," <<he>> says. "Th-thank you." <<He>> kisses your cheek before leaving.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+<</if>>
+
+:: Kylar Canteen Away [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $submissive gte 1150>>
+"It's rude to barge," you say. "Please leave us be."
+<<elseif $submissive lte 850>>
+"No one invited you," you say. "Leave."
+<<else>>
+"Please leave," you say. "There's not enough room for you."
+<</if>>
+<br><br>
+
+Kylar laughs. "I-I forgot," <<he>> says. "I have somewhere I need to be." <<He>> trips over the bench as <<he>> stands, eliciting laughter from several other students.
+<br><br>
+
+"I feel bad sending <<him>> away," Robin says when <<hes>> gone. "Everyone picks on <<himstop>>"
+<br><br>
+<<endevent>><<npc Robin>><<person1>>
+You finish the food. "I'm going to wait in the classroom," Robin says when you're done. "I don't like being late." <<He>> hugs you.
+<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+	Kylar watches from across the canteen.
+	<<gksuspicion>><<npcincr Kylar rage 1>>
+	<br><br>
+	<</if>>
+<<endevent>>
+<<link [[Next|Canteen]]>><</link>>
+<br>
+
+:: Kylar Canteen Stay [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 95>>
+
+Kylar is quiet, only speaking to point out something behind you. It's gone by the time you look.
+<br><br>
+
+You finish the food. "I'm going to wait in the classroom," Robin says when you're done. "I don't like being late." <<He>> hugs you.
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+<span class="red">You stagger as you rise to your feet.</span> You feel light-headed. "Are you okay?" you hear Kylar say through thickening fog. "You need the nurse." <<He>> puts an arm around your shoulder and steers you towards the door. You black out.
+<br><br>
+<<endevent>>
+<<link [[Next|Kylar Basement]]>><</link>>
+<br>
+
+<<else>>
+
+Robin tries to engage Kylar in conversation, but Kylar interrupts <<endevent>><<npc Robin>><<person1>><<him>> whenever <<he>> tries to speak.
+<br><br>
+
+	<<if $rng gte 51>>
+
+	Kylar tries to kiss you.
+	<br><br>
+	<<endevent>>
+
+	<<link [[Kiss Kylar|Kylar Canteen Kiss]]>><<npcincr Kylar love 5>><<npcincr Kylar rage -5>><<status -10>><</link>><<lcool>>
+	<br>
+	<<link [[Kiss Robin instead|Kylar Canteen Robin]]>><<npcincr Robin love 1>><<npcincr Kylar love -5>><<npcincr Kylar rage 5>><</link>>
+	<br>
+	<<link [[Refuse|Kylar Canteen Refuse]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><</link>>
+	<br>
+
+	<<else>>
+
+	You finish the food. "I'm going to wait in the classroom," Robin says when you're done. "I don't like being late." <<He>> hugs you. Kylar glares at <<himcomma>> but <<he>> gives no sign of noticing.
+	<br><br>
+
+<<endevent>>
+<<link [[Next|Canteen]]>><</link>>
+<br>
+	<</if>>
+<</if>>
+
+:: Kylar Canteen Kiss [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<npc Kylar>><<person1>>
+You kiss Kylar. <<He>> almost tackles you off your seat.
+<<gglove>><<llsuspicion>>
+<br><br>
+<<endevent>><<npc Robin>><<person1>>
+<<if $robinromance is 1>>
+Robin stares at you for a moment, then down at <<his>> tray. <<He>> stands and leaves without a word.
+<<lllove>><<npcincr Robin love -5>>
+<br><br>
+<<else>>
+Robin glances at you, but blushes and looks away when <<he>> sees what you're up to.
+<br><br>
+<</if>>
+
+<<endevent>>
+<<link [[Next|Canteen]]>><</link>>
+<br>
+
+:: Kylar Canteen Robin [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You lean passed Kylar and kiss Robin's cheek.
+<br><br>
+<<endevent>><<npc Robin>><<person1>>
+Robin looks surprised, and raises a hand to the spot you kissed. <<He>> turns to face you, smiles, and kisses your nose.
+<<gglove>><<npcincr Robin love 5>>
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+Kylar covers <<his>> face with <<his>> hands and leaves the table.
+<<lllove>><<ggksuspicion>><<npcincr Kylar love -5>><<npcincr Kylar rage 5>>
+<br><br>
+<<endevent>><<npc Robin>><<person1>>
+Robin looks concerned. "Is Kylar okay?" <<he>> asks.
+<br><br>
+
+You finish the food. "I'm going to wait in the classroom," Robin says when you're done. "I don't like being late." <<He>> hugs you. Kylar glares at <<himcomma>> but <<he>> gives no sign of noticing.
+<br><br>
+
+<<endevent>>
+<<link [[Next|Canteen]]>><</link>>
+<br>
+
+:: Kylar Canteen Refuse [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<npc Kylar>><<person1>>
+You pull away from Kylar. <<He>> looks down at <<his>> tray and stops speaking.
+<<llove>><<gksuspicion>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>>
+<br><br>
+
+You finish the food. "I'm going to wait in the classroom," Robin says when you're done. "I don't like being late." <<He>> hugs you. Kylar glares at <<himcomma>> but <<he>> gives no sign of noticing.
+<br><br>
+
+<<endevent>>
+<<link [[Next|Canteen]]>><</link>>
+<br>
+
+:: Canteen Lunch Kylar [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<npc Kylar>><<person1>>
+
+You sit beside Kylar and say hello.
+
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 95>>
+
+	<<Hes>> quiet, only speaking to point out something behind you. It's gone by the time you look.
+	<br><br>
+
+	You finish the food.
+	<br><br>
+
+	<span class="red">You stagger as you rise to your feet.</span> You feel light-headed. "Are you okay?" you hear Kylar say through thickening fog. "You need the nurse." <<He>> puts an arm around your shoulder and steers you towards the door. You black out.
+	<br><br>
+	<<endevent>>
+	<<link [[Next|Kylar Basement]]>><</link>>
+	<br>
+
+	<<elseif $NPCName[$NPCNameList.indexOf("Kylar")].love gte 60 and $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 16 and $NPCName[$NPCNameList.indexOf("Whitney")].state isnot "dungeon" and $rng gte 80>>
+
+		Before <<he>> can open <<his>> mouth to greet you, a figure slides into the seat on your other side. It's Whitney.
+		<br><br>
+		<<endevent>>
+		"Thought I saw my favourite slut sitting next to a freak,"<<npc Whitney>><<person1>><<he>> says before grabbing you by the hair and forcing your lips against <<his>>.
+		<<gstress>><<stress 6>>
+		<br><br>
+		Kylar freezes up.
+		<br><br>
+
+		<<link [[Kiss back|Canteen Kylar Whitney Kiss]]>><<npcincr Kylar rage 20>><<npcincr Whitney dom 1>><<npcincr Kylar love -20>><</link>><<llllove>><<gggksuspicion>><<gdom>><br>
+		<<link [[Pull away|Canteen Kylar Whitney Refuse]]>><<npcincr Kylar rage -1>><<npcincr Whitney dom -1>><</link>><<ldom>><<lksuspicion>><br>
+		<<if $submissive lte 500>>
+			<<link [[Slap|Canteen Kylar Whitney Slap]]>><<set $submissive -= 1>><<npcincr Whitney dom -3>><<npcincr Kylar rage -10>><</link>><<defianttext>><<llksuspicion>><<lldom>><br>
+		<</if>>
+
+
+	<<elseif $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+		<<if $rng gte 81 and $kylarcanteen isnot 1>><<set $kylarcanteen to 1>>
+		"Th-thanks," <<he>> begins. "Thanks for sitting with me."
+		<<elseif $rng gte 81>>
+		<<Hes>> distracted by <<his>> cutlery. <<His>> knife in particular.
+		<<elseif $rng gte 61>>
+		<<He>> rests <<his>> head on your shoulder.
+		<<elseif $rng gte 41>>
+		"The food is awful," <<he>> says, playing with it. "I usually buy something straight after school."
+		<<elseif $rng gte 21>>
+		"English was fun," <<he>> says. "I'm glad we share a class."
+		<<else>>
+		<<Hes>> eager to chat, and keeps touching your thigh.
+		<</if>>
+	<br><br>
+	You finish your food. Kylar carries your trays away, then walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+	<br><br>
+
+	<<link [[Next|Canteen]]>><<endevent>><</link>>
+	<br>
+
+	<<else>>
+
+	<<He>> stops spearing <<his>> food, but doesn't respond. You try to make small talk. You think <<hes>> listening.
+	<br><br>
+
+	You finish your food and depart. Kylar walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+	<br><br>
+
+	<<link [[Next|Canteen]]>><<endevent>><</link>>
+	<br>
+
+	<</if>>
+
+
+:: Canteen Kylar Whitney Kiss [nobr]
+<<effects>>
+You close your eyes and kiss back. <<npcincr Whitney love 1>><<glove>>
+<br><br>
+<<endevent>>
+Kylar is still frozen in place when your eyes open, <<npc Kylar>><<person1>><<his>> lips moving in a feeble attempt to speak.
+<br><br>
+"S-stop it," <<he>> manages, <<his>> breathing heavy. Whitney doesn't let up, and continues to assault your mouth. "I said stop!" Kylar's shouting turns heads. <<Hes>> on the verge of tears.
+<br><br>
+<<endevent>>
+Whitney pulls away from you at last, brushing a stray hair away from <<npc Whitney>><<person1>><<his>> face. <<He>> throws a smug grin at Kylar.
+<br><br>
+<<link [[Next|Canteen Kylar Whitney Confrontation]]>><</link>>
+
+:: Canteen Kylar Whitney Refuse [nobr]
+<<effects>>
+You push Whitney away. Kylar pulls you closer.
+<<if $submissive gte 1150>>
+	You cling tight.
+<<elseif $submissive lte 850>>
+	"Piss off," you spit. "I'm spending time with someone that respects me."
+<<else>>
+	"That was rude," you say, wiping off your lips.
+<</if>>
+<br><br>
+
+
+<<link [[Next|Canteen Kylar Whitney Confrontation]]>><</link>>
+
+:: Canteen Kylar Whitney Slap [nobr]
+<<effects>>
+
+Whitney forces <<his>> tongue into <<his>> mouth, so you bite it.
+<br><br>
+
+"Ow! You fucking bi-" <<Hes>> interrrupted by a slap across the face. Caught by surprise, <<he>> stumbles out of <<his>> seat.<br><br>
+<br><br>
+
+Heads turn around the canteen. You pull Kylar closer.
+<br><br>
+"Fucking freaks," Whitneys says. "I'm done with you losers." <<He>> leaves the canteen, <<his>> cronies in tow.
+<br><br>
+<<endevent>>
+<<npc Kylar>><<person1>>
+The other students lose interest. You finish your food beside a relieved Kylar. <<He>> carries your trays away once finished, then walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+<br><br>
+
+
+<<link [[Next|Canteen]]>><<endevent>><</link>>
+<br>
+
+:: Canteen Kylar Whitney Confrontation [nobr]
+<<effects>>
+<<endevent>>
+<<npc Whitney>><<person1>>
+"Well," Whitney says as <<he>> stands. <<He>> approaches Kylar, who stands and takes a step back. "This is adorable. The slut has a <<if $NPCName[$NPCNameList.indexOf("Kylar")].pronoun is "m">>fanboy<<else>>fangirl<</if>>."
+<br><br>
+<<endevent>><<npc Kylar>><<person1>>
+Whitney lunges for the smaller student, grasps <<his>> collar, and shoves <<him>> against a wall. Kylar's panicked gaze meets yours for a moment, before Whitney obscures your view.
+<<if $loveInterest.primary is "Kylar" or $loveInterest.secondary is "Kylar">><<gstress>><<stress 6>><</if>>
+<br><br>
+
+Excited at the prospect of violence, other students gather around.
+<br><br>
+<<endevent>><<npc Whitney>><<person1>>
+
+<<link [[Intervene|Canteen Kylar Whitney Intervene]]>><<set $submissive -= 1>><<npcincr Whitney dom -1>><<set $fightstart to 1>><<status -10>><</link>><<ldom>><<lcool>><br>
+<<link [[Encourage|Canteen Kylar Whitney Encourage]]>><<npcincr Kylar rage 20>><<status 1>><</link>><<promiscuous1>><<gcool>><<ggksuspicion>><br>
+<<link [[Remain Silent|Canteen Kylar Whitney Fight]]>><</link>><br>
+
+
+:: Canteen Kylar Whitney Intervene [nobr]
+
+<<if $fightstart is 1>>
+<<set $fightstart to 0>>
+
+<<neutral 1>>
+
+<<maninit>>
+<<set $enemytrust -= 100>>
+<<set $enemyanger += 200>>
+<<npcidlegenitals>>
+<<if $submissive gte 1150>>
+	You walk up to Whitney and tug on <<his>> shirt. "Bullying is wrong," you say.
+<<elseif $submissive lte 850>>
+	You grab Whitney's arm as <<he>> reels back for a punch. "You do this shit to me enough," you say. "I won't let you bully my friends too."
+<<else>>
+	"Kylar's not a freak," you say. "You interrupted us. This isn't fair." You wedge yourself between the two.
+<</if>>
+<br><br>
+<<He>> pushes you away. "Fine," Whitney says, dropping Kylar to the ground and turning to face you. "I'll floor you instead."
+<br><br>
+
+<<if $cool gte 240>><<set $rescue to 1>><</if>>
+<<if $robinmissing isnot 1 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>><<set $rescue to 1>><</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<if $alarm is 1 and $rescue is 0>>
+<<set $alarm to 0>>
+No teachers can hear you over the noise in the canteen. If you were more popular, maybe a fellow student would assist you.
+<br><br>
+<</if>>
+
+<<audience>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[Next|Canteen Kylar Whitney Intervene Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next|Canteen Kylar Whitney Intervene Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[Next|Canteen Kylar Whitney Intervene Finish]]>><</link>></span><<nexttext>>
+<<elseif $pain gte 100 and $willpowerpain is 0>>
+	<span id="next"><<link [[Next|Canteen Kylar Whitney Intervene Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Canteen Kylar Whitney Intervene]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Canteen Kylar Whitney Intervene Finish [nobr]
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+
+	You bring Whitney to <<his>> knees, and the crowd cheers for you. <<gcool>><<status 1>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Kylar>><<person1>>
+	<<if $loveInterest.primary is "Kylar" or $loveInterest.secondary is "Kylar">>
+		<<if $submissive gte 1150>>
+			"Bullying me is one thing," you say. "But please leave my <<if $pronoun is "m">>boyfriend<<else>>girlfriend<</if>> alone."
+		<<elseif $submissive lte 850>>
+			You grab Whitney's collar and pull <<endevent>><<npc Whitney>><<person1>><<his>> face up to yours. "Don't you dare touch my <<endevent>><<npc Kylar>><<person1>><<if $pronoun is "m">>boyfriend<<else>>girlfriend again," you say.<</if>>
+		<<else>>
+			"Leave my <<if $pronoun is "m">>boyfriend<<else>>girlfriend<</if>> alone," you say.
+		<</if>>
+		<<npcincr Kylar rage -20>><<lllksuspicion>>>
+	<<else>>
+		<<if $submissive gte 1150>>
+			"Bullying me is one thing," you say. "But please leave my friend alone."
+		<<elseif $submissive lte 850>>
+			You grab Whitney's shirt and pull <<endevent>><<npc Whitney>><<person1>><<his>> face up to yours. "Don't you dare touch my friends again," you say.
+		<<else>>
+			"Leave my friend alone," you say.
+		<</if>>
+	<</if>>
+	<br><br>
+	<<endevent>><<npc Whitney>><<person1>>Whintey pushes <<himself>> away from you, and scrambles into the crowd.
+	<br><br>
+	<<endevent>><<npc Kylar>><<person1>>
+	Kylar hugs you from behind. "I-I knew you'd save me," <<he>> says.<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+	The other students lose interest after Whitney's departure. You finish your food beside a relieved Kylar. <<He>> carries your trays away when you're done, then walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+	<br><br>
+
+	<<link [[Next|Canteen]]>><<endevent>><</link>><br>
+	<br>
+
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	"You... stupid..." Whitney pants, leaning against the wall. The audience burst into laughter. Flushed, <<he>> scrambes into the crowd.<<llust>><<npcincr Whitney lust -20>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	Kylar hugs you from behind. "I-I knew you'd save me," <<he>> says.<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+	The other students lose interest after Whitney's departure. You finish your food beside a relieved Kylar. <<He>> carries your trays away when you're done, then walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+	<br><br>
+
+
+
+	<<link [[Next|Canteen]]>><<endevent>><</link>><br>
+
+
+<<elseif $alarm is 1 and $rescue is 1>><<set $rescued += 1>>
+	Your shout is drowned by the noise of the canteen. Whitney pulls <<his>> arm back, readying a blow, but is interrupted by someone wrapping their arms around it from behind.
+	<br><br>
+	<<if $robinmissing isnot 1 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>>
+		<span class="green">It's Robin.</span> Another pair of students jump in to assist, and grasp Whitney's other arm. The weight becomes too much, and they tumble backwards.
+		<br><br>
+	<<elseif $cool gte 240>>
+		A student has stepped forward from the crowd, come to your aid. Another student steps forward, and latches onto Whitney's other arm. They tumble backwards.
+		<br><br>
+	<<else>>
+		Whitney manages to throw him off, but it gives you the opportunity you need.
+		<br><br>
+	<</if>>
+	<br><br>
+	You grasp Kylar's hand and escape into the crowd. Whitney shouts after you, but you evade <<him>> long enough for Leighton to arrive. <<He>> disperses the crowd, and escorts Whitney out.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	Kylar hugs you from behind. "I-I knew you'd save me," <<he>> says.<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+	The other students lose interest after Whitney's departure. You finish your food beside a relieved Kylar. <<He>> carries your trays away once you're done, then walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+	<br><br>
+
+
+	<<link [[Next|Canteen]]>><<endevent>><</link>><br>
+	<br>
+
+<<else>>
+
+	Whitney gains the upper hand, pinning you to the wall. "Stupid little shit!" <<He>> knees you in the stomach, and you keel over. <<He>> leaves you on the canteen floor.<<lcool>><<status -10>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+
+	The crowd disperses as Kylar rushes to your side. "Y-you're hurt," <<he>> says. <<He>> watches Whitney depart, and the fear in <<his>> eyes turns to malice.<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+
+	<<tearful>> you finishes your food beside a brooding Kylar. <<He>> carries your trays away when you're done, then walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+	<br><br>
+
+
+	<<link [[Next|Canteen]]>><<endevent>><</link>><br>
+
+<</if>>
+
+
+:: Canteen Kylar Whitney Encourage [nobr]
+<<effects>>
+
+
+"Fighting over me?" you coo. "Okay. Whoever wins gets a reward." You give your hip a little tweak for good measure. The crowd becomes even louder.
+<<promiscuity1>>
+
+Whitney smirks at you, but Kylar looks betrayed.
+<br><br>
+
+<<link [[Next|Canteen Kylar Whitney Fight]]>><</link>><br>
+
+:: Canteen Kylar Whitney Fight [nobr]
+<<effects>>
+
+<<endevent>><<npc Whitney>><<person1>>
+Whitney ponders a moment, then drops Kylar. "Tell you what," <<he>> says, stepping backwards. "You can have the first hit."
+<br><br>
+
+<<endevent>><<npc Kylar>><<person1>>
+Kylar looks around, as if looking for a way out, until <<his>> eyes rest on you.
+<br><br>
+<<endevent>><<npc Whitney>><<person1>>
+"What's the matter?" Whitney smirks. "Afraid? Why the slut sees anything in a creep like y-"
+<br><br>
+<<Hes>> cut off by a punch to the nose, and stumbles back in shock. "Don't call <<pher>> a slut," Kylar says as <span class="red">Whitney wipes the blood from <<his>> face.</span> The crowd quiets.
+<br><br>
+
+<<link [[Next|Canteen Kylar Whitney Fight 2]]>><</link>>
+<br>
+
+
+:: Canteen Kylar Whitney Fight 2 [nobr]
+<<effects>>
+
+"Alright," Whitney says. "My turn, freak." <<He>> charges. Kylar <<endevent>><<npc Kylar>><<person1>>raises <<his>> arms to defend <<himself>>, but the force shoves <<him>> to the ground. The crowd liven up again, and cheer for Whitney.
+<br><br>
+
+"That hurt?" Whitney asks. <<He>> delivers a kick to Kylar's stomach, much to the delight of the onlookers.
+<br><br>
+
+<<endevent>><<npc Whitney>><<person1>>
+<<link [[Cheer for Kylar|Canteen Kylar Cheer]]>><<status -10>><<npcincr Kylar rage -10>><<npcincr Kylar love 3>><<npcincr Whitney dom -1>><</link>><<lcool>><<llksuspicion>><<glove>><<ldom>><br>
+<<link [[Cheer for Whitney|Canteen Whitney Cheer]]>><<status 1>><<npcincr Kylar rage 10>><<npcincr Whitney dom 1>><</link>><<ggcool>><<ggksuspicion>><<gdom>><br>
+
+:: Canteen Kylar Cheer [nobr]
+<<effects>>
+<<endevent>><<npc Whitney>><<person1>>
+<<if $submissive gte 1150>>
+	"Pl-please win Kylar!"
+<<elseif $submissive lte 850>>
+	"Kick <<his>> ass Kylar!"
+<<else>>
+	"You can do it Kylar!"
+<</if>>
+<<endevent>><<npc Kylar>><<person1>>
+you shout, locking eyes with <<him>>. The other students give you disgusted looks, but you don't care. Whitney tears <<his>> gaze away from Kylar, and gives you a dark look.<br><br>
+
+Kylar seizes the opportunity, and delivers a kick from <<his>> position on the floor. It connects with Whitney's crotch. The crowd quiets again as Whitney groans and falls to the ground.
+<br><br>
+
+Something clatters to the ground beside Kylar as <<he>> gets <<his>> footing. <<His>> knife. <<He>> hurries to retrieve it, but it's too late. The circle of onlookers widens, but you hear someone push through the crowd behind you.
+<br><br>
+<<endevent>><<npc Whitney>><<person1>>
+
+"I saw that," Whitney sneers between grunts of pain. "Go on. Show everyone what a psycho you are-" A pair of arms grasp <<his>>, and hoist <<him>> to <<his>> feet. "Get the fuck away from-" Whitney begins, but cuts off as <<he>> comes face to face with Leighton.
+<br><br>
+
+"My office. Now."
+<br><br>
+
+Whitney regains some composure as <<he>> follows Leighton from the room. <<He>> shoots you a teasing look as <<he>> disappears through the doors.
+<br><br>
+
+
+<<link [[Next|Canteen Kylar Cheer 2]]>><</link>><br>
+
+:: Canteen Kylar Cheer 2 [nobr]
+<<effects>>
+
+<<endevent>><<npc Kylar>><<person1>>
+The crowd disperses, leaving a lone, trembling Kylar on the ground. You approach <<npc Kylar>><<person1>><<him>>, <<his>> eyes staring into space. You
+extend your hand to <<his>>.<br><br>
+Your touch makes <<him>> jump, and you find the knife pointed at you in a blink.
+<<if $submissive gte 1150>>
+	"I-it's okay," you say. "You did it."
+<<elseif $submissive lte 850>>
+	"Oi," you say. "No need for that. You won."
+<<else>>
+	"I knew you could win," you say.
+<</if>>
+You smile and squeeze <<his>> other hand. <<He>> drops the knife with a horrified look, and throws <<his>> arms around you.
+<br><br>
+
+<<His>> breaths are rapid. You stroke <<his>> hair for a few minutes, until <<he>> calms down.
+<br><br>
+
+"You really are perfect," <<he>> says into your shoulder, <<his>> grip a little too tight.
+<br><br>
+
+You continue eating, sat beside a dazed Kylar. <<He>> carries your trays away when you're done, then walks in the direction of the <<if $weather is "rain">>library<<else>>rear playground<</if>>.
+<br><br>
+
+<<link [[Next|Canteen]]>><<endevent>><</link>><br>
+
+
+:: Canteen Whitney Cheer [nobr]
+<<effects>>
+
+<<endevent>><<npc Kylar>><<person1>>
+<<if $submissive gte 1150>>
+	"Pl-please win, Whitney!" you shout.
+<<elseif $submissive lte 850>>
+	"Lay that freak out, Whitney!" you shout.
+<<else>>
+	"Go Whitney," you shout.
+<</if>>
+<<endevent>><<npc Whitney>><<person1>>
+Kylar stirs on the ground. <br><br>
+"Want some more?" Whitney laughs as Kylar struggles to <<endevent>><<npc Kylar>><<person1>><<his>> feet. "Fine by me-" <<endevent>><<npc Kylar>><<person1>><<he>> cuts off as something flashes in Kylar's hand. <span class="red">A knife.</span> The crowd's chanting stops, and the circle widens.
+<br><br>
+<<endevent>><<npc Whitney>><<person1>>
+"You really are a psycho," Whitney says. <<He>> doesn't back away, but <<his>> voice betrays <<his>> nervousness. Kylar points the knife at <<him>>. "What you waiting for, freak? Try it."<<ggstress>><<stress 12>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 85>>
+	<span class="red">Kylar screams and charges forward.</span> Whitney flinches backwards, and Kylar manages a full body tackle. <<endevent>><<npc Kylar>><<person1>><<He>> holds the knife above <<his>> head, <<his>> eyes crazed and murderous.<br><br>
+	<<endevent>><<npc Leighton>><<person1>>
+	A tall figure lunges from the crowd, and grasps Kylar's arms. Kylar freezes, and the knife clangs to the ground. It's Leighton. "Disperse immediately," <<he>> says to the crowd. "I don't have time for this nonsense." Leighton drags Kylar across the room. "Unacceptable," the headteacher says in a softer voice. "If not for your parents-"
+	<br><br>
+	Kylar shoots you one last betrayed look before the doors slam shut. The students lose interest, and walk away.
+	<br><br>
+	<<endevent>><<npc Whitney>><<person1>>
+	"What a fucking nutcase," Whitney says. <<He>> gives you a playful shove. "I expect a reward for winning later, slut." <<He>> leaves the cateen, <<his>> cronies in tow.
+	<br><br>
+
+	<<link [[Next|Canteen]]>><</link>><<endevent>><br>
+
+<<else>>
+	<<endevent>><<npc Kylar>><<person1>>
+	<span class="green">Kylar doesn't attack.</span> <<He>> doesn't move at all.
+	<br><br>
+	"Don't waste my time," Whitney taunts as <<he>> slaps the knife from Kylar's hands.
+	<br><br>
+	<<endevent>><<npc Leighton>><<person1>>
+	Leighton pushes his way through the crowd. "What do we have here?" <<he>> asks, pushing a final student aside in order to reach the center. <<His>> eyes pass over the beaten Kylar, and rest on Whitney.
+	<br>
+
+	"To my office," <<he>> continues "Now!"
+	<br><br>
+	<<endevent>><<npc Whitney>><<person1>>Whitney shrugs, and follows without protest. "See you later," <<he>> says as <<he>> passes. "Slut. I expect a reward for winning."
+	<br><br>
+	<<endevent>><<npc Kylar>><<person1>>
+	You look back to Kylar, but <<hes>> already gone. The other students disperse.
+	<br><br>
+
+	<<link [[Next|Canteen]]>><</link>><<endevent>><br>
+<</if>>
+
+
+
+
+:: Kylar Library [nobr]
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<npc Kylar>><<person1>>
+You approach Kylar's desk.
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+<<Hes>> sketching a picture of you.
+<br><br>
+<<else>>
+<<He>> hides whatever <<he>> was sketching when <<he>> sees you.
+<</if>>
+<br><br>
+<<kylaroptions>>
+
+:: Kylar Playground [nobr]
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<npc Kylar>><<person1>>
+You approach Kylar's stump.
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+<<Hes>> smiles when <<he>> sees you.
+<<else>>
+<<He>> blushes and looks away when <<he>> sees you.
+<</if>>
+<br><br>
+<<kylaroptions>>
+
+:: Kylar Park [nobr]
+<<set $outside to 1>><<set $location to "park">><<effects>>
+
+<<npc Kylar>><<person1>>
+You approach Kylar's bench.
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+<<Hes>> sketching a picture of you.
+<<else>>
+<<He>> hides whatever <<he>> was sketching when <<he>> sees you.
+<</if>>
+<br><br>
+<<kylaroptions>>
+
+:: Kylar Arcade [nobr]
+<<set $outside to 1>><<set $location to "arcade">><<effects>>
+
+<<npc Kylar>><<person1>>
+You approach Kylar. <<Hes>> racking up quite a score.
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 50>>
+<<He>> moves even faster after noticing you. <<He>> gives you the occasional glance to make sure you're still watching.
+<<else>>
+When <<he>> notices you, though, <<his>> skill evaporates. <<Hes>> soon facing a game over screen.
+<</if>>
+<br><br>
+<<kylaroptions>>
+
+:: Street Kylar Rob [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You search the <<persons>> <<walletstop>> There's
+
+<<if $rng gte 81>>
+£25 inside.
+<<set $money += 2500>><<crimeup 25>>
+<<elseif $rng gte 61>>
+£20 inside.
+<<set $money += 2000>><<crimeup 20>>
+<<elseif $rng gte 41>>
+£15 inside.
+<<set $money += 1500>><<crimeup 15>>
+<<elseif $rng gte 21>>
+£10 inside.
+<<set $money += 1000>><<crimeup 10>>
+<<else>>
+£5 inside.
+<<set $money += 500>><<crimeup 5>>
+<</if>>
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
+
+:: Street Kylar Help [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You pick up the <<persons>> phone and call the hospital. After holding for several minutes, you give them your location and tell them what happened. They agree to send an ambulance.
+<br><br>
+
+<<link [[Rob|Street Kylar Rob]]>><</link>><<crime>>
+<br>
+<<link [[Leave|Street Kylar Leave]]>><</link>>
+<br>
+
+:: Street Kylar Leave [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You walk away. You glance around for the one responsible, but nothing seems amiss.
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
+
+:: Street Kylar Wink [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You wink back. The <<person>> looks down and smiles as <<he>> walks by.
+<<promiscuity1>>
+
+<<endevent>>
+<<destinationeventend>>
+
+:: Street Kylar Ignore [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You ignore the <<person>> and continue walking.
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
+
+:: Street Breast [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<if $phase is 1>>
+	You blush and resist the urge to cover your <<breasts>> with your arms.
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<if !$worn.upper.type.includes("naked")>>
+	You cross your arms under your <<breasts>> and meet <<his>> gaze, pushing them up and outlining them against your $worn.upper.name. The <<person>> admires you before walking on.
+	<<exhibitionism2>>
+	<<endevent>>
+	<<destinationeventend>>
+	<<else>>
+	You run your hand over your <<breasts>> as you meet <<his>> gaze. The <<person>> admires you before walking on.
+	<<exhibitionism2>>
+	<<endevent>>
+	<<destinationeventend>>
+	<</if>>
+<</if>>
+
+:: Street Kylar Chase [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<if $athletics gte random(1, 600)>>
+You chase the fabric, and <span class="green">succeed in snatching it from the air.</span> A force still pulls on it. There's a hook embedded in the garment, with a thin wire attached. You free the hook, and the wire drags it into an open window on the second story of a building.
+<br><br>
+
+The fabric is ruined, but you wrap it around your loins like a towel. Better than nothing.
+<<lowerwear 3>><<set $worn.lower.colour to $worn.lower.coloursaved>>
+Your run attracted attention. You blush and keep walking.
+<br><br>
+
+<<destinationeventend>>
+
+<<else>>
+You chase the fabric, and try to snatch it from the air. <span class="red">It flies beyond your reach</span> and enters a window on the second story of a building. The window shuts after it.
+<br><br>
+
+Your run attracted attention. You run for the cover of a <<if $bus is "park">>bush<<else>>parked car<</if>> and crouch. You're stuck in the middle of town with your <<lewdness>> displayed.
+<br><br>
+
+<<destinationeventend>>
+
+<</if>>
+
+:: Street Kylar Hide [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You run for the cover of a <<if $bus is "park">>bush<<else>>parked car<</if>> and crouch. You don't think anyone saw, but you're stuck in the middle of town with your <<lewdness>> displayed.
+<br><br>
+
+<<destinationeventend>>
+
+:: Street Kylar Refuse [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<if $submissive gte 1150>>
+You look away from Kylar. "S-sorry," you say. "Not today."
+<<elseif $submissive lte 850>>
+You put your hands on your hips. "In a creepy alley," you say. "Really? No."
+<<else>>
+You shake your head.
+<</if>>
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 70>>
+
+Kylar stares at the ground and nods. <<He>> turns as if to leave, but then lunges forward and shoves you against a wall with <<his>> hand. <<He>> raises <<his>> other to your throat. <<Hes>> holding a knife.
+<br><br>
+
+"You'll like me," <<he>> says. <<He>> presses the metal against your skin. "I'll make you."
+<br><br>
+
+<<link [[Nod|Street Kylar Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+<<link [[Refuse|Street Kylar Refuse 2]]>><<trauma 12>><<stress 12>><<pain 10>><<npcincr Kylar love -5>><<npcincr Kylar rage 10>><</link>><<lllove>><<ggksuspicion>><<ggtrauma>><<ggstress>><<gpain>>
+<br>
+
+<<else>>
+
+Kylar stares at the ground and nods. <<He>> turns and walks away.
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
+
+<</if>>
+
+:: Street Kylar Refuse 2 [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<if $submissive gte 1150>>
+"P-please don't hurt me," you say. "I do like you. I just don't want to do anything lewd."
+<<elseif $submissive lte 850>>
+"Do it," you say. "Prove how little you deserve me."
+<<else>>
+"No," you say. "If you want me to like you, you shouldn't do such horrible things."
+<</if>>
+<br><br>
+
+<<He>> presses the knife against your neck. Harder. It hurts, but then <<he>> withdraws. All malice is gone from <<his>> eyes, but the tears remain. "I-I," <<he>> stutters. "I'm sorry," <<he>> collapses to <<his>> knees and clutches your $worn.lower.name.
+<br><br>
+
+"D-Don't hate me. Please," <<he>> weeps.
+<br><br>
+
+<<link [[Forgive|Street Kylar Forgive]]>><<npcincr Kylar love 3>><<npcincr Kylar lust -3>><<npcincr Kylar rage -1>><</link>><<glove>><<llust>><<lsuspicion>>
+<br>
+<<link [[Punish|Street Kylar Punish]]>><<npcincr Kylar love -5>><</link>><<lllove>>
+<br>
+<<if $promiscuity gte 15 and $submissive lte 500>>
+<<link [[Punish Sexually|Street Kylar Foot]]>><<set $submissive -= 1>><</link>><<promiscuous2>><<defianttext>>
+<br>
+<</if>>
+
+:: Street Kylar Forgive [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You take Kylar's hand and help <<him>> up. You hug <<him>> as <<he>> cries into your shoulder.
+
+<<if $submissive gte 1150>>
+"I forgive you," you say "It's okay. Shhhh."
+<<elseif $submissive lte 850>>
+"You have problems," you say. "I understand."
+<<else>>
+"It's okay," you say. "But I want you to be nicer from now on."
+<</if>>
+<br><br>
+
+<<He>> pulls away and smiles through tears. <<He>> wipes <<his>> eyes with <<his>> sleeve, turns, and runs.
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
+
+:: Street Kylar Punish [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You turn your back to Kylar, shaking off <<his>> grip. <<He>> grasps your ankle, but you shake that off too. You storm away, leaving <<him>> on <<his>> knees.
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
+
+:: Street Kylar Foot [nobr]
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+You kick Kylar on to <<his>> back and stand over <<himstop>>
+<br><br>
+
+"You think you can threaten me without consequence?" you say.
+
+<<if $pronoun is "f">>
+	<<if $NPCList[0].penis isnot "none">>
+	You flick up <<his>> skirt with your foot, and press your toes against <<his>> striped panties. You feel <<his>> length beneath. <<He>> grasps your ankle and makes a weak effort to stop you, but you push down harder and <<he>> lies back with a yelp.
+	<br><br>
+
+	You rub <<him>> with your foot, and feel <<him>> erect beneath the fabric. "Is this what you want?" you ask in a teasing tone. "To get off in the middle of the street?" <<He>> squirms, so you rub harder, and keep rubbing until <<he>> shudders and a wet patch appears on <<his>> underwear.
+	<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
+	<br><br>
+
+	"Idiot," you say. "You got my foot slimy."
+	<<else>>
+	You flick up <<his>> skirt with your foot, and press your toes against <<his>> striped panties. You feel <<his>> pussy beneath. <<He>> grasps your ankle and makes a weak effort to stop you, but you push down harder and <<he>> lies back with a yelp.
+	<br><br>
+
+	You rub <<him>> with your foot, and feel <<him>> moisten beneath the fabric. "Is this what you want?" you ask in a teasing tone. "To get off in the middle of the street?" <<He>> squirms, so you rub harder, and keep rubbing until <<he>> shudders and moans.
+	<br><br>
+
+	"Idiot," you say. "You got my foot slimy."
+	<</if>>
+<<else>>
+	<<if $NPCList[0].penis isnot "none">>
+	You press your foot against <<his>> crotch. You feel <<his>> length beneath. <<He>> grasps your ankle and makes a weak effort to stop you, but you push down harder and <<he>> lies back with a yelp.
+	<br><br>
+
+	You rub <<him>> with your foot, and feel <<him>> erect beneath the fabric. "Is this what you want?" you ask in a teasing tone. "To get off in the middle of the street?" <<He>> squirms, so you rub harder, and keep rubbing until <<he>> shudders and a wet patch appears on <<his>> trousers.
+	<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
+	<br><br>
+
+	"Idiot," you say. "You got my foot slimy."
+	<<else>>
+	You press your foot against <<his>> crotch. You feel <<his>> pussy beneath. <<He>> grasps your ankle and makes a weak effort to stop you, but you push down harder and <<he>> lies back with a yelp.
+	<br><br>
+
+	You rub <<him>> with your foot, and feel <<him>> moisten beneath the fabric. "Is this what you want?" you ask in a teasing tone. "To get off in the middle of the street?" <<He>> squirms, so you rub harder, and keep rubbing until <<he>> shudders and moans.
+	<br><br>
+
+	"Idiot," you say. "You got my foot slimy."
+	<</if>>
+<</if>>
+<br><br>
+
+You leave <<him>> panting on the ground.
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>
+
+:: Street Kylar Sex [nobr]
+<<if $sexstart is 1>>
+<<set $sexstart to 0>>
+<<consensual>>
+<<set $consensual to 1>>
+<<neutral 1>>
+
+<<maninit>>
+<<He>> pulls you into the alley, then around another corner, away from prying eyes. There's a mattress already here. Kylar collapses on it, pulling you down atop <<himstop>>
+<br><br>
+<<set $rescue to 1>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $consensual is 1>>
+	<<if $finish is 1>>
+		<span id="next"><<link [[Next|Street Kylar Sex Finish]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[Next|Street Kylar Sex Finish]]>><</link>></span><<nexttext>>
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[Next|Street Kylar Sex Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[Next|Street Kylar Sex]]>><</link>></span><<nexttext>>
+	<</if>>
+<<else>>
+	<<if $alarm is 1 and $rescue is 1>>
+		<span id="next"><<link [[Next|Street Kylar Rape Finish]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[Next|Street Kylar Rape Finish]]>><</link>></span><<nexttext>>
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[Next|Street Kylar Rape Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[Next|Street Kylar Sex]]>><</link>></span><<nexttext>>
+	<</if>>
+<</if>>
+
+:: Street Kylar Sex Finish [nobr]
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+<<ejaculation>><<npcincr Kylar lust -20>>
+
+Kylar closes <<his>> eyes and rests <<his>> head on you. "Maybe we can be married in the forest," <<he>> says, eyes still shut. "My parents can-"
+<br><br>
+
+<<He>> jerks upright and looks at <<his>> watch. "I-I need to go," <<he>> says. "Sorry." <<He>> gazes at you from the end of the alley before disappearing.
+<br><br>
+
+<<tearful>> you rise from the mattress.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destinationeventend>>
+
+<<elseif $enemyhealth lte 0>>
+
+You shove Kylar back against the mattress.
+<br><br>
+
+<<tearful>> you run from the alley.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destinationeventend>>
+
+<<else>>
+
+"O-okay," Kylar stammers. "You must be busy. We'll do this again." You feel <<him>> watch you leave.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destinationeventend>>
+
+<</if>>
+
+:: Street Kylar Rape [nobr]
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<set $kylarraped += 1>>
+	<<if $daystate isnot "night">><<set $rescue to 1>><</if>>
+	Kylar pushes you toward the alley, <<his>> knife poking the small of your back. You turn another corner and find a mattress already lying there. <<He>> shoves you on top of it, discards the knife and leaps on you.
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[Next|Street Kylar Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next|Street Kylar Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[Next|Street Kylar Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Street Kylar Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Street Kylar Rape Finish [nobr]
+
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+<<ejaculation>>
+
+Kylar closes <<his>> eyes and rests <<his>> head on you. "Maybe we can be married in the forest," <<he>> says, eyes still shut. "My parents can-"
+<br><br>
+
+<<He>> jerks upright and looks at <<his>> watch. "I-I need to go," <<he>> says. "Sorry." <<He>> gazes at you from the end of the alley before disappearing.
+<br><br>
+
+<<tearful>> you rise from the mattress.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destinationeventend>>
+
+<<elseif $enemyhealth lte 0>>
+
+You shove Kylar back against the mattress.
+<br><br>
+
+<<tearful>> you run from the alley.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destinationeventend>>
+
+<<else>>
+
+<<generate2>><<person2>>A <<person>> appears at the end of the alley. "Is everything okay over there?" <<he>> shouts.
+<br><br>
+
+<<person1>>Kylar scrambles for <<his>> knife and glares at the <<person2>><<personstop>> "Don't interfere," <<person1>><<he>> shouts back.
+<br><br>
+
+The <<person2>><<person>> hesitates, but leaves when Kylar steps forward.<<person1>> It gives you the chance you need. <<tearful>> you climb off the mattress and run in the opposite direction. Kylar pulls the knife back as if to hurl it, but only embeds it in the mattress at <<his>> feet. <<He>> drops to <<his>> knees and buries <<his>> face in <<his>> hands as you turn the corner.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<destinationeventend>>
+
+<</if>>
+
+:: Kylar Parasites Feed [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _container to $container[$location]>>
+<<set _pregnancy to $sexStats.anus.pregnancy>>
+
+Nothing seems to be amiss, until you check in on <<print (_pregnancy.namesChildren is true ? "your children" : "the parasites")>>.
+<br><br>
+You see a small note near to the <<print _container.name>> with the letter "K" on it.
+
+<<if _container.deadCreatures is 0>>
+	It seems someone has been making sure that they are being properly looked after.
+	<br><br>
+	You should be careful. You might not get the help next time.
+	<<set _container.kylarDelay to 7>>
+	<<set _container.kylarFed to false>>
+	<<set _container.daysSinceFed to 0>>
+<<else>>
+	It seems someone was looking after them for you. It wasn't enough. They are all dead in the tank.
+	<br><br>
+	You bury them.
+	<<ggtrauma>>
+	<<if _pregnancy.namesChildren is true>>
+		<<set _traumaMulti to 2>>
+	<<else>>
+		<<set _traumaMulti to 1>>
+	<</if>>
+	<<set $trauma += 100 * _traumaMulti * _container.deadCreatures>>
+<</if>>
+<br><br>
+<<endevent>>
+<<link [[Next|Containers]]>><<set _container.deadCreatures to 0>><</link>>
+<br>
+
+:: Kylar Loft [nobr]
+<<set $outside to 0>><<effects>>
+
+You tell Kylar about the loft at the orphanage, and ask if <<he>> has any thoughts on what to do with the space.
+<br><br>
+
+"You could hide anything up there," <<he>> says. "I-I have an idea. I could set up a lab like I have at ho-" <<he>> interrupts <<himselfcomma>> and glances around. "Like I've seen on TV. You could make pepper spray. The basic ingredients aren't hard to get, it just takes time to ferment."
+<br><br>
+
+"I know where to get the equipment," <<he>> adds. "It will be expensive though."
+<br><br>
+
+<i>Adding a lab to the orphanage will cost £20000. It will provide you with one pepper spray refill per week and help the orphans protect themselves.</i>
+<br><br>
+<<set $loft_option_block to 1>>
+<<if $money gte 2000000>>
+<<link [[Set up lab (£20000 3:00)|Kylar Loft 2]]>><<set $money -= 2000000>><<set $loft_kylar to 1>><<set $loft_upgrade += 1>><<pass 180>><</link>>
+<br><br>
+<</if>>
+
+<<kylaroptions>>
+<<unset $loft_option_block>>
+
+:: Kylar Loft 2 [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+"Okay," Kylar says. "I'll get the stuff. Wait for me by the orphanage. I-I won't let you down."
+<br><br>
+
+You return to the orphanage without incident. You don't need to wait long. Kylar arrives, carrying two laden bags and panting. <<He>> follows you inside, though <<he>> seems to know where <<hes>> going.
+<br><br>
+
+You tug the cable, reveal the hidden staircase, and ascend. Kylar investigates each room until <<he>> finds one <<he>> deems suitable. "Good," <<he>> says, placing <<his>> bags on a creaky old table. <<He>> starts setting up the equipment while explaining how it all works.
+
+<<if $science gte 700>>
+It sounds straightforward.
+<<elseif $science gte 500>>
+It sounds easy enough.
+<<elseif $science gte 300>>
+You think you understand, but you don't feel confident.
+<<else>>
+It's a bit complex for you.
+<</if>>
+<br><br>
+
+<<link [[Next|Kylar Loft 3]]>><</link>>
+<br>
+
+:: Kylar Loft 3 [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<generatey2>>A <<person2>><<person>> arrives to investigate at one point. You send <<him>> downstairs to gather others. More residents arrive and crowd around the door. They look nervous, but excited.
+<br><br>
+
+Kylar explains the fermentation process, and demonstrates how to prepare the chemicals and pressurise the canisters. Some of the older orphans sneer at Kylar, but <<person1>><<he>> ignores them.
+<br><br>
+
+"I wrote a list of instructions," Kylar says once you're alone. <<He>> hands you a note. "You should stick it up somewhere." <<He>> looks at <<his>> feet, as if waiting for something.
+<br><br>
+
+<<link [[Reward with kiss|Kylar Loft Kiss]]>><</link>><<promiscuous1>><<npcincr Kylar love 1>><<npcincr Kylar lust 1>><<glove>><<glust>>
+<br>
+<<if $promiscuity gte 35>>
+<<link [[Reward with lewd|Kylar Loft Lewd]]>><</link>><<promiscuous3>><<npcincr Kylar love 3>><<npcincr Kylar lust 3>><<gglove>><<gglust>>
+<br>
+<</if>>
+<<link [[Thank|Kylar Loft Thank]]>><</link>>
+<br>
+
+:: Kylar Loft Kiss [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+You take <<his>> hands and pull <<him>> against you. <<He>> leans in, letting you support <<his>> trembling body. Your lips meet. <<Hes>> inhibited at first, but becomes more confident as the kiss deepens. You feel <<his>> hand grope your <<bottomstop>>
+<br><br>
+
+When you pull away <<his>> eyes remain closed. <<He>> looks serene, if red-faced. <<His>> eyes open. "Th-Thank you," <<he>> manages. <<He>> departs with a blissful smile.
+<br><br>
+
+<<link [[Next|Orphanage Loft]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Loft Lewd [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+You shove <<him>> back against the table, holding <<him>> down with one hand while the other creeps down <<his>> tummy.
+
+<<if $NPCList[0].gender is "f">>
+	<<if $NPCList[0].penis isnot "none">>
+	<span class="purple">You flick up <<his>> skirt, </span><span class="lewd">revealing <<his>> $NPCList[0].penisdesc.</span>
+	<<else>>
+	<span class="purple">You flick up <<his>> skirt, </span><span class="lewd">revealing <<his>> <<pussystop>></span>
+	<</if>>
+<<else>>
+	<<if $NPCList[0].penis isnot "none">>
+	<span class="purple">You pull down <<his>> shorts, </span><span class="lewd">revealing <<his>> $NPCList[0].penisdesc.</span>
+	<<else>>
+	<span class="purple">You pull down <<his>> shorts, </span><span class="lewd">revealing <<his>> <<pussystop>></span>
+	<</if>>
+<</if>>
+<br><br>
+"No underwear?" you tease. "Someone's naughty."
+<br><br>
+
+"I-It's not like that," <<he>> says.
+<br><br>
+<<if $NPCList[0].penis isnot "none">>
+"Oh?" you reply. "Then why are you already erect?" You run your fingers up and down <<his>> length.
+<br><br>
+
+<<He>> squirms a bit too forcefully for this to continue, so you push <<him>> onto <<his>> side and slide in behind <<himstop>> You cradle <<his>> head with one hand, and wrap the other around <<his>> waist, before continuing the assault on <<his>> penis. <<He>> doesn't last long. <<His>> whole body shudders.
+<br><br>
+<<else>>
+"Oh?" you reply. "Then why are you already wet?" Your push a finger against <<his>> clitoris, and rub.
+<br><br>
+
+<<He>> squirms a bit too forcefully for this to continue, so you push <<him>> onto <<his>> side and slide in behind <<himstop>> You cradle <<his>> head with one hand, and wrap the other around <<his>> waist, before continuing the assault on <<his>> pussy. <<He>> doesn't last long. <<His>> whole body shudders.
+<br><br>
+<</if>>
+
+You kiss <<his>> cheek. "Thank you for helping," You say. "The other orphans are grateful, even if they don't show it."
+<br><br>
+
+You hold <<him>> for a few minutes until <<his>> breathing returns to normal. <<He>> departs with a blissful smile.
+<br><br>
+
+<<link [[Next|Orphanage]]>><<endevent>><</link>>
+<br>
+
+:: Kylar Loft Thank [nobr]
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<if $submissive gte 1150>>
+"Thank you so much," you say. "You've helped a lot."
+<<elseif $submissive lte 850>>
+"Thanks," you say. "The orphans are grateful, even if they won't admit it."
+<<else>>
+"Thank you," you say. "You did a good thing today."
+<</if>>
+<br><br>
+Kylar nods, still looking at <<his>> feet. <<He>> opens <<his>> mouth to speak, but instead turns and leaves.
+<br><br>
+
+<<link [[Next|Orphanage Loft]]>><<endevent>><</link>>
+<br>

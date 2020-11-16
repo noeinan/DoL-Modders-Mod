@@ -1,0 +1,117 @@
+:: Widgets Actions Feet [widget]
+<<widget "feetgrab">><<nobr>>
+
+<<if $combattype is "train">>
+	<<set _end to $enemyno-1>>
+<<else>>
+	<<set _end to 0>>
+<</if>>
+
+<<set _xx to $enemyno-1>>
+<<if _xx is -1>>
+	<<set _stanceCheck to 0>>
+<<else>>
+	<<set _stanceCheck to $NPCList[_xx].stance>>
+<</if>>
+
+<<if $consensual is 1 and $promiscuity lte 34 and $enemytype is "man" or $consensual is 1 and $deviancy lte 34 and $enemytype isnot "man">>
+	<!-- Do Nothing -->
+<<elseif _stanceCheck isnot "topface">>
+	<<for _j = $enemyno-1; _j gte _end; _j-->>
+		<<if $NPCList[_j].penis is 0>>
+			<<if $feetactiondefault is "grab">>
+				| <label><span class="sub">Grab <<his>> penis</span> <<radiobutton "$feetaction" "grab" checked>><<feetdifficulty>> <<combatpromiscuous3>></label>
+			<<else>>
+				| <label><span class="sub">Grab <<his>> penis</span> <<radiobutton "$feetaction" "grab">><<feetdifficulty>> <<combatpromiscuous3>></label>
+			<</if>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<for _j = $enemyno-1; _j gte _end; _j-->>
+		<<if $NPCList[_j].vagina is 0>>
+			<<if $feetactiondefault is "vaginagrab">>
+				| <label><span class="sub">Press your feet against <<his>> pussy</span> <<radiobutton "$feetaction" "vaginagrab" checked>><<feetdifficulty>> <<combatpromiscuous3>></label>
+			<<else>>
+				| <label><span class="sub">Press your feet against <<his>> pussy</span> <<radiobutton "$feetaction" "vaginagrab">><<feetdifficulty>> <<combatpromiscuous3>></label>
+			<</if>>
+			<<break>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<</nobr>><</widget>>
+
+<<widget "feetgrabnew">><<nobr>>
+
+<<if $combattype is "train">>
+	<<set _end to $enemyno-1>>
+<<else>>
+	<<set _end to 0>>
+<</if>>
+
+<<set _xx to $enemyno-1>>
+<<if _xx is -1>>
+	<<set _stanceCheck to 0>>
+<<else>>
+	<<set _stanceCheck to $NPCList[_xx].stance>>
+<</if>>
+
+<<if $consensual is 1 and ($promiscuity lte 34 and $enemytype is "man" or $deviancy lte 34 and $enemytype isnot "man")>>
+	<!-- Do Nothing -->
+<<elseif _stanceCheck isnot "topface">>
+	<<for _j = $enemyno-1; _j gte _end; _j-->>
+		<<if $NPCList[_j].penis is 0>>
+			<<set _feetaction["Grab their penis"] to "grab">>
+			<<break>>
+		<</if>>
+	<</for>>
+
+	<<for _j = $enemyno-1; _j gte _end; _j-->>
+		<<if $NPCList[_j].vagina is 0>>
+			<<set _feetaction["Press your feet against their pussy"] to "vaginagrab">>
+			<<break>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<</nobr>><</widget>>
+
+<<widget "feetKick">><<nobr>>
+<<if $consensual isnot 1>>
+	<<set _feetaction["Kick"] to "kick">>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "feetGrabRub">><<nobr>>
+<<set _feetaction["Rub"] to "grabrub">>
+<<set _feetaction["Stop"] to "stop">>
+<</nobr>><</widget>>
+
+<<widget "feetOthervagina">><<nobr>>
+<<set _feetaction["Rub"] to "vaginagrabrub">>
+<<set _feetaction["Stop"] to "stop">>
+<</nobr>><</widget>>
+
+<<widget "feetRunClothed">><<nobr>>
+<<if $combattype is "train">>
+	<<set _end to $enemyno-1>>
+<<else>>
+	<<set _end to 0>>
+<</if>>
+
+<<set _xx to $enemyno-1>>
+<<if _xx is -1>>
+	<<set _stanceCheck to 0>>
+<<else>>
+	<<set _stanceCheck to $NPCList[_xx].stance>>
+<</if>>
+
+<<for _j = $enemyno-1; _j gte _end; _j-->>
+	<<if $NPCList[_j].vagina is 0>>
+		<<if $NPCList[_j].penis is "clothed">>
+			<<set _feetaction["Rub their crotch"] to "rub">>
+			<<break>>
+		<</if>>
+	<</if>>
+<</for>>
+<</nobr>><</widget>>

@@ -1,0 +1,670 @@
+:: Widgets Stats [widget]
+
+<<widget "trauma">><<nobr>>
+	<<if $args[0] or $args[1]>>
+		<<if $args[0] gte 0>>
+			<<set $trauma += ($args[0] * 3) - (($args[0] * 1.5) * ($control / $controlmax))>>
+			<<if $dev is 1>><<set $control -= $args[0]>><</if>>
+		<<else>>
+			<<set $trauma += ($args[0] * 3) + (($args[0] * 1.5) * ($control / $controlmax))>>
+		<</if>>
+	<</if>>
+	<<if $trauma gte 1>>
+		<<set $sleeptrouble to 1>>
+	<<else>>
+		<<set $sleeptrouble to 0>>
+	<</if>>
+
+	<<if $trauma gte ($traumamax / 10) * 1>>
+		<<set $nightmares to 1>>
+	<<else>>
+		<<set $nightmares to 0>>
+	<</if>>
+
+	<<if $trauma gte ($traumamax / 10) * 7>>
+		<<set $anxiety to 2>>
+	<<elseif $trauma gte ($traumamax / 10) * 2>>
+		<<set $anxiety to 1>>
+	<<else>>
+		<<set $anxiety to 0>>
+	<</if>>
+
+	<<if $trauma gte ($traumamax / 10) * 8>>
+		<<set $flashbacks to 1>>
+	<<else>>
+		<<set $flashbacks to 0>>
+	<</if>>
+
+	<<if $trauma gte ($traumamax / 10) * 6>>
+		<<set $panicattacks to 2>>
+	<<elseif $trauma gte ($traumamax / 10) * 4>>
+		<<set $panicattacks to 1>>
+	<<else>>
+		<<set $panicattacks to 0>>
+	<</if>>
+
+	<<updateHallucinations>>
+
+	<<if $trauma gte $traumamax>>
+		<<set $dissociation to 2>>
+	<<elseif $trauma gte ($traumamax / 10) * 9>>
+		<<set $dissociation to 1>>
+	<<else>>
+		<<set $dissociation to 0>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "combattrauma">><<nobr>>
+	<<if $args[0]>>
+		<<if $args[0] gte 0>>
+			<<set $trauma += ($args[0] * 1) - (($args[0] * 0.5) * ($control / $controlmax))>>
+			<<if $dev is 1>><<set $control -= $args[0]>><</if>>
+		<<else>>
+			<<set $trauma += ($args[0] * 1) + (($args[0] * 0.5) * ($control / $controlmax))>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "straighttrauma">><<nobr>>
+	<<if $args[0]>>
+		<<set $trauma += ($args[0] * 1)>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "updateHallucinations">><<nobr>>
+	<<if $trauma gte ($traumamax / 10) * 5 or $awareness gte 400 or $hallucinogen gt 0 or ($moonstate isnot 0 and $daystate is "night")>>
+		<<set $hallucinations to 2>>
+	<<elseif $trauma gte ($traumamax / 10) * 3 or $awareness gte 300>>
+		<<set $hallucinations to 1>>
+	<<else>>
+		<<set $hallucinations to 0>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "control">><<nobr>>
+	<<if $args[0]>>
+		<<set $control += ($args[0] * 10)>>
+		<<if $args[0] gte 1>>
+			<<set $controlstart += ($args[0] * 10)>>
+		<</if>>
+		<<if $control gte ($controlmax / 5) * 2>>
+			<<set $controlled to 1>>
+		<<else>>
+			<<set $controlled to 0>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "combatcontrol">><<nobr>>
+	<<if $args[0]>>
+		<<set $control += ($args[0] * 10)>>
+		<<if $control gte $controlstart>>
+			<<set $control to $controlstart>>
+		<</if>>
+		<<if $control gte ($controlmax / 5) * 2>>
+			<<set $controlled to 1>>
+		<<else>>
+			<<set $controlled to 0>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "corruption">><<nobr>>
+<<if $args[0]>>
+	<<set $corruption_slime += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "semenvolume">><<nobr>>
+	<<if $args[0] and $penisexist is 1>>
+		<<set $semen_volume += ($args[0] * 3)>>
+		<<if $cow gte 6>>
+			<<set $semen_volume += ($args[0] * 3)>>
+		<</if>>
+		<<set $semen_volume = Math.clamp($semen_volume, 0, $semen_max)>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "milkvolume">><<nobr>>
+	<<if $args[0]>>
+		<<if $args[0] gt 0>>
+			<<set $lactation_pressure += 1>>
+			<<if $cow gte 6>>
+				<<set $lactation_pressure += 1>>
+			<</if>>
+		<</if>>
+		<<if $lactating is 1>>
+			<<set $milk_volume += ($args[0] * 2)>>
+			<<if $cow gte 6>>
+				<<set $milk_volume += ($args[0] * 2)>>
+			<</if>>
+			<<set $milk_volume = Math.clamp($milk_volume, 24, $milk_max)>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "stress">><<nobr>>
+	<<if $args[0]>>
+		<<if $args[0] gt 0>>
+			<<if $drunk gte 480>>
+				<<set $stress += ($args[0] * 10)>>
+			<<elseif $drunk gte 360>>
+				<<set $stress += ($args[0] * 15)>>
+			<<elseif $drunk gte 240>>
+				<<set $stress += ($args[0] * 20)>>
+			<<elseif $drunk gte 120>>
+				<<set $stress += ($args[0] * 25)>>
+			<<elseif $drunk gte 1>>
+				<<set $stress += ($args[0] * 30)>>
+			<<else>>
+				<<set $stress += ($args[0] * 40)>>
+			<</if>>
+		<<else>>
+			<<set $stress += ($args[0] * 80)>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "arousal">><<nobr>>
+	<<if $args[0] gte 0 or $args[0] lt 0>>
+		<<set $arousal to Math.clamp($arousal + $args[0], 0, $arousalmax)>>
+		<<if $args[0] gte 0>>
+			<<if $args[1] is true>>
+				<<if $trackedArousal.length gt 4>>
+					<<run $trackedArousal.deleteAt(0)>>
+				<</if>>
+				<<run $trackedArousal.push(0)>>
+			<</if>>
+			<<set $trackedArousal[$trackedArousal.length - 1] += $args[0]>>
+		<</if>>
+	<<else>>
+		<<if $arousalError is undefined>>
+			<<set $arousalError to [$args[0]]>>
+		<<elseif $arousalError.length gte 50>>
+			<<set $arousalError to [$args[0]]>>
+		<<else>>
+			<<set $arousalError.push($args[0])>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "breastarousal">><<nobr>>
+	<<if $args[0] gte 0 or $args[0] lt 0>>
+		<<set $arousal += ($args[0] * $breastsensitivity)>>
+		<<if $args[0] gte 0>>
+			<<set $trackedArousal[$trackedArousal.length - 1] += $args[0] * $breastsensitivity>>
+		<</if>>
+	<<else>>
+		<<if $arousalError is undefined>>
+			<<set $arousalError to [$args[0]]>>
+		<<elseif $arousalError.length gte 50>>
+			<<set $arousalError to [$args[0]]>>
+		<<else>>
+			<<set $arousalError.push($args[0])>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "genitalarousal">><<nobr>>
+	<<if $args[0] gte 0 or $args[0] lt 0>>
+		<<set $arousal += ($args[0] * $genitalsensitivity)>>
+		<<if $args[0] gte 0>>
+			<<set $trackedArousal[$trackedArousal.length - 1] += $args[0] * $genitalsensitivity>>
+		<</if>>
+	<<else>>
+		<<if $arousalError is undefined>>
+			<<set $arousalError to [$args[0]]>>
+		<<elseif $arousalError.length gte 50>>
+			<<set $arousalError to [$args[0]]>>
+		<<else>>
+			<<set $arousalError.push($args[0])>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "tiredness">><<nobr>>
+	<<if $args[0]>>
+		<<if $args[0] gt 0>>
+			<<set $tiredness += ($args[0] * 15)>>
+		<<else>>
+			<<set $tiredness += ($args[0] * 20)>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "pain">><<nobr>>
+<!-- Including masochism effect for all pain NG v2.7 -->
+	<<if $args[0] gte 0 or $args[0] lt 0>>
+		<<if $masochism gte 100>>
+			<<set $pain += (($args[0] * (1 - ($masochism / 1200))) * 4)>>
+			<<set _arousal to (($args[0] * (0 + ($masochism / 24))) * 4)>>
+			<<arousal _arousal>>
+			<<set $arousalmasochism += ($args[0] * (0 + ($masochism / 14)))>>
+		<<else>>
+		<<set $pain += ($args[0] * 4)>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "masopain">><<nobr>>
+	<<if $args[0]>>
+		<<set $pain += (($args[0] * (1 - ($masochism / 1200))) * 4)>>
+		<<set _arousal to (($args[0] * (0 + ($masochism / 18))) * 4)>>
+		<<arousal _arousal>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "detention">><<nobr>>
+	<<if $args[0]>>
+		<<if $args[0] gt 0>>
+			<<set $detention += ($args[0] * 10)>>
+		<</if>>
+		<<set $delinquency += ($args[0] * 4)>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "status">><<nobr>>
+	<<if $args[0]>>
+		<<if $args[0] gt 0>>
+			<<set $cool += ($args[0] * 1)>>
+			<<if $worn.face.type.includes("cool")>>
+				<<set $cool += ($args[0] * 1)>>
+			<</if>>
+			<<if $worn.head.type.includes("cool")>>
+				<<set $cool += ($args[0] * 1)>>
+			<</if>>
+			<<if $worn.upper.type.includes("cool")>>
+				<<set $cool += ($args[0] * 1)>>
+			<</if>>
+		<<elseif $args[0] lt 0>>
+			<<set $cool *= (1 - ($args[0] / -100))>>
+			<<set $cool -= 1>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "spray">><<nobr>>
+	<<if $args[0]>>
+		<<if $args[0] gte 0>>
+			<<set $spray += $args[0]>>
+			<<set $spray to Math.clamp($spray, 0, $spraymax)>>
+		<<else>>
+			<<if $infinitespray is 1>>
+			<<else>>
+				<<set $spray += $args[0]>>
+				<<set $spray to Math.clamp($spray, 0, $spraymax)>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "awareness">><<nobr>>
+	<<if $args[0]>>
+		<<set $awareness += ($args[0])>>
+		<<for _e to 0; _e lt $clothing_number; _e++>>
+		<<activeclothes>>
+			<<if $worn[_active_clothes].type.includes("dark")>>
+				<<set $awareness += ($args[0])>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "purity">><<nobr>>
+	<<if $args[0]>>
+		<<set $purity += ($args[0])>>
+		<<for _e to 0; _e lt $clothing_number; _e++>>
+		<<activeclothes>>
+			<<if $worn[_active_clothes].type.includes("holy")>>
+				<<set $purity += ($args[0])>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "suspicion">><<nobr>>
+	<<if $args[0]>>
+		<<set $suspicion += ($args[0])>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "asylumstatus">><<nobr>>
+	<<if $args[0]>>
+		<<set $asylumstatus += ($args[0] * 1)>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "humiliation10">><<nobr>>
+	<<set $stress += 40>>
+	<<trauma 1>>
+<</nobr>><</widget>>
+
+<<widget "wolfpacktrust">><<nobr>>
+	<<set $wolfpacktrust += 1>>
+	<span class="green">The pack trusts you a little more.</span>
+<</nobr>><</widget>>
+
+<<widget "wolfpackfear">><<nobr>>
+	<<set $wolfpackfear += 1>>
+	<span class="green">The pack fears you a little more.</span>
+<</nobr>><</widget>>
+
+<<widget "gferocity">><<nobr>>
+	<<set $wolfpackferocity += 1>>
+	| <span class="blue">+ Ferocity</span>
+<</nobr>><</widget>>
+
+<<widget "gharmony">><<nobr>>
+	<<set $wolfpackharmony += 1>>
+	| <span class="lblue">+ Harmony</span>
+<</nobr>><</widget>>
+
+<<widget "lferocity">><<nobr>>
+	<<set $wolfpackferocity -= 1>>
+	| <span class="purple">- Ferocity</span>
+<</nobr>><</widget>>
+
+<<widget "lharmony">><<nobr>>
+	<<set $wolfpackharmony -= 1>>
+	| <span class="pink">- Harmony</span>
+<</nobr>><</widget>>
+
+<<widget "sub">><<nobr>>
+	<<if $args[0]>>
+		<<set $submissive += ($args[0] * 5)>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "def">><<nobr>>
+	<<if $args[0]>>
+		<<set $submissive -= ($args[0] * 5)>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "incgpenisinsecurity">><<nobr>>
+	<<set _n to 10>>
+	<<if $args[0] and typeof($args[0]) is "number">> <<set _n to $args[0]>> <</if>>
+	<<switch $penissize>>
+		<<case 4>>
+			<<insecurity "penis_big" _n>><<ginsecurity "penis_big">>
+		<<case 1>>
+			<<insecurity "penis_small" _n>><<ginsecurity "penis_small">>
+		<<case 0>>
+			<<insecurity "penis_tiny" _n>><<ginsecurity "penis_tiny">>
+		<<case -1>>
+			<<insecurity "penis_tiny" _n>><<ginsecurity "penis_tiny">>
+	<</switch>>
+<</nobr>><</widget>>
+
+<<widget "incggpenisinsecurity">><<nobr>>
+	<<incgpenisinsecurity 20>>
+<</nobr>><</widget>>
+
+<<widget "insecurity">><<nobr>>
+	<<if $args[0] is "penis_tiny" and $acceptance_penis_tiny lte 999>>
+		<<if $args[1] and $penisexist is 1>>
+			<<set $insecurity_penis_tiny += ($args[1] * 10)>>
+			<<set $insecurity_penis_tiny = Math.clamp($insecurity_penis_tiny, 0, 1000)>>
+			<<if $insecurity_penis_tiny gte 1000>>
+				<<stress 3>><<control -3>>
+			<<elseif $insecurity_penis_tiny gte 800>>
+				<<stress 3>><<control -2>>
+			<<elseif $insecurity_penis_tiny gte 600>>
+				<<stress 2>><<control -2>>
+			<<elseif $insecurity_penis_tiny gte 400>>
+				<<stress 2>><<control -1>>
+			<<elseif $insecurity_penis_tiny gte 200>>
+				<<stress 1>><<control -1>>
+			<<else>>
+				<<stress 1>>
+			<</if>>
+		<</if>>
+	<<elseif $args[0] is "penis_small" and $acceptance_penis_small lte 999>>
+		<<if $args[1] and $penisexist is 1>>
+			<<set $insecurity_penis_small += ($args[1] * 10)>>
+			<<set $insecurity_penis_small = Math.clamp($insecurity_penis_small, 0, 1000)>>
+			<<if $insecurity_penis_small gte 1000>>
+				<<stress 3>><<control -3>>
+			<<elseif $insecurity_penis_small gte 800>>
+				<<stress 3>><<control -2>>
+			<<elseif $insecurity_penis_small gte 600>>
+				<<stress 2>><<control -2>>
+			<<elseif $insecurity_penis_small gte 400>>
+				<<stress 2>><<control -1>>
+			<<elseif $insecurity_penis_small gte 200>>
+				<<stress 1>><<control -1>>
+			<<else>>
+				<<stress 1>>
+			<</if>>
+		<</if>>
+	<<elseif $args[0] is "penis_big" and $acceptance_penis_big lte 999>>
+		<<if $args[1] and $penisexist is 1>>
+			<<set $insecurity_penis_big += ($args[1] * 10)>>
+			<<set $insecurity_penis_big = Math.clamp($insecurity_penis_big, 0, 1000)>>
+			<<if $insecurity_penis_big gte 1000>>
+				<<stress 3>><<control -3>>
+			<<elseif $insecurity_penis_big gte 800>>
+				<<stress 3>><<control -2>>
+			<<elseif $insecurity_penis_big gte 600>>
+				<<stress 2>><<control -2>>
+			<<elseif $insecurity_penis_big gte 400>>
+				<<stress 2>><<control -1>>
+			<<elseif $insecurity_penis_big gte 200>>
+				<<stress 1>><<control -1>>
+			<<else>>
+				<<stress 1>>
+			<</if>>
+		<</if>>
+	<<elseif $args[0] is "breasts_tiny" and $player.gender is "f" and $acceptance_breasts_tiny lte 999>>
+		<<if $args[1]>>
+			<<set $insecurity_breasts_tiny += ($args[1] * 10)>>
+			<<set $insecurity_breasts_tiny = Math.clamp($insecurity_breasts_tiny, 0, 1000)>>
+			<<if $insecurity_breasts_tiny gte 1000>>
+				<<stress 3>><<control -3>>
+			<<elseif $insecurity_breasts_tiny gte 800>>
+				<<stress 3>><<control -2>>
+			<<elseif $insecurity_breasts_tiny gte 600>>
+				<<stress 2>><<control -2>>
+			<<elseif $insecurity_breasts_tiny gte 400>>
+				<<stress 2>><<control -1>>
+			<<elseif $insecurity_breasts_tiny gte 200>>
+				<<stress 1>><<control -1>>
+			<<else>>
+				<<stress 1>>
+			<</if>>
+		<</if>>
+	<<elseif $args[0] is "breasts_small" and $acceptance_breasts_small lte 999>>
+		<<if $args[1]>>
+			<<set $insecurity_breasts_small += ($args[1] * 10)>>
+			<<set $insecurity_breasts_small = Math.clamp($insecurity_breasts_small, 0, 1000)>>
+			<<if $insecurity_breasts_small gte 1000>>
+				<<stress 3>><<control -3>>
+			<<elseif $insecurity_breasts_small gte 800>>
+				<<stress 3>><<control -2>>
+			<<elseif $insecurity_breasts_small gte 600>>
+				<<stress 2>><<control -2>>
+			<<elseif $insecurity_breasts_small gte 400>>
+				<<stress 2>><<control -1>>
+			<<elseif $insecurity_breasts_small gte 200>>
+				<<stress 1>><<control -1>>
+			<<else>>
+				<<stress 1>>
+			<</if>>
+		<</if>>
+	<<elseif $args[0] is "breasts_big" and $acceptance_breasts_big lte 999>>
+		<<if $args[1]>>
+			<<set $insecurity_breasts_big += ($args[1] * 10)>>
+			<<set $insecurity_breasts_big = Math.clamp($insecurity_breasts_big, 0, 1000)>>
+			<<if $insecurity_breasts_big gte 1000>>
+				<<stress 3>><<control -3>>
+			<<elseif $insecurity_breasts_big gte 800>>
+				<<stress 3>><<control -2>>
+			<<elseif $insecurity_breasts_big gte 600>>
+				<<stress 2>><<control -2>>
+			<<elseif $insecurity_breasts_big gte 400>>
+				<<stress 2>><<control -1>>
+			<<elseif $insecurity_breasts_big gte 200>>
+				<<stress 1>><<control -1>>
+			<<else>>
+				<<stress 1>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "acceptance">><<nobr>>
+	<<if $args[0] is "penis_tiny">>
+		<<if $args[1]>>
+			<<set $acceptance_penis_tiny += ($args[1] * 6)>>
+			<<set $acceptance_penis_tiny = Math.clamp($acceptance_penis_tiny, 0, 1000)>>
+		<</if>>
+	<<elseif $args[0] is "penis_small">>
+		<<if $args[1]>>
+			<<set $acceptance_penis_small += ($args[1] * 6)>>
+			<<set $acceptance_penis_small = Math.clamp($acceptance_penis_small, 0, 1000)>>
+		<</if>>
+	<<elseif $args[0] is "penis_big">>
+		<<if $args[1]>>
+			<<set $acceptance_penis_big += ($args[1] * 6)>>
+			<<set $acceptance_penis_big = Math.clamp($acceptance_penis_big, 0, 1000)>>
+		<</if>>
+	<<elseif $args[0] is "breasts_tiny">>
+		<<if $args[1]>>
+			<<set $acceptance_breasts_tiny += ($args[1] * 6)>>
+			<<set $acceptance_breasts_tiny = Math.clamp($acceptance_breasts_tiny, 0, 1000)>>
+		<</if>>
+	<<elseif $args[0] is "breasts_small">>
+		<<if $args[1]>>
+			<<set $acceptance_breasts_small += ($args[1] * 6)>>
+			<<set $acceptance_breasts_small = Math.clamp($acceptance_breasts_small, 0, 1000)>>
+		<</if>>
+	<<elseif $args[0] is "breasts_big">>
+		<<if $args[1]>>
+			<<set $acceptance_breasts_big += ($args[1] * 6)>>
+			<<set $acceptance_breasts_big = Math.clamp($acceptance_breasts_big, 0, 1000)>>
+		<</if>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "willpower">><<nobr>>
+	<<if $args[0]>>
+		<<set $willpower += $args[0]>>
+	<</if>>
+	<<set $willpower = Math.clamp($willpower, 0, $willpowermax)>>
+<</nobr>><</widget>>
+
+<<widget "hope">><<nobr>>
+<<if $args[0]>>
+<<set $orphan_hope += ($args[0] * 2)>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "reb">><<nobr>>
+<<if $args[0]>>
+<<set $orphan_reb += ($args[0] * 2)>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "grace">><<nobr>>/*Optional second variable is the rank of the NPC giving the order. Grace changes won't apply if the player's rank equals or exceeds the NPC's.*/
+<<if $args[0]>>
+	<<if $args[1] is "monk">>
+		<<if $temple_rank is "initiate">>
+			<<set $grace += $args[0]>>
+			<<set $grace = Math.clamp($grace, -100, 100)>>
+		<<else>>
+		<</if>>
+	<<elseif $args[1] is "priest">>
+		<<if $temple_rank is "initiate" or $temple_rank is "monk">>
+			<<set $grace += $args[0]>>
+			<<set $grace = Math.clamp($grace, -100, 100)>>
+		<<else>>
+		<</if>>
+	<<elseif $args[1] is "bishop">>
+		<<if $temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest">>
+			<<set $grace += $args[0]>>
+			<<set $grace = Math.clamp($grace, -100, 100)>>
+		<<else>>
+		<</if>>
+	<<else>>
+		<<set $grace += $args[0]>>
+		<<set $grace = Math.clamp($grace, -100, 100)>>
+	<</if>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "livestock_obey">><<nobr>>
+	<<if $args[0]>>
+		<<set $livestock_obey += $args[0]>>
+		<<set $livestock_obey = Math.clamp($livestock_obey, 0, 100)>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "shame">><<nobr>>
+<<if $args[0]>>
+	<<set $shame += $args[0]>>
+	<<set $shame = Math.clamp($shame, 0, 100)>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "farm_yield">><<nobr>>
+<<if $farm_yield is undefined>>
+	<<set $farm_yield to 0>>
+<</if>>
+<<if $args[0]>>
+	<<set $farm_yield += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "oralskill">><<nobr>>
+<<if $args[0]>>
+	<<set $oralskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "vaginalskill">><<nobr>>
+<<if $args[0]>>
+	<<set $vaginalskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "penileskill">><<nobr>>
+<<if $args[0]>>
+	<<set $penileskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "handskill">><<nobr>>
+<<if $args[0]>>
+	<<set $handskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "analskill">><<nobr>>
+<<if $args[0]>>
+	<<set $analskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "feetskill">><<nobr>>
+<<if $args[0]>>
+	<<set $feetskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "bottomskill">><<nobr>>
+<<if $args[0]>>
+	<<set $bottomskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "thighskill">><<nobr>>
+<<if $args[0]>>
+	<<set $thighskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "chestskill">><<nobr>>
+<<if $args[0]>>
+	<<set $chestskill += $args[0]>>
+<</if>>
+<</nobr>><</widget>>

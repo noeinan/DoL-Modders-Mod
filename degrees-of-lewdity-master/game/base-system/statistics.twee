@@ -1,0 +1,388 @@
+:: Statistics [widget]
+<<widget "statistics">><<nobr>>
+<h3>Statistics</h3>
+__Virginities__
+<br>
+<<if $vaginaexist is 1>>
+	Vaginal virginity: <<print ($player.virginity.vaginal is true ? "Present" : "Taken by " + ($player.virginity.vaginal is false ? "unknown" : $player.virginity.vaginal))>>
+	<br>
+<</if>>
+<<if $penisexist is 1>>
+	Penile virginity: <<print ($player.virginity.penile is true ? "Present" : "Taken by " + ($player.virginity.penile is false ? "unknown" : $player.virginity.penile))>>
+	<br>
+<</if>>
+
+Anal virginity: <<print ($player.virginity.anal is true ? "Present" : "Taken by " + ($player.virginity.anal is false ? "unknown" : $player.virginity.anal))>>
+<br>
+Oral virginity: <<print ($player.virginity.oral is true ? "Present" : "Taken by " + ($player.virginity.oral is false ? "unknown" : $player.virginity.oral))>>
+<br><br>
+
+__Jobs__
+<br>
+Danced: $dancestat
+<br>
+Drinks served: $drinksservedstat
+<br>
+Tables served: $tablesservedstat
+<br>
+Whored yourself: $prostitutionstat
+<br>
+<<if $gamemode isnot "soft">>
+Forcibly whored out: $forcedprostitutionstat
+<br>
+<</if>>
+Hours worked on the docks: $dockhours
+<br>
+Buns sold at the cafe: $bunstat
+<br>
+Smugglers intercepted: $smuggler_stolen_stat
+<br>
+Produce sold: $produce_sold
+<br>
+Hours worked on a farm: <<print Math.trunc($farm_shift / 60)>>
+<br>
+Cattle milked: $cattle_milked
+<br>
+Clients serviced as a masseur: $masseur_stat
+<br>
+<br>
+
+__Sex__
+<br>
+Number of orgasms you've experienced: $orgasmstat
+<br>
+Penetrated others: $penilestat
+<br>
+Ejaculated in others: $penileejacstat
+<br>
+Vaginally penetrated: $vaginalstat
+<br>
+Ejaculated in vaginally: $vaginalejacstat
+<br>
+Anally penetrated: $analstat
+<br>
+Ejaculated in anally: $analejacstat
+<br>
+Orally penetrated: $oralstat
+<br>
+Ejaculated in orally: $oralejacstat
+<br>
+Handjobs given: $handstat
+<br>
+Handjob ejaculations: $handejacstat
+<br>
+Footjobs given: $feetstat
+<br>
+Footjob ejaculations: $feetejacstat
+<br>
+Thighjobs given: $thighstat
+<br>
+Thighjob ejaculations: $thighejacstat
+<br>
+Chestjobs given: $cheststat
+<br>
+Chestjob ejaculations: $chestejacstat
+<br>
+Buttjobs given: $bottomstat
+<br>
+Buttjob ejaculations: $bottomejacstat
+<br>
+Hair ejaculated on: $hairejacstat
+<br>
+Tummy ejaculated on: $tummyejacstat
+<br>
+Neck ejaculated on: $neckejacstat
+<br>
+Pussy ejaculated on: $vaginalentranceejacstat
+<br>
+Face ejaculated on: $faceejacstat
+<br>
+Total times you've been ejaculated on or in: $ejacstat
+<br>
+Gloryholes serviced: $gloryholestat
+<br>
+Masturbated: $masturbationstat
+<br>
+Masturbated to orgasm: $masturbationorgasmstat
+<br>
+Minutes spent masturbating: $masturbationtimestat
+<br>
+Breast milk drank: $milk_drank_stat ml
+<br>
+Breast milk produced: $milk_produced_stat ml
+<br>
+<<if $penisexist is 1>>Semen<<else>>Lewd fluid<</if>> produced: $semen_produced_stat ml
+<br>
+Fluid forcibly milked: $fluid_forced_stat ml
+<br>
+<<if $knot_stat isnot undefined>>
+Knotted: $knot_stat
+<br>
+<</if>>
+<br>
+
+<<if $gamemode isnot "soft">>
+	__Violence__
+	<br>
+	Molested: $moleststat
+	<br>
+	Raped: $rapestat
+	<br>
+	<<if $bestialitydisable is "f">>
+		Raped by animals: $beastrapestat
+		<br>
+	<</if>>
+	<<if $tentacledisable is "f">>
+		Raped by tentacle monsters: $tentaclerapestat
+		<br>
+	<</if>>
+	<<if $voredisable is "f">>
+		Swallowed: $swallowedstat
+		<br>
+	<</if>>
+	<<if $parasitedisable is "f">>
+		Parasites hosted: $parasitestat
+		<br>
+	<</if>>
+	Been hit: $hitstat
+	<br>
+	Hit others: $attackstat
+	<br>
+	Pepper spray used: $spraystat
+	<br>
+	Shots fired: $stat_shoot
+	<br>
+	Machines disabled: $machine_stat
+	<br><br>
+<</if>>
+
+__Dates__
+<br>
+<<if $dateCount.Total lte 0>>
+	You haven't gone on any dates!<br>
+<<else>>
+	Total Dates: $dateCount.Total
+	<br>
+	<<if $dateCount.Robin gte 1>>
+		Dates with Robin: $dateCount.Robin
+		<br>
+	<</if>>
+	<<if $dateCount.Whitney gte 1>>
+		Dates with Whitney: $dateCount.Whitney
+		<br>
+	<</if>>
+	<<if $dateCount.Kylar gte 1>>
+		Dates with Kylar: $dateCount.Kylar
+		<br>
+	<</if>>
+	<<if $dateCount.Eden gte 1>>
+		Dates with Eden: $dateCount.Eden
+		<br>
+	<</if>>
+	<<if $dateCount.Avery gte 1>>
+		Dates with Avery: $dateCount.Avery
+		<br>
+	<</if>>
+	<<if $dateCount.BlackWolfHunts gte 1>>
+		Hunts with the Black Wolf: $dateCount.BlackWolfHunts
+		<br>
+	<</if>>
+<</if>>
+<br>
+
+__Miscellaneous__
+<br>
+<<if $gamemode isnot "soft">>
+	Rescued: $rescued
+	<br>
+<</if>>
+Clothing stripped: $clothesstripstat
+<br>
+Clothing ruined: $clothesruinstat
+<br>
+Passed out: $passoutstat
+<br>
+Anal Pregnancy Births: <<print $sexStats.anus.pregnancy.givenBirth>>
+<br>
+Crime History: $crimehistory
+
+<br><br>
+__Save Game Versions Played On__
+<br>
+<<for _i to 0; _i lt $saveVersions.length; _i++>>
+	<<if _i gt 0>>
+		<<if SugarCube.State.variables.saveVersions[_i].split(".")[2] is SugarCube.State.variables.saveVersions[_i - 1].split(".")[2]>>
+			--
+		<<else>>
+			<br>
+		<</if>>
+	<</if>>
+	$saveVersions[_i]
+<</for>>
+
+<br>
+<</nobr>><</widget>>
+
+<<widget "extraStatistics">><<nobr>>
+<h3>Extra Statistics</h3>
+<div id="spoilerWarning">
+	Are you sure you want to see these? They may contain spoilers!
+	<br>
+	<<link Yes>>
+		<<addclass #spoilerWarning "hidden">>
+		<<removeclass #spoilerWarningConfirmed "hidden">>
+	<</link>>
+</div>
+<div id="spoilerWarningConfirmed" class="hidden">
+	__State__
+	<br>
+	Pain: <<print Math.trunc($pain)>>
+	<br>
+	Arousal: <<print Math.trunc($arousal)>>
+	<br>
+	Fatigue: <<print Math.trunc($tiredness)>>
+	<br>
+	Stress: <<print Math.trunc($stress)>>
+	<br>
+	Trauma: <<print Math.trunc($trauma)>>
+	<br>
+	Control: <<print Math.trunc($control)>>
+	<br>
+	Allure: <<print Math.trunc($allure)>>
+	<br>
+	Alcohol: <<print Math.trunc($drunk)>>
+	<br>
+	Drugs: <<print Math.trunc($drugged)>>
+	<br>
+	Hallucinogens: <<print Math.trunc($hallucinogen)>>
+	<br><br>
+
+	__Characteristics__
+	<br>
+	Awareness: <<print Math.trunc($awareness)>>
+	<br>
+	Purity: <<print Math.trunc($purity)>>
+	<br>
+	Physique: <<print Math.trunc($physique)>>
+	<br>
+	Willpower: <<print Math.trunc($willpower)>>
+	<br>
+	Beauty: <<print Math.trunc($beauty)>>
+	<br>
+	Promiscuity: <<print Math.trunc($promiscuity)>>
+	<br>
+	Exhibitionism: <<print Math.trunc($exhibitionism)>>
+	<br>
+	Deviancy: <<print Math.trunc($deviancy)>>
+	<br>
+	Corruption: <<print Math.trunc($corruption_slime)>>
+	<br>
+	<<if $temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest">>
+		Grace: <<print Math.trunc($grace)>>
+		<br>
+	<</if>>
+	Submissiveness: <<print Math.trunc($submissive)>>
+	<br>
+	Masochism: <<print Math.trunc($masochism)>>
+	<br>
+	Crossdresser progression:
+	<<if $crossdressingTrait isnot undefined>>
+		<<print Math.trunc($crossdressingTrait)>> %
+	<<else>>
+		0
+	<</if>>
+	<br>
+	Lactating: <<print ($lactating is 1 ? "True" : "False")>>
+	<br>
+	<<if $lactating is 1>>
+		Milk amount: <<print Math.trunc($milk_amount)>>
+		<br>
+		Milk volume: <<print Math.trunc($milk_volume)>>
+		<br>
+	<</if>>
+	<<if $penisexist is 1>>
+		Semen amount: <<print Math.trunc($semen_amount)>>
+		<br>
+		Semen volume: <<print Math.trunc($semen_volume)>>
+		<br>
+	<</if>>
+	<br>
+
+	__Clothes__
+	<br>
+	<<if $worn.upper.name isnot "naked">>
+		Upper wetness: <<print Math.trunc($upperwet)>>
+		<br>
+		Upper integrity: <<print Math.trunc($worn.upper.integrity)>>
+		<br>
+	<</if>>
+	<<if $worn.lower.name isnot "naked">>
+		Lower wetness: <<print Math.trunc($lowerwet)>>
+		<br>
+		Lower integrity: <<print Math.trunc($worn.lower.integrity)>>
+		<br>
+	<</if>>
+	<<if $worn.under_upper.name isnot "naked">>
+		Under Upper wetness: <<print Math.trunc($underupperwet)>>
+		<br>
+		Under Upper integrity: <<print Math.trunc($worn.under_upper.integrity)>>
+		<br>
+	<</if>>
+	<<if $worn.under_lower.name isnot "naked">>
+		Under Lower wetness: <<print Math.trunc($underlowerwet)>>
+		<br>
+		Under Lower integrity: <<print Math.trunc($worn.under_lower.integrity)>>
+		<br>
+	<</if>>
+	<br>
+
+	__Social__
+	<br>
+	School status: <<print Math.trunc($cool)>>
+	<br>
+	Delinquency: <<print Math.trunc($delinquency)>>
+	<br>
+	Crime: <<print Math.trunc($crime)>>
+	<br>
+	Orphanage hope: <<print Math.trunc($orphan_hope)>>
+	<br>
+	Orphanage rebelliousness: <<print Math.trunc($orphan_reb)>>
+	<br>
+	<<if $dockwork is 2>>
+		Docks status: <<print Math.trunc($dockstatus)>>
+		<br>
+	<</if>>
+	<br>
+
+	__Transformations__
+	<br>
+	Wolfiness: <<print Math.trunc($wolfbuild)>>
+	<br>
+	Wolf manifestation: <<print Math.trunc($wolfgirl)>>
+	<br>
+	Cattiness: <<print Math.trunc($catbuild)>>
+	<br>
+	Cat manifestation: <<print Math.trunc($cat)>>
+	<br>
+	Bovinity: <<print Math.trunc($cowbuild)>>
+	<br>
+	Cow manifestation: <<print Math.trunc($cow)>>
+	<br>
+	Angelicness: <<print Math.trunc($angelbuild)>>
+	<br>
+	Angel manifestation: <<print Math.trunc($angel)>>
+	<br>
+	Demonicness: <<print Math.trunc($demonbuild)>>
+	<br>
+	Demonic manifestation: <<print Math.trunc($demon)>>
+	<br>
+	Fallen manifestation:
+	<<if $fallenangel is undefined>>
+		0
+	<<else>>
+		<<print Math.trunc($fallenangel)>>
+	<</if>>
+	<br>
+
+</div>
+<</nobr>><</widget>>

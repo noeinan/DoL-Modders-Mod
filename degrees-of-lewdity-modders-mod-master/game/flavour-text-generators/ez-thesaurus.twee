@@ -1,0 +1,49 @@
+:: Widget EZ Thesaurus [widget]
+<<widget "EZdisgusting">><<nobr>>
+<<set _possibilities to [
+	"disgusting",
+	"icky",
+	"foul",
+	"awful",
+	"repulsive",
+	"nasty",
+	"gross",
+	"vile",
+	"nauseating",
+	"revolting",
+	"rotten"
+]>>
+<<print _possibilities.pluck()>>
+<</nobr>><</widget>>
+
+<<widget "EZsmall">><<nobr>>
+<<set _possibilities to [
+	"little",
+	"tiny",
+	"small",
+	"miniature",
+	"mini"
+]>>
+<<print _possibilities.pluck()>>
+<</nobr>><</widget>>
+
+<<widget "EZbig">><<nobr>>
+<<set _possibilities to [
+	"big",
+	"huge",
+	"giant",
+	"massive"
+]>>
+<<print _possibilities.pluck()>>
+<</nobr>><</widget>>
+
+<<widget "EZpenis">><<nobr>>
+<<set _possibilities to [
+	"penis",
+	"dick",
+	"cock",
+	"willy"
+]>>
+<<print _possibilities.pluck()>>
+<</nobr>><</widget>>
+

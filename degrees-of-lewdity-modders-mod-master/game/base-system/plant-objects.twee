@@ -1,0 +1,113 @@
+:: Widgets Plant Objects [widget]
+<<widget "init_plant_objects">><<nobr>>
+
+<<set setup.plants to {
+
+	red_rose: {
+		index: 0,
+		name: "red_rose",
+		plural: "red roses",
+		plant_cost: 400,
+		difficulty: 1,
+		bed: "earth",
+		type: "flower",
+		days: 14,
+		special: []
+		},
+
+	white_rose: {
+		index: 1,
+		name: "white_rose",
+		plural: "white roses",
+		plant_cost: 400,
+		difficulty: 1,
+		bed: "earth",
+		type: "flower",
+		days: 14,
+		special: []
+		},
+
+	orchid: {
+		index: 2,
+		name: "orchid",
+		plural: "orchids",
+		plant_cost: 1000,
+		difficulty: 2,
+		bed: "earth",
+		type: "flower",
+		days: 28,
+		special: []
+		},
+
+	daisy: {
+		index: 3,
+		name: "daisy",
+		plural: "daisies",
+		plant_cost: 100,
+		difficulty: 1,
+		bed: "earth",
+		type: "flower",
+		days: 7,
+		special: []
+		},
+
+	tulip: {
+		index: 4,
+		name: "tulip",
+		plural: "tulips",
+		plant_cost: 200,
+		difficulty: 1,
+		bed: "earth",
+		type: "flower",
+		days: 12,
+		special: []
+		},
+
+	lotus: {
+		index: 5,
+		name: "lotus",
+		plural: "lotus",
+		plant_cost: 300,
+		difficulty: 2,
+		bed: "water",
+		type: "flower",
+		days: 5,
+		special: []
+		},
+
+	lily: {
+		index: 6,
+		name: "lily",
+		plural: "lilies",
+		plant_cost: 200,
+		difficulty: 1,
+		bed: "earth",
+		type: "flower",
+		days: 10,
+		special: []
+		},
+
+	poppy: {
+		index: 7,
+		name: "poppy",
+		plural: "poppies",
+		plant_cost: 200,
+		difficulty: 2,
+		bed: "earth",
+		type: "flower",
+		days: 8,
+		special: []
+		}
+
+}>>
+
+<<set setup.plot_base to {
+
+	plant: "none",
+	stage: 0,
+	days: 0,
+	water: 0,
+	till: 0,
+
+}>>
+<</nobr>><</widget>>

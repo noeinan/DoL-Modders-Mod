@@ -1,0 +1,1276 @@
+:: Widgets Wardrobe [widget]
+
+<<widget "wardrobewear">><<nobr>>
+<<if $runWardrobeSanityChecker is true>>
+	<<wardrobeSanityCheck>>
+	<<set $runWardrobeSanityChecker to false>>
+<</if>>
+<<if $clothingShop.stolenClothes gt 0>>
+	<<set $clothingShop.stolenClothes to 0>>
+	<span class="gold">You place the clothes you recently stole from the shop in your wardrobe.</span>
+	<br>
+<</if>>
+<<if $wear is "strip">>
+	You remove your clothing.
+	<br><br>
+	<<undress $wardrobe_location>>
+<</if>>
+<<wearoutfit>>
+<<if $randomWear>>
+	<<randomWear>>
+<</if>>
+<<set _equip to ["over_upper", "over_lower", "upper", "lower", "under_upper", "under_lower", "over_head", "head", "face", "neck", "legs", "feet"]>>
+<<set _slimePrevent to ["upper", "lower", "under_upper", "under_lower"]>>
+<<set _towelCheck to ["upper", "lower"]>>
+<<set _equipSkip to {"over_upper":false, "over_lower":false, "upper":false, "lower":false, "under_upper":false, "under_lower":false, "over_head":false, "head":false, "face":false, "neck":false, "legs":false, "feet":false}>>
+<<for _ie to 0; _ie lt _equip.length;_ie++>>
+	<<if _equipSkip[_equip[_ie]] is true>>
+		<<continue>>
+	<</if>>
+	<<unset _wearId>><<unset _item>>
+	<<switch _equip[_ie]>>
+	<<case "over_upper">>
+		<<set _wearId to $wear_over_upper>>
+	<<case "over_lower">>
+		<<set _wearId to $wear_over_lower>>
+	<<case "upper">>
+		<<set _wearId to $wear_upper>>
+	<<case "lower">>
+		<<set _wearId to $wear_lower>>
+	<<case "under_upper">>
+		<<set _wearId to $wear_under_upper>>
+	<<case "under_lower">>
+		<<set _wearId to $wear_under_lower>>
+	<<case "over_head">>
+		<<set _wearId to $wear_over_head>>
+	<<case "head">>
+		<<set _wearId to $wear_head>>
+	<<case "face">>
+		<<set _wearId to $wear_face>>
+	<<case "neck">>
+		<<set _wearId to $wear_neck>>
+	<<case "legs">>
+		<<set _wearId to $wear_legs>>
+	<<case "feet">>
+		<<set _wearId to $wear_feet>>
+	<</switch>>
+	<<if _wearId is undefined>>
+		<<continue>>
+	<</if>>
+	<<if _wearId is "none">>
+		<<continue>>
+	<</if>>
+	<<if $wardrobeOption is "wear" or _wearId is "strip" or _wearId is "towel" or _wearId is "large_towel">>
+		/*Checks for cursed equip*/
+		<<unset _cursedPrevent>><<unset _outfitPieceIds>>
+		<<set _wornOutfitPrimary to $worn[_equip[_ie]].outfitPrimary>>
+		<<if $worn[_equip[_ie]].cursed is 1>>
+			You try to remove the <<print $worn[_equip[_ie]].name>>, but fail. <<print "<<cursedtext "+$worn[_equip[_ie]].name+">>">>
+			<br>
+			<<set _cursedPrevent to true>>
+		<</if>>
+		<<if _wornOutfitPrimary isnot undefined>>
+			<<for _labelWW, _valueWW range _wornOutfitPrimary>>
+				<<if $worn[_labelWW].cursed is 1>>
+					<<print "<<cursedtext "+$worn[_labelWW].name+">>">>
+					<<set _cursedPrevent to true>>
+				<</if>>
+			<</for>>
+		<</if>>
+		<<if _cursedPrevent is true>>
+			<<continue>>
+		<</if>>
+		/*Strips equip and puts it in the wardrobe*/
+		<<if _wearId is "strip" and $worn[_equip[_ie]].name isnot "naked">>
+			You remove the <<print $worn[_equip[_ie]].name>>.
+			<<generalUndress $wardrobe_location _equip[_ie]>>
+			<br>
+			<<if _wornOutfitPrimary isnot undefined>>
+				<<for _labelWW, _valueWW range _wornOutfitPrimary>>
+					<<if _valueWW isnot "broken" and $worn[_labelWW].name isnot "naked">>
+						You remove the <<print $worn[_labelWW].name>>.
+						<<generalUndress $wardrobe_location _labelWW>>
+					<</if>>
+				<</for>>
+			<</if>>
+			<<continue>>
+		<</if>>
+		<<unset _wornOutfitPrimary>>
+		/*Strips equip, puts it in the wardrobe and equips a towl*/
+		<<if _wearId is "towel" and _towelCheck.includes(_equip[_ie])>>
+			<<generalUndress $wardrobe_location _equip[_ie]>>
+			<<set $worn[_equip[_ie]] to clone(setup.clothes[_equip[_ie]][3])>><<set $worn[_equip[_ie]].colour to clone($worn[_equip[_ie]].colour_options.random())>>
+			<<if _equip[_ie] is "upper">>
+				You tie a towel around your chest.
+			<<else>>
+				You tie a towel around your waist.
+			<</if>>
+			<br><br>
+			<<continue>>
+		<</if>>
+		<<if _wearId is "large_towel" and _equip[_ie] is "upper">>
+			<<generalUndress $wardrobe_location "upper">><<generalUndress $wardrobe_location "lower">>
+			<<set $worn.upper to clone(setup.clothes.upper[14])>><<set $worn.upper.colour to clone($worn.upper.colour_options.random())>>
+			<<set $worn.lower to clone(setup.clothes.lower[15])>><<set $worn.lower.colour to clone($worn.upper.colour)>>
+			You tie a large towel around your chest.
+			<br><br>
+			<<continue>>
+		<</if>>
+	<</if>>
+	/*Find the item to equip*/
+	<<if _wearId gte 0>>
+		<<set _item to $wardrobe[_equip[_ie]][_wearId]>>
+	<</if>>
+	/*Prevent equip when the ear slime doesn't allow it*/
+	<<if _wearId gte 0 and _slimePrevent.includes(_equip[_ie]) and $corruption_slime gte 80 and $wardrobeOption is "wear">>
+		<<if $willpower lt 800 and _item.reveal lt 500 and !_item.type.includesAny("school", "event")>>
+			<span class="red">You were unable to equip your _item.name as the slime in your ear did not permit it.</span>
+			<br>
+			<<continue>>
+		<</if>>
+	<</if>>
+	/*Finds any outfit pieces and records the Ids*/
+	<<set _outfitPrimary to _item.outfitPrimary>>
+	<<if _outfitPrimary isnot undefined>>
+		<<set _outfitPieceIds to {}>>
+		<<for _labelWW, _valueWW range _outfitPrimary>>
+			<<if _valueWW isnot "broken">>
+				<<for _j to 0; _j lt $wardrobe[_labelWW].length; _j++>>
+					<<if $wardrobe[_labelWW][_j].name is _valueWW and _item.colour is $wardrobe[_labelWW][_j].colour and _item.accessory_colour is $wardrobe[_labelWW][_j].accessory_colour>>
+						<<if $wardrobe[_labelWW][_j].outfitSecondary[1] isnot _item.name>>
+							<<continue>>
+						<</if>>
+						<<set _matched to 0>>
+						<<if $wardrobe[_labelWW][_j].colour isnot "custom">>
+							<<set _matched++>>
+						<<elseif _item.colourCustom isnot undefined and $wardrobe[_labelWW][_j].colourCustom isnot undefined>>
+							<<if _item.colourCustom is $wardrobe[_labelWW][_j].colourCustom>>
+								<<set _matched++>>
+							<</if>>
+						<</if>>
+						<<if $wardrobe[_labelWW][_j].accessory_colour isnot "custom">>
+							<<set _matched++>>
+						<<elseif _item.accessory_colourCustom isnot undefined and $wardrobe[_labelWW][_j].accessory_colourCustom isnot undefined>>
+							<<if _item.accessory_colourCustom is $wardrobe[_labelWW][_j].accessory_colourCustom>>
+								<<set _matched++>>
+							<</if>>
+						<</if>>
+						<<if _matched is 2>>
+							<<set _outfitPieceIds[clone(_labelWW)] to clone(_j)>>
+							<<set _equipSkip[_labelWW] to true>>
+							<<break>>
+						<</if>>
+					<</if>>
+				<</for>>
+			<</if>>
+		<</for>>
+		<<if Object.keys(_outfitPieceIds).length is 0>>
+			<<unset _outfitPieceIds>>
+		<</if>>
+	<</if>>
+	<<unset _outfitPrimary>>
+	<<if $wardrobeOption is "delete" and _wearId gte 0>>
+		/*Delete the relating items*/
+		<<if _outfitPieceIds isnot undefined>>
+			<<for _labelWW, _valueWW range _outfitPieceIds>>
+				<<set $wardrobe[_labelWW].deleteAt(_valueWW)>>
+			<</for>>
+		<</if>>
+		You discard the <<print $wardrobe[_equip[_ie]][_wearId].name>>.
+		<<set $wardrobe[_equip[_ie]].deleteAt(_wearId)>>
+		<br>
+		<<continue>>
+	<</if>>
+	<<if $wardrobeOption is "repair" and _wearId gte 0>>
+		/*Repair the relating items*/
+		<<if _outfitPieceIds isnot undefined>>
+			<<for _labelWW, _valueWW range _outfitPieceIds>>
+				<<set $wardrobe[_labelWW][_valueWW].integrity = $wardrobe[_labelWW][_valueWW].integrity_max>>
+				<<pass 15>>
+			<</for>>
+		<</if>>
+		<<set $wardrobe[_equip[_ie]][_wearId].integrity = $wardrobe[_equip[_ie]][_wearId].integrity_max>>
+		<<pass 1>>
+		You repair the <<print $wardrobe[_equip[_ie]][_wearId].name>>.
+		<br>
+		<<continue>>
+	<</if>>
+	<<if $wardrobeOption is "seperateOutfits" and _wearId gte 0>>
+		<<if _outfitPieceIds isnot undefined>>
+			<<for _labelWW, _valueWW range _outfitPieceIds>>
+				<<set $wardrobe[_labelWW][_valueWW].outfitSecondary[1] to "broken">>
+				<<set $wardrobe[_equip[_ie]][_wearId].outfitPrimary[_labelWW] to "broken">>
+			<</for>>
+			You cut up the <<print $wardrobe[_equip[_ie]][_wearId].name>>.
+			<<pass 10>>
+			<br>
+		<</if>>
+		<<continue>>
+	<</if>>
+	<<if $wardrobeOption is "wear" and _wearId gte 0>>
+		/*Equip the relating items*/
+		<<generalUndress $wardrobe_location _equip[_ie]>>
+		<<if _outfitPieceIds isnot undefined>>
+			<<for _labelWW, _valueWW range _outfitPieceIds>>
+				<<generalUndress $wardrobe_location `clone(_labelWW)`>>
+				<<set $worn[clone(_labelWW)] to clone($wardrobe[clone(_labelWW)][clone(_valueWW)])>>
+				<<set $wardrobe[_labelWW].deleteAt(_valueWW)>>
+			<</for>>
+		<</if>>
+		<<set $worn[_equip[_ie]] to clone($wardrobe[_equip[_ie]][_wearId])>>
+		You put on the <<print $wardrobe[_equip[_ie]][_wearId].name>>.
+		<<set $wardrobe[_equip[_ie]].deleteAt(_wearId)>>
+		<br><br>
+	<</if>>
+<</for>>
+<<if $wear is "dry">><<set $wear to 0>>
+	<<set $upperwet to 0>><<set $lowerwet to 0>><<set $underlowerwet to 0>><<set $underupperwet to 0>>
+	You squeeze the water from your clothes.
+	<br><br>
+<</if>>
+<<set $wear to 0>>
+<<set $wear_over_upper to "none">>
+<<set $wear_over_lower to "none">>
+<<set $wear_upper to "none">>
+<<set $wear_lower to "none">>
+<<set $wear_under_upper to "none">>
+<<set $wear_under_lower to "none">>
+<<set $wear_over_head to "none">>
+<<set $wear_head to "none">>
+<<set $wear_face to "none">>
+<<set $wear_neck to "none">>
+<<set $wear_legs to "none">>
+<<set $wear_feet to "none">>
+<<set $wear_outfit to "none">>
+<<exposure>>
+<</nobr>><</widget>>
+
+<<widget "wardrobe">><<nobr>>
+<<unset $tempDisable>>
+<<clotheson>> /*Fixes perma pulled aside clothes introduced by 0.2.3.0 bug.*/
+<<if $upperwet gte 1 or $lowerwet gte 1 or $underlowerwet or $underupperwet gte 1>>
+	<<link [[Dry your clothes|$passage]]>><<set $wear to "dry">><<script>>state.display(state.active.title, null)<</script>><</link>>
+	<br>
+<</if>>
+
+<<link [[Strip all|$passage]]>><<set $wear to "strip">><</link>> |
+<<link [[Wear Random Clothes|$passage]]>><<set $randomWear to true>><</link>> |
+<<link Configure>><<toggleclass "#randomClothingConfigure" "hidden">><</link>> |
+<div id="randomClothingConfigure" class="hidden">
+	<<if $randomEquipConfigure is undefined>>
+		<<set $randomEquipConfigure to {face: true, feet: true, head: true, legs: true, lower: true, neck: true, under_lower: true, under_upper: true, upper: true}>>
+	<</if>>
+	<<set _equip to ["upper", "lower", "under_upper", "under_lower","head", "face", "neck", "legs", "feet"]>>
+	<<for _slot range _equip>>
+		<label><<print '<<checkbox "$randomEquipConfigure.'+_slot+'" false true '+($randomEquipConfigure[_slot] is true ? "checked" : "")+'>>'>> <<print _slot.replace("_"," ")>></label><br>
+	<</for>>
+</div>
+<br><br>
+
+<<if $location is "home" or $location is "town">>
+	<<if $tailorMonthlyService is "repair">>
+		__Wardrobe Repair Crate__
+		There is a small crate ready for sending clothes to be repaired.
+		<br>
+		<<link [[Add outfits and send|Wardrobe Repair Crate]]>>
+			<<set $wardrobeReturnLink to $passage>>
+			<<set $crateContents to "outfits">>
+		<</link>>
+		<br>
+		<<link [[Add all items and send|Wardrobe Repair Crate]]>>
+			<<set $wardrobeReturnLink to $passage>>
+			<<set $crateContents to "all">>
+		<</link>>
+		<br><br>
+		<<link [[Cancel the request|$passage]]>><<set $tailorMonthlyService to 1>><</link>>
+		<br><br>
+	<<elseif $tailorMonthlyService is "discard">>
+		__Wardrobe Sale Crate__
+		There is a small crate ready for sending clothes to be sold.
+		<br>
+		<<link [[Add outfits and send|Wardrobe Sale Crate]]>>
+			<<set $wardrobeReturnLink to $passage>>
+			<<set $crateContents to "outfits">>
+		<</link>>
+		<br>
+		<<link [[Add all items and send|Wardrobe Sale Crate]]>>
+			<<set $wardrobeReturnLink to $passage>>
+			<<set $crateContents to "all">>
+		<</link>>
+		<br><br>
+		<<link [[Cancel the request|$passage]]>><<set $tailorMonthlyService to 1>><</link>>
+		<br><br>
+	<</if>>
+	<<if $wardrobeRepair is undefined>>
+	<<elseif $wardrobeRepair.timeLeft is 0>>
+		The clothes sent to the tailor have been repaired and added back into your wardrobe.
+		<<wardrobeGetRepairedClothes>>
+		<br><br>
+	<</if>>
+<</if>>
+
+__Clothing sets__
+<br>
+<<listoutfits>>
+
+<hr>
+__Clothing__
+<br>
+
+<<if $newWardrobeStyle>>
+	<<dynamic "wardrobeLinks" "wardrobeLinks">>
+	<<dynamic "wardrobeContents" "wardrobeList">>
+<<else>>
+	<<oldWardrobeListDisplay>>
+<</if>>
+
+<<set $upperoff to 0>>
+<<set $loweroff to 0>>
+<<set $underloweroff to 0>>
+<<set $underupperoff to 0>>
+<<exposure>>
+
+<</nobr>><</widget>>
+
+<<widget "wardrobeContents">><<nobr>>
+	<<if $lastWardrobeSlot is "NewOutfit">>
+		<<wardrobeNewOutfit>>
+	<<else>>
+		<<wardrobeList $lastWardrobeSlot>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "wardrobeLinks">><<nobr>>
+<<set _wardrobeLinks=[
+	{ id: 'over_head', label: 'Over Head', disabled: !$debug },
+	{ id: 'over_upper', label: 'Over Upper', disabled: !$debug },
+	{ id: 'over_lower', label: 'Over Lower', disabled: !$debug },
+	{ id: 'head', label: 'Head' },
+	{ id: 'face', label: 'Face' },
+	{ id: 'neck', label: 'Neck' },
+	{ id: 'upper', label: 'Upper' },
+	{ id: 'lower', label: 'Lower' },
+	{ id: 'under_upper', label: 'Under Upper' },
+	{ id: 'under_lower', label: 'Under Lower' },
+	{ id: 'legs', label: 'Legs' },
+	{ id: 'feet', label: 'Feet' },
+	{ id: 'NewOutfit', label: 'New Outfit' },
+]>>
+<<for _i = 0; _i < _wardrobeLinks.length; _i++>>
+	<<set _wardrobeLink=_wardrobeLinks[_i]>>
+	<<if !_wardrobeLink.disabled>>
+		<a
+			@class="($lastWardrobeSlot is _wardrobeLink.id ? 'selected' : '')"
+			@id="Dynamic.eventBinder(_wardrobeLink.id)"
+			onclick="(id) => $lastWardrobeSlot = id"
+		>_wardrobeLink.label</a><<if _i < _wardrobeLinks.length - 1>> | <</if>>
+	<</if>>
+<</for>>
+<</nobr>><</widget>>
+
+<<widget "wardrobeClothingOptions">><<nobr>>
+<br>
+<<if $wardrobeOption is undefined or $wardrobeOption is 0>><<set $wardrobeOption to "wear">><</if>>
+<<if $wardrobeRepeat isnot true or ($wardrobeOption is "repair" and $location isnot "home")>><<set $wardrobeOption to "wear">><</if>>
+<label> Wear <<print '<<radiobutton "$wardrobeOption" "wear" '+($wardrobeOption is "wear" or $wardrobeRepeat is false ? "checked" : "")+'>>'>></label> |
+<label> Discard <<print '<<radiobutton "$wardrobeOption" "delete" '+($wardrobeOption is "delete" and $wardrobeRepeat is true ? "checked" : "")+'>>'>></label> |
+<<if $sewingKit is 1 and $location is "home">>
+	<label> Repair <<print '<<radiobutton "$wardrobeOption" "repair" '+($wardrobeOption is "repair" and $wardrobeRepeat is true ? "checked" : "")+'>>'>></label> |
+<</if>>
+<label> Seperate Outfits <<print '<<radiobutton "$wardrobeOption" "seperateOutfits" '+($wardrobeOption is "seperateOutfits" and $wardrobeRepeat is true ? "checked" : "")+'>>'>></label> |
+<label> Repeat Actions <<print '<<checkbox "$wardrobeRepeat" false true '+($wardrobeRepeat ? "checked" : "")+'>>'>></label>
+
+<<if $wardrobeOption is "delete" and $wardrobeRepeat is true>>
+	<h2 class="red">Discard On Repeat</h2>
+<<else>>
+	<br><br>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "wardrobeNewOutfit">><<nobr>>
+<br>
+Add new set:
+<br>
+Name: <input id="outfitName" type="text" value="Custom" onfocus="SugarCube.State.variables.tempDisable = true;">
+<br>
+Type: <label>Everyday <<radiobutton "$outfit_type" 0 checked>></label> | <label>Sleep<<radiobutton "$outfit_type" "sleep">></label> | <label>Swimming<<radiobutton "$outfit_type" "swim">></label>
+<br>
+<label>
+	Save Clothes Colours in Set
+	<<print '<<checkbox "$saveColor" false true '+($saveColor is true ? "checked" : "")+'>>'>>
+</label>
+<br>
+<<link [[Add current clothes as new set|$passage]]>>
+	<<script>>
+		SugarCube.State.variables.outfit_name = document.getElementById("outfitName").value;
+	<</script>>
+	<<set $outfit.push(
+		{index: $outfit.length,
+		name: $outfit_name,
+		over_upper: clone($worn.over_upper.name),
+		over_lower: clone($worn.over_lower.name),
+		upper: clone($worn.upper.name),
+		lower: clone($worn.lower.name),
+		under_upper: clone($worn.under_upper.name),
+		under_lower: clone($worn.under_lower.name),
+		over_head: clone($worn.over_head.name),
+		head: clone($worn.head.name),
+		face: clone($worn.face.name),
+		neck: clone($worn.neck.name),
+		legs: clone($worn.legs.name),
+		feet: clone($worn.feet.name),
+		type: ["normal"]
+		},
+	)>>
+
+	<<if $outfit_name is "" or $outfit_name is "Custom">><<print '<<set $outfit_name to "Custom ' + $outfit.length + '">>'>><</if>>
+	<<set $outfit.last().name to $outfit_name>>
+	<<if $outfit_type>>
+		<<set $outfit.last().type.push($outfit_type)>>
+	<</if>>
+
+	<<if $saveColor is true>>
+		<<set _equip to ["over_upper", "over_lower", "upper", "lower", "under_upper", "under_lower", "over_head", "head", "face", "neck", "legs", "feet"]>>
+		<<set _colors to {}>>
+		<<for _ie to 0; _ie lt _equip.length; _ie++>>
+			<<set _colors[_equip[_ie]] to [clone($worn[_equip[_ie]].colour),clone($worn[_equip[_ie]].accessory_colour)]>>
+			<<if $worn[_equip[_ie]].colour is "custom" or $worn[_equip[_ie]].accessory_colour is "custom">>
+				<<run _colors[_equip[_ie]+"custom"] to [clone($worn[_equip[_ie]].colourCustom),clone($worn[_equip[_ie]].accessory_colourCustom)]>>
+			<</if>>
+		<</for>>
+		<<set $outfit.last().colors to clone(_colors)>>
+	<<else>>
+		<<set $outfit.last().colors to false>>
+	<</if>>
+<</link>>
+<</nobr>><</widget>>
+
+<<widget "wardrobeintegrity">><<nobr>>
+<<set _war_int to $args[0]>>
+<<if $wardrobe[_war_int][_i].integrity gt (($wardrobe[_war_int][_i].integrity_max / 10) * 9)>>
+<<elseif $wardrobe[_war_int][_i].integrity gt (($wardrobe[_war_int][_i].integrity_max / 10) * 5)>>
+(frayed)
+<<elseif $wardrobe[_war_int][_i].integrity gt (($wardrobe[_war_int][_i].integrity_max / 10) * 2)>>
+(torn)
+<<else>>
+(tattered)
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "wardrobeList">><<nobr>>
+<<wardrobeClothingOptions>>
+<<set _wardrobe_list to $args[0]>>
+<<set _errorPrevent to false>>
+<<switch _wardrobe_list>>
+	<<case "over_head">><<set _wear to "wear_over_head">>
+	<<case "head">><<set _wear to "wear_head">>
+	<<case "face">><<set _wear to "wear_face">>
+	<<case "neck">><<set _wear to "wear_neck">>
+	<<case "over_upper">><<set _wear to "wear_over_upper">>
+	<<case "over_lower">><<set _wear to "wear_over_lower">>
+	<<case "upper">><<set _wear to "wear_upper">>
+	<<case "lower">><<set _wear to "wear_lower">>
+	<<case "under_upper">><<set _wear to "wear_under_upper">>
+	<<case "under_lower">><<set _wear to "wear_under_lower">>
+	<<case "legs">><<set _wear to "wear_legs">>
+	<<case "feet">><<set _wear to "wear_feet">>
+	<<default>><<set _errorPrevent to true>>
+<</switch>>
+<<set _outfitTypes to ["upper","lower","under_upper","under_lower"]>>
+<<set _loweroutfitCheck to ["lower","under_lower"]>>
+<<if _errorPrevent isnot true>>
+	__<<print _wardrobe_list[0].toUpperCase() + _wardrobe_list.substring(1)>>__ <i>$wardrobe[_wardrobe_list].length / $wardrobe.space</i>
+	<<if _wardrobe_list is "upper">>(Outfits will also take a lower slot)<</if>>
+	<<if _wardrobe_list is "under_upper">>(Outfits will also take an under lower slot)<</if>>
+	<br>
+	Order by:
+	/*Undefined error for unknown reason*/
+	/*<a @onclick="`wikifier('wardrobeListReorder', '`+ $lastWardrobeSlot + `', 'name');`">Name</a> |*/
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'name');">Name</a> |
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'color');">Colour</a> |
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'lewd');">Lewd</a> |
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'integrity');">Integrity</a> |
+	<<if _outfitTypes.includes(_wardrobe_list)>>
+		<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'outfit');">Outfit Status</a> |
+	<</if>>
+	<br>
+	Inverse Order by:
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'name', true);">Name</a> |
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'color', true);">Colour</a> |
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'lewd', true);">Lewd</a> |
+	<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'integrity', true);">Integrity</a> |
+	<<if _outfitTypes.includes(_wardrobe_list)>>
+		<a onclick="wikifier('wardrobeListReorder', SugarCube.State.variables.lastWardrobeSlot, 'outfit', true);">Outfit Status</a> |
+	<</if>>
+	<br><br>
+	Currently equipped:
+	<<if $worn[_wardrobe_list].name isnot "naked">>
+		<<set _wornItem to $worn[_wardrobe_list]>>
+		<<clothingicon _wornItem>>
+		<<print _wornItem.name_cap>>
+		<<if _wornItem.colour isnot 0>>
+			<span @class="_wornItem.colour">(_wornItem.colour)</span>
+		<</if>>
+		<<if _wornItem.outfitPrimary isnot undefined>>
+			<<set _keys to Object.keys(_wornItem.outfitPrimary)>>
+			<<set _broken to 0>>
+			<<for _j to 0; _j lt _keys.length; _j++>>
+				<<if _wornItem.outfitPrimary[_keys[_j]] is "broken">>
+					<<set _broken++>>
+				<</if>>
+			<</for>>
+			<<if _broken is 0>>
+					<span class="gold">(Outfit)</span>
+			<<elseif _broken lt _keys.length>>
+					<span class="red">(Partly Broken)</span>
+			<<else>>
+					<span class="red">(Broken)</span>
+			<</if>>
+		<</if>>
+		<<if _wornItem.outfitSecondary isnot undefined>>
+			<<if _wornItem.outfitSecondary[1] is "broken">>
+				<span class="red">(Broken)</span>
+			<<else>>
+				<span class="gold">(Outfit)</span>
+			<</if>>
+		<</if>>
+		<<if _wornItem.integrity gt ((_wornItem.integrity_max / 10) * 9)>>
+		<<elseif _wornItem.integrity gt ((_wornItem.integrity_max / 10) * 5)>>
+			(frayed)
+		<<elseif _wornItem.integrity gt ((_wornItem.integrity_max / 10) * 2)>>
+			(torn)
+		<<else>>
+			(tattered)
+		<</if>>
+		<a onclick="document.getElementById('wardrobeItemDetails').classList.toggle('hidden')">Extra Info</a>
+		<br>
+		<div id="wardrobeItemDetails" class="hidden">
+			<<if _wornItem.plural is 1>><<integrity _wornItem.integrity_max "cap">><<else>>A <<integrity _wornItem.integrity_max>><</if>>
+			and <<reveal _wornItem.reveal>> <<print _wornItem.name>>.
+
+			<<if _wornItem.gender is "m">><span class="lblue">For boys ♂.</span><<elseif _wornItem.gender is "f">><span class="pink">For girls ♀.</span><</if>>
+			<<print _wornItem.description>>
+			<br><br>
+			<<set _temp_choice to $worn[_wardrobe_list]>>
+			<<shoptraits>>
+		</div>
+	<<else>>
+		nothing
+		<br>
+	<</if>>
+	<br>
+	<<if $worn[_wardrobe_list].name isnot "naked">>
+		<div class="wardrobeItem"><a @onclick="`SugarCube.State.variables.`+_wear+` = 'strip';SugarCube.State.display(SugarCube.State.variables.passage)`">Strip</a></div>
+	<</if>>
+	<<if _wardrobe_list is "upper">>
+		<div class="wardrobeItem"><a onclick="SugarCube.State.variables.wear_upper='large_towel';SugarCube.State.display(SugarCube.State.variables.passage)">Large Towel</a></div>
+	<</if>>
+	<<if _wardrobe_list is "upper" or _wardrobe_list is "lower" >>
+		<div class="wardrobeItem"><a @onclick="`SugarCube.State.variables.`+_wear+` = 'towel';SugarCube.State.display(SugarCube.State.variables.passage)`">Towel</a></div>
+	<</if>>
+
+	<<for _i to 0; _i lt $wardrobe[_wardrobe_list].length; _i++>>
+		<<set _item to $wardrobe[_wardrobe_list][_i]>>
+		<<if _item.outfitSecondary isnot undefined>>
+			<<if _item.outfitSecondary[1] isnot "broken">>
+				<<continue>>
+			<</if>>
+		<</if>>
+		<div class="wardrobeItem">
+		<<clothingicon _item>><a @onclick="`SugarCube.State.variables.`+_wear+` = `+ _i +`;SugarCube.State.display(SugarCube.State.variables.passage)`">_item.name_cap</a>
+		<<if _item.gender is "m">>
+			| <span class="blue">♂</span> |
+		<<elseif _item.gender is "f">>
+			| <span class="pink">♀</span> |
+		<<else>>
+			|
+		<</if>>
+		<<if _item.colour isnot 0>>
+			<span @class="$wardrobe[_wardrobe_list][_i].colour">(_item.colour)</span>
+		<</if>>
+		<<if _item.outfitPrimary isnot undefined>>
+			<<set _keys to Object.keys(_item.outfitPrimary)>>
+			<<set _broken to 0>>
+			<<for _j to 0; _j lt _keys.length; _j++>>
+				<<if _item.outfitPrimary[_keys[_j]] is "broken">>
+					<<set _broken++>>
+				<</if>>
+			<</for>>
+			<<if _broken is 0>>
+				<span class="gold">(Outfit)</span>
+			<<elseif _broken lt _keys.length>>
+				<span class="red">(Partly Broken)</span>
+			<<else>>
+				<span class="red">(Broken)</span>
+			<</if>>
+		<</if>>
+		<<if _item.outfitSecondary isnot undefined>>
+			<span class="red">(Broken)</span>
+		<</if>>
+		<<wardrobeintegrity _wardrobe_list>> |
+		<<reveal _item.reveal>>
+		</div>
+	<</for>>
+	<div style="clear:both;"></div>
+<<else>>
+	An error occured to 'widget "wardrobeList"', please report if you did not edit the save data manually in any way.
+<</if>>
+
+<</nobr>><</widget>>
+
+<<widget "oldWardrobeListDisplay">><<nobr>>
+<<wardrobeClothingOptions>>
+<<if $debug is 1>>
+	<<oldWardrobeList "over_upper">>
+	<<oldWardrobeList "over_lower">>
+<</if>>
+<<oldWardrobeList "upper" "outfits">>
+<<oldWardrobeList "upper" "non-outfits">>
+<<oldWardrobeList "lower">>
+<<oldWardrobeList "under_upper" "outfits">>
+<<oldWardrobeList "under_upper" "non-outfits">>
+<<oldWardrobeList "under_lower">>
+<<if $debug is 1>>
+	<<oldWardrobeList "over_head">>
+<</if>>
+<<oldWardrobeList "head">>
+<<oldWardrobeList "face">>
+<<oldWardrobeList "neck">>
+<<oldWardrobeList "legs">>
+<<oldWardrobeList "feet">>
+<div style="clear:both;"></div>
+<<wardrobeNewOutfit>>
+<</nobr>><</widget>>
+
+<<widget "oldWardrobeList">><<nobr>>
+
+<<set _wardrobe_list to $args[0]>>
+<<set _showType to $args[1]>>
+<<switch _wardrobe_list>>
+	<<case "over_head">><<set _wear to "wear_over_head">>
+	<<case "head">><<set _wear to "wear_head">>
+	<<case "face">><<set _wear to "wear_face">>
+	<<case "neck">><<set _wear to "wear_neck">>
+	<<case "over_upper">><<set _wear to "wear_over_upper">>
+	<<case "over_lower">><<set _wear to "wear_over_lower">>
+	<<case "upper">><<set _wear to "wear_upper">>
+	<<case "lower">><<set _wear to "wear_lower">>
+	<<case "under_upper">><<set _wear to "wear_under_upper">>
+	<<case "under_lower">><<set _wear to "wear_under_lower">>
+	<<case "legs">><<set _wear to "wear_legs">>
+	<<case "feet">><<set _wear to "wear_feet">>
+<</switch>>
+
+<div class="clothingBox">
+__<<print _wardrobe_list[0].toUpperCase() + _wardrobe_list.substring(1)>>__ <i>$wardrobe[_wardrobe_list].length / $wardrobe.space</i>
+<br><br>
+<div>
+<ul>
+<<if $worn[_wardrobe_list].name isnot "naked">>
+	<li><a @onclick="`SugarCube.State.variables.`+_wear+` = 'strip';SugarCube.State.display(SugarCube.State.variables.passage)`">Strip</a></li>
+<</if>>
+<<if _wardrobe_list is "upper">>
+	<li><a onclick="SugarCube.State.variables.wear_upper='large_towel';SugarCube.State.display(SugarCube.State.variables.passage)">Large Towel</a></li>
+<</if>>
+<<if _wardrobe_list is "upper" or _wardrobe_list is "lower" >>
+	<li><a @onclick="`SugarCube.State.variables.`+_wear+` = 'towel';SugarCube.State.display(SugarCube.State.variables.passage)`">Towel</a></li>
+<</if>>
+<<for _i to 0; _i lt $wardrobe[_wardrobe_list].length; _i++>>
+	<<set _item to $wardrobe[_wardrobe_list][_i]>>
+	<<if _item.outfitSecondary isnot undefined>>
+		<<if _item.outfitSecondary[1] isnot "broken">>
+			<<continue>>
+		<</if>>
+	<</if>>
+	<<if (_item.outfitPrimary isnot undefined and _showType is "non-outfits") or (_item.outfitPrimary is undefined and _showType is "outfits")>>
+		<<continue>>
+	<</if>>
+	<li>/*<<clothingicon _item>>*/<a @onclick="`SugarCube.State.variables.`+_wear+` = `+ _i +`;SugarCube.State.display(SugarCube.State.variables.passage)`">_item.name_cap</a>
+	<<if $wardrobe[_wardrobe_list][_i].colour isnot 0>>
+		<span @class="$wardrobe[_wardrobe_list][_i].colour">(_item.colour)</span>
+	<</if>>
+	<<wardrobeintegrity _wardrobe_list>>
+	</li>
+<</for>>
+</ul>
+</div></div>
+
+<</nobr>><</widget>>
+
+<<widget "wardrobeListReorder">><<nobr>>
+<<if $args[0] and $args[1]>>
+	<<set _slot to $args[0]>>
+	<<set _orderType to $args[1]>>
+	<<set _descending to $args[2]>>
+
+	<<set _wardrobeItems to clone($wardrobe[_slot])>>
+	<<set _newWardrobeItems to []>>
+	<<switch _orderType>>
+	<<case "name">>
+		<<set _itemNames to []>>
+		<<for _i to 0; _i lt _wardrobeItems.length; _i++>>
+			<<run _itemNames.pushUnique(_wardrobeItems[_i].name)>>
+		<</for>>
+		<<if _descending>>
+			<<set _sortedItemNames to _itemNames.sort(function(a, b){return b.localeCompare(a)})>>
+		<<else>>
+			<<set _sortedItemNames to _itemNames.sort()>>
+		<</if>>
+
+		<<for _i to 0; _i lt _sortedItemNames.length; _i++>>
+			<<for _j to 0; _j lt _wardrobeItems.length; _j++>>
+				<<if _wardrobeItems[_j].name is _sortedItemNames[_i]>>
+					<<run _newWardrobeItems.push(clone(_wardrobeItems[_j]))>>
+				<</if>>
+			<</for>>
+		<</for>>
+	<<case "color">>
+		<<set _itemColors to []>>
+		<<for _i to 0; _i lt _wardrobeItems.length; _i++>>
+			<<run _itemColors.pushUnique(_wardrobeItems[_i].colour)>>
+		<</for>>
+		<<if _descending>>
+			<<set _sortedItemColors to _itemColors.sort(function(a, b){
+				if(a === 0){
+					return 0;
+				}
+				if(b === 0){
+					return 0;
+				}
+				return b.localeCompare(a);
+			})>>
+		<<else>>
+			<<set _sortedItemColors to _itemColors.sort()>>
+		<</if>>
+
+		<<for _i to 0; _i lt _sortedItemColors.length; _i++>>
+			<<for _j to 0; _j lt _wardrobeItems.length; _j++>>
+				<<if _wardrobeItems[_j].colour is _sortedItemColors[_i]>>
+					<<run _newWardrobeItems.push(clone(_wardrobeItems[_j]))>>
+				<</if>>
+			<</for>>
+		<</for>>
+	<<case "integrity">>
+		<<set _itemIntegrity to []>>
+		<<for _i to 0; _i lt _wardrobeItems.length; _i++>>
+			<<run _itemIntegrity.pushUnique((_wardrobeItems[_i].integrity / _wardrobeItems[_i].integrity_max))>>
+		<</for>>
+		<<if _descending>>
+			<<set _sortedItemIntegrity to _itemIntegrity.sort()>>
+		<<else>>
+			<<set _sortedItemIntegrity to _itemIntegrity.sort(function(a, b){return b-a})>>
+		<</if>>
+
+		<<for _i to 0; _i lt _sortedItemIntegrity.length; _i++>>
+			<<for _j to 0; _j lt _wardrobeItems.length; _j++>>
+				<<if (_wardrobeItems[_j].integrity / _wardrobeItems[_j].integrity_max) is _sortedItemIntegrity[_i]>>
+					<<run _newWardrobeItems.push(clone(_wardrobeItems[_j]))>>
+				<</if>>
+			<</for>>
+		<</for>>
+	<<case "outfit">>
+		<<if _descending>>
+			<<set _status to ["broken",0,1]>>
+		<<else>>
+			<<set _status to [1,0,"broken"]>>
+		<</if>>
+		<<for _i to 0; _i lt _status.length; _i++>>
+			<<for _j to 0; _j lt _wardrobeItems.length; _j++>>
+				<<if _wardrobeItems[_j].one_piece is _status[_i]>>
+					<<run _newWardrobeItems.push(clone(_wardrobeItems[_j]))>>
+				<</if>>
+			<</for>>
+		<</for>>
+	<<case "lewd">>
+		<<set _itemReveal to []>>
+		<<for _i to 0; _i lt _wardrobeItems.length; _i++>>
+			<<run _itemReveal.pushUnique(_wardrobeItems[_i].reveal)>>
+		<</for>>
+		<<if _descending>>
+			<<set _sortedItemReveal to _itemReveal.sort()>>
+		<<else>>
+			<<set _sortedItemReveal to _itemReveal.sort(function(a, b){return b-a})>>
+		<</if>>
+		<<for _i to 0; _i lt _sortedItemReveal.length; _i++>>
+			<<for _j to 0; _j lt _wardrobeItems.length; _j++>>
+				<<if _wardrobeItems[_j].reveal is _sortedItemReveal[_i]>>
+					<<run _newWardrobeItems.push(clone(_wardrobeItems[_j]))>>
+				<</if>>
+			<</for>>
+		<</for>>
+	<</switch>>
+
+	<<if _newWardrobeItems isnot []>>
+		<<set $wardrobe[_slot] to clone(_newWardrobeItems)>>
+	<</if>>
+	<<run Dynamic.render()>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "wardrobeSanityCheck">><<nobr>>
+/*Fixes invisible outfit bottoms caused by bugs in previous versions*/
+<<set $lastWardrobeSanityCheck to $saveVersions.last()>>
+/*Update _equip as required*/
+<<set _equip to ["lower", "under_lower"]>>
+<<for _slot range _equip>>
+	<<set $_itemIndex to {}>>
+	<<for $_i to 0; $_i lt $wardrobe[_slot].length; $_i++>>
+		<<if $wardrobe[_slot][$_i].outfitSecondary is undefined>>
+			<<continue>>
+		<</if>>
+		<<if $wardrobe[_slot][$_i].outfitSecondary[1] is "broken">>
+			<<continue>>
+		<</if>>
+
+		/*Prep*/
+		<<set $_markBroken to true>>
+		<<set $_found to false>>
+		<<set $_item to $wardrobe[_slot][$_i]>>
+		<<set $_outfitSecondary to $wardrobe[_slot][$_i].outfitSecondary>>
+		<<if $_itemIndex[$_outfitSecondary[0]] is undefined>>
+			<<set $_itemIndex[$_outfitSecondary[0]] to []>>
+		<</if>>
+
+		/*Look for a primary piece that matches*/
+		<<for $_j to 0; $_j lt $wardrobe[$_outfitSecondary[0]].length; $_j++>>
+			<<if $wardrobe[$_outfitSecondary[0]][$_j].name isnot $_outfitSecondary[1]>>
+				<<continue>>
+			<</if>>
+			<<if $_itemIndex[$_outfitSecondary[0]].includes($_j)>>
+				<<continue>>
+			<</if>>
+
+			<<if $wardrobe[$_outfitSecondary[0]][$_j].colour is $_item.colour and $wardrobe[$_outfitSecondary[0]][$_j].accessory_colour is $_item.accessory_colour>>
+				<<if $_item.colour isnot "custom" and $_item.accessory_colour isnot "custom">>
+					<<set $_markBroken to false>>
+					<<run $_itemIndex[$_outfitSecondary[0]].push(clone($_j))>>
+					<<break>>
+				<<elseif $_item.colourCustom is $wardrobe[$_outfitSecondary[0]][$_j].colourCustom and $_item.accessory_colourCustom is $wardrobe[$_outfitSecondary[0]][$_j].accessory_colourCustom>>
+					<<set $_markBroken to false>>
+					<<run $_itemIndex[$_outfitSecondary[0]].push(clone($_j))>>
+					<<break>>
+				<</if>>
+			<</if>>
+		<</for>>
+		<<if $_markBroken is true>>
+			/*Mark as broken*/
+			<<set $wardrobe[_slot][$_i].outfitSecondary[1] to "broken">>
+			<<set $wardrobe[_slot][$_i].one_piece to "broken">>
+			<<set $wardrobe[_slot][$_i].set to clone(_slot)>>
+			<<set $wardrobe[_slot][$_i].sanityCheck to true>>
+		<</if>>
+	<</for>>
+<</for>>
+<</nobr>><</widget>>
+
+<<widget "wardrobeGetRepairedClothes">><<nobr>>
+<<set _equip to ["over_upper","over_lower","upper","lower","under_upper","under_lower","over_head","head","face","neck","legs","feet"]>>
+<<set _takenAway to 0>>
+<<for $_i to 0; $_i lt _equip.length; $_i++>>
+	<<if $wardrobeRepair[_equip[$_i]] is undefined>>
+		<<continue>>
+	<</if>>
+	<<for $_j to 0; $_j lt $wardrobeRepair[_equip[$_i]].length; $_j++>>
+		<<if $wardrobe[_equip[$_i]].length gte $wardrobe.space>>
+			<<set _takenAway++>>
+			<<continue>>
+		<</if>>
+		<<generalSend "wardrobe" _equip[$_i] `$wardrobeRepair[_equip[$_i]][$_j][0]` `$wardrobeRepair[_equip[$_i]][$_j][1]` `$wardrobeRepair[_equip[$_i]][$_j][3]`>>
+		<<if $wardrobeRepair[_equip[$_i]][$_j][2] isnot undefined and $wardrobeRepair[_equip[$_i]][$_j][2] isnot null>>
+			/*colourCustom*/
+			<<set $wardrobe[_equip[$_i]].last().colourCustom to $wardrobeRepair[_equip[$_i]][$_j][2]>>
+			<<if $wardrobe[_equip[$_i]].last().outfitPrimary isnot undefined>>
+				<<for $_label, $_value range $wardrobe[_equip[$_i]].last().outfitPrimary>>
+					<<if $wardrobe[$_label].last().name is $_value>>
+						<<set $wardrobe[$_label].last().colourCustom to $wardrobeRepair[_equip[$_i]][$_j][2]>>
+					<</if>>
+				<</for>>
+			<</if>>
+		<</if>>
+		<<if $wardrobeRepair[_equip[$_i]][$_j][4] isnot undefined and $wardrobeRepair[_equip[$_i]][$_j][4] isnot null>>
+			/*accessory_colourCustom*/
+			<<set $wardrobe[_equip[$_i]].last().accessory_colourCustom to $wardrobeRepair[_equip[$_i]][$_j][4]>>
+			<<if $wardrobe[_equip[$_i]].last().outfitPrimary isnot undefined>>
+				<<for $_label, $_value range $wardrobe[_equip[$_i]].last().outfitPrimary>>
+					<<if $wardrobe[$_label].last().name is $_value>>
+						<<set $wardrobe[$_label].last().colourCustom to $wardrobeRepair[_equip[$_i]][$_j][2]>>
+					<</if>>
+				<</for>>
+			<</if>>
+		<</if>>
+	<</for>>
+<</for>>
+<<if _takenAway gt 0>>
+	<br>
+	The driver thanks you for the donation of _takenAway items due to you not having enough space.
+<</if>>
+<<unset $wardrobeRepair>>
+<</nobr>><</widget>>
+
+<<widget "randomWear">><<nobr>>
+<<set $wardrobeOption to "wear">>
+<<set _equip to []>>
+<<set _equipped to []>>
+<<for $_label, $_value range $randomEquipConfigure>>
+	<<if $_value>>
+		<<generalUndress "wardrobe" $_label>>
+		<<run _equip.push($_label)>>
+	<</if>>
+<</for>>
+<<for _i to 0; _i lt _equip.length;_i++>>
+	<<if !_equipped.includes(_equip[_i]) and $worn[_equip[_i]].name is "naked" and $wardrobe[_equip[_i]].length gt 0>>
+		<<set _ids to []>>
+
+		<<for _j to 0; _j lt $wardrobe[_equip[_i]].length; _j++>>
+			<<if $wardrobe[_equip[_i]][_j].outfitSecondary is undefined>>
+			<<elseif $wardrobe[_equip[_i]][_j].outfitSecondary[1] isnot "broken">>
+				<<continue>>
+			<</if>>
+			<<run _ids.push(_j)>>
+		<</for>>
+		<<set _id to _ids.pluck()>>
+		<<if _id>>
+			<<run _equipped.pushUnique(_equip[_i])>>
+			<<if $wardrobe[_equip[_i]][_id].outfitPrimary isnot undefined>>
+				<<for $_label, $_value range $wardrobe[_equip[_i]][_id].outfitPrimary>>
+					<<if $_value isnot "broken">>
+						<<run _equipped.pushUnique($_label)>>
+					<</if>>
+				<</for>>
+			<</if>>
+			<<print `<<set $wear_` + _equip[_i] + ` to ` + clone(_id) + `>>`>>
+		<</if>>
+		<<unset _id>>
+	<</if>>
+<</for>>
+<<unset $randomWear>>
+<</nobr>><</widget>>
+
+:: Wardrobe [nobr]
+<<effects>>
+<<set $wardrobe_location to "wardrobe">>
+You look in your wardrobe.
+<br><br>
+<<wardrobewear>>
+<<link [[Close wardrobe|Bedroom]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+<br><br>
+<<wardrobe>>
+
+:: Changing Room [nobr]
+<<effects>><<set $outside to 0>><<set $location to "beach">>
+<<set $wardrobe_location to "wardrobe">>
+You are in a small wooden changing room.
+<br><br>
+<<wardrobewear>>
+<<if $exposed lte 1>>
+<<link[[Leave|Beach]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+<br><br>
+<<else>>
+You can't go out like this!
+<br><br>
+<</if>>
+<<wardrobe>>
+
+:: Eden Wardrobe [nobr]
+<<effects>>
+You look through the cupboard containing your clothes. There's an old dressing screen for privacy.
+<br><br>
+<<set $wardrobe_location to "wardrobe">>
+<<wardrobewear>>
+<<if $exhibitionism gte 75>>
+	<<link [[Done|Eden Cabin]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+<<elseif $exhibitionism gte 55>>
+	<<if $exposed lte 1>>
+	<<link [[Done|Eden Cabin]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+	<br><br>
+	<<else>>
+	You can't remain undressed like this!
+	<br><br>
+	<</if>>
+<<else>>
+	<<if $exposed lte 0>>
+	<<link [[Done|Eden Cabin]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+	<br><br>
+	<<else>>
+	You can't remain undressed like this!
+	<br><br>
+	<</if>>
+<</if>>
+<<wardrobe>>
+
+:: Asylum Wardrobe [nobr]
+
+<<effects>>
+You look through the cupboard containing your clothes.
+<br><br>
+<<set $wardrobe_location to "wardrobe">>
+<<wardrobewear>>
+<<if $exhibitionism lte 54>>
+	<<if $exposed lte 0>>
+		<<link [[Done|Asylum Cell]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+		<br><br>
+	<<else>>
+		You can't remain undressed like this!
+		<br><br>
+	<</if>>
+<<elseif $exhibitionism gte 75>>
+	<<link [[Done|Asylum Cell]]>><</link>>
+	<br><br>
+<<else>>
+	<<if $exposed lte 1>>
+		<<link [[Done|Asylum Cell]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+		<br><br>
+	<<else>>
+		You can't remain undressed like this!
+		<br><br>
+	<</if>>
+<</if>>
+<<wardrobe>>
+
+:: Strip Club Dressing Room [nobr]
+
+<<effects>><<set $outside to 0>><<set $location to "strip_club">>
+<<set $wardrobe_location to "wardrobe">>
+You are in the strip club's dressing room. <<if $daystate isnot "day" and $daystate isnot "dawn">>There are a few mirrors, currently occupied by staff fixing their hair and makeup.<</if>>
+<br><br>
+<<wardrobewear>>
+<<if $exhibitionism lte 14>>
+	<<if $exposed lte 0>>
+		<<link [[Back to the club (0:01)|Strip Club]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+		<br><br>
+	<<else>>
+		You can't go out like this!
+		<br><br>
+	<</if>>
+<<elseif $exhibitionism gte 55>>
+	<<link [[Back to the club (0:01)|Strip Club]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+	<br><br>
+<<else>>
+	<<if $exposed lte 1>>
+		<<link [[Back to the club (0:01)|Strip Club]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+		<br><br>
+	<<else>>
+		You can't go out like this!
+		<br><br>
+	<</if>>
+<</if>>
+<<wardrobe>>
+
+:: Brothel Dressing Room [nobr]
+
+<<effects>><<set $outside to 0>><<set $location to "brothel">>
+<<set $wardrobe_location to "wardrobe">>
+You are in the brothel's dressing room. There are a few mirrors, currently occupied by staff fixing their hair and makeup.
+<br><br>
+<<wardrobewear>>
+<<if $exhibitionism lte 14>>
+	<<if $exposed lte 0>>
+		<<link [[Back to the brothel (0:01)|Brothel]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+		<br><br>
+	<<else>>
+		You can't go out like this!
+		<br><br>
+	<</if>>
+<<elseif $exhibitionism gte 55>>
+	<<link [[Back to the brothel (0:01)|Brothel]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+	<br><br>
+<<else>>
+	<<if $exposed lte 1>>
+		<<link [[Back to the brothel (0:01)|Brothel]]>><<pass 1>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+		<br><br>
+	<<else>>
+		You can't go out like this!
+		<br><br>
+	<</if>>
+<</if>>
+<<wardrobe>>
+
+:: School Boy Wardrobe [nobr]
+
+<<effects>><<set $outside to 0>><<set $location to "pool">>
+<<set $wardrobe_location to "wardrobe">>
+You stand in front of your open locker.
+<br><br>
+<<wardrobewear>>
+<<if $exposed gte 2 and $exhibitionism lt 75>>
+	You can't go out like this!
+	<br><br>
+<<else>>
+	<<link [[Leave|School Boy Changing Room]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+	<br><br>
+<</if>>
+<<wardrobe>>
+
+:: School Girl Wardrobe [nobr]
+
+<<effects>><<set $outside to 0>><<set $location to "pool">>
+<<set $wardrobe_location to "wardrobe">>
+You stand in front of your open locker.
+<br><br>
+<<wardrobewear>>
+<<if $exposed gte 2 and $exhibitionism lt 75>>
+	You can't go out like this!
+	<br><br>
+<<else>>
+	<<link [[Leave|School Girl Changing Room]]>><<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><</link>>
+	<br><br>
+<</if>>
+<<wardrobe>>
+
+:: Wardrobe Sale Crate [nobr]
+
+Are you prepared to add all your
+<<if $crateContents is "all">>
+	clothes
+<<else>>
+	outfits
+<</if>>
+to the crate and send them to be sold? Might be best to go shopping shortly after.
+<br><br>
+<<set _value to 0>>
+<<for _items range $wardrobe>>
+	<<for _i to 0; _i lt _items.length; _i++>>
+		<<if _items[_i].shop.length is 0>>
+			<<continue>>
+		<</if>>
+		<<if _items[_i].outfitSecondary isnot undefined>>
+			<<continue>>
+		<</if>>
+		<<if _items[_i].outfitPrimary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor(_items[_i].cost * (_items[_i].integrity / _items[_i].integrity_max) / 3)>>
+	<</for>>
+<</for>>
+It will earn you £<<print ((_value + 5000) / 100).toFixed(2)>>.
+<br><br>
+<<link [[Yes|Wardrobe Sale Crate Result]]>><</link>>
+<br>
+<<link [[No|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>
+
+:: Wardrobe Sale Crate Result [nobr]
+
+<<set $tailorMonthlyService to 30>>
+<<set _value to 0>>
+<<set _equip to ["over_upper","over_lower","upper","lower","under_upper","under_lower","over_head","head","face","neck","legs","feet"]>>
+<<for $_i to 0; $_i lt _equip.length; $_i++>>
+	<<set _toDelete to []>>
+	<<for $_j to 0; $_j lt $wardrobe[_equip[$_i]].length; $_j++>>
+		<<if $wardrobe[_equip[$_i]][$_j].shop.length is 0>>
+			<<continue>>
+		<</if>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitSecondary isnot undefined>>
+			<<run _toDelete.push(clone($_j))>>
+			<<continue>>
+		<</if>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitPrimary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor($wardrobe[_equip[$_i]][$_j].cost * ($wardrobe[_equip[$_i]][$_j].integrity / $wardrobe[_equip[$_i]][$_j].integrity_max) / 3)>>
+		<<run _toDelete.push(clone($_j))>>
+	<</for>>
+	<<for $_j to $wardrobe[_equip[$_i]].length; $_j gte 0; $_j-->>
+		<<if _toDelete.includes($_j)>>
+			<<run $wardrobe[_equip[$_i]].deleteAt($_j)>>
+		<</if>>
+	<</for>>
+<</for>>
+The driver takes the crate away, leaving £<<print ((_value + 5000) / 100).toFixed(2)>> in its place.
+<<set $money += Math.floor(_value + 5000)>>
+<br><br>
+<<link [[Continue|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>
+
+:: Wardrobe Repair Crate [nobr]
+
+Are you prepared to add all your
+<<if $crateContents is "all">>
+	clothes
+<<else>>
+	outfits
+<</if>>
+to the crate and send them to be repaired? Might be best to go shopping shortly after.
+<br><br>
+<<set _value to 0>>
+<<for _items range $wardrobe>>
+	<<for _i to 0; _i lt _items.length; _i++>>
+		<<if _items[_i].outfitSecondary isnot undefined>>
+			<<continue>>
+		<</if>>
+		<<if _items[_i].outfitPrimary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor(_items[_i].cost * (1 - (_items[_i].integrity / _items[_i].integrity_max)) * 1.25)>>
+	<</for>>
+<</for>>
+It will cost you
+<<if _value gt 5000>>
+	£<<print ((_value - 5000) / 100).toFixed(2)>>.
+<<else>>
+	nothing.
+<</if>>
+<br><br>
+<<if $money gte _value>>
+	<<link [[Yes|Wardrobe Repair Crate Result]]>><</link>>
+<<else>>
+	Not enough money.
+<</if>>
+<br>
+<<link [[No|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>
+
+:: Wardrobe Repair Crate Result [nobr]
+
+<<set $tailorMonthlyService to 30>>
+<<set $wardrobeRepair to {timeLeft: 1}>>
+<<set _equip to ["over_upper","over_lower","upper","lower","under_upper","under_lower","over_head","head","face","neck","legs","feet"]>>
+<<set _value to 0>>
+<<for $_i to 0; $_i lt _equip.length; $_i++>>
+	<<set _toDelete to []>>
+	<<for $_j to 0; $_j lt $wardrobe[_equip[$_i]].length; $_j++>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitSecondary isnot undefined>>
+			<<run _toDelete.push(clone($_j))>>
+			<<continue>>
+		<</if>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitPrimary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor($wardrobe[_equip[$_i]][$_j].cost * (1 - ($wardrobe[_equip[$_i]][$_j].integrity / $wardrobe[_equip[$_i]][$_j].integrity_max)) * 1.25)>>
+
+		<<if $wardrobeRepair[_equip[$_i]] is undefined>>
+			<<set $wardrobeRepair[_equip[$_i]] to []>>
+		<</if>>
+		<<set _itemStats to [
+				clone($wardrobe[_equip[$_i]][$_j].index),
+				clone($wardrobe[_equip[$_i]][$_j].colour),
+				clone($wardrobe[_equip[$_i]][$_j].colourCustom),
+				clone($wardrobe[_equip[$_i]][$_j].accessory_colour),
+				clone($wardrobe[_equip[$_i]][$_j].accessory_colourCustom)
+			]>>
+		<<run $wardrobeRepair[_equip[$_i]].push(clone(_itemStats))>>
+		<<run _toDelete.push(clone($_j))>>
+	<</for>>
+	<<for $_j to $wardrobe[_equip[$_i]].length; $_j gte 0; $_j-->>
+		<<if _toDelete.includes($_j)>>
+			<<run $wardrobe[_equip[$_i]].deleteAt($_j)>>
+		<</if>>
+	<</for>>
+<</for>>
+<<if _value gt 5000>>
+	<<set $money -= _value - 5000>>
+	The driver takes £<<print ((_value - 5000) / 100).toFixed(2)>> and the crate away.
+<<else>>
+	The driver takes the crate away.
+<</if>>
+<br><br>
+<<link [[Continue|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>

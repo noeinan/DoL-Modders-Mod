@@ -1,0 +1,183 @@
+:: Widgets variablesStart2 [widget]
+<<widget "variablesStart2">><<nobr>>
+/*Variables required at the start of passage 'Start2', please remove if not required"*/
+
+<<if $skinColor.tanImgEnabled is null>>
+	<<set $skinColor.tanImgEnabled to "f">>
+<</if>>
+
+<<clamp>>
+<<effects>>
+<<initnpcgender>>
+<<set $physiquesize to (1000 * $devlevel)>>
+
+<<if $debug is 1>>
+	<<set $spraymax += 1>>
+	<<set $spray += 1>>
+<</if>>
+
+<<set $per_npc to {}>>
+
+<<set $physique to ($physiquesize / 7) * 3>>
+<<set $beauty to ($beautymax / 7)>>
+
+<<set $playergender to 1>>/*Needed to stop VersionUpdate triggering on first couple of pages.*/
+
+<<set $devstate to 1>>
+
+<<if $breastsize is 0>>
+	<<set $breastsizeold to 0>><<set $breastgrowthtimer to 350>>
+<<elseif $breastsize is 1>>
+	<<set $breastsizeold to 1>><<set $breastgrowthtimer to 350>>
+<<elseif $breastsize is 2>>
+	<<set $breastsizeold to 2>><<set $breastgrowthtimer to 350>>
+<<elseif $breastsize is 3>>
+	<<set $breastsizeold to 3>><<set $breastgrowthtimer to 350>>
+<<else>>
+	<<set $breastsizeold to 4>><<set $breastgrowthtimer to 350>>
+<</if>>
+
+<<physicalAdjustmentsInit>>
+<<tryOnInit>>
+
+<<givestartclothing>>
+
+<<set $intro to 0>>
+<<set $haircolour to $hairselect>>
+<<set $naturalhaircolour to $haircolour>>
+
+<<if $cheatdisable is "f" and !$debug>>
+	<<set $feats.locked to true>>
+<</if>>
+
+<<set $eyecolour to $eyeselect>>
+
+<<if $awareselect is "innocent">>
+<<elseif $awareselect is "knowledgeable">>
+	<<set $awareness += 200>>
+	<<set $awarelevel to 1>>
+<</if>>
+
+<<set $player.gender_appearance to $player.gender>>
+<<set $player.gender_appearance_factors to []>>
+<<set $player.femininity to 0>>
+<<set $player.gender_appearance_without_overwear to $player.gender>>
+<<set $player.gender_appearance_without_overwear_factors to []>>
+<<set $player.femininity_without_overwear to 0>>
+<<if $player.gender is "f">>
+	<<set $vaginause to 0>>
+	<<set $vaginastate to 0>>
+	<<set $vaginaexist to 1>>
+	<<set $penisuse to "none">>
+	<<set $penisstate to "none">>
+	<<set $penisexist to 0>>
+	<<set $player.sex to "f">>
+	<<set $player.ballsExist to false>>
+<<elseif $player.gender is "m">>
+	<<set $vaginause to "none">>
+	<<set $vaginastate to "none">>
+	<<set $vaginaexist to 0>>
+	<<set $penisuse to 0>>
+	<<set $penisstate to 0>>
+	<<set $penisexist to 1>>
+	<<set $player.sex to "m">>
+	<<set $player.ballsExist to true>>
+<<elseif $player.gender is "h">>
+	<<set $vaginause to 0>>
+	<<set $vaginastate to 0>>
+	<<set $vaginaexist to 1>>
+	<<set $penisuse to 0>>
+	<<set $penisstate to 0>>
+	<<set $penisexist to 1>>
+	<<set $player.gender to "h">>
+	<<set $player.sex to "h">>
+	<<set $player.penisExist to true>>
+	<<set $player.vaginaExist to true>>
+<</if>>
+
+<<if $background is "nerd">>
+	<<set $science += 200>><<set $maths += 200>><<set $english += 200>><<set $history += 200>><<set $school += 800>><<set $cool to 0>>
+<<elseif $background is "athlete">>
+	<<set $physique += ($physiquesize / 4)>><<set $swimmingskill += 200>><<set $athletics += 200>><<set $science to 100>><<set $maths to 100>><<set $english to 100>><<set $history to 100>><<set $school to 400>>
+<<elseif $background is "delinquent">>
+	<<set $delinquency += 401>><<set $cool += 200>>
+<<elseif $background is "promiscuous">>
+	<<set $promiscuity += 35>>
+<<elseif $background is "exhibitionist">>
+	<<set $exhibitionism += 35>>
+<<elseif $background is "deviant">>
+	<<set $deviancy += 35>>
+<<elseif $background is "beautiful">>
+	<<set $beauty += ($beautymax / 2)>>
+<<elseif $background is "crossdresser">>
+	<<if $player.gender is "f">>
+		<<set $player.gender_posture to "m">>
+	<<elseif $player.gender is "m">>
+		<<set $player.gender_posture to "f">>
+	<<else>>
+		<<set $player.gender_posture to "n">>
+	<</if>>
+<</if>>
+<<set $backgroundTraits to [$background]>>
+
+<<if $hairlength gte 900>>
+	<<set $hairlengthstage to "feet">>
+<<elseif $hairlength gte 700>>
+	<<set $hairlengthstage to "thighs">>
+<<elseif $hairlength gte 600>>
+	<<set $hairlengthstage to "navel">>
+<<elseif $hairlength gte 400>>
+	<<set $hairlengthstage to "chest">>
+<<elseif $hairlength gte 200>>
+	<<set $hairlengthstage to "shoulder">>
+<<else>>
+	<<set $hairlengthstage to "short">>
+<</if>>
+
+<<if $fringelength gte 900>>
+	<<set $fringelengthstage to "feet">>
+<<elseif $fringelength gte 700>>
+	<<set $fringelengthstage to "thighs">>
+<<elseif $fringelength gte 600>>
+	<<set $fringelengthstage to "navel">>
+<<elseif $fringelength gte 400>>
+	<<set $fringelengthstage to "chest">>
+<<elseif $fringelength gte 200>>
+	<<set $fringelengthstage to "shoulder">>
+<<else>>
+	<<set $fringelengthstage to "short">>
+<</if>>
+
+<<if $saveId is undefined>>
+	<<set $saveId to random(10000, 99999)>>
+<</if>>
+
+<<if $feats.allSaves.points gt 0>>
+	<<applyFeatsBoost>>
+<</if>>
+
+<<if $penisexist is 1>>
+	<<set $semen_amount to 90>>
+	<<set $semen_volume to 90>>
+<<else>>
+	<<set $semen_amount to 0>>
+	<<set $semen_volume to 0>>
+<</if>>
+
+<<set $bodywritingImages to true>>
+
+<<if $dateCount is undefined>>
+	<<set $dateCount to {
+		Total: 0,
+		Robin: 0,
+		Whitney: 0,
+		Kylar: 0,
+		Eden: 0,
+		Avery: 0,
+		BlackWolfHunts: 0,
+	}>>
+<</if>>
+
+<<setupTransformationPiecesObject>>
+
+<</nobr>><</widget>>

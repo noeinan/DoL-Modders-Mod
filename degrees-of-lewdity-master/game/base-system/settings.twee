@@ -1,0 +1,932 @@
+:: Widgets Settings [widget]
+
+<<widget "initsettings">><<nobr>>
+<<set $player.gender to "f">>
+<<set $player.sex to "f">>
+<<set $devlevel to 12>>
+<<set $breastsize to 0>>
+<<set $breastsensitivity to 1>>
+<<set $penissize to 1>>
+<<set $genitalsensitivity to 1>>
+<<set $eyeselect to "purple">>
+<<set $hairselect to "red">>
+<<set $hairlength to 200>>
+<<set $awareselect to "innocent">>
+<<set $background to "waif">>
+<<if StartConfig.enableImages is true>>
+	<<set $images to 1>>
+	<<set $silhouettedisable to "f">>
+<</if>>
+<<set $numberify_enabled to 1>>
+<<set $gamemode to "normal">>
+<<set $whitechance to 90>>
+<<set $blackchance to 10>>
+<<set $bestialitydisable to "f">>
+<<set $swarmdisable to "f">>
+<<set $spiderdisable to "f">>
+<<set $bodywritingdisable to "f">>
+<<set $parasitedisable to "f">>
+<<set $bestialitydisable to "f">>
+<<set $slimedisable to "f">>
+<<set $voredisable to "f">>
+<<set $tentacledisable to "f">>
+<<set $analdisable to "f">>
+<<set $transformdisable to "f">>
+<<set $hirsutedisable to "t">>
+<<set $breastfeedingdisable to "f">>
+<<set $analpregdisable to "f">>
+<<set $tipdisable to "f">>
+<<if $debug is 1>>
+	<<set $debugdisable to "f">>
+<<else>>
+	<<set $debugdisable to "t">>
+<</if>>
+	<<set $cheatdisable to "t">>
+<<set $watersportsdisable to "f">>
+<<set $timestyle to "military">>
+<<set $saveName to "">>
+<<set $zoom to 100>>
+<<set $checkstyle to "words">>
+<<set $blackwolfmonster to 0>>
+<<set $player.ballsExist to false>>
+
+<<set $newWardrobeStyle to false>>
+<<set $imgLighten to false>>
+<<set $sidebarStats to "Disabled">>
+<<set $combatControls to "radio">>
+<<set $reducedLineHeight to false>>
+
+<</nobr>><</widget>>
+
+<<widget "displaySettings">><<nobr>>
+<<if $args[0]>>
+	<<set $currentSettings to $args[0]>>
+<</if>>
+<<if $passage isnot "Start" and ($currentSettings is "characterSettings" or $currentSettings is "featSettings")>>
+	<<set $currentSettings to "gameSettings">>
+<</if>>
+<<switch $currentSettings>>
+	<<case "characterSettings">><<replace #settingsDiv>><<characterSettings>><</replace>>
+	<<case "featSettings">><<replace #settingsDiv>><<featSettings>><</replace>>
+	<<case "gameSettings">><<replace #settingsDiv>><<gameSettings>><</replace>>
+	<<case "sizeLimitsSettings">><<replace #settingsDiv>><<sizeLimitsSettings>><</replace>>
+	<<case "npcSettings">><<replace #settingsDiv>><<npcSettings>><</replace>>
+	<<case "generalSettings">><<replace #settingsDiv>><<generalSettings>><</replace>>
+	<<case "exportsettings">><<replace #settingsDiv>><<exportsettings>><</replace>>
+	<<default>><<replace #settingsDiv>><<gameSettings>><</replace>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "settings">><<nobr>>
+<<if $passage is "Start">>
+<div id="settingsExit">
+	<<settingsExit>>
+</div>
+<br>
+<</if>>
+<div class="gold">
+	<<if $passage is "Start">>
+		<<button "Character Creation<span class='red'>*</span>">>
+			<<displaySettings "characterSettings">>
+		<</button>>
+		<<if $images is 1>>
+			<<button "Feat Boosts<span class='red'>*</span> <img src='img/ui/GoldCoin.gif' style='height:1.1em;margin-bottom:-3px;'/>">>
+				<<displaySettings "featSettings">>
+			<</button>>
+		<<else>>
+			<<button "Feat Boosts<span class='red'>*</span>">>
+				<<displaySettings "featSettings">>
+			<</button>>
+		<</if>>
+	<</if>>
+	<<button "Game Settings">>
+		<<displaySettings "gameSettings">>
+	<</button>>
+	<<button "Size Limits">>
+		<<displaySettings "sizeLimitsSettings">>
+	<</button>>
+	<<button "Named NPC Settings">>
+		<<displaySettings "npcSettings">>
+	<</button>>
+	<<button "General">>
+		<<displaySettings "generalSettings">>
+	<</button>>
+	<<button "Export/Import Settings">>
+		<<displaySettings "exportsettings">>
+	<</button>>
+</div>
+
+<br>
+<div id="settingsDiv">
+	<<if $passage is "Start">>
+	<<characterSettings>><<set $currentSettings to "characterSettings">>
+	<<else>>
+	<<gameSettings>><<set $currentSettings to "gameSettings">>
+	<</if>>
+</div>
+<br>
+<<link "Top of Page">>
+	<<script>>
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	<</script>>
+<</link>>
+<<if $passage isnot "Start">>
+<br><br>
+<div id="settingsExit">
+	<<settingsExit>>
+</div>
+<</if>>
+<br><br>
+<</nobr>><</widget>>
+
+<<widget "settingsExit">><<nobr>>
+<<if $passage is "Start">>
+	<<set _buttonName to "Begin">>
+<<else>>
+	<<set _buttonName to "Confirm">>
+<</if>>
+<<link _buttonName>>
+	<<if ($feats.locked is true or $cheatdisable is "t") and ($feats.soft is true or ($gamemode isnot "soft" and $alluremod gte 1))>>
+		<<settingsExitFunction>>
+	<<else>>
+		<<replace #settingsExit>><<settingsExitConfirm>><</replace>>
+	<</if>>
+<</link>>
+<</nobr>><</widget>>
+
+<<widget "settingsExitConfirm">><<nobr>>
+<span class="red">Some settings will disable feats in some way, is this OK?</span>
+<br>
+<<link "No, please undo these changes">>
+	<<set $cheatdisable to "t">>
+	<<if $gamemode is "soft">>
+		<<set $gamemode to "normal">>
+	<</if>>
+	<<if $alluremod lt 1>>
+		<<set $alluremod to 1>>
+	<</if>>
+	<<replace #settingsExit>><<settingsExit>><</replace>>
+	<<displaySettings>>
+<</link>>
+<br><br><br>
+<<link "Yes">>
+	<<settingsExitFunction>>
+<</link>>
+<</nobr>><</widget>>
+
+<<widget "settingsExitFunction">><<nobr>>
+	<<if $settingsExitPassage is "Start2">>
+		<<setSkinColorBase>>
+	<</if>>
+	<<if $cheatdisable is "f" and !$debug>>
+		<<set $feats.locked to true>>
+	<</if>>
+	<<if $gamemode is "soft" or $alluremod lt 1>>
+		<<set $feats.soft to true>>
+	<</if>>
+	<<initnpcgender>>
+	<<hirsuteHideCheck>>
+	<<tanned 0 "ignoreCoverage">>
+	<<set _settingsExitPassage to clone($settingsExitPassage)>>
+	<<unset $settingsExitPassage>>
+	<<run State.display(_settingsExitPassage)>>
+<</nobr>><</widget>>
+
+<<widget "characterSettings">><<nobr>>
+	<span class="red">The Character tab can only be accessed at the beginning.</span>
+	<br><br>
+
+	<<if $dev is 1>>
+		<span class="gold">Difficulty</span>
+		<br>
+		<span class="red">Harder</span> <------------------------------> <span class="green">Easier</span>
+		<br>
+		<<numberslider "$devlevel" $devlevel 6 16 1>>
+		<br><br>
+	<<else>>
+		<span class="gold">Body size</span> - A smaller body makes you inflict less damage during encounters, making defiance harder.
+		<br>
+		<label>Tiny <<print '<<radiobutton "$devlevel" 6 ' + ($devlevel is 6 ? "checked" : "") + '>>'>></label> |
+		<label>Small <<print '<<radiobutton "$devlevel" 10 ' + ($devlevel is 10 ? "checked" : "") + '>>'>></label> |
+		<label>Normal <<print '<<radiobutton "$devlevel" 12 ' + ($devlevel is 12 ? "checked" : "") + '>>'>></label> |
+		<label>Large <<print '<<radiobutton "$devlevel" 16 ' + ($devlevel is 16 ? "checked" : "") + '>>'>></label>
+		<br><br>
+	<</if>>
+
+	<span class="gold">Gender</span>
+	<br>
+	<label>Male <<print '<<radiobutton "$player.gender" "m" ' + ($player.gender is "m" ? "checked" : "") + '>>'>></label> |
+	<label>Female <<print '<<radiobutton "$player.gender" "f" ' + ($player.gender is "f" ? "checked" : "") + '>>'>></label> |
+	<label>Hermaphrodite <<print '<<radiobutton "$player.gender" "h" ' + ($player.gender is "h" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Natural features</span>
+	<br>
+	<label>Masculine <<print '<<radiobutton "$player.gender_body" "m" ' + ($player.gender_body is "m" ? "checked" : "") + '>>'>></label> |
+	<label>Feminine <<print '<<radiobutton "$player.gender_body" "f" ' + ($player.gender_body is "f" ? "checked" : "") + '>>'>></label> |
+	<label>Androgynous <<print '<<radiobutton "$player.gender_body" "a" ' + ($player.gender_body is "a" ? "checked" : "") + '>>'>></label> |
+	<br><br>
+
+	<<if $dev is 1>>
+		<span class="gold">Sex</span>
+		<br>
+		<label>Penis <<print '<<radiobutton "$player.sex" "m" ' + ($player.sex is "m" ? "checked" : "") + '>>'>></label> |
+		<label>Vagina <<print '<<radiobutton "$player.sex" "f" ' + ($player.sex is "f" ? "checked" : "") + '>>'>></label>
+		<br><br>
+	<</if>>
+
+	<span class="gold">Penis size</span> - if applicable
+	<br>
+	<label>Tiny <<print '<<radiobutton "$penissize" 0 ' + ($penissize is 0 ? "checked" : "") + '>>'>></label> |
+	<label>Small <<print '<<radiobutton "$penissize" 1 ' + ($penissize is 1 ? "checked" : "") + '>>'>></label> |
+	<label>Normal <<print '<<radiobutton "$penissize" 2 ' + ($penissize is 2 ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Breast size</span>
+	<br>
+	<label>Flat <<print '<<radiobutton "$breastsize" 0 ' + ($breastsize is 0 ? "checked" : "") + '>>'>></label> |
+	<label>Budding <<print '<<radiobutton "$breastsize" 1 ' + ($breastsize is 1 ? "checked" : "") + '>>'>></label> |
+	<label>Tiny <<print '<<radiobutton "$breastsize" 2 ' + ($breastsize is 2 ? "checked" : "") + '>>'>></label> |
+	<label>Small <<print '<<radiobutton "$breastsize" 3 ' + ($breastsize is 3 ? "checked" : "") + '>>'>></label> |
+	<label>Pert <<print '<<radiobutton "$breastsize" 4 ' + ($breastsize is 4 ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Ass size</span>
+	<br>
+	<label>Slender <<print '<<radiobutton "$bottomsize" 0 ' + ($bottomsize is 0 ? "checked" : "") + '>>'>></label> |
+	<label>Slim <<print '<<radiobutton "$bottomsize" 1 ' + ($bottomsize is 1 ? "checked" : "") + '>>'>></label> |
+	<label>Modest <<print '<<radiobutton "$bottomsize" 2 ' + ($bottomsize is 2 ? "checked" : "") + '>>'>></label> |
+	<label>Cushioned <<print '<<radiobutton "$bottomsize" 3 ' + ($bottomsize is 3 ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Testes</span> - applicable only if hermaphrodite
+	<br>
+	<label>Yes <<print '<<radiobutton "$player.ballsExist" true ' + ($player.ballsExist is true ? "checked" : "") + '>>'>></label> |
+	<label>No <<print '<<radiobutton "$player.ballsExist" false ' + ($player.ballsExist is false ? "checked" : "") + '>>'>></label> |
+	<br><br>
+
+	<span class="gold">Chest sensitivity</span>
+	<br>
+	<label>Normal <<print '<<radiobutton "$breastsensitivity" 1 ' + ($breastsensitivity is 1 ? "checked" : "") + '>>'>></label> |
+	<label><span class="pink">Sensitive</span> <<print '<<radiobutton "$breastsensitivity" 3 ' + ($breastsensitivity is 3 ? "checked" : "") + '>>'>></label> |
+	<label><span class="red">Very sensitive</span> <<print '<<radiobutton "$breastsensitivity" 5 ' + ($breastsensitivity is 5 ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Genital sensitivity</span>
+	<br>
+	<label>Normal <<print '<<radiobutton "$genitalsensitivity" 1 ' + ($genitalsensitivity is 1 ? "checked" : "") + '>>'>></label> |
+	<label><span class="pink">Sensitive</span> <<print '<<radiobutton "$genitalsensitivity" 3 ' + ($genitalsensitivity is 3 ? "checked" : "") + '>>'>></label> |
+	<label><span class="red">Very sensitive</span> <<print '<<radiobutton "$genitalsensitivity" 5 ' + ($genitalsensitivity is 5 ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Eye Colour</span>
+	<br>
+	<label><span class="purple">Purple</span> <<print '<<radiobutton "$eyeselect" "purple" ' + ($eyeselect is "purple" ? "checked" : "") + '>>'>></label> |
+	<label><span class="blue">Dark Blue</span> <<print '<<radiobutton "$eyeselect" "dark blue" ' + ($eyeselect is "dark blue" ? "checked" : "") + '>>'>></label> |
+	<label><span class="lblue">Light Blue</span> <<print '<<radiobutton "$eyeselect" "light blue" ' + ($eyeselect is "light blue" ? "checked" : "") + '>>'>></label> |
+	<label><span class="tangerine">Amber</span> <<print '<<radiobutton "$eyeselect" "amber" ' + ($eyeselect is "amber" ? "checked" : "") + '>>'>></label> |
+	<label><span class="brown">Hazel</span> <<print '<<radiobutton "$eyeselect" "hazel" ' + ($eyeselect is "hazel" ? "checked" : "") + '>>'>></label> |
+	<label><span class="green">Green</span> <<print '<<radiobutton "$eyeselect" "green" ' + ($eyeselect is "green" ? "checked" : "") + '>>'>></label> |
+	<label><span class="red">Red</span> <<print '<<radiobutton "$eyeselect" "red" ' + ($eyeselect is "red" ? "checked" : "") + '>>'>></label> |
+	<label><span class="pink">Pink</span> <<print '<<radiobutton "$eyeselect" "pink" ' + ($eyeselect is "pink" ? "checked" : "") + '>>'>></label> |
+	<label><span class="grey">Grey</span> <<print '<<radiobutton "$eyeselect" "grey" ' + ($eyeselect is "grey" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Hair Colour</span>
+	<br>
+	<label><span class="red">Red</span> <<print '<<radiobutton "$hairselect" "red" ' + ($hairselect is "red" ? "checked" : "") + '>>'>></label> |
+	<label><span class="black">Black</span> <<print '<<radiobutton "$hairselect" "black" ' + ($hairselect is "black" ? "checked" : "") + '>>'>></label> |
+	<label><span class="brown">Brown</span> <<print '<<radiobutton "$hairselect" "brown" ' + ($hairselect is "brown" ? "checked" : "") + '>>'>></label> |
+	<label><span class="lightbrown">Light brown</span> <<print '<<radiobutton "$hairselect" "lightbrown" ' + ($hairselect is "lightbrown" ? "checked" : "") + '>>'>></label> |
+	<label><span class="gold">Blond</span> <<print '<<radiobutton "$hairselect" "blond" ' + ($hairselect is "blond" ? "checked" : "") + '>>'>></label> |
+	<label><span class="platinum">Platinum blond</span> <<print '<<radiobutton "$hairselect" "platinumblond" ' + ($hairselect is "platinumblond" ? "checked" : "") + '>>'>></label> |
+	<label><span class="strawberry">Strawberry blond</span> <<print '<<radiobutton "$hairselect" "strawberryblond" ' + ($hairselect is "strawberryblond" ? "checked" : "") + '>>'>></label> |
+	<label><span class="tangerine">Ginger</span> <<print '<<radiobutton "$hairselect" "ginger" ' + ($hairselect is "ginger" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Hair length</span>
+	<br>
+	<label>Ear <<print '<<radiobutton "$hairlength" 0 ' + ($hairlength is 0 ? "checked" : "") + '>>'>></label> |
+	<label>Neck <<print '<<radiobutton "$hairlength" 200 ' + ($hairlength is 200 ? "checked" : "") + '>>'>></label> |
+	<label>Chest <<print '<<radiobutton "$hairlength" 400 ' + ($hairlength is 400 ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Skin Colour</span>
+	<br>
+	Reddish:
+	<label>Light <<print '<<radiobutton "$skinColor.natural" "light" ' + ($skinColor.natural is "light" ? "checked" : "") + '>>'>></label> |
+	<label>Medium <<print '<<radiobutton "$skinColor.natural" "medium" ' + ($skinColor.natural is "medium" ? "checked" : "") + '>>'>></label> |
+	<label>Dark <<print '<<radiobutton "$skinColor.natural" "dark" ' + ($skinColor.natural is "dark" ? "checked" : "") + '>>'>></label> |
+	<label>Gyaru <<print '<<radiobutton "$skinColor.natural" "gyaru" ' + ($skinColor.natural is "gyaru" ? "checked" : "") + '>>'>> (Pale with no tan, very dark with full tan)</label>
+	<br>
+	Yellowish:
+	<label>Light <<print '<<radiobutton "$skinColor.natural" "ylight" ' + ($skinColor.natural is "ylight" ? "checked" : "") + '>>'>></label> |
+	<label>Medium <<print '<<radiobutton "$skinColor.natural" "ymedium" ' + ($skinColor.natural is "ymedium" ? "checked" : "") + '>>'>></label> |
+	<label>Dark <<print '<<radiobutton "$skinColor.natural" "ydark" ' + ($skinColor.natural is "ydark" ? "checked" : "") + '>>'>></label> |
+	<label>Gyaru <<print '<<radiobutton "$skinColor.natural" "ygyaru" ' + ($skinColor.natural is "ygyaru" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<label>Initial Tan Value: <<numberslider "$skinColor.range" $skinColor.range 0 100 1>></label>
+	<br>
+	<<if StartConfig.enableImages is true>>
+		<<link "Test Colour">>
+			<<replace #test>>
+				<<if $skinColor.tanImgEnabled is "f">>
+					<<set $skinColor.tanImgEnabled to "t">>
+					<<set _skincolortemp to true>>
+				<</if>>
+				<<print '<div style="height: 30px; width: 50px; background-color: red; filter: '+skinColor($skinColor.tanImgEnabled, $skinColor.range,setup.skinColor[$skinColor.natural])+';"></div>'>>
+				<<if _skincolortemp is true>>
+					<<set $skinColor.tanImgEnabled to "f">>
+				<</if>>
+			<</replace>>
+		<</link>> (approximate) - <span class="red">Visual representation of the PC's skin colour and tanning changes must be enabled through the General tab of this Settings menu before they will function. They are disabled by default due to performance issues on some devices.</span>
+		<div id="test">/*<<print '<div style="height: 30px; width: 50px; background-color: red; filter: '+skinColor($skinColor.tanImgEnabled, $skinColor.range,setup.skinColor[$skinColor.natural])+';"></div>'>>*/</div>
+		<br>
+	<</if>>
+	<br>
+
+	<span class="gold">Awareness</span> - Whether your character knows a thing or two about sex despite their lack of experience.
+	<br>
+	<label>Innocent <<print '<<radiobutton "$awareselect" "innocent" ' + ($awareselect is "innocent" ? "checked" : "") + '>>'>></label> |
+	<label>Knowledgeable <<print '<<radiobutton "$awareselect" "knowledgeable" ' + ($awareselect is "knowledgeable" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Background</span>
+	<br>
+	<label>Waif <<print '<<radiobutton "$background" "waif" ' + ($background is "waif" ? "checked" : "") + '>>'>> - No special advantages or disadvantages. <i>Recommended for beginners.</i></label>
+	<br>
+	<label>Nerd <<print '<<radiobutton "$background" "nerd" ' + ($background is "nerd" ? "checked" : "") + '>>'>> - Good at school. Picked on. <span class="red">(This will prevent Unsocial Moth feat from being earned)</span></label>
+	<br>
+	<label>Athlete <<print '<<radiobutton "$background" "athlete" ' + ($background is "athlete" ? "checked" : "") + '>>'>> - Physically capable. Grades have suffered.</label>
+	<br>
+	<label>Delinquent <<print '<<radiobutton "$background" "delinquent" ' + ($background is "delinquent" ? "checked" : "") + '>>'>> - Your antics have made you popular with other students. Less so with the teachers.</label>
+	<br>
+	<label>Promiscuous <<print '<<radiobutton "$background" "promiscuous" ' + ($background is "promiscuous" ? "checked" : "") + '>>'>> - You've experimented sexually.</label>
+	<br>
+	<label>Exhibitionist <<print '<<radiobutton "$background" "exhibitionist" ' + ($background is "exhibitionist" ? "checked" : "") + '>>'>> - You have an affinity for exposing yourself in public places.</label>
+	<br>
+	<label>Deviant <<print '<<radiobutton "$background" "deviant" ' + ($background is "deviant" ? "checked" : "") + '>>'>> - You <i>really</i> like animals.</label>
+	<br>
+	<label>Beautiful <<print '<<radiobutton "$background" "beautiful" ' + ($background is "beautiful" ? "checked" : "") + '>>'>> - You turn heads. <i>Not recommended for beginners.</i></label>
+	<br>
+	<label>Crossdresser <<print '<<radiobutton "$background" "crossdresser" ' + ($background is "crossdresser" ? "checked" : "") + '>>'>> - You've taken a liking to the clothing of the opposite sex. Does nothing for hermaphrodites.</label>
+	<br>
+	<label>Lustful <<print '<<radiobutton "$background" "lustful" ' + ($background is "lustful" ? "checked" : "") + '>>'>> - Arousal increases over time, and needs to be managed.</label>
+
+<</nobr>><</widget>>
+
+<<widget "featSettings">><<nobr>>
+	<span class="red">The Feat Boost's tab can only be accessed at the beginning.</span>
+	<br><br>
+	<<if $feats.allSaves.points is undefined or $feats.allSaves.points is 0>>
+		<span class="red">You have 0 VrelCoins to use on boosts at the moment. If this is incorrect, please load your last save and restart.</span>
+	<<else>>
+		<<link "Reset All Feats">>
+			<<set $feats to {
+				"locked":false,
+				"soft":false,
+				"allSaves":{},
+				"currentSave":{},
+				"filter":"All"
+			}>>
+			<<script>>
+				localStorage.removeItem("dolFeats");
+			<</script>>
+			<<setupFeats true>>
+			<<displaySettings "featSettings">>
+		<</link>><span class="red"> This will remove all feats that have been earned so far, meaning you will have to collect them again.</span>
+		Loading your last save with these feats will revert this.
+		<br><br>
+		<div id="featsPointsMenu">
+			<<featsPointsMenu>>
+		</div>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "gameSettings">><<nobr>>
+	<span class="gold">Game Mode</span>
+	<br>
+	<label>Normal mode <<print '<<radiobutton "$gamemode" "normal" ' + ($gamemode is "normal" ? "checked" : "") + '>>'>> - Survive in a dangerous world.</label>
+	<br>
+	<label>Soft mode
+	<<print '<<radiobutton "$gamemode" "soft" ' + ($gamemode is "soft" ? "checked" : "") + '>>'>>
+	- For those who prefer a light-hearted lewd adventure, though the game is still dark in places. <span class="red">This is an experimental feature, and contains gamebreaking bugs. It will be changed or removed in the future. Leaving the settings with soft mode will prevent you from earning feats till it is set to normal mode. Doing this will permanently prevent some feats from being earned.</span></label>
+	<br>
+	<<if $intro is 1 or $gamemode is "hard">>
+		<label>Hard mode
+		<<print '<<radiobutton "$gamemode" "hard" ' + ($gamemode is "hard" ? "checked" : "") + '>>'>>
+		- Removes lewd stat decay (promiscuity, exhibitionism, deviancy,) making trauma and control increasingly difficult to manage. Can only be chosen at the game's start, and being incarcerated in the asylum will put you in normal mode. <span class="red">This is an experimental feature, and will be changed or removed in the future.</span></label>
+		<br>
+	<</if>>
+	<br><br>
+
+	<span class="gold">Percentage of people attracted to you that are male</span>
+	<br>
+	<<numberslider "$malechance" $malechance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Percentage of women that have penises</span>
+	<br>
+	<<numberslider "$dgchance" $dgchance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Percentage of women that have strap-on penises</span>
+	<br>
+	<<numberslider "$straponchance" $straponchance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Percentage of men that have vaginas</span>
+	<br>
+	<<numberslider "$cbchance" $cbchance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Percentage of other victims that are male</span>
+	<br>
+	<<numberslider "$malevictimchance" $malevictimchance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Proportion of same-sex couples</span>
+	<br>
+	<<numberslider "$homochance" $homochance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Average size of women's breasts</span> - A bigger number means bigger breasts in the world. At 12 everyone will have enormous breasts. At -12 everyone will have flat chests. Defaults to 0, which will result in a broad range of sizes.
+	<br>
+	<<numberslider "$breast_mod" $breast_mod -12 12 1>>
+	<br><br>
+
+	<span class="gold">Average size of NPC penises</span> - A bigger number means bigger penises in the world. At 8 everyone will have enormous penises. At -8 everyone will have tiny penises. Defaults to 0, which will result in a broad range of sizes.
+	<br>
+	<<numberslider "$penis_mod" $penis_mod -8 8 1>>
+	<br><br>
+
+	<span class="gold">Likelihood of npcs having pale skin</span>
+	<br>
+	<<numberslider "$whitechance" $whitechance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Likelihood of npcs having dark skin</span>
+	<br>
+	<<numberslider "$blackchance" $blackchance 0 100 1>>
+	<br><br>
+
+	<span class="gold">The rate that events are triggered by allure</span> - Default is 1.0.
+	<br>
+	<span class="red">Leaving the settings with this below 1 will prevent you from earning feats till it is increased. Doing this will permanently prevent some feats from being earned.</span>
+	<br>
+	<<numberslider "$alluremod" $alluremod 0.2 2 0.1>>
+	<br><br>
+
+	<span class="gold">Percentage of beasts attracted to you that are male</span>
+	<br>
+	<<numberslider "$beastmalechance" $beastmalechance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Percentage of beasts that are replaced with monster girls or boys</span> - Requires bestiality to be enabled.
+	<br>
+	<<numberslider "$monsterchance" $monsterchance 0 100 1>>
+	<br><br>
+
+	<span class="gold">Replace beasts with monster boys and girls</span>
+	<br>
+	<label>Only when hallucinating <<print '<<radiobutton "$monsterhallucinations" "t" ' + ($monsterhallucinations is "t" ? "checked" : "") + '>>'>></label> |
+	<label>At any time <<print '<<radiobutton "$monsterhallucinations" "f" ' + ($monsterhallucinations is "f" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Togglable Features</span>
+	<br>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$bestialitydisable" "t" "f" ' + ($bestialitydisable is "f" ? "checked" : "") + '>>'>> Enable bestiality
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$swarmdisable" "t" "f" ' + ($swarmdisable is "f" ? "checked" : "") + '>>'>> Enable swarms (Eels, etc)
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$parasitedisable" "t" "f" ' + ($parasitedisable is "f" ? "checked" : "") + '>>'>> Enable parasites
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$slimedisable" "t" "f" ' + ($slimedisable is "f" ? "checked" : "") + '>>'>> Enable slimes
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$voredisable" "t" "f" ' + ($voredisable is "f" ? "checked" : "") + '>>'>> Enable soft monster vore
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$tentacledisable" "t" "f" ' + ($tentacledisable is "f" ? "checked" : "") + '>>'>> Enable tentacles
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$analdisable" "t" "f" ' + ($analdisable is "f" ? "checked" : "") + '>>'>> Enable anal
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$transformdisable" "t" "f" ' + ($transformdisable is "f" ? "checked" : "") + '>>'>> Enable transformations
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$hirsutedisable" "t" "f" ' + ($hirsutedisable is "f" ? "checked" : "") + '>>'>> Extra hirsute/hairy wolf transformation
+	</div></label>
+	<<if $debug is 1>>
+		<label><div class="settingsToggle">
+		<<print '<<checkbox "$pbdisable" "t" "f" ' + ($pbdisable is "f" ? "checked" : "") + '>>'>> Enable pubic hair growth
+		</div></label>
+	<</if>>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$breastfeedingdisable" "t" "f" ' + ($breastfeedingdisable is "f" ? "checked" : "") + '>>'>> Enable lactation
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$analpregdisable" "t" "f" ' + ($analpregdisable is "f" ? "checked" : "") + '>>'>> Enable anal parasitic pregnancy
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$watersportsdisable" "t" "f" ' + ($watersportsdisable is "f" ? "checked" : "") + '>>'>> Enable watersports
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$spiderdisable" "t" "f" ' + ($spiderdisable is "f" ? "checked" : "") + '>>'>> Enable spiders
+	</div></label>
+	<label><div class="settingsToggle">
+	<<print '<<checkbox "$bodywritingdisable" "t" "f" ' + ($bodywritingdisable is "f" ? "checked" : "") + '>>'>> Enable body-writing and forced tattoos
+	</div></label>
+	<div style="clear:both;">/*Keep at end of toggles*/</div>
+<</nobr>><</widget>>
+
+<<widget "sizeLimitsSettings">><<nobr>>
+	<span class="gold">Maximum player character breast size</span> - Breasts already above this size won't automatically shrink. Your breasts will grow regardless of gender. Males and those with high purity experience slower growth. Surgery, pills and parasites can influence growth in both directions. Having breasts played with and hosting internal parasites increase growth.
+	<br>
+	<<set _name to ["Flat", "Budding", "Tiny", "Small", "Pert", "Modest", "Full", "Large", "Ample", "Massive", "Huge", "Gigantic", "Enormous"]>>
+	<<for _i to 0; _i lt _name.length; _i++>>
+		<label><<print _name[_i]>> <<print '<<radiobutton "$breastsizemax" _i ' + ($breastsizemax is _i ? "checked" : "") + '>>'>></label> |
+	<</for>>
+	<br><br>
+
+	<span class="gold">Maximum player character ass size</span> - Bottoms already above this size won't automatically shrink.
+	<br>
+	<<set _name to ["Slender", "Slim", "Modest", "Cushioned", "Soft", "Round", "Plump", "Large", "Huge"]>>
+	<<for _i to 0; _i lt _name.length; _i++>>
+		<label><<print _name[_i]>> <<print '<<radiobutton "$bottomsizemax" _i ' + ($bottomsizemax is _i ? "checked" : "") + '>>'>></label> |
+	<</for>>
+	<br><br>
+
+	<span class="gold">Maximum player character penis size</span> - Penises already above this size won't automatically shrink. Surgery, pills and parasites can influence growth in both directions.
+	<br>
+	<<set _name to ["Mini", "Tiny", "Small", "Normal", "Large", "Enormous"]>>
+	<<for _i to 0; _i lt _name.length; _i++>>
+		<label><<print _name[_i]>> <<print '<<radiobutton "$penissizemax" ' + (_i - 1) + ' ' + ($penissizemax is (_i - 1) ? "checked" : "") + '>>'>></label> |
+	<</for>>
+	<br><br>
+
+	<span class="gold">Minimum player character penis size</span> - Penises already below this size won't automatically grow.
+	<br>
+	<<set _name to ["Mini", "Tiny"]>>
+	<<for _i to 0; _i lt _name.length; _i++>>
+		<label><<print _name[_i]>> <<print '<<radiobutton "$penissizemin" ' + (_i - 1) + ' ' + ($penissizemin is (_i - 1) ? "checked" : "") + '>>'>></label> |
+	<</for>>
+	<br><br>
+
+<</nobr>><</widget>>
+
+<<widget "generalSettings">><<nobr>>
+	<span class="gold">Images</span>
+	<br>
+	<<if StartConfig.enableImages is true>>
+		Images may not load properly on older Androids.
+		<br>
+		<label>Enable images <<print '<<radiobutton "$images" 1 ' + ($images is 1 ? "checked" : "") + '>>'>></label> |
+		<label>Disable images <<print '<<radiobutton "$images" 0 ' + ($images is 0 ? "checked" : "") + '>>'>></label>
+		<br><br>
+
+		<label>Enable NPC silhouettes <<print '<<radiobutton "$silhouettedisable" "f" ' + ($silhouettedisable is "f" ? "checked" : "") + '>>'>></label> |
+		<label>Disable NPC silhouettes <<print '<<radiobutton "$silhouettedisable" "t" ' + ($silhouettedisable is "t" ? "checked" : "") + '>>'>></label>
+		<br><br>
+
+		<<if $skinColor.init is false and $passage isnot "Start">>
+			<span class="gold">You can now choose your character's skin colour. Click "Test" to preview the setting on the paperdolls. Click "Confirm" when you've made your selection.</span> This can cause performance issues on some devices. Should this be an issue, the option to disable the new skin system will appear here.
+			<br>
+			<div id="skinColorDiv"><img class="" src="img/bodyRed/baseReColorTest.png"></div>
+
+			Skin colour:<br>
+			Reddish:
+			<label>Light <<print '<<radiobutton "$naturalSkinColor" "light" ' + ($naturalSkinColor is "light" ? "checked" : "") + '>>'>></label> |
+			<label>Medium <<print '<<radiobutton "$naturalSkinColor" "medium" ' + ($naturalSkinColor is "medium" ? "checked" : "") + '>>'>></label> |
+			<label>Dark <<print '<<radiobutton "$naturalSkinColor" "dark" ' + ($naturalSkinColor is "dark" ? "checked" : "") + '>>'>></label> |
+			<label>Gyaru <<print '<<radiobutton "$naturalSkinColor" "gyaru" ' + ($naturalSkinColor is "gyaru" ? "checked" : "") + '>>'>> (Pale with no tan, very dark with full tan)</label>
+			<br>
+			Yellowish:
+			<label>Light <<print '<<radiobutton "$naturalSkinColor" "ylight" ' + ($naturalSkinColor is "ylight" ? "checked" : "") + '>>'>></label> |
+			<label>Medium <<print '<<radiobutton "$naturalSkinColor" "ymedium" ' + ($naturalSkinColor is "ymedium" ? "checked" : "") + '>>'>></label> |
+			<label>Dark <<print '<<radiobutton "$naturalSkinColor" "ydark" ' + ($naturalSkinColor is "ydark" ? "checked" : "") + '>>'>></label>
+			<label>Gyaru <<print '<<radiobutton "$naturalSkinColor" "ygyaru" ' + ($naturalSkinColor is "ygyaru" ? "checked" : "") + '>>'>></label>
+			<br><br>
+
+			<label>Initial Tan: <<print '<<numberslider "$range" '+($range isnot undefined? $range:0)+' 0 100 1>>'>></label>
+			<br>
+			<<link Test>>
+				<<if $range isnot undefined and $naturalSkinColor isnot undefined>>
+					<<replace #skinColorDiv>><<SkinColorImgTest $range $naturalSkinColor>><</replace>>
+				<</if>>
+			<</link>>
+
+			<br>
+			<<link [[Confirm|$passage]]>>
+				<<if $range isnot undefined and $naturalSkinColor isnot undefined>>
+					<<set $skinColor.range to $range>>
+					<<set $skinColor.natural to $naturalSkinColor>>
+					<<set $skinColor.tanningEnabled to true>>
+					<<set $skinColor.tanImgEnabled to "t">>
+					<<setSkinColorBase>>
+					<<unset $naturalSkinColor>>
+					<<unset $range>>
+				<</if>>
+			<</link>> - <span class="red">These settings can not be changed after Confirming.</span>
+		<<else>>
+		Visual representation of the player character's skin colour - <span class="pink">May hinder performance on some devices</span>
+		<br>
+			<label>On <<print '<<radiobutton "$skinColor.tanImgEnabled" "t" ' + ($skinColor.tanImgEnabled is "t" ? "checked" : "") + '>>'>></label> |
+			<label>Off <<print '<<radiobutton "$skinColor.tanImgEnabled" "f" ' + ($skinColor.tanImgEnabled is "f" ? "checked" : "") + '>>'>></label>
+
+			<br><br>
+			Tanning changes - Whether tan will change due to sun exposure, or the lack of it.
+			<br>
+			<label>On <<print '<<radiobutton "$skinColor.tanningEnabled" true ' + ($skinColor.tanningEnabled is true ? "checked" : "") + '>>'>></label> |
+			<label>Off <<print '<<radiobutton "$skinColor.tanningEnabled" false ' + ($skinColor.tanningEnabled is false ? "checked" : "") + '>>'>></label>
+			- <span class="red">(Option to disable may be removed at a later date)</span>
+		<</if>>
+		<br><br>
+
+		Body-writing Images - Disabling will improve performance and prevent issues like when images are flickering.
+		<br>
+		<label>Enable body-writing images <<print '<<radiobutton "$bodywritingImages" true ' + ($bodywritingImages is true ? "checked" : "") + '>>'>></label> |
+		<label>Disable body-writing images <<print '<<radiobutton "$bodywritingImages" false ' + ($bodywritingImages is false ? "checked" : "") + '>>'>></label>
+	<<else>>
+		Not Available
+	<</if>>
+	<br><br>
+	<span class="gold">Numbered link navigation</span>
+	<br>
+	<<if StartConfig.enableLinkNumberify is true>>
+	<label>Enable numbered link navigation <<print '<<radiobutton "$numberify_enabled" 1 ' + ($numberify_enabled is 1 ? "checked" : "") + '>>'>></label> |
+	<label>Disable numbered link navigation <<print '<<radiobutton "$numberify_enabled" 0 ' + ($numberify_enabled is 0 ? "checked" : "") + '>>'>></label>
+	<<else>>
+		Not Available
+	<</if>>
+	<br><br>
+
+	<span class="gold">Time format</span>
+	<br>
+	<label>24-hour <<print '<<radiobutton "$timestyle" "military" ' + ($timestyle is "military" ? "checked" : "") + '>>'>></label> |
+	<label>12-hour <<print '<<radiobutton "$timestyle" "ampm" ' + ($timestyle is "ampm" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Skill check display</span>
+	<br>
+	<label>Show exact percentage <<print '<<radiobutton "$checkstyle" "percentage" ' + ($checkstyle is "percentage" ? "checked" : "") + '>>'>></label> |
+	<label>Show only general description <<print '<<radiobutton "$checkstyle" "words" ' + ($checkstyle is "words" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">In game hints and tips</span> - Shows in the sidebar
+	<br>
+	<label>Enable hints and tips <<print '<<radiobutton "$tipdisable" "f" ' + ($tipdisable is "f" ? "checked" : "") + '>>'>></label> |
+	<label>Disable hints and tips <<print '<<radiobutton "$tipdisable" "t" ' + ($tipdisable is "t" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Additional error information</span> - Shows in the sidebar
+	<br>
+	<label>Enable additional error messages <<print '<<radiobutton "$debugdisable" "f" ' + ($debugdisable is "f" ? "checked" : "") + '>>'>></label> |
+	<label>Disable additional error messages <<print '<<radiobutton "$debugdisable" "t" ' + ($debugdisable is "t" ? "checked" : "") + '>>'>></label>
+	<br><br>
+
+	<span class="gold">Save Name</span> - Shows in the save menu in place of the save id
+	<br>
+	<span class="red">Only 10 characters at most will show in the save menu, leave empty to show the save ID</span>
+	<br>
+	<<textbox "$saveName" $saveName>>
+	<br><br>
+	<span class="gold">Game Zoom</span> -Will allow you to adjust the size of game elements and text. 100 is the default value.
+	A value of 50 will zoom the page out to half of its original size, while a value of 200 will zoom the page in to double its size.
+	The test button will not save the zoom value into the current save.
+	<br>
+	<span class="red">
+		Please be careful with this setting! Only save if you are happy with the changes made, as reloading the game will reset it to the last value used in that save.
+		Depending on the device and browser, the setting may break entirely, and may cause unexpected effects. Please report these issues as necessary.
+	</span>
+	<br>
+	<<numberslider "$zoom" $zoom 50 200 1>>
+	<input type="button" value="Set Zoom Test" onclick="zoom()"/>
+	<br><br>
+	<input type="button" value="Reset Zoom" onclick="zoom(100, true)"/>
+	<input type="button" value="Set Zoom" onclick="zoom(undefined, true)"/>
+	<br><br>
+	<span class="gold">Cheats menu</span> - Button shows in sidebar
+	<br>
+	<span class="red">Leaving the settings with cheats enabled will prevent you from earning feats in a save.</span>
+	<br>
+	<label>Enable cheats <<print '<<radiobutton "$cheatdisable" "f" ' + ($cheatdisable is "f" ? "checked" : "") + '>>'>></label> |
+	<label>Disable cheats <<print '<<radiobutton "$cheatdisable" "t" ' + ($cheatdisable is "t" ? "checked" : "") + '>>'>></label>
+	<br><br>
+	<<if version.major gt 2 or version.minor gt 29>>
+		<<link [["Character Viewer"|Clothes Testing]]>>
+			<<set $lastPassage to $passage>>
+			<<set $gameTanImgSetting to clone($skinColor.tanImgEnabled)>>
+		<</link>>
+		- This will allow you to have a play with the character sprites, this will not affect your save in any way.
+	<</if>>
+
+<</nobr>><</widget>>
+
+<<widget "npcSettings">><<nobr>>
+<<set _penisNames to ["Tiny", "Average", "Thick", "Huge"]>>
+<<if $passage is "Start">>
+<span class="red">Untouched options will be automatically generated for you.</span>
+<br>
+<</if>>
+<<link "Generate all genders based on game settings">>
+	<<initnpcgender "genders">>
+	<<displaySettings>>
+<</link>>
+<br>
+<<link "Generate all penis sizes based on game settings">>
+	<<initnpcgender "penis">>
+	<<displaySettings>>
+<</link>>
+<br>
+<<link "Generate all breast sizes based on game settings">>
+	<<initnpcgender "breasts">>
+	<<displaySettings>>
+<</link>>
+<<if $debug is 1>>
+	<br>
+	<<link "Reset hair and eye colours (Will only effect NPC's with a default colour)">>
+		<<generateNPCNameHairAndEyeColors "default">>
+		<<displaySettings>>
+	<</link>>
+<</if>>
+<br><br>
+
+<<if _npcId is undefined>>
+	<<set _npcId to 0>>
+
+	<<set _breastDescription to ["Flat","Small","Pert","Modest","Full","Large"]>>
+	<<set _breastDescriptionNPC to ["nipple","small breast","pert breast","modest breast","full breast","large breast"]>>
+	<<set _breastsDescriptionNPC to ["nipples","small breast","pert breast","modest breast","full breast","large breast"]>>
+
+	<<set _hairColorNPC to ["Red","Black","Brown","Light Brown","Blond","Platinum blond","Strawberry blond","Ginger", "mousy"]>>
+	<<set _hairColorNPCData to ["red","black","brown","lightbrown","blond","platinumblond","strawberryblond","ginger", "mousy"]>>
+	<<set _hairColorNPCText to ["red","black","brown","lightbrown","gold","platinum","strawberry","tangerine", "mousy"]>>
+
+	<<set _eyeColorNPC to ["Purple","Dark Blue","Light Blue","Amber","Hazel","Green","Red","Pink","Grey"]>>
+	<<set _eyeColorNPCData to ["purple","dark blue","light blue","amber","hazel","green","red","pink","grey"]>>
+	<<set _eyeColorNPCText to ["purple","blue","lblue","tangerine","brown","green","red","pink","grey"]>>
+<</if>>
+
+<<if _npcList is undefined>>
+	<<set _npcList to {}>>
+	<<for $_i to 0; $_i lt $NPCNameList.length; $_i++>>
+		<<set _npcList[clone($NPCNameList[$_i])] to clone($_i)>>
+	<</for>>
+<</if>>
+
+<div id="npcSettingsMenu">
+	<<npcSettingsMenu>>
+</div>
+
+<<if _listActive isnot true>>
+	<<NPCSettingsReset>>
+	<<set _listActive to true>>
+<</if>>
+
+<</nobr>><</widget>>
+
+<<widget "exportsettings">><<nobr>>
+
+<span class="yellow">Will also import/export settings found in the "SAVE/OPTIONS" overlay.</span>
+
+<h4>Settings File Import/Export</h4>
+
+<<if SugarCube.Browser.isMobile.any() is true>>
+	Note that saving and loading from file does not work on Android currently.
+<<else>>
+	Load from file: <input id="saveImport" type="file" value="Load from file" onchange="importSettings(this.files, 'file')">
+	<br><br>
+	<input type="button" value="Save to file" onclick="exportSettings(null,'file')">
+<</if>>
+
+<h4>Settings Text Import/Export</h4>
+
+To save your current settings, click on "Get Settings Data", then copy and paste the save data where required.
+<br>
+To load your current settings, paste in the settings data then click "Load Settings Data".
+<br>
+To transfer to and from Android, it is recommended to use email or a service such as pastebin. Please ensure that the start and the end of the save is exact to prevent issues.
+<br>
+Click on "Copy Text Area" to copy the current contents for you. The button name will change to "Copying Error" if your device or browser does not support it.
+<br><br>
+<textarea id="settingsDataInput" rows="4" cols="40" onClick="if(SugarCube.State.variables.disableAutoSelect == false)this.select();" onfocus="SugarCube.State.variables.tempDisable = true;" onblur="SugarCube.State.variables.tempDisable = false;"></textarea>
+<br>
+<input type="button" value="Clear Text Box" onclick="clearTextBox('settingsDataInput')"/>
+<input type="button" value="Top of Text Box" onclick="topTextArea('settingsDataInput')"/>
+<input type="button" value="Bottom of Text Box" onclick="bottomTextArea('settingsDataInput')"/>
+<input type="button" value="Get Settings Data" onclick="exportSettings(null,'text')"/>
+<input type="button" value="Load Settings Data" onclick="importSettings(null,'text')"/>
+<input id="CopyTextArea" type="button" value="Copy Text Area" onclick="copySavedata('settingsDataInput')">
+<input id="LoadExternalExportFile" type="button" value="Load External Export File" onclick="loadExternalExportFile()">
+
+<br><br>
+
+<label>
+	<<print '<<checkbox "$disableAutoSelect" false true '+($disableAutoSelect is true? "checked":"")+'>>'>>
+	Disables auto select.
+</label>
+
+<</nobr>><</widget>>
+
+<<widget "npcSettingsMenu">><<nobr>>
+<<listbox "_npcId" autoselect>>
+	<<optionsfrom _npcList>>
+<</listbox>>
+<<if _npcId gt 0>>
+	| <<link Previous>>
+		<<set _npcId-->>
+		<<replace #npcSettingsMenu>><<npcSettingsMenu>><</replace>>
+	<</link>> |
+<<else>>
+	| Previous |
+<</if>>
+<<if _npcId lt $NPCName.length>>
+	<<link Next>>
+		<<set _npcId++>>
+		<<replace #npcSettingsMenu>><<npcSettingsMenu>><</replace>>
+	<</link>>
+<<else>>
+	Next
+<</if>>
+<br><br>
+<span class="gold">$NPCName[_npcId].nam the $NPCName[_npcId].title</span>
+<br>
+<label><<print '<<radiobutton "$NPCName['+_npcId+'].pronoun" "f" ' + ($NPCName[_npcId].pronoun is "f" ? "checked" : "") + '>>'>> Female</label> |
+<label><<print '<<radiobutton "$NPCName['+_npcId+'].pronoun" "m" ' + ($NPCName[_npcId].pronoun is "m" ? "checked" : "") + '>>'>> Male</label>
+<br>
+<label><<print '<<radiobutton "$NPCName['+_npcId+'].gender" "f" ' + ($NPCName[_npcId].gender is "f" ? "checked" : "") + '>>'>> Vagina</label> |
+<label><<print '<<radiobutton "$NPCName['+_npcId+'].gender" "m" ' + ($NPCName[_npcId].gender is "m" ? "checked" : "") + '>>'>> Penis</label>
+<br><br>
+Penis size - if applicable:
+<br>
+<<for _j to 0; _j lt _penisNames.length; _j++>>
+	<label>
+		<<print '<<radiobutton "$NPCName['+_npcId+'].penissize" ' + (_j + 1) + ' ' + ($NPCName[_npcId].penissize is (_j + 1) ? "checked" : "") + '>>'>>
+		<<print _penisNames[_j]>>
+	</label> |
+<</for>>
+<br><br>
+
+Breast size:
+<br>
+<<for _j to 0; _j lt _breastDescription.length; _j++>>
+	<label>
+		<<set _onclick to "SugarCube.State.variables.NPCName["+_npcId+"].breastsize="+ _j + ";">>
+		<<set _onclick += "SugarCube.State.variables.NPCName["+_npcId+"].breastdesc='" + _breastDescriptionNPC[_j] + "';">>
+		<<set _onclick += "SugarCube.State.variables.NPCName["+_npcId+"].breastsdesc='" + _breastsDescriptionNPC[_j] + "';">>
+		<<print '<input type="radio" name="breastSize" @value="_j" @onclick="clone(_onclick)" '+($NPCName[_npcId].breastsize is (_j) ? "checked" : "") +'/>'>>
+		<<print _breastDescription[_j]>>
+	</label> |
+<</for>>
+<br><br>
+
+<<if $NPCName[_npcId].nam is "Black Wolf">>
+	Beast Type:
+	<br>
+	<label><<print '<<radiobutton "$blackwolfmonster" 0 ' + ($blackwolfmonster is 0 ? "checked" : "") + '>>'>> Always a beast</label> |
+	<label><<print '<<radiobutton "$blackwolfmonster" 1 ' + ($blackwolfmonster is 1 ? "checked" : "") + '>>'>> Monster girl or boy when requirements met</label>
+	<br><br>
+<</if>>
+<<if $debug is 1>>
+	Hair Colour:
+	<br>
+	<<for _j to 0; _j lt _hairColorNPC.length; _j++>>
+		<label>
+			<<print '<<radiobutton "$NPCName['+_npcId+'].hairColour" "'+_hairColorNPCData[_j]+'" ' + ($NPCName[_npcId].hairColour is _hairColorNPCData[_j] ? "checked" : "") + '>>'>>
+			<span @class="_hairColorNPCText[_j]">_hairColorNPC[_j]</span>
+		</label> |
+	<</for>>
+	<br><br>
+
+	Eye Colour:
+	<br>
+	<<for _j to 0; _j lt _eyeColorNPC.length; _j++>>
+		<label>
+			<<print '<<radiobutton "$NPCName['+_npcId+'].eyeColour" "'+_eyeColorNPCData[_j]+'" ' + ($NPCName[_npcId].eyeColour is _eyeColorNPCData[_j] ? "checked" : "") + '>>'>>
+			<span @class="_eyeColorNPCText[_j]">_eyeColorNPC[_j]</span>
+		</label> |
+	<</for>>
+	<br><br>
+<</if>>
+
+<</nobr>><</widget>>
+
+:: Settings [nobr]
+<<set $settingsExitPassage to "Bedroom">>
+<<settings>>
+
+:: Attitudes [nobr]
+<<attitudes>>
+<br><br>
+<<link [[Confirm|$attitudesExitPassage]]>>
+	<<unset $attitudesExitPassage>>
+<</link>>
+<br>

@@ -1,0 +1,30 @@
+# IDE, temp, generated, and other local-only files
+.idea/
+.vscode
+.DS_Store
+*~
+*.iml
+node_modules/
+tweego*
+Degrees of Lewdity*.html
+*.7z
+Zimg/
+gitw
+
+* Ignoring working folder for Quin2k
+mod/
+*.code-workspace
+release/
+
+# Error logs
+yarn-error.log
+
+# Keys
+/keys/*
+!/keys/README.md
+
+# Dist
+/dist/*
+# We use a placeholder to ensure the host system creates the folder 
+#  (may run into permissions issues if you allow docker to create it)
+!/dist/.placeholder

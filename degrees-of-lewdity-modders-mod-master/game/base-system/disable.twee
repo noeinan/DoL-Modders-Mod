@@ -1,0 +1,186 @@
+:: Widgets Disable [widget]
+<<widget "disable">><<nobr>>
+
+<<if $penisuse is "cover">>
+	<<set $penisuse to 0>>
+<</if>>
+<<if $anususe is "cover">>
+	<<set $anususe to 0>>
+<</if>>
+<<if $vaginause is "cover">>
+	<<set $vaginause to 0>>
+<</if>>
+
+<<if $penisuse is "clit">>
+	<<set $penisuse to 0>><<set $penisstate to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].vagina is "frot">>
+			<<set $NPCList[_i].vagina to 0>>
+			<<set $NPCList[_i].location.genitals to 0>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $penisuse is "otheranusrub">>
+	<<set $penisuse to 0>>
+	<<set $penisstate to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].vagina is "otheranusfrot">>
+			<<set $NPCList[_i].vagina to 0>>
+			<<set $NPCList[_i].location.genitals to 0>>
+		<</if>>
+		<<if $NPCList[_i].penis is "otheranusfrot">>
+			<<set $NPCList[_i].penis to 0>>
+			<<set $NPCList[_i].location.genitals to 0>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $feetuse is "othervagina">>
+	<<set $feetuse to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].vagina is "feet">>
+			<<set $NPCList[_i].vagina to 0>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $feetuse is "penis">>
+	<<set $feetuse to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].penis is "feet">>
+			<<set $NPCList[_i].penis to 0>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<disablearms>>
+
+<<if $bottomuse is "penis">>
+	<<set $bottomuse to 0>><<set $anusstate to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].penis is "cheeks">>
+			<<set $NPCList[_i].penis to 0>>
+			<<set $NPCList[_i].location.genitals to 0>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $bottomuse is "mouth">>
+	<<set $bottomuse to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[0].mouth is "bottom">>
+			<<set $NPCList[0].mouth to 0>>
+			<<if $NPCList[_i].penis is "othermouth">>
+				<<set $NPCList[_i].penis to 0>>
+				<<set $NPCList[_i].location.head to 0>>
+			<</if>>
+			<<if $NPCList[_i].vagina is "othermouth">>
+				<<set $NPCList[_i].vagina to 0>>
+				<<set $NPCList[_i].location.head to 0>>
+			<</if>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $thighuse is "penis">>
+	<<set $thighuse to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].penis is "thighs">>
+			<<set $NPCList[_i].penis to 0>>
+			<<set $NPCList[_i].location.genitals to 0>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $thighuse is "mouth">>
+	<<set $thighuse to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].mouth is "thigh">>
+			<<set $NPCList[0].mouth to 0>>
+			<<if $NPCList[_i].penis is "othermouth">>
+				<<set $NPCList[_i].penis to 0>>
+				<<set $NPCList[_i].location.head to 0>>
+			<</if>>
+			<<if $NPCList[_i].vagina is "othermouth">>
+				<<set $NPCList[_i].vagina to 0>>
+				<<set $NPCList[_i].location.head to 0>>
+			<</if>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $chestuse isnot 0>>
+	<<set $chestuse to 0>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if $NPCList[_i].penis is "chest">>
+			<<set $NPCList[_i].penis to 0>>
+			<<set $NPCList[_i].location.genitals to 0>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if $feetuse isnot "grappled" and $feetuse isnot "bound">>
+	<<set $feetuse to 0>>
+<</if>>
+
+<<for _i = 0; _i < $tentacles.max; _i++>>
+	<<if $tentacles[_i].head is "feet">>
+		<<set $leftleg to 0>>
+		<<set $rightleg to 0>>
+		<<set $tentacles[_i].head to 0>>
+	<<elseif $tentacles[_i].head is "leftarm">>
+		<<set $leftarm to 0>>
+		<<set $tentacles[_i].head to 0>>
+	<<elseif $tentacles[_i].head is "rightarm">>
+		<<set $rightarm to 0>>
+		<<set $tentacles[_i].head to 0>>
+	<</if>>
+<</for>>
+
+<</nobr>><</widget>>
+
+<<widget "disablearms">><<nobr>>
+	<<disableleftarm>>
+	<<disablerightarm>>
+<</nobr>><</widget>>
+
+<<widget "disableleftarm">><<nobr>>
+	<<if $leftarm is "othervagina">>
+		<<for _i = 0; _i < $NPCList.length; _i++>>
+			<<if $NPCList[_i].vagina is "leftarm">>
+				<<set $NPCList[_i].vagina to 0>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<<if $leftarm is "penis">>
+		<<for _i = 0; _i < $NPCList.length; _i++>>
+			<<if $NPCList[_i].penis is "leftarm">>
+				<<set $NPCList[_i].penis to 0>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<<if $leftarm isnot "grappled" and $leftarm isnot "bound">>
+		<<set $leftarm to 0>>
+	<</if>>
+<</nobr>><</widget>>
+
+<<widget "disablerightarm">><<nobr>>
+	<<if $rightarm is "othervagina">>
+		<<for _i = 0; _i < $NPCList.length; _i++>>
+			<<if $NPCList[_i].vagina is "rightarm">>
+				<<set $NPCList[_i].vagina to 0>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<<if $rightarm is "penis">>
+		<<for _i = 0; _i < $NPCList.length; _i++>>
+			<<if $NPCList[_i].penis is "rightarm">>
+				<<set $NPCList[_i].penis to 0>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<<if $rightarm isnot "grappled" and $rightarm isnot "bound">>
+		<<set $rightarm to 0>>
+	<</if>>
+<</nobr>><</widget>>
